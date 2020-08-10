@@ -1,0 +1,10 @@
+# Demographic Data Types {#datatypes}
+
+## Sources of Data
+
+## Code books for surveys
+
+## Recoding variables
+
+## Validating your recodes
+

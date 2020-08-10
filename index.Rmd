@@ -1,0 +1,680 @@
+--- 
+title: "Applied Demographic Data Analysis with R"
+author: "Corey S. Sparks"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+github-repo: rstudio/bookdown-demo
+description: "Modern techniques with programming examples"
+---
+
+# Introduction
+
+## Why a book on statistics for demographers?
+Demographers have always been a mixture of sociologists, economists, statisticians, health researchers, and other broad sub-disciples of social science. As such, we bring with us a large amount of baggage from our respective academic life courses, and we often are trained by a wide variety of mentors and professors. It's my perspective that our interdisciplinary experience is one of our greatest strengths as a group. Given that our training is often in one of a core set of home disciplines, we often have methodological training from said discipline, and this may not be a broad enough perspective to firmly ground us in the types of methods that demographers commonly employ. This is not the fault of the departments that trained us, it's just a historical fact. So, why am I writing a book on statistics and data analysis aimed at demographers? I will give you three reasons:
+
+1. Demographers have to go beyond the sample. This is to say that our results and research is generally representative of a larger national or international population, and we do this explicitly in our models.
+
+2. Demographers don't use random samples for our analysis. Statistics books the world over are based on assumptions of random sampling and independence, while the data that we often have to, or desire to use, comes more than likely from a data source that was collected using a complex survey design. This is a big deal and we have to have training materials that instill this in our students early on in their careers.
+
+3. Weird data. As demographers, we often use data from lots of different places and if you were trained up to this point to believe that the linear model is the end-all be-all of statistical inference, I've got news for you friends, you've been misled. Categorical outcomes, counts, hierarchically structured, longitudinally collected, spatially referenced, just to name a few of such oddities, are ubiquitous in our field, and part of what makes our discipline so cool and interesting to newcomers. 
+
+My goal for this book is to take the lessons I've learned teaching statistics to a diverse and often cursorily trained group of students who have problems they care about, that they need to bring demographic data to bear upon. This is a challenge, and I have always been a stalwart proponent of teaching statistics and data analysis in a _very_ applied manner. As such, this book won't be going into rigorous proofs of estimators or devoting pages to expositions of icky algebra; instead it will focus on exploring modern methods of data analysis that in used by demographers every day, but not always taught in our training programs. As someone who has learned much more of these methods by personal exploration than by formal study, I find that many of these methods are absent from the canon of social science statistics, but are both in great demand from people who hire us, and absolutely necessary to the demographer's analytic toolkit. It's a major goal of this book to de-mystify the process and to make it accessible to a wide audience, so I will always strive to illustrate the key aspects of the methods described herein, and ground the discussion of methods in applications. 
+
+## Why R?
+I've used R for twenty years. I was also trained in SPSS and SAS along the way, by various mentors. Some tried to get me to learn more general purpose languages like Delphi (of all things) or Perl, or Basic, and I've been chastised for not knowing the depths of Python, but R presents a nimble and rigorous platform to _do_ demography. My top three reasons for teaching and using R are:
+
+1. It's free - This is important, because, why should be pass along more costs to people, especially our students? This also make R code accessible to people, worldwide. 
+
+2. It's the hotbed of methodological development. The R ecosystem has thousands of packages that represent the bleeding edge of data analysis, visualization and data science. This makes R attractive because it can pivot quickly to adopt new methods, which often lag in their development in other environments. 
+
+3. It has a supportive community of users. While there are some debates over how friendly some R users are to new users, overall, after spending 20 years in the R community, I've personally assisted hundreds of users, and been personally helped by many others. The open source nature of R lends itself to sharing of ideas and collaboration between users. 
+
+
+### My assumptions in this book
+In statistics we always make assumptions, often these are wrong, but we adapt to our mistakes daily. My assumptions about who is reading this book are:
+
+1. You are interested in learning more about R.
+
+2. You are likely a student or professional interested in demography or population research.
+
+3. You have likely been exposed to other statistical platforms and are curious about R, in conjunction with 1 and 2 above.
+
+4. You may be an avid R user from another strange and exotic discipline, but are interested in how demographers do research.
+
+5. You want to see _how_ to do things instead of being bombarded with theoretical and often unnecessary gate-keeping mathematical treatments of statistical models. 
+
+I think if any of these assumptions are true, you're in the right place. That being said, this book 
+_is not_ a review of all of statistics, nor is it an encyclopedic coverage of the R language and ecosystem. I image the latter being on the same scale of hopelessness as the search for the Holy Grail or the fountain of youth. People have died for such fool hearty quests, I'm not falling on my sword here folks. 
+
+
+## Welcome to R.
+
+If you're coming to R from SAS, there is no data step. There are no procs. The [SAS and R book](https://www.amazon.com/gp/product/1466584491/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=1466584491&linkCode=as2&tag=sasandrblog-20) is very useful for going between the two programs.  
+
+If you're coming from SPSS and you've been using the button clicking method, be prepared for a steep learning curve. If you've been writing syntax in SPSS, you're at least used to having to code. There's a good book for SAS and SPSS users by Bob Meunchen at the Univ. of Tennessee [here](https://www.amazon.com/SAS-SPSS-Users-Statistics-Computing/dp/1461406846), which may be of some help.
+
+
+## R and Rstudio
+
+The Rgui is the base version of R, but is not very good to program in. Rstudio is much better, as it gives you a true integrated development environment (IDE), where you can write code in one window, see results in others, see locations of files, and see objects you've created. To get started, you should download the R installer for your operating system. Windows and Mac have installer files, and Linux users will install R using their prefererred package manager.
+
+Download R from [CRAN](https://cran.r-project.org/). If you're on Windows, I would also highly recommend you install [Rtools](https://cran.r-project.org/), because it gives you c++ and Fortran compilers, which many packages need to be installed. 
+
+Rstudio can be downloaded for free [here](https://rstudio.com/products/rstudio/download/). Again, each operating system has its own binary for Rstudio, so pick the one that matches your operating system. Rstudio typically has 4 sub-windows open at any given time. Here is what mine looks like:
+
+![Rstudio](rstudio.png)
+
+In mine, the top left window is where I have a script file ( in this case the .Rmd file that is part of this book), the bottom left window is the command line, where you can type commands directly into R. The top right window is currently showing my R environment, with a few objects that are currently saved in memory. The bottom right window shows the files in the current directory, and you can do typical file operations to them (rename, delete, move) in this window.
+
+### R file types
+*.R files*
+R uses a basic text file with the .R extension. This type of file is useful if you're going to write a function or do some analysis and don't want to have formatted output or text. You can use these files for everything, but they are limited in their ability to produce reports and formatted output, so I recommend people work with R Markdown files instead.
+
+*.Rmd files*
+Rstudio uses a form of the markdown formatting language, called R Markdown, for creating formatted documents that include code, tables, figures and statistical output. **This book is written in R Markdown!** 
+
+R Markdown is nice for lots of reasons, such as the ability to insert latex equations into documents:
+
+$$y_i \sim Normal (x` \beta, \sigma_2)$$
+or to include output tables directly into a document:
+
+```{r, echo=F, results='asis'}
+library(readr)
+prb<-read_csv(file = "https://raw.githubusercontent.com/coreysparks/data/master/PRB2008_All.csv", col_types = read_rds(url("https://raw.githubusercontent.com/coreysparks/r_courses/master/prbspec.rds")))
+names(prb)<-tolower(names(prb))
+```
+
+```{r}
+library(broom)
+library(pander)
+fit<-lm(imr~tfr+percurban+percpoplt15+percmarwomcontraall, prb)
+pander(broom::tidy(fit))
+
+```
+
+without having to make tables in Word or some other program. You can basically do your entire analysis, or a slidewhow for a presentation, or an entire paper, including bibliography, in Rstudio.
+
+### R projects
+Rstudio allows you to create a R project, which basically sets up a specific location to store R code for a given project you may be doing. For instance, this book is a single R project, which helps me organize all the chapters, bibliographies, figures, etc. R projects also allow you to use version control, including Git and SVN, to collaborate and share code/data with others. 
+
+
+### R data files
+R allows you to read and write its own *native* data formats, as well as read and write text formatted files and data files from other statistical software packages. Two native R data formats are `.rds` and `.rdata` formates. `.rds` files allow you to save a single R object to an external files, while `.rdata` files allow you to save one or more objects to a file. 
+
+Here is a short example of doing this, where I create 2 vectors, `x` and `y` and save them.
+
+```{r}
+x<-c(1, 2,3)
+
+y<-c(4, 5, 6)
+
+saveRDS(x, file="~/x.rds")
+
+save(list=c("x","y"), file="xy.rdata")
+
+```
+
+I can also load these into R again:
+```{r}
+readRDS(file="~/x.rds")
+load("xy.rdata")
+```
+
+
+Standard methods for importing text data such as comma separated value or tab delimted files can be read into R using `read.csv()` or `read.table()` and smililar writing functions are available. 
+
+To read in a dataset from another statistical package, I recommend using the `haven` package. It allows you to read and write SAS (both sas7bdat and xpt files), Stata, SPSS (both por and sav files). 
+
+For example, here I write out a dataframe containing `x` and `y` from above to a SAS version 7 file:
+
+```{r}
+xy<-data.frame(x=x, y=y)
+xy
+
+library(haven)
+
+write_sas(data=xy, path="~/xy.sas7bdat")
+```
+
+R also has packages for reading/writing such data formats as JSON, ESRI Shapefiles, Excel spreadsheets, Google Spreadsheets, DBF files, in addtion to tools for connecting to SQL databases, and for interfacing with other statistics packages, such as Mplus, OpenBUGS, WinBUGS and GIS systems.
+
+
+## Getting help in R
+
+I wish I had a nickel for every time I ran into a problem trying to do something in R, that would be a lot of nickles. Here are some good tips for finding help in R:
+
+1) If you know the name of a function you want to use, but just need help using it, try `?`
+
+`?lm`
+
+2) If you need to find a function to do something, try `??`
+
+`??"linear model"`
+
+3) You can also search the history of other R users questions by tapping into the [RSiteSearch](http://finzi.psych.upenn.edu/search.html) website, which is an archive of user questions to the R list serve. This can be used by tying `RSiteSearch()`
+
+`RSiteSearch("heteroskedasticity")`
+
+4) Speaking of which, there are multiple [R user email list serves](https://www.r-project.org/mail.html) that you can ask questions to, or subscribe to daily digests from. These typically want an example of what you're trying to do, referred to as a *reproducible example*. I wish I also had nickles for each question I've asked and answered on these forums.
+
+5) A good source for all things programming is the statistics branch of [Stack Exchange](https://stats.stackexchange.com), which has lots of contributed questions and answers, although many answers are either very snarky or wrong or for an old version of a library, so *caveat emptor*.
+
+6) Your local R guru or R user group. You would be surprised at how many people are R users, there may be one just down the hall, or in the cubicle next door. I relish the opportunity to talk to other R users, mostly because, even though I've used R for more than 20 years, I still learn so much by talking to others about how they use R. 
+
+Lastly, I want to be clear that there are often **more than one way to do everything** in R. Simple things like reading and writing a CSV data file can be accomplished by any of a handful of different functions found in different packages. If someone tells you that there is only one way to do something, they are usually wrong in such a statement, regarding R at least. 
+
+## R packages
+R uses packages to do store functions that do different types of analysis, so we will need to install lots of different packages to do different things. There are over 20,000 different packages currently for R. These are hosted on one of a number of *repositories*, such as the Comprehensive R Archive Network, or CRAN, which is the official repository for R packages. Other locations where authors store packages include [R-Forge]("https://r-forge.r-project.org/") and [BioconductoR]("https://www.bioconductor.org/"). Many authors host packages in [Github]("https://github.com") repositories, especially for development purposes. 
+
+Packages are often organized into *Task Views*,  which CRAN uses to organize packages into thematic areas. You can find a list of these Task Views [here]("https://cran.r-project.org/web/views/"). There is not a task view for Demography, but there are ones for the [Social Sciences]("https://cran.r-project.org/web/views/SocialSciences.html"), [Econometrics]("https://cran.r-project.org/web/views/Econometrics.html"), and [Spatial Data]("https://cran.r-project.org/web/views/Spatial.html") to name a few. Task views allow users to download a lot of thematically linked packages in a single command, through the package `ctv`, or Cran Task Views. You can install this package by typing:
+
+`install.packages("ctv")`
+
+into Rstudio. Then you have to load the package by useing the `library()` command:
+
+`library(ctv)`
+
+which gives you access to the functions in that package. You don't need to install the package again, unless you update your R software, but each time you start a new session (i.e. open Rstudio), you will have to load the library again. If you want to install all of the packages in the Social Science task view, you would type:
+
+`install.views("SocialSciences")`
+
+into R and it will install all of the packages under that task view, as of the writing of this sentence, include over 80 packages. 
+
+I strongly recommend you install several packages prior to us beginning to use R, so you will not be distracted by this later. I've written a short script on my Github repository and you can use it by running:
+
+```{r, eval=FALSE}
+source("https://raw.githubusercontent.com/coreysparks/Rcode/master/install_first_short.R")
+```
+
+
+This will install a few dozen R packages that are commonly used for social science analysis and some other packages I find of use. 
+
+## Your R user environment
+
+When you begin an R session (open Rstudio) you will begin in your home directory. This is traditionally, on Windows, at `'C:/Users/yourusername/Documents'` on Mac at `'/Users/yourusername'`, and on Linux at `'/users/yourusername'`. There are files you can add to your home directory to specify starting options for R. You can find information on setting up `.Rprofile` and `.Renviron` files on [CRAN's website](https://cran.r-project.org/web/packages/startup/vignettes/startup-intro.html). This allows you to setup packages that load every time R starts, to save API keys and other various options. These are completely optional and many R users never touch these.
+
+If you're not sure where you are you can type `getwd()`, for get working directory, and R will tell you:
+```{r,eval=FALSE}
+getwd()
+```
+
+If you don't like where you start, you can change it, by using `setwd()`, to set your working directory to a new location.
+```{r, eval=FALSE}
+setwd("~")
+getwd()
+```
+
+R projects will typically set the home folder for the project at the directory location of the project, so files associate with the project will always be in the same place. 
+
+## Some Simple R examples
+Below we will go through a simple R session where we introduce some concepts that are important for R. I'm running these in an Rstudio session, in the 
+
+
+#### R is a calculator
+```{r}
+#addition and subtraction
+3+7
+3-7
+```
+
+```{r}
+#multiplication and division
+3*7
+
+3/7
+```
+```{r}
+#powers
+3^2
+3^3
+```
+
+```{r}
+#sommon math functions
+log(3/7)
+exp(3/7)
+sin(3/7)
+
+```
+
+
+```{r}
+#custom functions
+myfun<-function(x){
+  sqrt(x)^x
+}
+
+myfun(5)
+
+```
+
+#### Variables and objects
+
+In R we assign values to objects (object-oriented programming). These can generally have any name, but some names are reserved for R. For instance you probably wouldn't want to call something 'mean' because there's a 'mean()' function already in R. For instance:
+
+```{r}
+x<-3
+y<-7
+x+y
+x*y
+log(x*y)
+
+```
+
+#### vectors
+R thinks everything is a matrix, or a vector, meaning a row or column of numbers, or characters. One of R's big selling points is that much of it is completely vectorized. Meaning, I can apply an operation along all elements of a vector without having to write a loop. For example, if I want to multiply a vector of numbers by a constant, in SAS, I could do:
+
+`for (i in 1 to 5)`
+`  x[i]<-y[i]*5`
+`end`
+
+but in R, I can just do:
+```{r}
+x<-c(3, 4, 5, 6, 7)
+#c() makes a vector
+y<-7
+
+x*y
+
+```
+
+
+R is also very good about using vectors, let's say I wanted to find the third element of x:
+```{r}
+x[3]
+
+#or if I want to test if this element is 10
+x[3]==10
+x[3]!=10
+```
+
+```{r}
+#of is it larger than another number:
+x[3]>3
+
+#or is any element of the whole vector greater than 3
+x>3
+
+```
+
+
+If you want to see what's in an object, use `str()`, for `str`ucture
+
+```{r}
+str(x)
+```
+
+and we see that x is numeric, and has those values.
+
+We can also see different characteristics of x
+
+```{r}
+#how long is x?
+length(x)
+
+#is x numeric?
+is.numeric(x)
+
+#is x full of characters?
+is.character(x)
+
+#is any element of x missing?
+is.na(x)
+xc<-c("1","2")
+
+#now i'll modify x
+x<-c(x, NA) #combine x and a missing value ==NA
+x
+
+#Now ask if any x's are missing
+is.na(x)
+```
+
+#### replacing elements of vectors
+Above, we had a missing value in X, let's say we want to replace it with another value:
+
+```{r}
+x<-ifelse(test = is.na(x)==T, yes =  sqrt(7.2), no =  x)
+x
+```
+
+Done!
+
+#### Dataframes
+Traditionally, R organizes variables into data frames, these are like a spreadsheet. The columns can have names, and the dataframe itself can have data of different types. Here we make a short data frame with three columns, two numeric and one character:
+
+```{r}
+mydat<-data.frame(
+  x=c(1,2,3,4,5),
+  y=c(10, 20, 35, 57, 37),
+  group=c("A", "A" ,"A", "B", "B")
+)
+
+#See the size of the dataframe
+dim(mydat)
+length(mydat$x)
+#Open the dataframe in a viewer and just print it
+View(mydat)
+print(mydat)
+```
+
+
+
+## Real data example
+Now let's open a 'real' data file. This is the [2008 World population data sheet](http://www.prb.org/Publications/Datasheets/2008/2008wpds.aspx) from the [Population Reference Bureau](http://www.prb.org). It contains summary information on many demographic and population level characteristics of nations around the world in 2008.
+
+I've had this entered into a **Comma Separated Values** file by some poor previous GRA of mine and it lives happily on Github now for all the world to see. CSV files are a good way to store data coming out of a spreadsheet. R can read Excel files, but it digests text files easier. Save something from Excel as CSV. 
+
+I can read it from github directly by using a function in the `readr` library:
+
+```{r, echo=F, results='hide', message=F, tidy=TRUE}
+library(readr)
+prb<-read_csv(file = "https://raw.githubusercontent.com/coreysparks/data/master/PRB2008_All.csv")
+#names(prb) #print the column names
+#View(prb) #open it in a viewer
+```
+
+That's handy. If the file lived on our computer, I could read it in like so:
+*note, please make a folder on your computer so you can store things for this class in a single location!!!! Organization is Key to Success in Graduate School*
+
+```{r}
+
+prb<-read_csv("~/git_area//r_courses/PRB2008_All.csv")
+
+```
+
+Same result.
+
+The `haven` library can read files from other statistical packages easily, so if you have data in Stata, SAS or SPSS, you can read it into R using those functions, for example, the `read_dta()` function reads Stata files, `read_sav()` to read SPSS data files. 
+
+I would not recommend you store data in Excel files for many reasons, but if you do, save the files as a CSV file and use the `read_csv()` function above to read it in.
+
+```{r}
+library(haven)
+prb_stata<-read_dta("~/git_area//r_courses/prb2008.dta")
+
+prb_spss<-read_sav("~/git_area//r_courses/prb_2008.sav")
+
+
+```
+
+Don't know what a function's called use ??
+
+`??stata`
+`??csv`
+
+and Rstudio will show you a list of functions that have these strings in them. 
+
+What if you know the function name, like `read_csv()` but you want to see all the function arguments?
+
+`?read_csv`
+
+will open up the help file for that specific function
+
+
+#### Save a file
+Want to save something as a R data file? Use `save()`
+
+```{r}
+save(prb, file="~/prb_2008_saved.Rdata")
+```
+
+If you have an R data file, use `load()` to open it:
+
+```{r}
+load("~/git_area//r_courses/prb_2008.Rdata")
+```
+
+
+
+## Descriptive analysis
+
+Let's have a look at some descriptive information about the data:
+```{r}
+#Frequency Table of # of Contries by Continent
+table(prb$Continent)
+
+
+#basic summary statistics for the fertility rate
+summary(prb$TFR)
+
+```
+
+From this summary, we see that the mean is 3.023, there is one country missing the Total fertility rate variable. The minimum is 1 and the maximum is 7.1 children per woman.
+
+
+Now, we will cover some basic descriptive statistical analysis. We will describe measures of central tendency and variability and how these are affected by outliers in our data. 
+
+### Measures of central tendency
+
+We can use graphical methods to describe what data 'look like' in a visual sense, but graphical methods are rarely useful for comparative purposes. In order to make comparisons, you need to rely on a numerical summary of data vs. a graphical one (I'm not saying statistical graphics aren't useful, they are!)
+
+Numerical measures tell us a lot about the form of a distribution without resorting to graphical methods. The first kind of summary statistics we will see are those related to the measure of *central tendency*. Measures of central tendency tell us about the central part of the distribution
+
+
+### Mean and median
+Here is an example from the PRB data. R has a few different ways to get a variable from a data set. One way is the `$` notation, used like `dataset$variable`
+
+```{r}
+mean(prb$TFR)
+
+```
+
+Whoops! What happened? This means that R can't calculate the mean because there's a missing value, which we saw before. We can tell R to automatically remove missing values by:
+
+
+```{r}
+mean(prb$TFR, na.rm = T)
+
+
+```
+
+Which is correct. 
+
+
+### Measures of variation
+
+One typical set of descriptive statistics that is very frequently used is the so-called **five number summary** and it consists of : the Minimum, lower quartile, median, upper quartile and maximum values. This is often useful if the data are not symmetric or skewed. This is what you get when  you use the `fivenum()` function, or we can include the mean if we use the `summary()` function.
+
+```{r}
+?fivenum
+fivenum(prb$TFR) 
+summary(prb$TFR)
+```
+
+#### Variance
+To calculate the variance and standard deviation of a variable:
+
+```{r}
+var(x)
+sd(x)
+
+sqrt(var(x))#same as using sd()
+```
+
+
+### Basic ggplot()
+Let's say that we want to compare the distributions of income from the above examples graphically. Since the `ggplot2` library is part of the tidyverse, it integrates directly with dplyr and we can do plots within pipes too.
+
+In generally, `ggplot()` has a few core statements.
+
+1) ggplot() statement - This tells R the data and the basic aesthetic that will be plotted, think x and y axis of a graph
+2) Define the geometries you want to use to plot your data, there are many types of plots you can do, some are more appropriate for certain types of data
+3) Plot annotations - Titles, labels etc.
+
+
+Now I will illustrate some basic ggplot examples, and I'm going to use the PRB data for now because it's much prettier than the ACS data for plotting.
+
+
+```{r prbhist}
+library(ggplot2)
+
+ggplot(data=prb, mapping=aes(TFR))+
+  geom_histogram( bins=10)+
+  ggtitle(label = "Distribution of the Total Fertility Rate ", subtitle = "2008 Estimates")+
+  xlab(label = "TFR")+
+  ylab(label="Frequency")
+
+```
+
+
+There is also a nice geometry called `freqpoly` that will draw polygons instead of bars for a histogram. I will use this to produce histograms for each continent.
+
+```{r}
+ggplot(data=prb,mapping = aes(TFR, colour=Continent))+
+  geom_freqpoly( bins=10)+
+  ggtitle(label = "Distribution of the Total Fertility Rate by Continent", subtitle = "2008 Estimates")+
+  xlab(label = "TFR")+
+  ylab(label="Frequency")
+
+```
+
+Also, we can plot the relative frequency , or density, instead of the count by including the `..density..` argument in the aesthetic `aes()`.
+
+```{r}
+ggplot(data=prb,mapping = aes(TFR, colour=Continent, ..density..))+
+  geom_freqpoly( bins=10)+
+  ggtitle(label = "Distribution of the Total Fertility Rate by Continent", subtitle = "2008 Estimates")+
+  xlab(label = "TFR")+
+  ylab(label="Frequency")
+
+
+
+```
+
+
+#### Stem and leaf plots/Box and Whisker plots
+Another visualization method is the stem and leaf plot, or box and whisker plot. This is useful when you have a continuous variable you want to display the distribution of across levels of a categorical variable.  This is basically a graphical display of Tukey's 5 number summary of data. 
+
+```{r}
+ggplot(prb, mapping = aes(x= Continent, y =TFR))+
+  geom_boxplot()+
+  ggtitle(label = "Distribution of the Total Fertility Rate by Continent", subtitle = "2008 Estimates")
+```
+You can flip the axes, by adding `coord_flip()`
+
+```{r}
+ggplot(prb, mapping = aes(x= Continent, y =TFR))+
+  geom_boxplot()+
+  ggtitle(label = "Distribution of the Total Fertility Rate by Continent", subtitle = "2008 Estimates")+coord_flip()
+
+```
+You can also color the boxes by a variable, Here, I will make a new variable that is the combination of the continent variable with the region variable, using the `paste()` function. It's useful for combining values of two strings.
+
+```{r, fig.height=8, fig.width=10}
+library(dplyr)
+prb%>%
+  mutate(newname = paste(Continent, Region, sep="-"))%>%
+  ggplot(aes(x= newname, y =TFR,fill=Continent))+
+  geom_boxplot()+coord_flip()+
+  ggtitle(label = "Distribution of the Total Fertility Rate by Continent", subtitle = "2008 Estimates")
+
+
+```
+
+
+#### X-Y Scatter plots
+These are useful for finding relationships among two or more continuous variables. `ggplot()` can really make these pretty.
+
+Here are a few riffs using the PRB data:
+
+```{r}
+ggplot(data=prb,mapping= aes(x=TFR, y=IMR))+
+  geom_point()+
+  ggtitle(label = "Relationship between Total Fertility and Infant Mortality", subtitle = "2008 Estimates")+
+  xlab(label = "TFR")+
+  ylab(label="IMR")
+```
+
+
+Now we color varies by continent
+```{r}
+ggplot(data=prb,mapping= aes(x=TFR, y=IMR, color=Continent))+
+  geom_point()+
+  ggtitle(label = "Relationship between Total Fertility and Infant Mortality", subtitle = "2008 Estimates")+
+  xlab(label = "TFR")+
+  ylab(label="IMR")
+```
+
+Now we vary the shape of the point by continent
+```{r}
+#shape varies by continent
+ggplot(data=prb,mapping= aes(x=TFR, y=IMR, shape=Continent))+
+  geom_point()+
+  ggtitle(label = "Relationship between Total Fertility and Infant Mortality", subtitle = "2008 Estimates")+
+  xlab(label = "TFR")+
+  ylab(label="IMR")
+
+```
+
+#### Facet plots
+Facet plots are nice, if you want to create a plot separately for a series of groups. This allows you to visualize if the relationship is constant across those groups, well at least graphically. 
+
+```{r}
+ggplot(data=prb,mapping= aes(x=TFR, y=IMR, color=Continent))+
+  geom_point()+
+  facet_wrap(~Continent)+
+  ggtitle(label = "Relationship between Total Fertility and Infant Mortality", subtitle = "2008 Estimates")+
+  xlab(label = "TFR")+
+  ylab(label="IMR")
+
+```
+
+
+#### Plotting relationships with some line fits
+`ggplot` allows you to make some very nice line-fit plots for scatter plots. While the math behind these lines is not what we are talking about, they do produce a nice graphical summary of the relationships.
+
+```{r}
+ggplot(data=prb,mapping= aes(x=TFR, y=IMR))+
+  geom_point()+
+  geom_smooth( method = "lm")+
+  ggtitle(label = "Relationship between Total Fertility and Infant Mortality", subtitle = "2008 Estimates-linear fit")+
+  xlab(label = "TFR")+
+  ylab(label="IMR")
+
+ggplot(data=prb)+
+  geom_point(mapping= aes(x=TFR, y=IMR))+
+  geom_smooth(mapping= aes(x=TFR, y=IMR) , method = "loess")+
+  ggtitle(label = "Relationship between Total Fertility and Infant Mortality", subtitle = "2008 Estimates")+
+  xlab(label = "TFR")+
+  ylab(label="IMR")
+
+```
+
+Another example, this time of a  bad linear plot!
+
+```{r}
+ggplot(data=prb,mapping= aes(x=TFR, y=PercPopLT15))+
+  geom_point()+
+  geom_smooth( method = "lm")+
+  ggtitle(label = "Relationship between Total Fertility and Percent under age 15", subtitle = "2008 Estimates-linear fit")+
+  xlab(label = "Percent under age 15")+
+  ylab(label="IMR")
+```
+
+So instead, us a nonlinear fit, a la a loess regression:
+
+```{r}
+ggplot(data=prb, mapping= aes(x=TFR, y=PercPopLT15))+
+  geom_point()+
+  geom_smooth( method = "loess")+
+  ggtitle(label = "Relationship between Total Fertility and Percent under age 15", subtitle = "2008 Estimates- loess fit")+
+  xlab(label = "Percent under age 15")+
+  ylab(label="IMR")
+
+```
+
+
+
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
