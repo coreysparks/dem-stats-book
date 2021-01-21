@@ -1,0 +1,2205 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Applied Demographic Data Analysis with R</title>
+  <meta name="description" content="Applied Demographic Data Analysis with R" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Applied Demographic Data Analysis with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Applied Demographic Data Analysis with R" />
+  
+  
+  
+
+<meta name="author" content="Corey S. Sparks" />
+
+
+<meta name="date" content="2020-11-20" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path=""><a href="#introduction"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path=""><a href="#why-a-book-on-statistics-for-demographers"><i class="fa fa-check"></i><b>1.1</b> Why a book on statistics for demographers?</a></li>
+<li class="chapter" data-level="1.2" data-path=""><a href="#why-r"><i class="fa fa-check"></i><b>1.2</b> Why R?</a><ul>
+<li class="chapter" data-level="1.2.1" data-path=""><a href="#my-assumptions-in-this-book"><i class="fa fa-check"></i><b>1.2.1</b> My assumptions in this book</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path=""><a href="#welcome-to-r."><i class="fa fa-check"></i><b>1.3</b> Welcome to R.</a></li>
+<li class="chapter" data-level="1.4" data-path=""><a href="#r-and-rstudio"><i class="fa fa-check"></i><b>1.4</b> R and Rstudio</a><ul>
+<li class="chapter" data-level="1.4.1" data-path=""><a href="#r-file-types"><i class="fa fa-check"></i><b>1.4.1</b> R file types</a></li>
+<li class="chapter" data-level="1.4.2" data-path=""><a href="#r-projects"><i class="fa fa-check"></i><b>1.4.2</b> R projects</a></li>
+<li class="chapter" data-level="1.4.3" data-path=""><a href="#r-data-files"><i class="fa fa-check"></i><b>1.4.3</b> R data files</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path=""><a href="#getting-help-in-r"><i class="fa fa-check"></i><b>1.5</b> Getting help in R</a></li>
+<li class="chapter" data-level="1.6" data-path=""><a href="#r-packages"><i class="fa fa-check"></i><b>1.6</b> R packages</a><ul>
+<li class="chapter" data-level="1.6.1" data-path=""><a href="#functions-within-packages"><i class="fa fa-check"></i><b>1.6.1</b> Functions within packages</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path=""><a href="#your-r-user-environment"><i class="fa fa-check"></i><b>1.7</b> Your R user environment</a></li>
+<li class="chapter" data-level="1.8" data-path=""><a href="#some-simple-r-examples"><i class="fa fa-check"></i><b>1.8</b> Some Simple R examples</a><ul>
+<li class="chapter" data-level="1.8.1" data-path=""><a href="#r-is-a-calculator"><i class="fa fa-check"></i><b>1.8.1</b> R is a calculator</a></li>
+<li class="chapter" data-level="1.8.2" data-path=""><a href="#variable-types"><i class="fa fa-check"></i><b>1.8.2</b> Variable types</a></li>
+<li class="chapter" data-level="1.8.3" data-path=""><a href="#nicer-looking-tables"><i class="fa fa-check"></i><b>1.8.3</b> Nicer looking tables</a></li>
+</ul></li>
+<li class="chapter" data-level="1.9" data-path=""><a href="#real-data-example"><i class="fa fa-check"></i><b>1.9</b> Real data example</a></li>
+<li class="chapter" data-level="1.10" data-path=""><a href="#basic-descriptive-analysis-of-data"><i class="fa fa-check"></i><b>1.10</b> Basic Descriptive analysis of data</a><ul>
+<li class="chapter" data-level="1.10.1" data-path=""><a href="#dataframe-summaries"><i class="fa fa-check"></i><b>1.10.1</b> Dataframe summaries</a></li>
+<li class="chapter" data-level="1.10.2" data-path=""><a href="#frequency-tables"><i class="fa fa-check"></i><b>1.10.2</b> Frequency tables</a></li>
+<li class="chapter" data-level="1.10.3" data-path=""><a href="#more-basic-statistical-summaries"><i class="fa fa-check"></i><b>1.10.3</b> More basic statistical summaries</a></li>
+<li class="chapter" data-level="1.10.4" data-path=""><a href="#measures-of-central-tendency"><i class="fa fa-check"></i><b>1.10.4</b> Measures of central tendency</a></li>
+<li class="chapter" data-level="1.10.5" data-path=""><a href="#mean-and-median"><i class="fa fa-check"></i><b>1.10.5</b> Mean and median</a></li>
+<li class="chapter" data-level="1.10.6" data-path=""><a href="#measures-of-variation"><i class="fa fa-check"></i><b>1.10.6</b> Measures of variation</a></li>
+<li class="chapter" data-level="1.10.7" data-path=""><a href="#the-tidyverse"><i class="fa fa-check"></i><b>1.10.7</b> The tidyverse</a></li>
+<li class="chapter" data-level="1.10.8" data-path=""><a href="#basic-dplyr"><i class="fa fa-check"></i><b>1.10.8</b> Basic dplyr</a></li>
+<li class="chapter" data-level="1.10.9" data-path=""><a href="#basic-ggplot"><i class="fa fa-check"></i><b>1.10.9</b> Basic ggplot</a></li>
+<li class="chapter" data-level="1.10.10" data-path=""><a href="#chapter-summary"><i class="fa fa-check"></i><b>1.10.10</b> Chapter summary</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#references"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Applied Demographic Data Analysis with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Applied Demographic Data Analysis with R</h1>
+<p class="author"><em>Corey S. Sparks</em></p>
+<p class="date"><em>2020-11-20</em></p>
+</div>
+<div id="introduction" class="section level1">
+<h1><span class="header-section-number">Chapter 1</span> Introduction</h1>
+<div id="why-a-book-on-statistics-for-demographers" class="section level2">
+<h2><span class="header-section-number">1.1</span> Why a book on statistics for demographers?</h2>
+<p>Demographers have always been a mixture of sociologists, economists, statisticians, health researchers, and other broad sub-disciples of social science. As such, we bring with us a large amount of baggage from our respective academic life courses, and we often are trained by a wide variety of mentors and professors. It’s my perspective that our interdisciplinary experience is one of our greatest strengths as a group. Given that our training is often in one of a core set of home disciplines, we often have methodological training from said discipline, and this may not be a broad enough perspective to firmly ground us in the types of methods that demographers commonly employ. This is not the fault of the departments that trained us, it’s just a historical fact. So, why am I writing a book on statistics and data analysis aimed at demographers? I will give you three reasons:</p>
+<ol style="list-style-type: decimal">
+<li><p>Demographers have to go beyond the sample. This is to say that our results and research is generally representative of a larger national or international population, and we do this explicitly in our models.</p></li>
+<li><p>We demographers don’t use random samples for our analysis. Statistics books the world over are based on assumptions of random sampling and independence, while the data that we often have to, or desire to use, comes more than likely from a data source that was collected using a complex survey design. This is a big deal and we have to have training materials that instill this in our students early on in their careers.</p></li>
+<li><p>Weird data. As demographers, we often use data from lots of different places and if you were trained up to this point to believe that the linear model is the end-all be-all of statistical inference, I’ve got news for you friends, you’ve been misled. Categorical outcomes, counts, hierarchically structured, longitudinally collected, spatially referenced, just to name a few of such oddities, are ubiquitous in our field, and part of what makes our discipline so cool and interesting to newcomers.</p></li>
+</ol>
+<p>My goal for this book is to take the lessons I’ve learned teaching statistics to a diverse and often cursorily trained group of students who have problems they care about, that they need to bring demographic data to bear upon. This is a challenge, and I have always been a stalwart proponent of teaching statistics and data analysis in a <em>very</em> applied manner. As such, this book won’t be going into rigorous proofs of estimators or devoting pages to expositions of icky algebra; instead it will focus on exploring modern methods of data analysis that in used by demographers every day, but not always taught in our training programs. As someone who has learned much more of these methods by personal exploration than by formal study, I find that many of these methods are absent from the canon of social science statistics, but are both in great demand from people who hire us, and absolutely necessary to the demographer’s analytic toolkit. It’s a major goal of this book to de-mystify the process and to make it accessible to a wide audience, so I will always strive to illustrate the key aspects of the methods described herein, and ground the discussion of methods in applications.</p>
+</div>
+<div id="why-r" class="section level2">
+<h2><span class="header-section-number">1.2</span> Why R?</h2>
+<p>I’ve used R for twenty years. I was also trained in SPSS and SAS along the way, by various mentors. Some tried to get me to learn more general purpose languages like Delphi (of all things) or Perl, or Basic, and I’ve been chastised for not knowing the depths of Python, but R presents a nimble and rigorous platform to <em>do</em> demography. My top three reasons for teaching and using R are:</p>
+<ol style="list-style-type: decimal">
+<li><p>It’s free - This is important, because, why should we pass along more costs to people, especially our students? This also make R code accessible to people, worldwide.</p></li>
+<li><p>It’s the hotbed of methodological development. The R ecosystem has thousands of packages that represent the bleeding edge of data analysis, visualization and data science. This makes R attractive because it can pivot quickly to adopt new methods, which often lag in their development in other environments.</p></li>
+<li><p>It has a supportive community of users. While there are some debates over how friendly some R users are to new users, overall, after spending 20 years in the R community, I’ve personally assisted hundreds of users, and been personally helped by many others. The open source nature of R lends itself to sharing of ideas and collaboration between users.</p></li>
+</ol>
+<div id="my-assumptions-in-this-book" class="section level3">
+<h3><span class="header-section-number">1.2.1</span> My assumptions in this book</h3>
+<p>In statistics we always make assumptions, often these are wrong, but we adapt to our mistakes daily. My assumptions about who is reading this book are:</p>
+<ol style="list-style-type: decimal">
+<li><p>You are interested in learning more about R.</p></li>
+<li><p>You are likely a student or professional interested in demography or population research.</p></li>
+<li><p>You have likely been exposed to other statistical platforms and are curious about R, in conjunction with 1 and 2 above.</p></li>
+<li><p>You may be an avid R user from another strange and exotic discipline, but are interested in how demographers do research.</p></li>
+<li><p>You want to see <em>how</em> to do things instead of being bombarded with theoretical and often unnecessary gate-keeping mathematical treatments of statistical models.</p></li>
+</ol>
+<p>I think if any of these assumptions are true, you’re in the right place. That being said, this book
+<em>is not</em> a review of all of statistics, nor is it an encyclopedic coverage of the R language and ecosystem. I image the latter being on the same scale of hopelessness as the search for the Holy Grail or the fountain of youth. People have died for such fool hearty quests, I’m not falling on my sword here folks.</p>
+</div>
+</div>
+<div id="welcome-to-r." class="section level2">
+<h2><span class="header-section-number">1.3</span> Welcome to R.</h2>
+<p>If you’re coming to R from SAS, there is no data step. There are no procs. The <a href="https://www.amazon.com/gp/product/1466584491/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=1466584491&amp;linkCode=as2&amp;tag=sasandrblog-20">SAS and R book</a> <span class="citation">Kleinman and Horton (2014)</span> is very useful for going between the two programs.</p>
+<p>If you’re coming from SPSS and you’ve been using the button clicking method, be prepared for a steep learning curve. If you’ve been writing syntax in SPSS, you’re at least used to having to code. There’s a good book for SAS and SPSS users by Bob Meunchen at the Univ. of Tennessee <a href="https://www.amazon.com/SAS-SPSS-Users-Statistics-Computing/dp/1461406846">here</a>, which may be of some help.</p>
+<p>Stata users have fewer official publications at their fingertips to ease the transition to R, but I have always thought that the two were very similar. If you search the internet for information related to R and Stata, you will find a myriad of (somewhat dated) blog posts on which one is better for “data science”, how to “get started” with either and so forth. What is really needed is a text similar to <span class="citation">Kleinman and Horton (2014)</span> which acts as a crosswalk between the two programs.</p>
+</div>
+<div id="r-and-rstudio" class="section level2">
+<h2><span class="header-section-number">1.4</span> R and Rstudio</h2>
+<p>The Rgui is the base version of R, but is not very good to program in. Rstudio is much better, as it gives you a true integrated development environment (IDE), where you can write code in one window, see results in others, see locations of files, and see objects you’ve created. To get started, you should download the R installer for your operating system. Windows and Mac have installer files, and Linux users will install R using their preferred package manager.</p>
+<p>Download R from <a href="https://cran.r-project.org/">CRAN</a>. If you’re on Windows, I would also highly recommend you install <a href="https://cran.r-project.org/">Rtools</a>, because it gives you c++ and Fortran compilers, which many packages need to be installed.</p>
+<p>Rstudio can be downloaded for free <a href="https://rstudio.com/products/rstudio/download/">here</a>.</p>
+<p>I would recommend installing the base R program from CRAN first then (for Windows users) install Rtools, then install Rstudio, in that order.</p>
+<p>Again, each operating system has its own binary for Rstudio, so pick the one that matches your operating system. Rstudio typically has 4 sub-windows open at any given time. Here is what mine looks like:</p>
+<div class="figure">
+<img src="rstudio.png" alt="" />
+<p class="caption">Rstudio</p>
+</div>
+<p>In mine, the top left window is where I have a script file ( in this case the .Rmd file that is part of this book), the bottom left window is the command line, where you can type commands directly into R. The top right window is currently showing my R environment, with a few objects that are currently saved in memory. The bottom right window shows the files in the current directory, and you can do typical file operations to them (rename, delete, move) in this window.</p>
+<div id="r-file-types" class="section level3">
+<h3><span class="header-section-number">1.4.1</span> R file types</h3>
+<p><em>.R files</em>
+R uses a basic text file with the .R extension. This type of file is useful if you’re going to write a function or do some analysis and don’t want to have formatted output or text. You can use these files for everything, but they are limited in their ability to produce reports and formatted output, so I recommend people work with R Markdown files instead.</p>
+<p><em>.Rmd files</em>
+Rstudio uses a form of the markdown formatting language, called R Markdown, for creating formatted documents that include code, tables, figures and statistical output. <strong>This book is written in R Markdown!</strong></p>
+<p>R Markdown is nice for lots of reasons, such as the ability to insert latex equations into documents.</p>
+<p><span class="math display">\[
+{y_i \sim Normal (x&#39;\beta, \sigma_2)}
+\]</span>
+or to include output tables directly into a document:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(broom)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">library</span>(pander)</span>
+<span id="cb1-3"><a href="#cb1-3"></a>fit&lt;-<span class="kw">lm</span>(imr<span class="op">~</span>tfr<span class="op">+</span>pcturban<span class="op">+</span>pctlt15_<span class="dv">2018</span><span class="op">+</span>pctwomcontra_all, prb)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">pander</span>(broom<span class="op">::</span><span class="kw">tidy</span>(fit))</span></code></pre></div>
+<table style="width:92%;">
+<colgroup>
+<col width="26%" />
+<col width="15%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">term</th>
+<th align="center">estimate</th>
+<th align="center">std.error</th>
+<th align="center">statistic</th>
+<th align="center">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">(Intercept)</td>
+<td align="center">6.209</td>
+<td align="center">6.551</td>
+<td align="center">0.9478</td>
+<td align="center">0.3446</td>
+</tr>
+<tr class="even">
+<td align="center">tfr</td>
+<td align="center">3.392</td>
+<td align="center">2.006</td>
+<td align="center">1.691</td>
+<td align="center">0.09274</td>
+</tr>
+<tr class="odd">
+<td align="center">pcturban</td>
+<td align="center">-0.0923</td>
+<td align="center">0.04553</td>
+<td align="center">-2.028</td>
+<td align="center">0.04425</td>
+</tr>
+<tr class="even">
+<td align="center">pctlt15_2018</td>
+<td align="center">0.8699</td>
+<td align="center">0.2441</td>
+<td align="center">3.564</td>
+<td align="center">0.0004798</td>
+</tr>
+<tr class="odd">
+<td align="center">pctwomcontra_all</td>
+<td align="center">-0.2114</td>
+<td align="center">0.06018</td>
+<td align="center">-3.512</td>
+<td align="center">0.0005757</td>
+</tr>
+</tbody>
+</table>
+<p>This allows you to make tables in Rmarkdown without having to do non-repeatable tasks in Word or some other program. You can basically do your entire analysis, or a sideshow for a presentation, or an entire paper, including bibliography, in Rstudio.</p>
+</div>
+<div id="r-projects" class="section level3">
+<h3><span class="header-section-number">1.4.2</span> R projects</h3>
+<p>Rstudio allows you to create a R project, which basically sets up a specific location to store R code for a given project you may be doing. For instance, this book is a single R project, which helps me organize all the chapters, bibliographies, figures, etc.</p>
+<p>R projects also allow you to use version control, including Git and SVN, to collaborate and share code and data with others.</p>
+</div>
+<div id="r-data-files" class="section level3">
+<h3><span class="header-section-number">1.4.3</span> R data files</h3>
+<p>R allows you to read and write its own <em>native</em> data formats, as well as read and write text formatted files and data files from other statistical software packages. Two native R data formats are <code>.rds</code> and <code>.rdata</code> formats. <code>.rds</code> files allow you to save a single R object to an external files, while <code>.rdata</code> files allow you to save one or more objects to a file.</p>
+<p>Here is a short example of doing this, where I create 2 vectors, <code>x</code> and <code>y</code> and save them.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>x&lt;-<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>,<span class="dv">3</span>)</span>
+<span id="cb2-2"><a href="#cb2-2"></a></span>
+<span id="cb2-3"><a href="#cb2-3"></a>y&lt;-<span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>)</span>
+<span id="cb2-4"><a href="#cb2-4"></a></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="kw">saveRDS</span>(x, <span class="dt">file=</span><span class="st">&quot;~/x.rds&quot;</span>)</span>
+<span id="cb2-6"><a href="#cb2-6"></a></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="kw">save</span>(<span class="dt">list=</span><span class="kw">c</span>(<span class="st">&quot;x&quot;</span>,<span class="st">&quot;y&quot;</span>), <span class="dt">file=</span><span class="st">&quot;xy.rdata&quot;</span>)</span></code></pre></div>
+<p>I can also load these into R again:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">readRDS</span>(<span class="dt">file=</span><span class="st">&quot;~/x.rds&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] 1 2 3</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">load</span>(<span class="st">&quot;xy.rdata&quot;</span>)</span></code></pre></div>
+<p>Standard methods for importing text data such as comma separated value or tab delimited files can be read into R using <code>read.csv()</code> or <code>read.table()</code> and similar writing functions are available.</p>
+<p>To read in a dataset from another statistical package, I recommend using the <code>haven</code> package. It allows you to read and write SAS (both sas7bdat and xpt files), Stata, SPSS (both .por and .sav files).</p>
+<p>For example, here I write out a dataframe containing <code>x</code> and <code>y</code> from above to a SAS version 7 file:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>xy&lt;-<span class="kw">data.frame</span>(<span class="dt">x=</span>x, <span class="dt">y=</span>y)</span>
+<span id="cb6-2"><a href="#cb6-2"></a>xy</span></code></pre></div>
+<pre><code>##   x y
+## 1 1 4
+## 2 2 5
+## 3 3 6</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">library</span>(haven)</span>
+<span id="cb8-2"><a href="#cb8-2"></a></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="kw">write_sas</span>(<span class="dt">data=</span>xy, <span class="dt">path=</span><span class="st">&quot;~/xy.sas7bdat&quot;</span>)</span></code></pre></div>
+<p>I will describe dataframes more later in the chapter.</p>
+<p>R also has packages for reading/writing such data formats as JSON, ESRI Shapefiles, Excel spreadsheets, Google Spreadsheets, DBF files, in addition to tools for connecting to SQL databases, and for interfacing with other statistics packages, such as Mplus, OpenBUGS, WinBUGS and various Geographic Information Systems.</p>
+</div>
+</div>
+<div id="getting-help-in-r" class="section level2">
+<h2><span class="header-section-number">1.5</span> Getting help in R</h2>
+<p>I wish I had a nickel for every time I ran into a problem trying to do something in R, that would be a lot of nickles. Here are some good tips for finding help in R:</p>
+<ol style="list-style-type: decimal">
+<li>If you know the name of a function you want to use, but just need help using it, try <code>?</code></li>
+</ol>
+<p><code>?lm</code></p>
+<ol start="2" style="list-style-type: decimal">
+<li>If you need to find a function to do something, try <code>??</code></li>
+</ol>
+<p><code>??"linear model"</code></p>
+<ol start="3" style="list-style-type: decimal">
+<li>You can also search the history of other R users questions by tapping into the <a href="http://finzi.psych.upenn.edu/search.html">RSiteSearch</a> website, which is an archive of user questions to the R list serve. This can be used by tying <code>RSiteSearch()</code></li>
+</ol>
+<p><code>RSiteSearch("heteroskedasticity")</code></p>
+<ol start="4" style="list-style-type: decimal">
+<li><p>Speaking of which, there are multiple <a href="https://www.r-project.org/mail.html">R user email list serves</a> that you can ask questions to, or subscribe to daily digests from. These typically want an example of what you’re trying to do, referred to as a <em>reproducible example</em>. I wish I also had nickles for each question I’ve asked and answered on these forums.</p></li>
+<li><p>A good source for all things programming is the statistics branch of <a href="https://stats.stackexchange.com">Stack Exchange</a>, which has lots of contributed questions and answers, although many answers are either very snarky or wrong or for an old version of a library, so <em>caveat emptor</em>.</p></li>
+<li><p>Your local R guru or R user group. You would be surprised at how many people are R users, there may be one just down the hall, or in the cubicle next door. I relish the opportunity to talk to other R users, mostly because, even though I’ve used R for more than 20 years, I still learn so much by talking to others about how they use R.</p></li>
+</ol>
+<p>Lastly, I want to be clear that there are often <strong>more than one way to do everything</strong> in R. Simple things like reading and writing a CSV data file can be accomplished by any of a handful of different functions found in different packages. If someone tells you that there is only one way to do something, they are usually wrong in such a statement, regarding R at least.</p>
+</div>
+<div id="r-packages" class="section level2">
+<h2><span class="header-section-number">1.6</span> R packages</h2>
+<p>R uses packages to store functions that do different types of analysis, so we will need to install lots of different packages to do different things. There are over 20,000 different packages currently for R. These are hosted on one of a number of <em>repositories</em>, such as the Comprehensive R Archive Network, or CRAN, which is the official repository for R packages. Other locations where authors store packages include <a href="%22https://r-forge.r-project.org/%22">R-Forge</a> and <a href="%22https://www.bioconductor.org/%22">BioconductoR</a>. Many authors host packages in <a href="%22https://github.com%22">Github</a> repositories, especially for development purposes.</p>
+<p>Packages are often organized into <em>Task Views</em>, which CRAN uses to organize packages into thematic areas. You can find a list of these Task Views <a href="%22https://cran.r-project.org/web/views/%22">here</a>. There is not a task view for Demography, but there are ones for the <a href="%22https://cran.r-project.org/web/views/SocialSciences.html%22">Social Sciences</a>, <a href="%22https://cran.r-project.org/web/views/Econometrics.html%22">Econometrics</a>, and <a href="%22https://cran.r-project.org/web/views/Spatial.html%22">Spatial Data</a> to name a few. Task views allow users to download a lot of thematically linked packages in a single command, through the package <code>ctv</code>, or Cran Task Views. You can install this package by typing:</p>
+<p><code>install.packages("ctv")</code></p>
+<p>into Rstudio. Then you have to load the package by using the <code>library()</code> command:</p>
+<p><code>library(ctv)</code></p>
+<p>which gives you access to the functions in that package. You don’t need to install the package again, unless you update your R software, but each time you start a new session (i.e. open Rstudio), you will have to load the library again. If you want to install all of the packages in the Social Science task view, you would type:</p>
+<p><code>install.views("SocialSciences")</code></p>
+<p>into R and it will install all of the packages under that task view, as of the writing of this sentence, include over 80 packages.</p>
+<p>I strongly recommend you install several packages prior to us beginning to use R, so you will not be distracted by this later. I’ve written a short script on my Github repository and you can use it by running:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">source</span>(<span class="st">&quot;https://raw.githubusercontent.com/coreysparks/Rcode/master/install_first_short.R&quot;</span>)</span></code></pre></div>
+<p>This will install a few dozen R packages that are commonly used for social science analysis and some other packages I find of use.</p>
+<p>You only have to install a package once, but each time you start a R session, you must load the package to use its functions. You should also routinely update your installed packages using <code>update.packages(ask=F)</code>. This will update any packages that have new versions on CRAN. These often will contain bug fixes and new features. On CRAN, each package will have a README file that tells what has changed in the various versions. Here is one for one of my favorite packages <a href="https://cran.r-project.org/web/packages/tidycensus/readme/README.html"><code>tidycensus</code></a>.</p>
+<div id="functions-within-packages" class="section level3">
+<h3><span class="header-section-number">1.6.1</span> Functions within packages</h3>
+<p>Each package will have one or more functions within it, each doing a specific task. The default way to access all functions within a given package is to use the command <code>library(packagename)</code> to access the functions. Once loaded, all the functions will be accessible to you. Sometimes, different packages have functions with the same name, for example the base R library has the function <code>lag()</code>, which lag’s a time series, the <code>dplyr</code> library also has a function <code>lag()</code>, which does a similar task, but with different function arguments. If you have the <code>dplyr</code> library loaded, R will default to use its <code>lag()</code> function. If you want to access a specific function within a specific library, sometimes it is safest to use the <code>library::function()</code> syntax. So if I want to use base R’s <code>lag()</code> function, I could do</p>
+<p><code>stats::lag()</code></p>
+<p>to access that function specifically. How do you know when this happens? When you load a library, you will often see messages from R that functions have conflicts. For example, if I load <code>dplyr</code>, I see:</p>
+<div class="figure">
+<img src="images/dplyrconflict.png" alt="" />
+<p class="caption">Conflict messages</p>
+</div>
+<p>As you use R more, you will learn which packages have conflicts, and often the developers of the packages will do this and rename the commonly conflicting functions. For example, the function to recode variables in the <code>car</code> package, <code>car::recode()</code> was renamed to <code>car::Recode()</code> to avoid conflicts with the <code>dplyr::recode()</code> function, as both are often used in the same analysis.</p>
+<div id="more-notes-on-functions" class="section level4">
+<h4><span class="header-section-number">1.6.1.1</span> More notes on functions</h4>
+<p>Functions in R are bits of code that do something, what they do depends on the code within them. For instance, the <code>median()</code> function’s underlying code can be seen by:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">getAnywhere</span>(<span class="kw">median.default</span>())</span></code></pre></div>
+<pre><code>## A single object matching &#39;median.default&#39; was found
+## It was found in the following places
+##   package:stats
+##   registered S3 method for median from namespace stats
+##   namespace:stats
+## with value
+## 
+## function (x, na.rm = FALSE, ...) 
+## {
+##     if (is.factor(x) || is.data.frame(x)) 
+##         stop(&quot;need numeric data&quot;)
+##     if (length(names(x))) 
+##         names(x) &lt;- NULL
+##     if (na.rm) 
+##         x &lt;- x[!is.na(x)]
+##     else if (any(is.na(x))) 
+##         return(x[FALSE][NA])
+##     n &lt;- length(x)
+##     if (n == 0L) 
+##         return(x[FALSE][NA])
+##     half &lt;- (n + 1L)%/%2L
+##     if (n%%2L == 1L) 
+##         sort(x, partial = half)[half]
+##     else mean(sort(x, partial = half + 0L:1L)[half + 0L:1L])
+## }
+## &lt;bytecode: 0x00000000163f1470&gt;
+## &lt;environment: namespace:stats&gt;</code></pre>
+<p>This seems like a lot, I know, but it allows you to see all of the code under the hood of any function. Obviously, the more complicated the function, the more complicated the code. For instance, I can write my own simple function to find the mean of a sample:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>mymean&lt;-<span class="cf">function</span>(x, <span class="dt">na.rm=</span><span class="ot">FALSE</span>){</span>
+<span id="cb12-2"><a href="#cb12-2"></a>  sx&lt;-<span class="kw">sum</span>(x, <span class="dt">na.rm=</span><span class="ot">FALSE</span>)</span>
+<span id="cb12-3"><a href="#cb12-3"></a>  nx&lt;-<span class="kw">length</span>(x)</span>
+<span id="cb12-4"><a href="#cb12-4"></a>  mu&lt;-sx<span class="op">/</span>nx</span>
+<span id="cb12-5"><a href="#cb12-5"></a>  mu</span>
+<span id="cb12-6"><a href="#cb12-6"></a>}</span>
+<span id="cb12-7"><a href="#cb12-7"></a></span>
+<span id="cb12-8"><a href="#cb12-8"></a><span class="kw">mymean</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>))</span></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<p>This function only includes the basic machinery to calculate the arithmetic mean of a vector <span class="math inline">\(x\)</span>. The function has 2 <strong>arguments</strong>, <code>x</code> and <code>na.rm</code>. All R functions have one or more arguments that users must enter for the function to operate. Some arguments are required, while some are optional, also some arguments, such as the <code>na.rm=FALSE</code>, have default values. As mentioned earlier, to see all the information for a function’s arguments, use the help operator, <code>?</code>. For example <code>?mean</code> will show you the help documents for the <code>mean()</code> function</p>
+<div class="figure">
+<img src="images/meandoc.png" alt="" />
+<p class="caption">Mean Function Help</p>
+</div>
+<p>When using a new function, it’s always advised to check out the help file to see all the arguments the function can take, because this is where you can choose alternative specifications for models and methods. These help files also contain the original citations for methods, so you can immediately check the source of the algorithms. The help files also contain a working example of how to use the function on data contained in R.</p>
+</div>
+</div>
+</div>
+<div id="your-r-user-environment" class="section level2">
+<h2><span class="header-section-number">1.7</span> Your R user environment</h2>
+<p>When you begin an R session (generally by opening Rstudio) you will begin in your home directory. This is traditionally, on Windows, at <code>'C:/Users/yourusername/Documents'</code> on Mac at <code>'/Users/yourusername'</code>, and on Linux at <code>'/users/yourusername'</code>. There are files you can add to your home directory to specify starting options for R.</p>
+<p>You can find information on setting up <code>.Rprofile</code> and <code>.Renviron</code> files on <a href="https://cran.r-project.org/web/packages/startup/vignettes/startup-intro.html">CRAN’s website</a>. This allows you to setup packages that load every time R starts, to save API keys and other various options. These are completely optional and many R users never touch these.</p>
+<p>If you’re not sure where you are you can type <code>getwd()</code>, for get working directory, and R will tell you:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">getwd</span>()</span></code></pre></div>
+<p>If you don’t like where you start, you can change it, by using <code>setwd()</code>, to set your working directory to a new location.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw">setwd</span>(<span class="st">&quot;~&quot;</span>)</span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="kw">getwd</span>()</span></code></pre></div>
+<p>R projects will typically set the home folder for the project at the directory location of the project, so files associate with the project will always be in the same place. You can set this at the beginning of your R code file to ensure the code will look for data in a specific location.</p>
+</div>
+<div id="some-simple-r-examples" class="section level2">
+<h2><span class="header-section-number">1.8</span> Some Simple R examples</h2>
+<p>Below we will go through a simple R session where we introduce some concepts that are important for R. I’m running these in an Rstudio session, in the</p>
+<div id="r-is-a-calculator" class="section level3">
+<h3><span class="header-section-number">1.8.1</span> R is a calculator</h3>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co">#addition and subtraction</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="dv">3</span><span class="op">+</span><span class="dv">7</span></span></code></pre></div>
+<pre><code>## [1] 10</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="dv">3-7</span></span></code></pre></div>
+<pre><code>## [1] -4</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co">#multiplication and division</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="dv">3</span><span class="op">*</span><span class="dv">7</span></span></code></pre></div>
+<pre><code>## [1] 21</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="dv">3</span><span class="op">/</span><span class="dv">7</span></span></code></pre></div>
+<pre><code>## [1] 0.4285714</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="co">#powers</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="dv">3</span><span class="op">^</span><span class="dv">2</span></span></code></pre></div>
+<pre><code>## [1] 9</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="dv">3</span><span class="op">^</span><span class="dv">3</span></span></code></pre></div>
+<pre><code>## [1] 27</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="co">#common math functions</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a><span class="kw">log</span>(<span class="dv">3</span><span class="op">/</span><span class="dv">7</span>)</span></code></pre></div>
+<pre><code>## [1] -0.8472979</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="kw">exp</span>(<span class="dv">3</span><span class="op">/</span><span class="dv">7</span>)</span></code></pre></div>
+<pre><code>## [1] 1.535063</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="kw">sin</span>(<span class="dv">3</span><span class="op">/</span><span class="dv">7</span>)</span></code></pre></div>
+<pre><code>## [1] 0.4155719</code></pre>
+<p>R allows users to write custom functions as well. In general, if you find yourself writing the same code over and over again, you should probably just write a function and save it to your local user environment.</p>
+<p>For example a very simple function is given below, it takes a variable <span class="math inline">\(x\)</span> as an argument, and then exponentiates the value of the variable.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="co">#custom functions</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a>myfun&lt;-<span class="cf">function</span>(x){</span>
+<span id="cb34-3"><a href="#cb34-3"></a>  <span class="kw">exp</span>(x)</span>
+<span id="cb34-4"><a href="#cb34-4"></a>}</span>
+<span id="cb34-5"><a href="#cb34-5"></a></span>
+<span id="cb34-6"><a href="#cb34-6"></a><span class="kw">myfun</span>(.<span class="dv">5</span>)</span></code></pre></div>
+<pre><code>## [1] 1.648721</code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="kw">myfun</span>(<span class="op">-</span>.<span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [1] 0.9048374</code></pre>
+<p>You may want to save this function for future use, so you don’t have to write it over again. In general, this is why people write R packages, to store custom functions, but you can also save the function to an R script. One such way to do this is to use the <code>dump()</code> command.</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="kw">dump</span>(<span class="st">&quot;myfun&quot;</span>, <span class="dt">file=</span><span class="st">&quot;myfun1.R&quot;</span>)</span></code></pre></div>
+<p>One way to load this function when you want to use it is to use the <code>source()</code> command, which loads any code in a given R script.</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="kw">source</span>(<span class="st">&quot;myfun1.R&quot;</span>)</span></code></pre></div>
+<p>Which will load this function into your local environment and you can use it. If you are interested in writing your own packages, I would highly recommend reading <span class="citation">Wickham (n.d.)</span>.</p>
+<div id="variables-and-objects" class="section level4">
+<h4><span class="header-section-number">1.8.1.1</span> Variables and objects</h4>
+<p>In R we assign values to objects (object-oriented programming). These can generally have any name, but some names are reserved for R. For instance you probably wouldn’t want to call something ‘mean’ because there’s a ‘mean()’ function already in R. For instance:</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>x&lt;-<span class="dv">3</span></span>
+<span id="cb40-2"><a href="#cb40-2"></a>y&lt;-<span class="dv">7</span></span>
+<span id="cb40-3"><a href="#cb40-3"></a>x<span class="op">+</span>y</span></code></pre></div>
+<pre><code>## [1] 10</code></pre>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a>x<span class="op">*</span>y</span></code></pre></div>
+<pre><code>## [1] 21</code></pre>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="kw">log</span>(x<span class="op">*</span>y)</span></code></pre></div>
+<pre><code>## [1] 3.044522</code></pre>
+<p>The <code>[1]</code> in the answer refers to the first element of a <em>vector</em>, which brings us to…</p>
+</div>
+<div id="vectors" class="section level4">
+<h4><span class="header-section-number">1.8.1.2</span> Vectors</h4>
+<p>R thinks many objects are like a matrix, or a vector, meaning a row or column that contains either numbers or characters. One of R’s big selling points is that much of it is completely vectorized. Meaning, I can apply an operation along all elements of a vector without having to write a <em>loop</em>.</p>
+<p>For example, if I want to multiply a vector of numbers by a constant, in SAS, I could do:</p>
+<p><code>for (i in 1 to 5)</code>
+<code>x[i]&lt;-y[i]*5</code>
+<code>end;</code></p>
+<p>but in R, I can just do:</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a>x&lt;-<span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>)</span>
+<span id="cb46-2"><a href="#cb46-2"></a><span class="co">#c() makes a vector</span></span>
+<span id="cb46-3"><a href="#cb46-3"></a>y&lt;-<span class="dv">7</span></span>
+<span id="cb46-4"><a href="#cb46-4"></a></span>
+<span id="cb46-5"><a href="#cb46-5"></a>x<span class="op">*</span>y</span></code></pre></div>
+<pre><code>## [1] 21 28 35 42 49</code></pre>
+<p>R is also very good about using vectors, let’s say I wanted to find the third element of x:</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a>x[<span class="dv">3</span>]</span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+<p>or if I want to test if this element is 10</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a>x[<span class="dv">3</span>]<span class="op">==</span><span class="dv">10</span></span></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a>x[<span class="dv">3</span>]<span class="op">!=</span><span class="dv">10</span></span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>or is it larger than another number:</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a>x[<span class="dv">3</span>]<span class="op">&gt;</span><span class="dv">3</span></span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>or is any element of the whole vector greater than 3</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a>x<span class="op">&gt;</span><span class="dv">3</span></span></code></pre></div>
+<pre><code>## [1] FALSE  TRUE  TRUE  TRUE  TRUE</code></pre>
+<p>If you want to see what’s in an object, use <code>str()</code>, for <code>str</code>ucture</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a><span class="kw">str</span>(x)</span></code></pre></div>
+<pre><code>##  num [1:5] 3 4 5 6 7</code></pre>
+<p>and we see that x is numeric, and has the values that we made.</p>
+<p>We can also see different characteristics of x</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a><span class="co">#how long is x?</span></span>
+<span id="cb60-2"><a href="#cb60-2"></a><span class="kw">length</span>(x)</span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1"></a><span class="co">#is x numeric?</span></span>
+<span id="cb62-2"><a href="#cb62-2"></a><span class="kw">is.numeric</span>(x)</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1"></a><span class="co">#is x full of characters?</span></span>
+<span id="cb64-2"><a href="#cb64-2"></a><span class="kw">is.character</span>(x)</span></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1"></a><span class="co">#is any element of x missing?</span></span>
+<span id="cb66-2"><a href="#cb66-2"></a><span class="kw">is.na</span>(x)</span></code></pre></div>
+<pre><code>## [1] FALSE FALSE FALSE FALSE FALSE</code></pre>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1"></a><span class="co">#now i&#39;ll modify x</span></span>
+<span id="cb68-2"><a href="#cb68-2"></a>x&lt;-<span class="kw">c</span>(x, <span class="ot">NA</span>) <span class="co">#combine x and a missing value ==NA</span></span>
+<span id="cb68-3"><a href="#cb68-3"></a>x</span></code></pre></div>
+<pre><code>## [1]  3  4  5  6  7 NA</code></pre>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1"></a><span class="co">#Now ask if any x&#39;s are missing</span></span>
+<span id="cb70-2"><a href="#cb70-2"></a><span class="kw">is.na</span>(x)</span></code></pre></div>
+<pre><code>## [1] FALSE FALSE FALSE FALSE FALSE  TRUE</code></pre>
+</div>
+<div id="replacing-elements-of-vectors" class="section level4">
+<h4><span class="header-section-number">1.8.1.3</span> Replacing elements of vectors</h4>
+<p>Above, we had a missing value in X, let’s say we want to replace it with another value. He we will use basic conditional logic, which exists in any programming language. The <code>ifelse()</code> function will evaluate a <code>test</code> statement, and depending on if that statement is true, it will assign a value, if the statement is false, R will assign another value. Here, we replace the missing value with <span class="math inline">\(\sqrt{7.2}\)</span>, and leave the other values as they are.</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1"></a>x&lt;-<span class="kw">ifelse</span>(<span class="dt">test =</span> <span class="kw">is.na</span>(x)<span class="op">==</span>T, <span class="dt">yes =</span>  <span class="kw">sqrt</span>(<span class="fl">7.2</span>), <span class="dt">no =</span>  x)</span>
+<span id="cb72-2"><a href="#cb72-2"></a>x</span></code></pre></div>
+<pre><code>## [1] 3.000000 4.000000 5.000000 6.000000 7.000000 2.683282</code></pre>
+</div>
+</div>
+<div id="variable-types" class="section level3">
+<h3><span class="header-section-number">1.8.2</span> Variable types</h3>
+<p>R stores data differently depending on the type of information contained. Common variables types in R are numeric, character, integer and factor.</p>
+<p>Numeric variables are just that, numbers. They can be whole numbers or decimal values. The best way to see if a variable is numeric is to use <code>is.numeric(x)</code>, and R will return TRUE if the variable is numeric and FALSE if it is not.</p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1"></a><span class="kw">is.numeric</span>(x)</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>Likewise, you can use <code>is.character()</code>, <code>is.integer()</code>, and <code>is.factor</code> to identify if a variable is of a given type. The <code>class()</code> function will also do this more generally:</p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1"></a><span class="kw">class</span>(x)</span></code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<p>Character and factor variables often store the same kind of information, and R (until recently) would always convert character variables to factors when data were read into R. This is the option <code>getOption("stringsAsFactors")</code>, which used to default to True, but has recently changed. What’s the difference you ask? Character variables store information on strings, or text. This is one way to code categorical variables that are strings. Factors, on the other hand can store strings OR numbers as categorical variables, and can be ordered or unordered. Factors also allow for specific categories of the variable to be considered as reference categories, as are often used in many statistical procedures. Factor variables have “levels” which are the different values of the categorical variable, this implied a more complicated structure than simple character variables, which lack these qualities.</p>
+<p>You can manipulate variables of one type into another, with some notable things to watch out for.</p>
+<p>Here are some examples:</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1"></a><span class="co">#create at numeric vector</span></span>
+<span id="cb78-2"><a href="#cb78-2"></a></span>
+<span id="cb78-3"><a href="#cb78-3"></a>z&lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>)</span>
+<span id="cb78-4"><a href="#cb78-4"></a><span class="kw">class</span>(z)</span></code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<p>We can convert this to a character vector using <code>as.character()</code></p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1"></a>zc&lt;-<span class="st"> </span><span class="kw">as.character</span>(z)</span>
+<span id="cb80-2"><a href="#cb80-2"></a>zc</span></code></pre></div>
+<pre><code>## [1] &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot;</code></pre>
+<p>Likewise, we can convert it to a factor type:</p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1"></a>zf&lt;-<span class="kw">as.factor</span>(z)</span>
+<span id="cb82-2"><a href="#cb82-2"></a>zf</span></code></pre></div>
+<pre><code>## [1] 1 2 3 4
+## Levels: 1 2 3 4</code></pre>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1"></a><span class="kw">class</span>(zf)</span></code></pre></div>
+<pre><code>## [1] &quot;factor&quot;</code></pre>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1"></a><span class="kw">is.ordered</span>(zf)</span></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<p>and as an ordered factor:</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1"></a>zfo&lt;-<span class="kw">factor</span>(zf, <span class="dt">ordered =</span> T)</span>
+<span id="cb88-2"><a href="#cb88-2"></a>zfo</span></code></pre></div>
+<pre><code>## [1] 1 2 3 4
+## Levels: 1 &lt; 2 &lt; 3 &lt; 4</code></pre>
+<div id="dataframes" class="section level4">
+<h4><span class="header-section-number">1.8.2.1</span> Dataframes</h4>
+<p>Traditionally, R organizes variables into data frames, these are like a spreadsheet. The columns can have names, and the <em>dataframe</em> itself can have data of different types.</p>
+<p>Here we make a short data frame with three columns, two numeric and one factor:</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1"></a>mydat&lt;-<span class="kw">data.frame</span>(</span>
+<span id="cb90-2"><a href="#cb90-2"></a>  <span class="dt">x=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>),</span>
+<span id="cb90-3"><a href="#cb90-3"></a>  <span class="dt">y=</span><span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">35</span>, <span class="dv">57</span>, <span class="dv">37</span>, <span class="dv">21</span>, <span class="dv">23</span>, <span class="dv">25</span>),</span>
+<span id="cb90-4"><a href="#cb90-4"></a>  <span class="dt">group=</span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;A&quot;</span> ,<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>,<span class="st">&quot;C&quot;</span>,<span class="st">&quot;C&quot;</span>))</span>
+<span id="cb90-5"><a href="#cb90-5"></a>)</span>
+<span id="cb90-6"><a href="#cb90-6"></a></span>
+<span id="cb90-7"><a href="#cb90-7"></a><span class="co">#See the size of the dataframe</span></span>
+<span id="cb90-8"><a href="#cb90-8"></a><span class="kw">dim</span>(mydat)</span></code></pre></div>
+<pre><code>## [1] 8 3</code></pre>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1"></a><span class="co">#Open the dataframe in a viewer and just print it</span></span>
+<span id="cb92-2"><a href="#cb92-2"></a><span class="kw">View</span>(mydat)</span>
+<span id="cb92-3"><a href="#cb92-3"></a><span class="kw">print</span>(mydat)</span></code></pre></div>
+<pre><code>##   x  y group
+## 1 1 10     A
+## 2 2 20     A
+## 3 3 35     A
+## 4 4 57     B
+## 5 5 37     B
+## 6 6 21     C
+## 7 7 23     C
+## 8 8 25     C</code></pre>
+</div>
+<div id="accessing-variables-in-dataframes" class="section level4">
+<h4><span class="header-section-number">1.8.2.2</span> Accessing variables in dataframes</h4>
+<p>R has a few different ways to get a variable from a data set. One way is the <code>$</code> notation, used like <code>dataset$variable</code>, and another is to provide the column index or name of the variable. These three methods are illustrated below. The first tells R to get the variable named <code>group</code> from the data. The second tells R to get the column named <code>group</code> from the data, and the third tells R to get the third column from the data.</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1"></a>mydat<span class="op">$</span>group</span></code></pre></div>
+<pre><code>## [1] A A A B B C C C
+## Levels: A B C</code></pre>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1"></a>mydat[<span class="st">&#39;group&#39;</span>] </span></code></pre></div>
+<pre><code>##   group
+## 1     A
+## 2     A
+## 3     A
+## 4     B
+## 5     B
+## 6     C
+## 7     C
+## 8     C</code></pre>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1"></a>mydat[,<span class="dv">3</span>]</span></code></pre></div>
+<pre><code>## [1] A A A B B C C C
+## Levels: A B C</code></pre>
+<p>The <code>names()</code> function is very useful for seeing all the column names of a dataset, without having to print any of the data.</p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1"></a><span class="kw">names</span>(mydat)</span></code></pre></div>
+<pre><code>## [1] &quot;x&quot;     &quot;y&quot;     &quot;group&quot;</code></pre>
+<p>R has several useful function for previewing the contents of a dataframe or variable. The <code>head()</code> function shows the first 6 observations of a dataframe or variable, and <code>tail()</code> shows the last 6 observations. You can also show a custom number of observations by using the <code>n=</code> argument in either function. These are illustrated below:</p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1"></a><span class="kw">head</span>(mydat)</span></code></pre></div>
+<pre><code>##   x  y group
+## 1 1 10     A
+## 2 2 20     A
+## 3 3 35     A
+## 4 4 57     B
+## 5 5 37     B
+## 6 6 21     C</code></pre>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1"></a><span class="kw">head</span>(mydat, <span class="dt">n=</span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##   x  y group
+## 1 1 10     A
+## 2 2 20     A</code></pre>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1"></a><span class="kw">head</span>(mydat<span class="op">$</span>group)</span></code></pre></div>
+<pre><code>## [1] A A A B B C
+## Levels: A B C</code></pre>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1"></a><span class="kw">tail</span>(mydat)</span></code></pre></div>
+<pre><code>##   x  y group
+## 3 3 35     A
+## 4 4 57     B
+## 5 5 37     B
+## 6 6 21     C
+## 7 7 23     C
+## 8 8 25     C</code></pre>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1"></a><span class="kw">tail</span>(mydat, <span class="dt">n=</span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##   x  y group
+## 7 7 23     C
+## 8 8 25     C</code></pre>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1"></a><span class="kw">tail</span>(mydat<span class="op">$</span>group)</span></code></pre></div>
+<pre><code>## [1] A B B C C C
+## Levels: A B C</code></pre>
+</div>
+</div>
+<div id="nicer-looking-tables" class="section level3">
+<h3><span class="header-section-number">1.8.3</span> Nicer looking tables</h3>
+<p>R can also produce nicely formatted HTML and LaTeX tables. There are several packages that do this, but the <code>knitr</code> package has some basic table creation functions that do a good job for simple tables.</p>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1"></a><span class="kw">library</span>(knitr)</span>
+<span id="cb114-2"><a href="#cb114-2"></a></span>
+<span id="cb114-3"><a href="#cb114-3"></a><span class="kw">kable</span>(mydat,</span>
+<span id="cb114-4"><a href="#cb114-4"></a>      <span class="dt">caption =</span> <span class="st">&quot;My basic table&quot;</span>,</span>
+<span id="cb114-5"><a href="#cb114-5"></a>      <span class="dt">align =</span> <span class="st">&#39;c&#39;</span>,  </span>
+<span id="cb114-6"><a href="#cb114-6"></a>      <span class="dt">format =</span> <span class="st">&quot;html&quot;</span>)</span></code></pre></div>
+<table>
+<caption>
+<span id="tab:unnamed-chunk-42">Table 1.1: </span>My basic table
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+x
+</th>
+<th style="text-align:center;">
+y
+</th>
+<th style="text-align:center;">
+group
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+A
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+20
+</td>
+<td style="text-align:center;">
+A
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+35
+</td>
+<td style="text-align:center;">
+A
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+57
+</td>
+<td style="text-align:center;">
+B
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+37
+</td>
+<td style="text-align:center;">
+B
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+21
+</td>
+<td style="text-align:center;">
+C
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+7
+</td>
+<td style="text-align:center;">
+23
+</td>
+<td style="text-align:center;">
+C
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+25
+</td>
+<td style="text-align:center;">
+C
+</td>
+</tr>
+</tbody>
+</table>
+<p>Much more advanced tables can be created using the <code>gt</code> package <span class="citation">Iannone, Cheng, and Schloerke (2020)</span>, which allows for highly customized tables.</p>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1"></a><span class="kw">library</span>(gt, <span class="dt">quietly =</span> T)</span>
+<span id="cb115-2"><a href="#cb115-2"></a><span class="kw">library</span>(dplyr, <span class="dt">quietly =</span> T)</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1"></a>mydat<span class="op">%&gt;%</span></span>
+<span id="cb119-2"><a href="#cb119-2"></a><span class="st">  </span><span class="kw">gt</span>()<span class="op">%&gt;%</span></span>
+<span id="cb119-3"><a href="#cb119-3"></a><span class="st">  </span><span class="kw">tab_header</span>(<span class="dt">title=</span> <span class="st">&quot;My simple gt table&quot;</span>, <span class="dt">subtitle =</span> <span class="st">&quot;With a subtitle&quot;</span>)</span></code></pre></div>
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#gudveevtxo .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#gudveevtxo .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#gudveevtxo .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#gudveevtxo .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#gudveevtxo .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gudveevtxo .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#gudveevtxo .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#gudveevtxo .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#gudveevtxo .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#gudveevtxo .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#gudveevtxo .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#gudveevtxo .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#gudveevtxo .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#gudveevtxo .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#gudveevtxo .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#gudveevtxo .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#gudveevtxo .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#gudveevtxo .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gudveevtxo .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#gudveevtxo .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gudveevtxo .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#gudveevtxo .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#gudveevtxo .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gudveevtxo .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#gudveevtxo .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#gudveevtxo .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#gudveevtxo .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#gudveevtxo .gt_left {
+  text-align: left;
+}
+
+#gudveevtxo .gt_center {
+  text-align: center;
+}
+
+#gudveevtxo .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#gudveevtxo .gt_font_normal {
+  font-weight: normal;
+}
+
+#gudveevtxo .gt_font_bold {
+  font-weight: bold;
+}
+
+#gudveevtxo .gt_font_italic {
+  font-style: italic;
+}
+
+#gudveevtxo .gt_super {
+  font-size: 65%;
+}
+
+#gudveevtxo .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="gudveevtxo" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  <thead class="gt_header">
+    <tr>
+      <th colspan="3" class="gt_heading gt_title gt_font_normal" style>My simple gt table</th>
+    </tr>
+    <tr>
+      <th colspan="3" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>With a subtitle</th>
+    </tr>
+  </thead>
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">x</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">y</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">group</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">10</td>
+      <td class="gt_row gt_center">A</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">20</td>
+      <td class="gt_row gt_center">A</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_right">3</td>
+      <td class="gt_row gt_right">35</td>
+      <td class="gt_row gt_center">A</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_right">4</td>
+      <td class="gt_row gt_right">57</td>
+      <td class="gt_row gt_center">B</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_right">5</td>
+      <td class="gt_row gt_right">37</td>
+      <td class="gt_row gt_center">B</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_right">6</td>
+      <td class="gt_row gt_right">21</td>
+      <td class="gt_row gt_center">C</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_right">7</td>
+      <td class="gt_row gt_right">23</td>
+      <td class="gt_row gt_center">C</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_right">8</td>
+      <td class="gt_row gt_right">25</td>
+      <td class="gt_row gt_center">C</td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
+</div>
+</div>
+<div id="real-data-example" class="section level2">
+<h2><span class="header-section-number">1.9</span> Real data example</h2>
+<p>Now let’s open a ‘real’ data file. This is the <a href="https://www.prb.org/2018-world-population-data-sheet-with-focus-on-changing-age-structures/">2018 World population data sheet</a> from the <a href="http://www.prb.org">Population Reference Bureau</a>. It contains summary information on many demographic and population level characteristics of nations around the world in 2018.</p>
+<p>I’ve had this entered into a <strong>Comma Separated Values</strong> file by some poor previous research assistant of mine and it lives happily on Github now for all the world to see. CSV files are a good way to store data coming out of a spreadsheet, because R can read them without any other packages. R can also read Excel files, but it requires external packages to do so, such as <code>readxl</code>.</p>
+<p>I can read it from Github directly by using a function in the <code>readr</code> library, or with the base R function <code>read.csv()</code>, both accomplish the same task.</p>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1"></a>prb &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="dt">file =</span> <span class="st">&quot;https://raw.githubusercontent.com/coreysparks/r_courses/master/2018_WPDS_Data_Table_FINAL.csv&quot;</span>, </span>
+<span id="cb120-2"><a href="#cb120-2"></a>    <span class="dt">stringsAsFactors =</span> T)</span></code></pre></div>
+<p>That’s handy. If the file lived on our computer in your working directory, I could read it in like so:</p>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1"></a>prb&lt;-<span class="kw">read_csv</span>(<span class="st">&quot;path/to/file/2018_WPDS_Data_Table_FINAL.csv&quot;</span>)</span></code></pre></div>
+<p>Same result.</p>
+<p>The <code>haven</code> library <span class="citation">Wickham and Miller (2020)</span> can read files from other statistical packages easily, so if you have data in Stata, SAS or SPSS, you can read it into R using those functions, for example, the <code>read_dta()</code> function reads Stata files, <code>read_sav()</code> to read SPSS data files.</p>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1"></a><span class="kw">library</span>(haven)</span>
+<span id="cb122-2"><a href="#cb122-2"></a>prb_stata&lt;-<span class="kw">read_dta</span>(<span class="st">&quot;path/to/file/prb2018.dta&quot;</span>)</span>
+<span id="cb122-3"><a href="#cb122-3"></a></span>
+<span id="cb122-4"><a href="#cb122-4"></a>prb_spss&lt;-<span class="kw">read_sav</span>(<span class="st">&quot;path/to/file/prb_2018.sav&quot;</span>)</span></code></pre></div>
+</div>
+<div id="basic-descriptive-analysis-of-data" class="section level2">
+<h2><span class="header-section-number">1.10</span> Basic Descriptive analysis of data</h2>
+<p>One of the key elements of analyzing data is the initial descriptive analysis of it. In subsequent chapters, I will go into more depth about this process, but for now, I want to illustrate some simple but effective commands for summarizing data.</p>
+<div id="dataframe-summaries" class="section level3">
+<h3><span class="header-section-number">1.10.1</span> Dataframe summaries</h3>
+<p>The <code>summary()</code> function is very useful both in terms of producing numerical summaries of individual variables, but also for shows summaries of entire dataframes. Its output differs based on the type of variable you give it, for character variables it does not return any summary. For factor variables, it returns a frequency table, and for numeric variables, it returns the five number summary plus the mean.</p>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1"></a><span class="kw">summary</span>(prb<span class="op">$</span>region)</span></code></pre></div>
+<pre><code>##        CARIBBEAN  CENTRAL AMERICA     CENTRAL ASIA        EAST ASIA 
+##               17                8                5                8 
+##   EASTERN AFRICA   EASTERN EUROPE    MIDDLE AFRICA  NORTHERN AFRICA 
+##               20               10                9                7 
+## NORTHERN AMERICA  NORTHERN EUROPE          OCEANIA    SOUTH AMERICA 
+##                2               11               17               13 
+##       SOUTH ASIA   SOUTHEAST ASIA  SOUTHERN AFRICA  SOUTHERN EUROPE 
+##                9               11                5               15 
+##   WESTERN AFRICA     WESTERN ASIA   WESTERN EUROPE 
+##               16               18                9</code></pre>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="#cb125-1"></a><span class="kw">summary</span>(<span class="kw">as.factor</span>(prb<span class="op">$</span>continent))</span></code></pre></div>
+<pre><code>##           AFRICA             ASIA           EUROPE NORTHERN AMERICA 
+##               57               51               45               27 
+##          OCEANIA    SOUTH AMERICA 
+##               17               13</code></pre>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="#cb127-1"></a><span class="kw">summary</span>(prb<span class="op">$</span>tfr)</span></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   1.000   1.600   2.300   2.709   3.750   7.200</code></pre>
+<p>I find this function to be very useful when I’m initially exploring a data set, so I can easily see the min/max values of a variable. There are many alternatives to this base function, including <code>psych::describe()</code>, <code>Hmisc::describe()</code>, and <code>skimr::skim()</code>, all of which produce summaries of dataframes or variables</p>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="#cb129-1"></a>desc1 &lt;-<span class="st"> </span>psych<span class="op">::</span><span class="kw">describe</span>(prb, <span class="dt">fast =</span> F)</span>
+<span id="cb129-2"><a href="#cb129-2"></a><span class="kw">print</span>(desc1, <span class="dt">short =</span> T)</span></code></pre></div>
+<pre><code>##      vars n mean sd median trimmed mad min max range skew kurtosis se
+##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 27 rows ]</code></pre>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="#cb131-1"></a>desc2&lt;-<span class="st"> </span>Hmisc<span class="op">::</span><span class="kw">describe</span>(prb, <span class="dt">tabular=</span>T)</span>
+<span id="cb131-2"><a href="#cb131-2"></a><span class="kw">head</span>(desc2)</span></code></pre></div>
+<pre><code>## prb 
+## 
+##  6  Variables      210  Observations
+## --------------------------------------------------------------------------------
+## continent 
+##        n  missing distinct 
+##      210        0        6 
+## 
+## lowest : AFRICA           ASIA             EUROPE           NORTHERN AMERICA OCEANIA         
+## highest: ASIA             EUROPE           NORTHERN AMERICA OCEANIA          SOUTH AMERICA   
+##                                                                               
+## Value                AFRICA             ASIA           EUROPE NORTHERN AMERICA
+## Frequency                57               51               45               27
+## Proportion            0.271            0.243            0.214            0.129
+##                                             
+## Value               OCEANIA    SOUTH AMERICA
+## Frequency                17               13
+## Proportion            0.081            0.062
+## --------------------------------------------------------------------------------
+## region 
+##        n  missing distinct 
+##      210        0       19 
+## 
+## lowest : CARIBBEAN       CENTRAL AMERICA CENTRAL ASIA    EAST ASIA       EASTERN AFRICA 
+## highest: SOUTHERN AFRICA SOUTHERN EUROPE WESTERN AFRICA  WESTERN ASIA    WESTERN EUROPE 
+## --------------------------------------------------------------------------------
+## country 
+##        n  missing distinct 
+##      210        0      210 
+## 
+## lowest : Afghanistan    Albania        Algeria        Andorra        Angola        
+## highest: Vietnam        Western Sahara Yemen          Zambia         Zimbabwe      
+## --------------------------------------------------------------------------------
+## pop2018 
+##        n  missing distinct     Info     Mean      Gmd      .05      .10 
+##      210        0      142        1    36.29    59.09     0.10     0.20 
+##      .25      .50      .75      .90      .95 
+##     1.30     7.00    25.43    65.21   117.95 
+## 
+## lowest :    0.0    0.1    0.2    0.3    0.4, highest:  209.4  265.2  328.0 1371.3 1393.8
+## --------------------------------------------------------------------------------
+## cbr 
+##        n  missing distinct     Info     Mean      Gmd      .05      .10 
+##      210        0       37    0.998    20.34    11.47      9.0      9.0 
+##      .25      .50      .75      .90      .95 
+##     11.0     18.5     28.0     35.1     39.0 
+## 
+## lowest :  7  8  9 10 11, highest: 40 41 43 45 48
+## --------------------------------------------------------------------------------
+## cdr 
+##        n  missing distinct     Info     Mean      Gmd      .05      .10 
+##      210        0       16    0.986    7.676    3.061        4        5 
+##      .25      .50      .75      .90      .95 
+##        6        7        9       11       13 
+## 
+## lowest :  1  2  3  4  5, highest: 12 13 14 15 16
+##                                                                             
+## Value          1     2     3     4     5     6     7     8     9    10    11
+## Frequency      1     4     5     8    25    37    29    26    25    18    14
+## Proportion 0.005 0.019 0.024 0.038 0.119 0.176 0.138 0.124 0.119 0.086 0.067
+##                                         
+## Value         12    13    14    15    16
+## Frequency      5     6     5     1     1
+## Proportion 0.024 0.029 0.024 0.005 0.005
+## --------------------------------------------------------------------------------</code></pre>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="#cb133-1"></a>desc3&lt;-skimr<span class="op">::</span><span class="kw">skim</span>(prb)</span>
+<span id="cb133-2"><a href="#cb133-2"></a>desc3</span></code></pre></div>
+<table>
+<caption><span id="tab:unnamed-chunk-50">Table 1.2: </span>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">prb</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">210</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">27</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">factor</td>
+<td align="left">3</td>
+</tr>
+<tr class="odd">
+<td align="left">numeric</td>
+<td align="left">24</td>
+</tr>
+<tr class="even">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: factor</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="left">ordered</th>
+<th align="right">n_unique</th>
+<th align="left">top_counts</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">continent</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">6</td>
+<td align="left">AFR: 57, ASI: 51, EUR: 45, NOR: 27</td>
+</tr>
+<tr class="even">
+<td align="left">region</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">19</td>
+<td align="left">EAS: 20, WES: 18, CAR: 17, OCE: 17</td>
+</tr>
+<tr class="odd">
+<td align="left">country</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">210</td>
+<td align="left">Afg: 1, Alb: 1, Alg: 1, And: 1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">pop2018</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">36.29</td>
+<td align="right">139.62</td>
+<td align="right">0.0</td>
+<td align="right">1.30</td>
+<td align="right">7.0</td>
+<td align="right">25.43</td>
+<td align="right">1393.8</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">cbr</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">20.34</td>
+<td align="right">10.24</td>
+<td align="right">7.0</td>
+<td align="right">11.00</td>
+<td align="right">18.5</td>
+<td align="right">28.00</td>
+<td align="right">48.0</td>
+<td align="left">▇▅▃▃▁</td>
+</tr>
+<tr class="odd">
+<td align="left">cdr</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">7.68</td>
+<td align="right">2.74</td>
+<td align="right">1.0</td>
+<td align="right">6.00</td>
+<td align="right">7.0</td>
+<td align="right">9.00</td>
+<td align="right">16.0</td>
+<td align="left">▂▇▆▂▁</td>
+</tr>
+<tr class="even">
+<td align="left">rate_inc</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">1.27</td>
+<td align="right">1.06</td>
+<td align="right">-0.7</td>
+<td align="right">0.30</td>
+<td align="right">1.2</td>
+<td align="right">2.20</td>
+<td align="right">3.8</td>
+<td align="left">▇▇▇▆▂</td>
+</tr>
+<tr class="odd">
+<td align="left">netmig</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">0.31</td>
+<td align="right">6.85</td>
+<td align="right">-21.0</td>
+<td align="right">-2.00</td>
+<td align="right">0.0</td>
+<td align="right">2.00</td>
+<td align="right">32.0</td>
+<td align="left">▁▇▃▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">projpop2030</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">40.81</td>
+<td align="right">149.97</td>
+<td align="right">0.0</td>
+<td align="right">1.33</td>
+<td align="right">7.9</td>
+<td align="right">33.10</td>
+<td align="right">1532.3</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">projpop2050</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">46.91</td>
+<td align="right">157.42</td>
+<td align="right">0.0</td>
+<td align="right">1.42</td>
+<td align="right">9.1</td>
+<td align="right">40.95</td>
+<td align="right">1680.1</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">imr</td>
+<td align="right">1</td>
+<td align="right">1.00</td>
+<td align="right">22.10</td>
+<td align="right">20.53</td>
+<td align="right">1.5</td>
+<td align="right">6.00</td>
+<td align="right">14.0</td>
+<td align="right">36.00</td>
+<td align="right">85.0</td>
+<td align="left">▇▂▂▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">tfr</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">2.71</td>
+<td align="right">1.34</td>
+<td align="right">1.0</td>
+<td align="right">1.60</td>
+<td align="right">2.3</td>
+<td align="right">3.75</td>
+<td align="right">7.2</td>
+<td align="left">▇▃▃▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">gnigdp</td>
+<td align="right">21</td>
+<td align="right">0.90</td>
+<td align="right">19804.30</td>
+<td align="right">21208.36</td>
+<td align="right">710.0</td>
+<td align="right">4490.00</td>
+<td align="right">12880.0</td>
+<td align="right">27400.00</td>
+<td align="right">128060.0</td>
+<td align="left">▇▂▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">pcturban</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">60.03</td>
+<td align="right">23.61</td>
+<td align="right">13.0</td>
+<td align="right">41.00</td>
+<td align="right">61.5</td>
+<td align="right">78.75</td>
+<td align="right">100.0</td>
+<td align="left">▅▆▇▇▆</td>
+</tr>
+<tr class="even">
+<td align="left">popdens</td>
+<td align="right">7</td>
+<td align="right">0.97</td>
+<td align="right">9413.00</td>
+<td align="right">74675.11</td>
+<td align="right">52.0</td>
+<td align="right">423.00</td>
+<td align="right">859.0</td>
+<td align="right">2150.00</td>
+<td align="right">1032235.0</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">pctwomcontra_all</td>
+<td align="right">43</td>
+<td align="right">0.80</td>
+<td align="right">51.27</td>
+<td align="right">21.48</td>
+<td align="right">4.0</td>
+<td align="right">33.50</td>
+<td align="right">55.0</td>
+<td align="right">67.50</td>
+<td align="right">88.0</td>
+<td align="left">▃▅▅▇▅</td>
+</tr>
+<tr class="even">
+<td align="left">pctwomcontra_mod</td>
+<td align="right">46</td>
+<td align="right">0.78</td>
+<td align="right">43.09</td>
+<td align="right">21.34</td>
+<td align="right">2.0</td>
+<td align="right">24.00</td>
+<td align="right">44.5</td>
+<td align="right">60.00</td>
+<td align="right">84.0</td>
+<td align="left">▆▇▇▇▅</td>
+</tr>
+<tr class="odd">
+<td align="left">pctmalehiv</td>
+<td align="right">74</td>
+<td align="right">0.65</td>
+<td align="right">1.61</td>
+<td align="right">3.36</td>
+<td align="right">0.1</td>
+<td align="right">0.20</td>
+<td align="right">0.5</td>
+<td align="right">1.22</td>
+<td align="right">19.3</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">pctfemhiv</td>
+<td align="right">74</td>
+<td align="right">0.65</td>
+<td align="right">2.28</td>
+<td align="right">5.54</td>
+<td align="right">0.1</td>
+<td align="right">0.10</td>
+<td align="right">0.3</td>
+<td align="right">1.60</td>
+<td align="right">35.1</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">e0male</td>
+<td align="right">2</td>
+<td align="right">0.99</td>
+<td align="right">70.04</td>
+<td align="right">7.57</td>
+<td align="right">50.0</td>
+<td align="right">65.00</td>
+<td align="right">71.0</td>
+<td align="right">75.25</td>
+<td align="right">82.0</td>
+<td align="left">▂▃▅▇▆</td>
+</tr>
+<tr class="even">
+<td align="left">e0female</td>
+<td align="right">2</td>
+<td align="right">0.99</td>
+<td align="right">74.78</td>
+<td align="right">8.16</td>
+<td align="right">52.0</td>
+<td align="right">69.00</td>
+<td align="right">77.0</td>
+<td align="right">80.25</td>
+<td align="right">88.0</td>
+<td align="left">▁▃▃▇▅</td>
+</tr>
+<tr class="odd">
+<td align="left">e65male</td>
+<td align="right">11</td>
+<td align="right">0.95</td>
+<td align="right">15.14</td>
+<td align="right">2.53</td>
+<td align="right">10.0</td>
+<td align="right">13.00</td>
+<td align="right">15.0</td>
+<td align="right">17.00</td>
+<td align="right">20.0</td>
+<td align="left">▃▇▅▅▃</td>
+</tr>
+<tr class="even">
+<td align="left">e65female</td>
+<td align="right">11</td>
+<td align="right">0.95</td>
+<td align="right">17.51</td>
+<td align="right">3.18</td>
+<td align="right">10.0</td>
+<td align="right">15.00</td>
+<td align="right">17.0</td>
+<td align="right">20.00</td>
+<td align="right">24.0</td>
+<td align="left">▁▇▇▇▃</td>
+</tr>
+<tr class="odd">
+<td align="left">pctlt15_2018</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">27.51</td>
+<td align="right">10.59</td>
+<td align="right">12.0</td>
+<td align="right">18.00</td>
+<td align="right">25.5</td>
+<td align="right">36.75</td>
+<td align="right">50.0</td>
+<td align="left">▇▆▅▅▃</td>
+</tr>
+<tr class="even">
+<td align="left">pctlt15_2050</td>
+<td align="right">11</td>
+<td align="right">0.95</td>
+<td align="right">20.93</td>
+<td align="right">7.43</td>
+<td align="right">11.0</td>
+<td align="right">15.00</td>
+<td align="right">18.0</td>
+<td align="right">27.00</td>
+<td align="right">43.0</td>
+<td align="left">▇▃▂▂▁</td>
+</tr>
+<tr class="odd">
+<td align="left">pct65p_2018</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">8.93</td>
+<td align="right">6.23</td>
+<td align="right">1.0</td>
+<td align="right">4.00</td>
+<td align="right">7.0</td>
+<td align="right">14.00</td>
+<td align="right">28.0</td>
+<td align="left">▇▃▂▂▁</td>
+</tr>
+<tr class="even">
+<td align="left">pct65p_2050</td>
+<td align="right">11</td>
+<td align="right">0.95</td>
+<td align="right">16.92</td>
+<td align="right">9.36</td>
+<td align="right">3.0</td>
+<td align="right">8.00</td>
+<td align="right">17.0</td>
+<td align="right">24.50</td>
+<td align="right">36.0</td>
+<td align="left">▇▆▅▇▂</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>skimr::skim()</code> function is very good at doing summaries of both numeric and categorical data, while the other functions are perhaps best suited to numeric data.</p>
+<p>The <code>summary()</code> function, as well as the other three functions in other packages can be used on a single variable within a dataframe as well, or on a simple vector:</p>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1"></a><span class="kw">summary</span>(prb<span class="op">$</span>tfr)</span></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   1.000   1.600   2.300   2.709   3.750   7.200</code></pre>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="#cb136-1"></a><span class="kw">summary</span>(zf)</span></code></pre></div>
+<pre><code>## 1 2 3 4 
+## 1 1 1 1</code></pre>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="#cb138-1"></a>skimr<span class="op">::</span><span class="kw">skim</span>(prb<span class="op">$</span>tfr)</span></code></pre></div>
+<table>
+<caption><span id="tab:unnamed-chunk-53">Table 1.3: </span>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">prb$tfr</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">210</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">numeric</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">data</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">2.71</td>
+<td align="right">1.34</td>
+<td align="right">1</td>
+<td align="right">1.6</td>
+<td align="right">2.3</td>
+<td align="right">3.75</td>
+<td align="right">7.2</td>
+<td align="left">▇▃▃▁▁</td>
+</tr>
+</tbody>
+</table>
+<p>From this summary, we see that the mean is 2.7085714, there is one country missing the Total fertility rate variable. The minimum is 1 and the maximum is 7.2 children per woman.</p>
+</div>
+<div id="frequency-tables" class="section level3">
+<h3><span class="header-section-number">1.10.2</span> Frequency tables</h3>
+<p>A basic exploration of data, especially if your data have categorical or nominal variables, includes the extensive use of frequency tables. If you’re simply looking at the number of observations in each level of a categorical variable, or using frequency tables to aggregate data, they are some of the most useful basic statistical summaries around. The basic function for constructing simple tables is <code>table()</code> in base R. More sophisticated table construction is allowed in <code>xtabs()</code></p>
+<p>Let’s have a look at some descriptive information about the data:</p>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="#cb139-1"></a><span class="co">#Frequency Table of # of Countries by Continent</span></span>
+<span id="cb139-2"><a href="#cb139-2"></a><span class="kw">table</span>(prb<span class="op">$</span>continent)</span></code></pre></div>
+<pre><code>## 
+##           AFRICA             ASIA           EUROPE NORTHERN AMERICA 
+##               57               51               45               27 
+##          OCEANIA    SOUTH AMERICA 
+##               17               13</code></pre>
+<p>Frequency of TFR over 3 by continent:</p>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="#cb141-1"></a><span class="kw">table</span>(<span class="kw">I</span>(prb<span class="op">$</span>tfr<span class="op">&gt;</span><span class="dv">3</span>), prb<span class="op">$</span>continent)</span></code></pre></div>
+<pre><code>##        
+##         AFRICA ASIA EUROPE NORTHERN AMERICA OCEANIA SOUTH AMERICA
+##   FALSE     11   40     45               27       7            12
+##   TRUE      46   11      0                0      10             1</code></pre>
+<p>Two things to notice in the above code, first we have to use the <code>$</code> operator to extract each variable from the <code>prb</code> dataframe. Second, the <code>I()</code> operator is used. This is honestly one of my favorite things in base R. <code>I()</code> is the indicator function, it evaluates to <code>TRUE</code> or <code>FALSE</code> depending on the argument inside of it. This also allows for fast construction of binary variables on the fly in any function. Here’s another example:</p>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="#cb143-1"></a>x&lt;-<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">19</span>)</span>
+<span id="cb143-2"><a href="#cb143-2"></a><span class="kw">I</span>(x<span class="op">&gt;</span><span class="dv">5</span>)</span></code></pre></div>
+<pre><code>## [1] FALSE FALSE FALSE FALSE  TRUE  TRUE</code></pre>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="#cb145-1"></a><span class="kw">table</span>(<span class="kw">I</span>(x<span class="op">&gt;</span><span class="dv">5</span>))</span></code></pre></div>
+<pre><code>## 
+## FALSE  TRUE 
+##     4     2</code></pre>
+<p>So we see how this works, I checks if <code>x</code> is greater than 5, if it is, <code>I()</code> returns <code>TRUE</code>. When we feed this to <code>table()</code>, we can count up the <code>TRUE</code> and <code>FALSE</code> responses.</p>
+<p>Later in the book, we will see how to employ the <code>xtabs()</code> function to quickly aggregate data from individual level to aggregate level.</p>
+</div>
+<div id="more-basic-statistical-summaries" class="section level3">
+<h3><span class="header-section-number">1.10.3</span> More basic statistical summaries</h3>
+<p>Now, we will cover some basic descriptive statistical analysis including basic measures of central tendency and variability.</p>
+</div>
+<div id="measures-of-central-tendency" class="section level3">
+<h3><span class="header-section-number">1.10.4</span> Measures of central tendency</h3>
+<p>We can use graphical methods to describe what data ‘look like’ in a visual sense, but graphical methods are rarely useful for comparative purposes. In order to make comparisons, you need to rely on a numerical summary of data vs. a graphical one.</p>
+<p>Numerical measures tell us a lot about the form of a distribution without resorting to graphical methods. The first kind of summary statistics we will see are those related to the measure of <em>central tendency</em>. Measures of central tendency tell us about the central part of the distribution</p>
+</div>
+<div id="mean-and-median" class="section level3">
+<h3><span class="header-section-number">1.10.5</span> Mean and median</h3>
+<p>Here is an example from the PRB data.</p>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="#cb147-1"></a><span class="kw">mean</span>(prb<span class="op">$</span>tfr)</span></code></pre></div>
+<pre><code>## [1] 2.708571</code></pre>
+<p>Whoops! What happened? This means that R can’t calculate the mean because there’s a missing value, which we saw before. We can tell R to automatically remove missing values by:</p>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="#cb149-1"></a><span class="kw">mean</span>(prb<span class="op">$</span>tfr, <span class="dt">na.rm =</span> T)</span></code></pre></div>
+<pre><code>## [1] 2.708571</code></pre>
+<p>Which works without an error. Many R functions will fail, or do listwise deletion of observations when <code>NA</code>s are present, so it’s best to look at the documentation for the function you’re wanting to use to see what it’s default na action is. The <code>mean()</code> function defaults to <code>na.rm=FALSE</code>, which indicates that it does not remove missing values by default.</p>
+<p>We can also calculate the median TFR</p>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="#cb151-1"></a><span class="kw">median</span>(prb<span class="op">$</span>tfr, <span class="dt">na.rm =</span> T)</span></code></pre></div>
+<pre><code>## [1] 2.3</code></pre>
+</div>
+<div id="measures-of-variation" class="section level3">
+<h3><span class="header-section-number">1.10.6</span> Measures of variation</h3>
+<p>One typical set of descriptive statistics that is very frequently used is the so-called <strong>five number summary</strong> and it consists of : the Minimum, lower quartile, median, upper quartile and maximum values. This is often useful if the data are not symmetric or skewed. This is what you get when you use the <code>fivenum()</code> function, or we can include the mean if we use the <code>summary()</code> function.</p>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="#cb153-1"></a><span class="kw">fivenum</span>(prb<span class="op">$</span>tfr) </span></code></pre></div>
+<pre><code>## [1] 1.0 1.6 2.3 3.8 7.2</code></pre>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="#cb155-1"></a><span class="kw">summary</span>(prb<span class="op">$</span>tfr)</span></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   1.000   1.600   2.300   2.709   3.750   7.200</code></pre>
+<div id="variance" class="section level4">
+<h4><span class="header-section-number">1.10.6.1</span> Variance</h4>
+<p>To calculate the variance and standard deviation of a variable:</p>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="#cb157-1"></a><span class="kw">var</span>(prb<span class="op">$</span>tfr, <span class="dt">na.rm=</span>T) <span class="co">#variance</span></span></code></pre></div>
+<pre><code>## [1] 1.806338</code></pre>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="#cb159-1"></a><span class="kw">sd</span>(prb<span class="op">$</span>tfr, <span class="dt">na.rm=</span>T) <span class="co">#standard deviation</span></span></code></pre></div>
+<pre><code>## [1] 1.344001</code></pre>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="#cb161-1"></a><span class="kw">sqrt</span>(<span class="kw">var</span>(prb<span class="op">$</span>tfr)) <span class="co">#same as using sd()</span></span></code></pre></div>
+<pre><code>## [1] 1.344001</code></pre>
+<p>The above sections have shown some basic ways to summarize data in R, along with many handy functions that are pervasive in my own general work flow. Is this everything R will do, No. Are these the only way to do things in R? Never. I’m constantly marveled at how many new functions I see my students using in their own work and this reminds me how much of the R ecosystem I have yet to explore, even after twenty-plus years of using it.</p>
+</div>
+</div>
+<div id="the-tidyverse" class="section level3">
+<h3><span class="header-section-number">1.10.7</span> The tidyverse</h3>
+<p>So far, most of the functions I have discussed have been from the base R ecosystem, with some specific functions from other downloadable packages. One of the biggest changes to R in recent years has been the explosion in popularity of the <strong>tidyverse</strong> <span class="citation">Wickham et al. (2019)</span>. The tidyverse is a large collection of related packages that share a common philosophy of how data and programming relate to one another and work together to produce a more streamlined, literate way of programming with data.</p>
+<p>To get the core parts of the tidyverse, install it using <code>install.packages("tidyverse")</code> in your R session. This will install the core components of the tidyverse that can then be used throughout the rest of the book.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<p>Two of the workhorses in the tidyverse are the packages <code>dplyr</code> <span class="citation">Wickham et al. (2020)</span> and <code>ggplot2</code> <span class="citation">Wickham (2016)</span>. The <code>dplyr</code> package is very thoroughly described in the book <em>R for Data Science</em> <span class="citation">Wickham and Grolemund (2017)</span>, and the <code>ggplot2</code> package also has a book-length description in the book <em>ggplot2: Elegant Graphics for Data Analysis</em> <span class="citation">Wickham (2016)</span>, so I won’t waste time and space here with complete descriptions. Instead, I will show some pragmatic examples of how these work in my own work flow, and also use these packages together to produce some descriptive data visualizations.</p>
+</div>
+<div id="basic-dplyr" class="section level3">
+<h3><span class="header-section-number">1.10.8</span> Basic dplyr</h3>
+<p>The <code>dplyr</code> package has many functions that work together to produce succinct, readable and highly functional code. I often say about base R packages in comparison to things like SAS, that I can do something in R in about 10 lines of code compared to 50 in SAS. Using dplyr, you can do even more, faster.</p>
+<p>The package consists of core “verbs” that are used to clean, reshape, and summarize data. Using “pipes”, the user can chain these verbs together so that you only have to name the data being used once, which makes for more efficient code, since you’re not constantly having to name the dataframe. The pipes also allow for all variables within a dataframe to be accessed, without using the <code>$</code> or <code>[]</code> notation described earlier in this chapter.</p>
+<p>Perhaps a short tour of using dplyr would be good at this point, and we will see it used throughout the book. In the following code, I will use the <code>prb</code> data from earlier, and I will do a series of tasks. First, I will create a new variable using the <code>mutate()</code> function, then group the data into groups (similar to SAS’s ‘by’ processing) , then do some statistical summaries of other variables using the <code>summarise()</code> function.</p>
+<p>Here we go:</p>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="#cb163-1"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb163-2"><a href="#cb163-2"></a></span>
+<span id="cb163-3"><a href="#cb163-3"></a>prb<span class="op">%&gt;%</span></span>
+<span id="cb163-4"><a href="#cb163-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">high_tfr =</span> <span class="kw">ifelse</span>(<span class="dt">test =</span> tfr <span class="op">&gt;</span><span class="st"> </span><span class="dv">3</span>,<span class="dt">yes =</span>  <span class="st">&quot;high&quot;</span>,<span class="dt">no =</span>  <span class="st">&quot;low&quot;</span>) )<span class="op">%&gt;%</span></span>
+<span id="cb163-5"><a href="#cb163-5"></a><span class="st">  </span><span class="kw">group_by</span>(high_tfr)<span class="op">%&gt;%</span></span>
+<span id="cb163-6"><a href="#cb163-6"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n=</span><span class="kw">n</span>(), <span class="kw">across</span>(<span class="dt">.cols =</span> <span class="kw">c</span>(e0male, e0female, gnigdp, imr), <span class="dt">.fns =</span> mean, <span class="dt">na.rm=</span>T))<span class="op">%&gt;%</span></span>
+<span id="cb163-7"><a href="#cb163-7"></a><span class="st">  </span><span class="kw">ungroup</span>()</span></code></pre></div>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<pre><code>## # A tibble: 2 x 6
+##   high_tfr     n e0male e0female gnigdp   imr
+##   &lt;chr&gt;    &lt;int&gt;  &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+## 1 high        68   62.8     66.4  5329.  43.2
+## 2 low        142   73.6     78.9 27216.  11.9</code></pre>
+<p>The <code>prb%&gt;%</code> line says, take the prb data and feed it into the next verb using the pipe.
+The next line <code>mutate(high_tfr = ifelse(test = tfr &gt; 3,yes =  "high",no =  "low") )%&gt;%</code> tells R to create a new variable called <code>high_tfr</code>, the value of the variable will be created based on conditional logic. If the value of the tfr is over 3, the value will be <code>"high"</code> and if the value of the tfr is less than 3, the value of the variable will be <code>"low"</code>.</p>
+<p>The <code>group_by(high_tfr)%&gt;%</code> line tells R to form a “grouped data frame”, basically this is how <code>dplyr</code> segments data into discrete groups, based off a variable, and then performs operations on those groups. This is the same thing as stratification of data. You can use multiple variables in this function, to group your data by multiple attributes.</p>
+<p>The last line <code>summarise(n=n(),across(.cols = c(e0male, e0female, gnigdp, imr), .fns = mean, na.rm=T))</code> tells R to first count the number of cases in each group <code>n=n()</code>, then summarize multiple variables, in this case male and female life expectancy at birth, GDP, and the infant mortality rate, by each of the levels of the <code>high_tfr</code> variable. The summary I want to do is the mean of each variable, being sure to remove missing values before calculating the mean.</p>
+<p>Finally, we <code>ungroup()</code> the dataframe to remove the grouping, this is customary whenever using the <code>group_by()</code> verb.</p>
+<p>We see then the estimates of the four other indicators for countries that have TFR over 3, versus countries with a TFR under 3.</p>
+<p>This is a basic <code>dplyr</code> use, but it is far from what the package can do. Throughout the rest of the book, this process will be used to do calculations, aggregate data, present model results and produce graphics. This example was trying to show a simple workflow in dplyr, and introduce the pipe concept.</p>
+<p>Next, we will explore some basic uses of <code>dplyr</code> in conjunction with the <code>ggplot2</code> package.</p>
+</div>
+<div id="basic-ggplot" class="section level3">
+<h3><span class="header-section-number">1.10.9</span> Basic ggplot</h3>
+<p>Let’s say that we want to compare the distributions of income from the above examples graphically. Since the <code>ggplot2</code> library is part of the tidyverse, it integrates directly with dplyr and we can do plots within pipes too.</p>
+<p>In generally, <code>ggplot()</code> has a few core statements.</p>
+<ol style="list-style-type: decimal">
+<li><code>ggplot()</code> statement - This tells R the data and the basic aesthetic that will be plotted, think x and y axis of a graph. The aesthetic is defined using the <code>aes()</code> function. This is where you pass values to be plotted to the plot device.</li>
+<li>Define the geometries you want to use to plot your data, there are many types of plots you can do, some are more appropriate for certain types of data</li>
+<li>Plot annotations - Titles, labels etc. This allows you to customize the plot with more information to make it more easily understandable.</li>
+</ol>
+<p>Now I will illustrate some basic ggplot examples, and I’m going to use the PRB data that I have been using for other examples. In order to better illustrate the code, I will walk through a <em>very</em> minimal example, line by line.</p>
+<p><code>library(ggplot2)</code> Loads the ggplot package</p>
+<p><code>ggplot(data=prb, mapping =aes(x= tfr))+</code> Use the ggplot function, on the prb dataframe. The variable we are plotting is the total fertility rate, <code>tfr</code>. In this case, it is the only variable we are using. I include a <code>+</code> at the end of the line to tell R that more elements of the plot are going to be added.</p>
+<p><code>geom_histogram()+</code> Tells R that the <code>geom</code>etry we are using is a histogram, again we have the <code>+</code> at the end of the line to indicate that we will add something else to the plot, in this case a title.</p>
+<p><code>ggtitle(label = "Distribution of the Total Fertility Rate, 2018")</code>
+Tells R the primary title for the plot, which describes what is being plotted. I’m also going to add an additional annotation to the x-axis to indicate that it is showing the distribution of the TFR:</p>
+<p><code>xlab(label = "TFR")</code></p>
+<p>Now, let’s see all of this together:</p>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="#cb166-1"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb166-2"><a href="#cb166-2"></a></span>
+<span id="cb166-3"><a href="#cb166-3"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>prb, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x =</span> tfr))<span class="op">+</span></span>
+<span id="cb166-4"><a href="#cb166-4"></a><span class="st">  </span><span class="kw">geom_histogram</span>()<span class="op">+</span></span>
+<span id="cb166-5"><a href="#cb166-5"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="dt">label =</span> <span class="st">&quot;Distribution of the Total Fertility Rate, 2018&quot;</span>)<span class="op">+</span></span>
+<span id="cb166-6"><a href="#cb166-6"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="dt">label =</span> <span class="st">&quot;TFR&quot;</span>)</span></code></pre></div>
+<p><img src="index_files/figure-html/prbhist-1.png" width="672" /></p>
+<p>The above example named the data frame explicitly in the <code>ggplot()</code> call, but we can also use <code>dplyr</code> to pipe data into the plot:</p>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="#cb167-1"></a>prb<span class="op">%&gt;%</span></span>
+<span id="cb167-2"><a href="#cb167-2"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x =</span> tfr))<span class="op">+</span></span>
+<span id="cb167-3"><a href="#cb167-3"></a><span class="st">  </span><span class="kw">geom_histogram</span>()<span class="op">+</span></span>
+<span id="cb167-4"><a href="#cb167-4"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="dt">label =</span> <span class="st">&quot;Distribution of the Total Fertility Rate, 2018&quot;</span>)<span class="op">+</span></span>
+<span id="cb167-5"><a href="#cb167-5"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="dt">label =</span> <span class="st">&quot;TFR&quot;</span>)</span></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-64-1.png" width="672" /></p>
+<p>We can likewise incorporate a <code>dplyr</code> workflow directly into our plotting, using the example from before, we will create histograms for the high and low fertility groups using the <code>facet_wrap()</code> function.</p>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="#cb169-1"></a>prb<span class="op">%&gt;%</span></span>
+<span id="cb169-2"><a href="#cb169-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">high_tfr =</span> <span class="kw">ifelse</span>(<span class="dt">test =</span> tfr <span class="op">&gt;</span><span class="st"> </span><span class="dv">3</span>,<span class="dt">yes =</span>  <span class="st">&quot;high&quot;</span>,<span class="dt">no =</span>  <span class="st">&quot;low&quot;</span>) )<span class="op">%&gt;%</span></span>
+<span id="cb169-3"><a href="#cb169-3"></a><span class="st">  </span><span class="kw">group_by</span>(high_tfr)<span class="op">%&gt;%</span></span>
+<span id="cb169-4"><a href="#cb169-4"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x =</span> imr))<span class="op">+</span></span>
+<span id="cb169-5"><a href="#cb169-5"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>( <span class="dt">fill=</span>high_tfr))<span class="op">+</span></span>
+<span id="cb169-6"><a href="#cb169-6"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>high_tfr)<span class="op">+</span></span>
+<span id="cb169-7"><a href="#cb169-7"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="dt">label =</span> <span class="st">&quot;Distribution of the Infant Mortality Rate, 2018&quot;</span>,</span>
+<span id="cb169-8"><a href="#cb169-8"></a>          <span class="dt">subtitle =</span> <span class="st">&quot;Low and High Fertility Countries&quot;</span>)<span class="op">+</span></span>
+<span id="cb169-9"><a href="#cb169-9"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="dt">label =</span> <span class="st">&quot;Infant Mortality Rate&quot;</span>)</span></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<pre><code>## Warning: Removed 1 rows containing non-finite values (stat_bin).</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-65-1.png" width="672" />
+You also notice that I used the <code>aes(fill=high_tfr)</code> to tell R to color the histogram bars according to the variable <code>high_tfr</code>. The <code>aes()</code> function allows you to modify colors, line types, and fills based of values of a variable.</p>
+<p>Another way to display the distribution of a variable is to use <code>geom_density()</code> which calculates the kernel density of a variable. Again, I use a variable, this time the continent a country is on, to color the lines for the plot.</p>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="#cb172-1"></a>prb<span class="op">%&gt;%</span></span>
+<span id="cb172-2"><a href="#cb172-2"></a><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(tfr, <span class="dt">colour=</span>continent,<span class="dt">stat=</span> ..density..))<span class="op">+</span></span>
+<span id="cb172-3"><a href="#cb172-3"></a><span class="st">  </span><span class="kw">geom_density</span>()<span class="op">+</span></span>
+<span id="cb172-4"><a href="#cb172-4"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="dt">label =</span> <span class="st">&quot;Distribution of the Total Fertility Rate by Continent&quot;</span>, <span class="dt">subtitle =</span> <span class="st">&quot;2018 Estimates&quot;</span>)<span class="op">+</span></span>
+<span id="cb172-5"><a href="#cb172-5"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="dt">label =</span> <span class="st">&quot;TFR&quot;</span>)</span></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-66-1.png" width="672" /></p>
+<div id="stem-and-leaf-plotsbox-and-whisker-plots" class="section level4">
+<h4><span class="header-section-number">1.10.9.1</span> Stem and leaf plots/Box and Whisker plots</h4>
+<p>Another visualization method is the stem and leaf plot, or box and whisker plot. This is useful when you have a continuous variable you want to display the distribution of across levels of a categorical variable. This is basically a graphical display of Tukey’s 5 number summary of data.</p>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="#cb173-1"></a>prb<span class="op">%&gt;%</span></span>
+<span id="cb173-2"><a href="#cb173-2"></a><span class="st">  </span><span class="kw">ggplot</span>( <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x=</span> continent, <span class="dt">y =</span>tfr))<span class="op">+</span></span>
+<span id="cb173-3"><a href="#cb173-3"></a><span class="st">  </span><span class="kw">geom_boxplot</span>()<span class="op">+</span></span>
+<span id="cb173-4"><a href="#cb173-4"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="dt">label =</span> <span class="st">&quot;Distribution of the Total Fertility Rate by Continent&quot;</span>, <span class="dt">subtitle =</span> <span class="st">&quot;2018 Estimates&quot;</span>)</span></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-67-1.png" width="960" />
+You can flip the axes, by adding <code>coord_flip()</code></p>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="#cb174-1"></a>prb<span class="op">%&gt;%</span></span>
+<span id="cb174-2"><a href="#cb174-2"></a><span class="kw">ggplot</span>( <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x=</span> continent, <span class="dt">y =</span>tfr))<span class="op">+</span></span>
+<span id="cb174-3"><a href="#cb174-3"></a><span class="st">  </span><span class="kw">geom_boxplot</span>()<span class="op">+</span></span>
+<span id="cb174-4"><a href="#cb174-4"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="dt">label =</span> <span class="st">&quot;Distribution of the Total Fertility Rate by Continent&quot;</span>, <span class="dt">subtitle =</span> <span class="st">&quot;2018 Estimates&quot;</span>)<span class="op">+</span><span class="kw">coord_flip</span>()</span></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-68-1.png" width="960" />
+You can also color the boxes by a variable, Here, I will make a new variable that is the combination of the continent variable with the region variable, using the <code>paste()</code> function. It’s useful for combining values of two strings.</p>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="#cb175-1"></a>prb<span class="op">%&gt;%</span></span>
+<span id="cb175-2"><a href="#cb175-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">newname =</span> <span class="kw">paste</span>(continent, region, <span class="dt">sep=</span><span class="st">&quot;-&quot;</span>))<span class="op">%&gt;%</span></span>
+<span id="cb175-3"><a href="#cb175-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span> newname, <span class="dt">y =</span>tfr,<span class="dt">fill=</span>continent))<span class="op">+</span></span>
+<span id="cb175-4"><a href="#cb175-4"></a><span class="st">  </span><span class="kw">geom_boxplot</span>()<span class="op">+</span><span class="kw">coord_flip</span>()<span class="op">+</span></span>
+<span id="cb175-5"><a href="#cb175-5"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="dt">label =</span> <span class="st">&quot;Distribution of the Total Fertility Rate by Continent&quot;</span>, <span class="dt">subtitle =</span> <span class="st">&quot;2018 Estimates&quot;</span>)</span></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-69-1.png" width="960" /></p>
+</div>
+<div id="x-y-scatter-plots" class="section level4">
+<h4><span class="header-section-number">1.10.9.2</span> X-Y Scatter plots</h4>
+<p>These are useful for finding relationships among two or more continuous variables. <code>ggplot()</code> can really make these pretty. The <code>geom_point()</code> geometry adds points to the plot.</p>
+<p>Here are a few riffs using the PRB data:</p>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="#cb176-1"></a>prb<span class="op">%&gt;%</span></span>
+<span id="cb176-2"><a href="#cb176-2"></a><span class="kw">ggplot</span>(<span class="dt">mapping=</span> <span class="kw">aes</span>(<span class="dt">x=</span>tfr, <span class="dt">y=</span>imr))<span class="op">+</span></span>
+<span id="cb176-3"><a href="#cb176-3"></a><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></span>
+<span id="cb176-4"><a href="#cb176-4"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="dt">label =</span> <span class="st">&quot;Relationship between Total Fertility and Infant Mortality&quot;</span>, <span class="dt">subtitle =</span> <span class="st">&quot;2018 Estimates&quot;</span>)<span class="op">+</span></span>
+<span id="cb176-5"><a href="#cb176-5"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="dt">label =</span> <span class="st">&quot;TFR&quot;</span>)<span class="op">+</span></span>
+<span id="cb176-6"><a href="#cb176-6"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="dt">label=</span><span class="st">&quot;IMR&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-70-1.png" width="672" />
+R also makes it easy to overlay linear and spline smoothers for the data (more on splines later).</p>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="#cb178-1"></a>prb<span class="op">%&gt;%</span></span>
+<span id="cb178-2"><a href="#cb178-2"></a><span class="kw">ggplot</span>(<span class="dt">mapping=</span> <span class="kw">aes</span>(<span class="dt">x=</span>tfr, <span class="dt">y=</span>imr))<span class="op">+</span></span>
+<span id="cb178-3"><a href="#cb178-3"></a><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></span>
+<span id="cb178-4"><a href="#cb178-4"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">color=</span><span class="st">&quot;black&quot;</span>, <span class="dt">se =</span> F)<span class="op">+</span><span class="st"> </span><span class="co">#linear regression fit</span></span>
+<span id="cb178-5"><a href="#cb178-5"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">color=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">se=</span>F)<span class="op">+</span></span>
+<span id="cb178-6"><a href="#cb178-6"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="dt">label =</span> <span class="st">&quot;Relationship between Total Fertility and Infant Mortality&quot;</span>, <span class="dt">subtitle =</span> <span class="st">&quot;2018 Estimates&quot;</span>)<span class="op">+</span></span>
+<span id="cb178-7"><a href="#cb178-7"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="dt">label =</span> <span class="st">&quot;TFR&quot;</span>)<span class="op">+</span></span>
+<span id="cb178-8"><a href="#cb178-8"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="dt">label=</span><span class="st">&quot;IMR&quot;</span>)</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<pre><code>## Warning: Removed 1 rows containing non-finite values (stat_smooth).</code></pre>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<pre><code>## Warning: Removed 1 rows containing non-finite values (stat_smooth).</code></pre>
+<pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-71-1.png" width="672" /></p>
+<p>Now we color the points by continent</p>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="#cb184-1"></a>prb<span class="op">%&gt;%</span></span>
+<span id="cb184-2"><a href="#cb184-2"></a><span class="kw">ggplot</span>(<span class="dt">mapping=</span> <span class="kw">aes</span>(<span class="dt">x=</span>tfr, <span class="dt">y=</span>imr, <span class="dt">color=</span>continent))<span class="op">+</span></span>
+<span id="cb184-3"><a href="#cb184-3"></a><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></span>
+<span id="cb184-4"><a href="#cb184-4"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se=</span>F)<span class="op">+</span></span>
+<span id="cb184-5"><a href="#cb184-5"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="dt">label =</span> <span class="st">&quot;Relationship between Total Fertility and Infant Mortality&quot;</span>, <span class="dt">subtitle =</span> <span class="st">&quot;2018 Estimates&quot;</span>)<span class="op">+</span></span>
+<span id="cb184-6"><a href="#cb184-6"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="dt">label =</span> <span class="st">&quot;TFR&quot;</span>)<span class="op">+</span></span>
+<span id="cb184-7"><a href="#cb184-7"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="dt">label=</span><span class="st">&quot;IMR&quot;</span>)</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<pre><code>## Warning: Removed 1 rows containing non-finite values (stat_smooth).</code></pre>
+<pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-72-1.png" width="672" /></p>
+</div>
+<div id="facet-plots" class="section level4">
+<h4><span class="header-section-number">1.10.9.3</span> Facet plots</h4>
+<p>Facet plots are nice, they allow you to create a plot separately based on a grouping variable. This allows you to visualize if the relationship is constant across those groups. Here, I repeat the plot above, but I facet on the continent, and include the regression line for each continent.</p>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="#cb188-1"></a>prb<span class="op">%&gt;%</span></span>
+<span id="cb188-2"><a href="#cb188-2"></a><span class="kw">ggplot</span>(<span class="dt">mapping=</span> <span class="kw">aes</span>(<span class="dt">x=</span>tfr, <span class="dt">y=</span>imr, <span class="dt">color=</span>continent))<span class="op">+</span></span>
+<span id="cb188-3"><a href="#cb188-3"></a><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></span>
+<span id="cb188-4"><a href="#cb188-4"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se=</span>F, <span class="dt">color=</span><span class="st">&quot;black&quot;</span>)<span class="op">+</span></span>
+<span id="cb188-5"><a href="#cb188-5"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>continent)<span class="op">+</span></span>
+<span id="cb188-6"><a href="#cb188-6"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="dt">label =</span> <span class="st">&quot;Relationship between Total Fertility and Infant Mortality&quot;</span>, <span class="dt">subtitle =</span> <span class="st">&quot;2018 Estimates&quot;</span>)<span class="op">+</span></span>
+<span id="cb188-7"><a href="#cb188-7"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="dt">label =</span> <span class="st">&quot;TFR&quot;</span>)<span class="op">+</span></span>
+<span id="cb188-8"><a href="#cb188-8"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="dt">label=</span><span class="st">&quot;IMR&quot;</span>)</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<pre><code>## Warning: Removed 1 rows containing non-finite values (stat_smooth).</code></pre>
+<pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-73-1.png" width="672" /></p>
+<p>Another example, this time of a bad linear plot! <code>ggplot</code> makes it easy to examine if a relationship is linear or curvilinear, at least visually.</p>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="#cb192-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>prb,<span class="dt">mapping=</span> <span class="kw">aes</span>(<span class="dt">x=</span>tfr, <span class="dt">y=</span>pctlt15_<span class="dv">2018</span>))<span class="op">+</span></span>
+<span id="cb192-2"><a href="#cb192-2"></a><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></span>
+<span id="cb192-3"><a href="#cb192-3"></a><span class="st">  </span><span class="kw">geom_smooth</span>( <span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se=</span>F, <span class="dt">color=</span><span class="st">&quot;black&quot;</span>)<span class="op">+</span></span>
+<span id="cb192-4"><a href="#cb192-4"></a><span class="st">  </span><span class="kw">geom_smooth</span>( <span class="dt">method =</span> <span class="st">&quot;loess&quot;</span>, <span class="dt">se=</span>F, <span class="dt">color=</span><span class="st">&quot;blue&quot;</span>)<span class="op">+</span></span>
+<span id="cb192-5"><a href="#cb192-5"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="dt">label =</span> <span class="st">&quot;Relationship between Total Fertility and Percent under age 15&quot;</span>, <span class="dt">subtitle =</span> <span class="st">&quot;2018 Estimates- Linear &amp; Loess fit&quot;</span>)<span class="op">+</span></span>
+<span id="cb192-6"><a href="#cb192-6"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="dt">label =</span> <span class="st">&quot;Percent under age 15&quot;</span>)<span class="op">+</span></span>
+<span id="cb192-7"><a href="#cb192-7"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="dt">label=</span><span class="st">&quot;IMR&quot;</span>)</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;
+## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-74-1.png" width="672" /></p>
+</div>
+</div>
+<div id="chapter-summary" class="section level3">
+<h3><span class="header-section-number">1.10.10</span> Chapter summary</h3>
+<p>In this chapter, I have introduced R and Rstudio and some basic uses of the software for accessing data and estimating some summary statistics. The R ecosystem is large and complex, and the goal of this book is to show you, the user, how to use R for analyzing data from demographic data sources. In the chapters that follow, I will show how to use R within two large universes of data, the macro and the micro. The <em>macro</em> level sections will focus on using R on data that come primarily from places - nations, regions, administrative areas. The <em>micro</em> level sections will focus on analyzing complex survey data on individual responses to demographic surveys. The final section will discuss approaches that merge these two levels into a multi-level framework and describe how such models are estimated and applied.</p>
+</div>
+<div id="references" class="section level3 unnumbered">
+<h3>References</h3>
+<div id="refs" class="references">
+<div>
+<p>Iannone, Richard, Joe Cheng, and Barret Schloerke. 2020. <em>Gt: Easily Create Presentation-Ready Display Tables</em>. <a href="https://CRAN.R-project.org/package=gt">https://CRAN.R-project.org/package=gt</a>.</p>
+</div>
+<div>
+<p>Kleinman, Ken, and Nicholas J. Horton. 2014. <em>SAS and R: Data Management, Statistical Analysis, and Graphics, 2nd Edition</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="https://nhorton.people.amherst.edu/sasr2/">https://nhorton.people.amherst.edu/sasr2/</a>.</p>
+</div>
+<div>
+<p>Wickham, Hadley. 2016. <em>Ggplot2: Elegant Graphics for Data Analysis</em>. Springer-Verlag New York. <a href="https://ggplot2.tidyverse.org">https://ggplot2.tidyverse.org</a>.</p>
+</div>
+<div>
+<p>———. n.d. <em>R Packages</em>. 1st ed. O’Reily. <a href="https://r-pkgs.org/">https://r-pkgs.org/</a>.</p>
+</div>
+<div>
+<p>Wickham, Hadley, Mara Averick, Jennifer Bryan, Winston Chang, Lucy D’Agostino McGowan, Romain François, Garrett Grolemund, et al. 2019. “Welcome to the tidyverse.” <em>Journal of Open Source Software</em> 4 (43): 1686. <a href="https://doi.org/10.21105/joss.01686">https://doi.org/10.21105/joss.01686</a>.</p>
+</div>
+<div>
+<p>Wickham, Hadley, Romain François, Lionel Henry, and Kirill Müller. 2020. <em>Dplyr: A Grammar of Data Manipulation</em>. <a href="https://CRAN.R-project.org/package=dplyr">https://CRAN.R-project.org/package=dplyr</a>.</p>
+</div>
+<div>
+<p>Wickham, Hadley, and Garrett Grolemund. 2017. <em>R for Data Science: Import, Tidy, Transform, Visualize, and Model Data</em>. 1st ed. Paperback; O’Reilly Media. <a href="http://r4ds.had.co.nz/">http://r4ds.had.co.nz/</a>.</p>
+</div>
+<div>
+<p>Wickham, Hadley, and Evan Miller. 2020. <em>Haven: Import and Export ’Spss’, ’Stata’ and ’Sas’ Files</em>. <a href="https://CRAN.R-project.org/package=haven">https://CRAN.R-project.org/package=haven</a>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>If you followed the script at the beginning of this chapter, the tidyverse will already be installed.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/%s",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
