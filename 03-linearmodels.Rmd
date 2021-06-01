@@ -1,3 +1,0 @@
-# The Linear Model framework
-
-We describe our methods in this chapter.

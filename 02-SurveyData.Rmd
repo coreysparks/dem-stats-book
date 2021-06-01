@@ -1,8 +1,36 @@
+---
+output:
+  word_document: default
+bibliography: book.bib
+---
 # Survey Data
 
 This chapter is devoted to the descriptive analysis of complex survey data
 
+## Demographic Survey data
+The majority of demographic research relies on two or three main sources of information. First among these are population enumerations or censuses, followed by vital registration data on births and deaths and last but not least, data from surveys. Censuses and other population enumerations are typically undertaken by federal statistical agencies and demographers use this data once it's disseminated from these agencies. Similarly, vital registration data are usually collected by governmental agencies, who oversee the collection and data quality for the data. Survey data on the other hand can come from a wide variety of sources. 
+
+It's not uncommon for us to go and collect our own survey data specific to a research project we have, typically on a specialized population that we are interested in learning about, but surveys can also be quite general in their scope and collect information on a wide variety of subjects. Owing to the mix of small and large-scale survey data collection efforts, survey data are often available on many different topics, locales and time periods. Of course we as demographers are typically interested in population-level analysis or generalization from our work, so the survey data we try to use are collected in rigorous manners, with much attention and forethought paid to ensure the data we collect can actually be representative of the *target population* we are trying to describe. 
+
+In this chapter, I will introduce the nature of survey sampling as is often used in demographic data sources, and describe what to look for when first using a survey data source for you research. These topics are geared towards researchers and students who have not worked with survey data much in the past and will go over some very pragmatic things to keep in mind. Following this discussion, I will use a specific example from the US Census Bureau's American Community Survey and illustrate how to apply these principals to this specific source. The final goal of this chapter is to show how to use R to analyze survey data and produce useful summaries from our surveys, both tabular and graphically. 
+
 ## Basics of survey sampling
+
+To begin this section, I want to go over some of the simple terms from sampling that are very important to those of us who rely on survey data for our work. For many of the concepts from this chapter, I strongly recommend @Lohr2019 for the theoretical portions and @lumley2010 for discussion of how R is used for complex survey data. 
+
+
+The **target population** is the population that our survey has been designed to measure. For large national surveys, these are typically the population of the country of interest. For example, the Demographic and Health Survey has it's target population as women of childbearing ages in  
+
+women of reproductive age and their young childre living in  households
+
+
+
+**_Sampling frame_** - the set of sampling units containing distinct sets of population members - usually the most recent population census, ideally the entire population, and a complete list of clusters
+
+stratificatinon - lumping the population into homogeneous subgroups
+
+**_Sampling units_** are - where information will be collected from
+
 
 ### Simple versus complex survey design
 
@@ -18,3 +46,10 @@ This chapter is devoted to the descriptive analysis of complex survey data
 
 ## Tables and graphical summaries
 
+### References
+```{r include = FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
