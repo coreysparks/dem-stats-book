@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 1 Survey Data | 02-SurveyData.knit</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 1 Survey Data | 02-SurveyData.knit" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 1 Survey Data | 02-SurveyData.knit" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+
+<script src="libs/header-attrs-2.8/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path=""><a href="#survey-data"><i class="fa fa-check"></i><b>1</b> Survey Data</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path=""><a href="#demographic-survey-data"><i class="fa fa-check"></i><b>1.1</b> Demographic Survey data</a></li>
+<li class="chapter" data-level="1.2" data-path=""><a href="#basics-of-survey-sampling"><i class="fa fa-check"></i><b>1.2</b> Basics of survey sampling</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path=""><a href="#simple-versus-complex-survey-designs"><i class="fa fa-check"></i><b>1.2.1</b> Simple versus complex survey designs</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path=""><a href="#characteristics-of-your-survey"><i class="fa fa-check"></i><b>1.3</b> Characteristics of YOUR survey</a></li>
+<li class="chapter" data-level="1.4" data-path=""><a href="#example-the-american-community-survey"><i class="fa fa-check"></i><b>1.4</b> Example the American Community Survey</a></li>
+<li class="chapter" data-level="1.5" data-path=""><a href="#basics-of-analyzing-survey-data"><i class="fa fa-check"></i><b>1.5</b> Basics of analyzing survey data</a></li>
+<li class="chapter" data-level="1.6" data-path=""><a href="#replicates-and-jack-knifes-and-expansions-oh-my"><i class="fa fa-check"></i><b>1.6</b> Replicates and jack knifes and expansions, oh my!</a></li>
+<li class="chapter" data-level="1.7" data-path=""><a href="#descriptive-analysis-of-survey-data"><i class="fa fa-check"></i><b>1.7</b> Descriptive analysis of survey data</a></li>
+<li class="chapter" data-level="1.8" data-path=""><a href="#tables-and-graphical-summaries"><i class="fa fa-check"></i><b>1.8</b> Tables and graphical summaries</a>
+<ul>
+<li class="chapter" data-level="" data-path=""><a href="#references"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<!--bookdown:title:end-->
+<!--bookdown:title:start-->
+<div id="survey-data" class="section level1" number="1">
+<h1><span class="header-section-number">Chapter 1</span> Survey Data</h1>
+<p>This chapter is devoted to the descriptive analysis of complex survey data</p>
+<div id="demographic-survey-data" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Demographic Survey data</h2>
+<p>The majority of demographic research relies on two or three main sources of information. First among these are population enumerations or censuses, followed by vital registration data on births and deaths and last but not least, data from surveys. Censuses and other population enumerations are typically undertaken by federal statistical agencies and demographers use this data once it’s disseminated from these agencies. Similarly, vital registration data are usually collected by governmental agencies, who oversee the collection and data quality for the data. Survey data on the other hand can come from a wide variety of sources.</p>
+<p>It’s not uncommon for us to go and collect our own survey data specific to a research project we have, typically on a specialized population that we are interested in learning about, but surveys can also be quite general in their scope and collect information on a wide variety of subjects. Owing to the mix of small and large-scale survey data collection efforts, survey data are often available on many different topics, locales and time periods. Of course we as demographers are typically interested in population-level analysis or generalization from our work, so the survey data we try to use are collected in rigorous manners, with much attention and forethought paid to ensure the data we collect can actually be representative of the <em>target population</em> we are trying to describe.</p>
+<p>In this chapter, I will introduce the nature of survey sampling as is often used in demographic data sources, and describe what to look for when first using a survey data source for you research. These topics are geared towards researchers and students who have not worked with survey data much in the past and will go over some very pragmatic things to keep in mind. Following this discussion, I will use a specific example from the US Census Bureau’s American Community Survey and illustrate how to apply these principals to this specific source. The final goal of this chapter is to show how to use R to analyze survey data and produce useful summaries from our surveys, both tabular and graphically.</p>
+</div>
+<div id="basics-of-survey-sampling" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Basics of survey sampling</h2>
+<p>To begin this section, I want to go over some of the simple terms from sampling that are very important to those of us who rely on survey data for our work. For many of the concepts from this chapter, I strongly recommend <span class="citation">Lohr (2019)</span> for the theoretical portions and <span class="citation">Lumley (2010)</span> for discussion of how R is used for complex survey data.</p>
+<p>The <strong>target population</strong> is the population that our survey has been designed to measure. For large national surveys, these are typically the population of the country of interest. For example, the Demographic and Health Survey (DHS) has it’s primary target population as women of childbearing ages</p>
+<p>&lt;start&gt;</p>
+<p>in women of reproductive age and their young children living in households. Our <strong>observational units</strong> are the level at which we are collecting data, for surveys this is typically a person or a household, and our survey documentation will tell us what its unit of observation is. <strong>Sampling Units</strong> refer to the units that can serve for us to collect data from, for example we may not have a list of every school age child, but we may have a list of schools, so we may use schools as our sampling units and sample children within them. The <strong>sampling frame</strong> is the set of sampling units containing distinct sets of population members, this is usually the most recent population census, ideally the entire population, or following our school example from above, the entire listing of schools.</p>
+<p>These terms are ubiquitous in sampling, but other terminology also exists in many surveys and these terms relate to the nature of how the survey was actually carried out. Many times the surveys we end up using are not themselves <strong>simple random samples</strong>, but are instead some blend of stratified or cluster sample. For example, the DHS uses a stratified, cluster sample to collect its information. <strong>Strata</strong> refer to relatively homogeneous areas within the place we are trying to collect data. In the DHS, these are typically rural or urban areas of a country, as identified by the census. Within each strata, the DHS will choose <strong>clusters</strong> from which to sample from, this is a <strong>two-stage sampling method</strong>, where first the sampling frame is stratified, then clusters are selected. Clusters in the DHS are usually neighborhoods in urban areas and smaller towns or villages in rural areas.</p>
+<p>Figure 1 shows a cartoon of how this process works, with multiple potential cluster that can be sampled (boxes), and within the cluster are our observational units, some of which are sampled, and some of which are unsampled.</p>
+<div class="figure">
+<img src="images/MLdata.png" alt="" />
+<p class="caption">Figure 1</p>
+</div>
+<div id="simple-versus-complex-survey-designs" class="section level3" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> Simple versus complex survey designs</h3>
+<p>How the data we’re using is sampled has a major implication for how we analyze it. The majority of statistical tools assume that data come from simple random samples, because most methods assume independence of observations, regardless of which distribution or test statistic you are using. Violations of this assumption are a big problem when we go to analyze our data, because the non-independence of survey data are automatically in violation of a key assumption of any test. The stratified and clustered nature of many survey samples may also present problems for methods such as linear regression analysis which assume errors in the model are <strong>homoskedastic</strong>, or constant. When data are collected in a stratified or clustered method, the data may have less variation than a simple random sample, because individuals who live closely to one another often share other characteristics in common as well. Our statistical models don’t do well with this type of reduction in variation and we often have to resort to manipulations of our model parameters or standard errors of our statistics in order to make them coincide with how the data were collected.</p>
+<p>Not to fear! Data collected using public funds are typically required to be made available to the public with information on how to use them. Most surveys come with some kind of code book or user manual which describes how the data were collected and how you should go about using them. In these cases, it pays to read the manual because it will tell you the names of the stratification and clustering variables in the survey data. This will allow you to use the design of the survey in your analysis so that your statistical routines are corrected for the non-randomness and homogeneity in the survey data.</p>
+<p><strong>He’s not heavy, he’s my brother</strong></p>
+<p>Another important aspect of survey data are the use of weighting variables. Whenever we design a survey, we have our target population, or universe of respondents in mind. In the DHS, again, this is traditionally<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> women of childbearing age and their children <span class="citation">(ICF International 2012)</span>. When we collect a sample from this population, or sample may be, and typically is, imperfect. It is imperfect for many reasons, owing to the difficulty of sampling some members of the population, or their unwillingness to participate in our study. Part of designing an effective survey is knowing your universe or population, and its characteristics. This will let you know the probability of a particular person being in the sample. Of course, the more complicated the survey, the more complicated it is to know what this probability is. For example, if we were to sample people in the United States, using a stratified design based on rural and urban residence, we would need to know how many people lived in rural and urban areas within the country, as this would effect the probability of sampling a person in each type of area. This <strong>inclusion probability</strong> tells us how likely a given person is of being sampled. The inverse of the inclusion probability is called the <strong>sampling weight</strong>:</p>
+<p><span class="math inline">\(w_i = \frac{1} {\pi_i}\)</span></p>
+<p>where <span class="math inline">\(\pi_i\)</span> is the inclusion probability.</p>
+</div>
+</div>
+<div id="characteristics-of-your-survey" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Characteristics of YOUR survey</h2>
+</div>
+<div id="example-the-american-community-survey" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> Example the American Community Survey</h2>
+</div>
+<div id="basics-of-analyzing-survey-data" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> Basics of analyzing survey data</h2>
+</div>
+<div id="replicates-and-jack-knifes-and-expansions-oh-my" class="section level2" number="1.6">
+<h2><span class="header-section-number">1.6</span> Replicates and jack knifes and expansions, oh my!</h2>
+</div>
+<div id="descriptive-analysis-of-survey-data" class="section level2" number="1.7">
+<h2><span class="header-section-number">1.7</span> Descriptive analysis of survey data</h2>
+</div>
+<div id="tables-and-graphical-summaries" class="section level2" number="1.8">
+<h2><span class="header-section-number">1.8</span> Tables and graphical summaries</h2>
+<div id="references" class="section level3 unnumbered">
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div class="csl-entry">
+ICF International. 2012. <span>“Demographic and <span>Health</span> <span>Survey</span> <span>Sampling</span> and <span>Household</span> <span>Listing</span> <span>Manual</span>.”</span> ICF International.
+</div>
+<div class="csl-entry">
+Lohr, Shron. 2019. <em>Sampling: Design and Analysis</em>. 2nd ed. Boca Raton: Routledge &amp; CRC Press.
+</div>
+<div class="csl-entry">
+Lumley, Thomas. 2010. <em>Complex <span>Surveys</span>: <span>A</span> <span>Guide</span> to <span>Analysis</span> <span>Using</span> <span>R</span>: <span>A</span> <span>Guide</span> to <span>Analysis</span> <span>Using</span> <span>R</span></em>. John Wiley; Sons.
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>The modern DHS collects information on couples, men and children, so the universe has been expanded away from just women of childbearing age and their children.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/%s",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
