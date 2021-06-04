@@ -44,22 +44,57 @@ $w_i = \frac{1} {\pi_i}$
 
 where $\pi_i$ is the inclusion probability.
 
-\<start\>
-
 Sampling weights are what we use to make our analyses of a survey representative of the larger population. They serve many purposes including unequal inclusion probabilities, differences in sample characteristics compared to the larger population, and differences in response rates across sample subgroups. All of these situations make the sample deviate from the population by affecting who the actual respondents included in the survey are. Differences in our sample when compared to the larger population can affect most all of our statistical analysis since again, most methods assume random sampling. The weights that are included in public data are the result of a rigorous process conducted by those who designed and implemented the survey itself, and most surveys in their user manuals or code books describe the process of how the weights are created. For example, the US Center for Disease Control and Prevention's Behavioral Risk Factor Surveillance System (BRFSS) provides a very thorough description of how their final person weights are calculated [@cdc2020]. These weights include three primary factors, the *stratum weight*, which is a combination of the number of records in a sample strata and the density of phone lines in a given strata, combined with the number of phones in a sampled household and the number of adults in the household to produce the final design weight. These weights are then **raked** to eight different marginal totals, based on age, race/ethnicity, education, marital status, home ownership, gender by race/ethnicity, age by race/ethnicity and phone ownership[@cdc2020]. After this process, weights are interpretable as the number of people a given respondent in the survey represents in the population. So, if a respondent's weight in the survey data is 100, they actually represent 100 people in the target population.
+
+Other types of weights also exist, and are commonly seen in federal data sources. A common kind of weight that includes information on both the probability of inclusion **AND** the stratified design of the survey are **replicate weights**. Replicate weights are multiple weights for each respondent, and there are as many weights as there are different levels of the stratification variable. Later in this chapter, we will discuss how replicate weights are used, as compared to single design weights in an example.
 
 ## Characteristics of YOUR survey
 
-Survey data that come from reputable sources, such as most federal agencies or repositories such as the Inter-university Consortium for Political and Social Research (ICPSR) at the University of Michigan in the United States, are accompanied by descriptions of the data source including when and where it was collected, what it's target population is, and information on the design of the survey. This will include information on sample design, such as stratum or cluster variables, and design weights to be used when you conduct your analysis.
+Survey data that come from reputable sources, such as most federal agencies or repositories such as the Inter-university Consortium for Political and Social Research (ICPSR) at the University of Michigan in the United States, are accompanied by descriptions of the data source including when and where it was collected, what it's target population is, and information on the design of the survey. This will include information on sample design, such as stratum or cluster variables, and design or replicate weights to be used when you conduct your analysis. I cannot stress enough that learning how your particular survey data source is designed, and how the designers recommend you use provided survey variables for your analysis, is imperative to ensure your analysis is correctly specified.
 
-## Example the American Community Survey
+\<start\>
+
+## Example from the American Community Survey
+
+Let's look at an example of these ideas in a real data source. Throughout the book I will use several complex survey design data sources to illustrate various topics, in this chapter I will use data from the US Census Bureau's American Community Survey (ACS) public use microdata sample (PUMS). We can actually use the `tidycensus` package [@walker21] to download ACS PUMS directly from the Census Bureau.
+
+This example shows how to extract the 2018 single-year PUMS for the state of Texas, and only keep variables related to person-records. The ACS has information on both people and households, but for now we'll only look at the person records. Help on these functions can be found by typing `?pums_variables` and `?get_pums` in `R`
+
+```{r ch2_1, eval=TRUE,results='hide', message=FALSE, warning=FALSE, include=TRUE}
+library(tidycensus)
+library(tidyverse)
+
+pums_vars_18<- pums_variables %>%
+  filter(year== 2018, survey == "acs1") %>%
+  distinct(var_code, var_label, data_type, level) %>%
+  filter(level == "person")
+
+TX_pums <- get_pums(
+  variables = c("PUMA", "SEX", "AGEP", "CIT", "JWTR","JWRIP", "HISP"),
+  state = "TX",
+  survey = "acs1",
+  year = 2018)
+
+```
+
+```{r, results='asis'}
+knitr::kable(
+  head(TX_pums),
+  format = 'html'
+  )
+
+```
+
+These data are also easily available from the Integrated Public Use Microdata Series (IPUMS) project housed at the University of Minnesota [@Ruggles2021]. The IPUMS version of the data adds additional information to the data and homogenizes the data across multiple years to make using it easier. The following example will use the `ipumsr` package to read in an extract from IPUMS-USA
 
 ## Basics of analyzing survey data
 
 ## Replicates and jack knifes and expansions, oh my!
 
-## Descriptive analysis of survey data
+Most data sources will either have a single weight and or replicate weights
 
+## Descriptive analysis of survey data
+ 
 ## Tables and graphical summaries
 
 ### References
