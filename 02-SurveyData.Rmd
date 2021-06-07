@@ -52,8 +52,6 @@ Other types of weights also exist, and are commonly seen in federal data sources
 
 Survey data that come from reputable sources, such as most federal agencies or repositories such as the Inter-university Consortium for Political and Social Research (ICPSR) at the University of Michigan in the United States, are accompanied by descriptions of the data source including when and where it was collected, what it's target population is, and information on the design of the survey. This will include information on sample design, such as stratum or cluster variables, and design or replicate weights to be used when you conduct your analysis. I cannot stress enough that learning how your particular survey data source is designed, and how the designers recommend you use provided survey variables for your analysis, is imperative to ensure your analysis is correctly specified.
 
-\<start\>
-
 ## Example from the American Community Survey
 
 Let's look at an example of these ideas in a real data source. Throughout the book I will use several complex survey design data sources to illustrate various topics, in this chapter I will use data from the US Census Bureau's American Community Survey (ACS) public use microdata sample (PUMS). We can actually use the `tidycensus` package [@walker21] to download ACS PUMS directly from the Census Bureau.
@@ -85,16 +83,56 @@ knitr::kable(
 
 ```
 
-These data are also easily available from the Integrated Public Use Microdata Series (IPUMS) project housed at the University of Minnesota [@Ruggles2021]. The IPUMS version of the data adds additional information to the data and homogenizes the data across multiple years to make using it easier. The following example will use the `ipumsr` package to read in an extract from IPUMS-USA
+These data are also easily available from the Integrated Public Use Microdata Series (IPUMS) project housed at the University of Minnesota [@Ruggles2021]. The IPUMS version of the data adds additional information to the data and homogenizes the data across multiple years to make using it easier. The following example will use the `ipumsr` package to read in an extract from IPUMS-USA.
+
+\<start\>
+
+After you create an IPUMS extract, right click on the DDI link and save that file to your computer. Then repeat this for the .DAT file. If you need help creating an IPUMS extract, their staff have created a tutorial for doing so (<https://usa.ipums.org/usa/tutorials.shtml>).
+
+This will save the xml file that contains all the information on the data (what is contained in the data file) to your computer. When using IPUMS, it will have a name like `usa_xxxxx.xml` where the x's represent the extract number.
+
+You will also need to download the data file, by right clicking the **Download.DAT** link in the above image. This will save a .gz file to your computer, again with a name like: `usa_xxxxx.dat.gz`. Make sure this file and the xml file from above are in the same folder.
+
+![](images/impum1.png)
+
+The fundamentals of using `ipumsr` is to specify the name of your `.xml` file from your extract, and as long as your `.tar.gz` file from your extract is in the same location, R will read the data. The files on my computer:
+
+![](images/ipums_files.png)
+
+```{r ch2_2,eval=TRUE,results='hide', message=FALSE, warning=FALSE, include=TRUE}
+
+library(ipumsr)
+
+ddi <- read_ipums_ddi(ddi_file = "data/usa_00086.xml")
+ipums <- read_ipums_micro(ddi = ddi,
+                          n_max = 1000)
+
+```
+
+Will read in the data, in this case, it is a subset of the 2008 to 2012 single year ACS. This extract is not all of the variables from the ACS, as that would be a very large file and for my purposes here, I don't need that. My goal for the rest of the chapter is to illustrate how to use the IPUMS as an example of a complex survey design data set and the steps necessary to do so.
 
 ## Basics of analyzing survey data
+
+A fundamental part of analyzing complex survey data are knowing the variables within the data that contain the survey design information. The US Census Bureau has documented the desing of the survey in a publication [@uscensusbureau2014] The IPUMS version of the ACS has two variables `STRATA` and `CLUSTER` that describe the two stage process by which the data are collected. Here are a the first few lines of these from the data:
+
+```{r ch2_3,eval=TRUE,results='hide', message=FALSE, warning=FALSE, include=TRUE}
+options(scipen = 999)
+library(knitr)
+  
+kable(head(ipums[, c("SERIAL", "STRATA", "CLUSTER")],
+           n=10),
+      digits = 14 )
+
+```
+
+For the ACS, the strata is
 
 ## Replicates and jack knifes and expansions, oh my!
 
 Most data sources will either have a single weight and or replicate weights
 
 ## Descriptive analysis of survey data
- 
+
 ## Tables and graphical summaries
 
 ### References
