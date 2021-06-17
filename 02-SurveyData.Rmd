@@ -58,7 +58,7 @@ Let's look at an example of these ideas in a real data source. Throughout the bo
 
 This example shows how to extract the 2018 single-year PUMS for the state of Texas, and only keep variables related to person-records. The ACS has information on both people and households, but for now we'll only look at the person records. Help on these functions can be found by typing `?pums_variables` and `?get_pums` in `R`
 
-```{r ch2_1, eval=TRUE,results='hide', message=FALSE, warning=FALSE, include=TRUE}
+```{r ch2_1, eval=FALSE,results='hide', message=FALSE, warning=FALSE, include=TRUE}
 library(tidycensus)
 library(tidyverse)
 
@@ -69,13 +69,13 @@ pums_vars_18<- pums_variables %>%
 
 TX_pums <- get_pums(
   variables = c("PUMA", "SEX", "AGEP", "CIT", "JWTR","JWRIP", "HISP"),
-  state = "TX",
+  state = "AL",
   survey = "acs1",
   year = 2018)
 
 ```
 
-```{r, results='asis'}
+```{r, eval=FALSE, results='asis'}
 knitr::kable(
   head(TX_pums),
   format = 'html'
@@ -84,8 +84,6 @@ knitr::kable(
 ```
 
 These data are also easily available from the Integrated Public Use Microdata Series (IPUMS) project housed at the University of Minnesota [@Ruggles2021]. The IPUMS version of the data adds additional information to the data and homogenizes the data across multiple years to make using it easier. The following example will use the `ipumsr` package to read in an extract from IPUMS-USA.
-
-\<start\>
 
 After you create an IPUMS extract, right click on the DDI link and save that file to your computer. Then repeat this for the .DAT file. If you need help creating an IPUMS extract, their staff have created a tutorial for doing so (<https://usa.ipums.org/usa/tutorials.shtml>).
 
@@ -103,9 +101,8 @@ The fundamentals of using `ipumsr` is to specify the name of your `.xml` file fr
 
 library(ipumsr)
 
-ddi <- read_ipums_ddi(ddi_file = "data/usa_00086.xml")
-ipums <- read_ipums_micro(ddi = ddi,
-                          n_max = 1000)
+ddi <- read_ipums_ddi(ddi_file = "data/usa_00097.xml")
+ipums <- read_ipums_micro(ddi = ddi)
 
 ```
 
@@ -125,13 +122,133 @@ kable(head(ipums[, c("SERIAL", "STRATA", "CLUSTER")],
 
 ```
 
-For the ACS, the strata is
+\<start\>
+
+For the ACS, the strata variable is named, ironically `STRATA` and the cluster variable `CLUSTER`. The IPUMS creates the `STRATA` variable based on the sampling strata in the ACS, and the `CLUSTER` variable based on households within a stratum. Often in surveys, the clusters may not be households, they could be smaller population aggregates, such as neighborhoods and villages, as in the DHS.
+
+The data also come with housing unit weights and person unit weights, so your analysis can be either representative of housing units or people.
+
+```{r 2_4}
+kable(head(ipums[, c("SERIAL", "STRATA", "CLUSTER", "HHWT", "PERWT")],
+           n=10),
+      digits = 14 )
+
+```
+
+```{r, include=FALSE}
+sumwt<-sum(ipums$PERWT[ipums$STATEFIP==48])
+nres<-dim(ipums)[1]
+```
+
+As can be seen in the first few cases, the `HHWT` variable is the same for everyone in a given household, but each person has a unique person weight showing that they each represent different numbers of people in the population.
+
+We can see how the weights inflate each person or household to the population by summing the weights. Below, I sum the person weights for the state of Texas, the sum is `r prettyNum(sumwt,big.mark=",",scientific=FALSE)` million people, which is very close to the official estimate of the population in 2019 (<https://www.census.gov/quickfacts/TX>), we also see, by using the `n()` function, that there were `r prettyNum(nres,big.mark=",",scientific=FALSE)` persons in the sample in 2010 living in Texas.
+
+
+```{r 2_5}
+library(dplyr)
+ipums%>%
+  filter(STATEFIP == 48)%>%
+  summarize(tot_pop = sum( PERWT ) , n_respond = n())
+
+```
+```{r, include=FALSE}
+sumhh<-sum(ipums$HHWT[ipums$PERNUM==1])
+nhh<-length(unique(ipums$CLUSTER))
+
+```
+
+For housing units, we have to select a single person from the household in order for the same process to work, otherwise we would misrepresent the number of households in the state. We see there are `r prettyNum(sumhh,big.mark=",",scientific=FALSE)` million housing units, and `r prettyNum(nhh,big.mark=",",scientific=FALSE)` unique households in the data.
+
+
+```{r 2_6}
+ipums%>%
+  filter(STATEFIP == 48,
+         PERNUM == 1)%>%
+  summarize(tothh = sum( HHWT ) , n_housing = n())
+
+```
+
+This total is nearly identical to that from the [Census's ACS estimate](https://data.census.gov/cedsci/table?t=Housing&g=0400000US48&y=2019&tid=ACSDP1Y2019.DP04).
+
+This exercise shows that by using the provided weights in the survey, we can estimate the population size the sample was supposed to capture effectively. The `survey` package and the newer tidyverse package `srvyr` are designed to fully implement survey design and weighting and perform a wide variety of statistical summaries.
+
+The way these packages work, is that you provide the name of your data frame, and the survey design variables that are in your data and the package code performs the requested analysis, correcting for survey design and weighting to the appropriate population. The code below illustrates how to enter the survey design for the IPUMS-USA ACS. Some surveys will not have both a cluster and stratification variable, so again, it's important to consult your survey documentation to find these for your data.
+
+The function `as_survey_design()` in this case takes three arguements, since we are piping the 2010 ACS into it, we don't have to specify the name of the data. `ids` is the argument for the cluster variable, if your survey doesn't have one, just leave it out. `strata` is where you specify the name of the survey stratification variable, and `weights` is where you specify the name of the appropriate weighting variable. In this case, I'm replicating the estimate of the housing units in Texas from above, so I'll use the `HHWT` variable. The easiest way to get a total population estimate is to use the `survey_total()` function, which is equivalent to summing the weights as shown above, although in the case of the survey analysis commands in the `survey` and `srvyr` packages, the total will also be estimated with a standard error of the estimate.
+
+```{r ch2_8,eval=TRUE,results='hide', message=FALSE, warning=FALSE, include=TRUE}
+library(srvyr)
+library(survey)
+
+ipums%>%
+  filter(STATEFIP==48, PERNUM==1)%>%
+  as_survey_design(cluster= CLUSTER,
+                   strata = STRATA,
+                   weights = HHWT)%>%
+  summarize(tothh = survey_total())
+
+```
+
+```{r, include=FALSE}
+se1<-ipums%>%
+  filter(STATEFIP==48, PERNUM==1)%>%
+  as_survey_design(cluster= CLUSTER,
+                   strata = STRATA,
+                   weights = HHWT)%>%
+  summarize(tothh = survey_total())%>%
+  select(tothh_se)
+```
+
+In this case, our `tothh` estimate is identical to summing the weights, but new we also have an estimate of the precision of the estimate, so we could produce a more informed statistical estimate that in 2019, there were `r prettyNum(sumhh,big.mark=",",scientific=FALSE)` $\pm$ `r prettyNum(se1,big.mark=",",scientific=FALSE)` occupied housing units in the state.
+
+If your data come with replicate weights instead of strata and cluster variables, this can be specified using the `as_survey_rep()` command instead `as_survey_design()`. In this case, we have to specify all of the columns which correspond to the replicate weights in the data. There are likely many ways to do this, but below, I use a method that matches the column names using a regular expression, where we are looking for the string `REPWT`, followed by any number of numeric digits, that is what the `[0-9]+` portion tells R to do. Also, the ACS uses a balanced replicate weight construction, which also requires the case weight as well [@Ruggles2021], so we specify the replicate weight type as `BRR`. Again, this is specific to the ACS, and you need to consult your own code book for your survey for your design information.
+
+In this case, we get the same estimate for the total number of housing units, but a smaller variance in the estimate, which is often seen when using replicate weights.
+
+```{r}
+ipums%>%
+  filter(STATEFIP==48, PERNUM==1)%>%
+  as_survey_rep(weight = HHWT,
+            repweights =matches("REPWT[0-9]+"),
+            type = "JK1",
+            scale = 4/80,
+            rscales = rep(1, 80),
+            mse = TRUE)%>%
+  summarize(tothh = survey_total())
+```
+
+```{r, eval=FALSE}
+rw<-ipums%>%
+      filter(STATEFIP==48, PERNUM==1)%>%
+      select(REPWT1:REPWT50)
+
+t1<-survey::svrepdesign(data=ipums[ipums$STATEFIP==48&ipums$PERNUM==1,],
+                        repweights = rw,
+                        weights = ipums$HHWT[ipums$STATEFIP==48&ipums$PERNUM==1],
+                        type="JK1",scale = .05, rscales = rep(1, ncol(rw)), mse=T)
+
+t1$variables$ones<-1
+library(survey)
+
+svytotal(~ones, design=t1)
+```
+
+
+Of course we typically want to do more analysis than just estimate a population size, and typically we are interested in using survey data for comparisons and regression modeling. To carry out any sort of statistical testing on survey data, we must not only weight the data appropriately but we must also calculate all measures of variability correctly as well. Since surveys are stratified, the traditional formula for variances is not correct because under stratified sampling, all estimates are not only a function of the total sample, but also the within-strata sample averages and sample sizes. We can estimate the variances in our estimates using the design variables and sample weights in the survey analysis procedures, but there are options.
 
 ## Replicates and jack knifes and expansions, oh my!
 
-Most data sources will either have a single weight and or replicate weights
+When conducting your analysis, you may not have any choices of whether you should use replicate weights or design weights, because your survey may only have one of these. There are two main strategies to estimate variances in survey data, the *Taylor Series Approximation* also referred to as *linearization* and the use of *replicate weights*. The Taylor Series, or linearization method is an approximation to the true variance, but is likely the most commonly used technique when analyzing survey data using regression methods. @Lohr2019 describes the calculation of variances from simple and clustered random samples in her book, and by her admission, once one has a clustered random sample the variance calculations for simple calculations becomes much more complex. 
+
+The problem is that we often want much more complicated calculations in our work and the variance formulas for anything other than simple ratios are not analytically known. The Taylor series approximation to the variance for complex and nonlinear terms such as ratios or estimates of regression parameters. The `survey` package in R will do this if you specify a survey design that includes strata or clusters, while if you specify replicate weights then it will use an appropriate technique depending on how the data were collected. 
+
+Typical replicate methods include balanced replicates, where there are exactly two clusters within each stratum, jackknife methods, which effectively remove one cluster from the strata and perform all calculations without that cluster in the analysis, then average across all replicates, and bootstrap methods which randomly sample clusters within strata with replacement a large number of times to get an estimate of the quantities of interest. 
+
 
 ## Descriptive analysis of survey data
+
+
 
 ## Tables and graphical summaries
 

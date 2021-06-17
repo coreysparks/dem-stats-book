@@ -24,7 +24,7 @@
 <meta name="author" content="Corey S. Sparks" />
 
 
-<meta name="date" content="2021-06-01" />
+<meta name="date" content="2021-06-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -59,6 +59,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -220,16 +221,17 @@ div.csl-indent {
 <li class="chapter" data-level="2.1" data-path="survey-data.html"><a href="survey-data.html#demographic-survey-data"><i class="fa fa-check"></i><b>2.1</b> Demographic Survey data</a></li>
 <li class="chapter" data-level="2.2" data-path="survey-data.html"><a href="survey-data.html#basics-of-survey-sampling"><i class="fa fa-check"></i><b>2.2</b> Basics of survey sampling</a>
 <ul>
-<li class="chapter" data-level="2.2.1" data-path="survey-data.html"><a href="survey-data.html#simple-versus-complex-survey-design"><i class="fa fa-check"></i><b>2.2.1</b> Simple versus complex survey design</a></li>
+<li class="chapter" data-level="2.2.1" data-path="survey-data.html"><a href="survey-data.html#simple-versus-complex-survey-designs"><i class="fa fa-check"></i><b>2.2.1</b> Simple versus complex survey designs</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="survey-data.html"><a href="survey-data.html#characteristics-of-your-survey"><i class="fa fa-check"></i><b>2.3</b> Characteristics of YOUR survey</a></li>
-<li class="chapter" data-level="2.4" data-path="survey-data.html"><a href="survey-data.html#example-the-american-community-survey"><i class="fa fa-check"></i><b>2.4</b> Example the American Community Survey</a></li>
+<li class="chapter" data-level="2.4" data-path="survey-data.html"><a href="survey-data.html#example-from-the-american-community-survey"><i class="fa fa-check"></i><b>2.4</b> Example from the American Community Survey</a></li>
 <li class="chapter" data-level="2.5" data-path="survey-data.html"><a href="survey-data.html#basics-of-analyzing-survey-data"><i class="fa fa-check"></i><b>2.5</b> Basics of analyzing survey data</a></li>
 <li class="chapter" data-level="2.6" data-path="survey-data.html"><a href="survey-data.html#replicates-and-jack-knifes-and-expansions-oh-my"><i class="fa fa-check"></i><b>2.6</b> Replicates and jack knifes and expansions, oh my!</a></li>
 <li class="chapter" data-level="2.7" data-path="survey-data.html"><a href="survey-data.html#descriptive-analysis-of-survey-data"><i class="fa fa-check"></i><b>2.7</b> Descriptive analysis of survey data</a></li>
 <li class="chapter" data-level="2.8" data-path="survey-data.html"><a href="survey-data.html#tables-and-graphical-summaries"><i class="fa fa-check"></i><b>2.8</b> Tables and graphical summaries</a>
 <ul>
-<li class="chapter" data-level="" data-path="survey-data.html"><a href="survey-data.html#references-1"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="2.8.1" data-path="survey-data.html"><a href="survey-data.html#references-1"><i class="fa fa-check"></i><b>2.8.1</b> References</a></li>
+<li class="chapter" data-level="" data-path="survey-data.html"><a href="survey-data.html#references-2"><i class="fa fa-check"></i>References</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -255,7 +257,7 @@ div.csl-indent {
 <div id="header">
 <h1 class="title">Applied Demographic Data Analysis with R</h1>
 <p class="author"><em>Corey S. Sparks</em></p>
-<p class="date" style="margin-top: 1.5em;"><em>2021-06-01</em></p>
+<p class="date" style="margin-top: 1.5em;"><em>2021-06-17</em></p>
 </div>
 <div id="introduction" class="section level1" number="1">
 <h1><span class="header-section-number">Chapter 1</span> Introduction</h1>
@@ -496,7 +498,7 @@ or to include output tables directly into a document:</p>
 ##         sort(x, partial = half)[half]
 ##     else mean(sort(x, partial = half + 0L:1L)[half + 0L:1L])
 ## }
-## &lt;bytecode: 0x000000001daf9348&gt;
+## &lt;bytecode: 0x000000001dad0be8&gt;
 ## &lt;environment: namespace:stats&gt;</code></pre>
 <p>This seems like a lot, I know, but it allows you to see all of the code under the hood of any function. Obviously, the more complicated the function, the more complicated the code. For instance, I can write my own simple function to find the mean of a sample:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="introduction.html#cb12-1" aria-hidden="true" tabindex="-1"></a>mymean <span class="ot">&lt;-</span> <span class="cf">function</span>(x,</span>
@@ -917,12 +919,12 @@ C
 <span id="cb125-2"><a href="introduction.html#cb125-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>()<span class="sc">%&gt;%</span></span>
 <span id="cb125-3"><a href="introduction.html#cb125-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(<span class="at">title=</span> <span class="st">&quot;My simple gt table&quot;</span>,</span>
 <span id="cb125-4"><a href="introduction.html#cb125-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">subtitle =</span> <span class="st">&quot;With a subtitle&quot;</span>)</span></code></pre></div>
-<div id="ypkwxvnsyp" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="wimszfjigw" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#ypkwxvnsyp .gt_table {
+#wimszfjigw .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -947,7 +949,7 @@ C
   border-left-color: #D3D3D3;
 }
 
-#ypkwxvnsyp .gt_heading {
+#wimszfjigw .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -959,7 +961,7 @@ C
   border-right-color: #D3D3D3;
 }
 
-#ypkwxvnsyp .gt_title {
+#wimszfjigw .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -969,7 +971,7 @@ C
   border-bottom-width: 0;
 }
 
-#ypkwxvnsyp .gt_subtitle {
+#wimszfjigw .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -979,13 +981,13 @@ C
   border-top-width: 0;
 }
 
-#ypkwxvnsyp .gt_bottom_border {
+#wimszfjigw .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ypkwxvnsyp .gt_col_headings {
+#wimszfjigw .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1000,7 +1002,7 @@ C
   border-right-color: #D3D3D3;
 }
 
-#ypkwxvnsyp .gt_col_heading {
+#wimszfjigw .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1020,7 +1022,7 @@ C
   overflow-x: hidden;
 }
 
-#ypkwxvnsyp .gt_column_spanner_outer {
+#wimszfjigw .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1032,15 +1034,15 @@ C
   padding-right: 4px;
 }
 
-#ypkwxvnsyp .gt_column_spanner_outer:first-child {
+#wimszfjigw .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ypkwxvnsyp .gt_column_spanner_outer:last-child {
+#wimszfjigw .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ypkwxvnsyp .gt_column_spanner {
+#wimszfjigw .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1052,7 +1054,7 @@ C
   width: 100%;
 }
 
-#ypkwxvnsyp .gt_group_heading {
+#wimszfjigw .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1074,7 +1076,7 @@ C
   vertical-align: middle;
 }
 
-#ypkwxvnsyp .gt_empty_group_heading {
+#wimszfjigw .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1089,15 +1091,15 @@ C
   vertical-align: middle;
 }
 
-#ypkwxvnsyp .gt_from_md > :first-child {
+#wimszfjigw .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ypkwxvnsyp .gt_from_md > :last-child {
+#wimszfjigw .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ypkwxvnsyp .gt_row {
+#wimszfjigw .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1116,7 +1118,7 @@ C
   overflow-x: hidden;
 }
 
-#ypkwxvnsyp .gt_stub {
+#wimszfjigw .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1128,7 +1130,7 @@ C
   padding-left: 12px;
 }
 
-#ypkwxvnsyp .gt_summary_row {
+#wimszfjigw .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1138,7 +1140,7 @@ C
   padding-right: 5px;
 }
 
-#ypkwxvnsyp .gt_first_summary_row {
+#wimszfjigw .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1148,7 +1150,7 @@ C
   border-top-color: #D3D3D3;
 }
 
-#ypkwxvnsyp .gt_grand_summary_row {
+#wimszfjigw .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1158,7 +1160,7 @@ C
   padding-right: 5px;
 }
 
-#ypkwxvnsyp .gt_first_grand_summary_row {
+#wimszfjigw .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1168,11 +1170,11 @@ C
   border-top-color: #D3D3D3;
 }
 
-#ypkwxvnsyp .gt_striped {
+#wimszfjigw .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ypkwxvnsyp .gt_table_body {
+#wimszfjigw .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1181,7 +1183,7 @@ C
   border-bottom-color: #D3D3D3;
 }
 
-#ypkwxvnsyp .gt_footnotes {
+#wimszfjigw .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1195,13 +1197,13 @@ C
   border-right-color: #D3D3D3;
 }
 
-#ypkwxvnsyp .gt_footnote {
+#wimszfjigw .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#ypkwxvnsyp .gt_sourcenotes {
+#wimszfjigw .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1215,41 +1217,41 @@ C
   border-right-color: #D3D3D3;
 }
 
-#ypkwxvnsyp .gt_sourcenote {
+#wimszfjigw .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#ypkwxvnsyp .gt_left {
+#wimszfjigw .gt_left {
   text-align: left;
 }
 
-#ypkwxvnsyp .gt_center {
+#wimszfjigw .gt_center {
   text-align: center;
 }
 
-#ypkwxvnsyp .gt_right {
+#wimszfjigw .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ypkwxvnsyp .gt_font_normal {
+#wimszfjigw .gt_font_normal {
   font-weight: normal;
 }
 
-#ypkwxvnsyp .gt_font_bold {
+#wimszfjigw .gt_font_bold {
   font-weight: bold;
 }
 
-#ypkwxvnsyp .gt_font_italic {
+#wimszfjigw .gt_font_italic {
   font-style: italic;
 }
 
-#ypkwxvnsyp .gt_super {
+#wimszfjigw .gt_super {
   font-size: 65%;
 }
 
-#ypkwxvnsyp .gt_footnote_marks {
+#wimszfjigw .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -1308,7 +1310,7 @@ C
 <p>Now let’s open a ‘real’ data file. This is the <a href="https://www.prb.org/2018-world-population-data-sheet-with-focus-on-changing-age-structures/">2018 World population data sheet</a> from the <a href="http://www.prb.org">Population Reference Bureau</a>. It contains summary information on many demographic and population level characteristics of nations around the world in 2018.</p>
 <p>I’ve had this entered into a <strong>Comma Separated Values</strong> file by some poor previous research assistant of mine and it lives happily on Github now for all the world to see. CSV files are a good way to store data coming out of a spreadsheet, because R can read them without any other packages. R can also read Excel files, but it requires external packages to do so, such as <code>readxl</code>.</p>
 <p>I can read it from Github directly by using a function in the <code>readr</code> library, or with the base R function <code>read.csv()</code>, both accomplish the same task.</p>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="introduction.html#cb126-1" aria-hidden="true" tabindex="-1"></a>prb <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&quot;https://raw.githubusercontent.com/coreysparks/r_courses/master/2018_WPDS_Data_Table_FINAL.csv&quot;</span>, </span>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="introduction.html#cb126-1" aria-hidden="true" tabindex="-1"></a>prb <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&quot;https://raw.githubusercontent.com/coreysparks/r_courses/master/2018_WPDS_Data_Table_FINAL.csv&quot;</span>,</span>
 <span id="cb126-2"><a href="introduction.html#cb126-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">stringsAsFactors =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>That’s handy. If the file lived on our computer in your working directory, I could read it in like so:</p>
 <div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="introduction.html#cb127-1" aria-hidden="true" tabindex="-1"></a>prb <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;path/to/file/2018_WPDS_Data_Table_FINAL.csv&quot;</span>)</span></code></pre></div>

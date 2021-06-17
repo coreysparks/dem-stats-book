@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 1 Survey Data | 02-SurveyData.knit</title>
-  <meta name="description" content="" />
+  <title>Chapter 2 Survey Data | Applied Demographic Data Analysis with R</title>
+  <meta name="description" content="Chapter 2 Survey Data | Applied Demographic Data Analysis with R" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 1 Survey Data | 02-SurveyData.knit" />
+  <meta property="og:title" content="Chapter 2 Survey Data | Applied Demographic Data Analysis with R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,20 +16,22 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 1 Survey Data | 02-SurveyData.knit" />
+  <meta name="twitter:title" content="Chapter 2 Survey Data | Applied Demographic Data Analysis with R" />
   
   
   
 
+<meta name="author" content="Corey S. Sparks" />
 
 
+<meta name="date" content="2021-06-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
+<link rel="prev" href="introduction.html"/>
 
 <script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -157,21 +159,79 @@ div.csl-indent {
 <li><a href="./">A Minimal Book Example</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path=""><a href="#survey-data"><i class="fa fa-check"></i><b>1</b> Survey Data</a>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path=""><a href="#demographic-survey-data"><i class="fa fa-check"></i><b>1.1</b> Demographic Survey data</a></li>
-<li class="chapter" data-level="1.2" data-path=""><a href="#basics-of-survey-sampling"><i class="fa fa-check"></i><b>1.2</b> Basics of survey sampling</a>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#why-a-book-on-statistics-for-demographers"><i class="fa fa-check"></i><b>1.1</b> Why a book on statistics for demographers?</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#why-r"><i class="fa fa-check"></i><b>1.2</b> Why R?</a>
 <ul>
-<li class="chapter" data-level="1.2.1" data-path=""><a href="#simple-versus-complex-survey-designs"><i class="fa fa-check"></i><b>1.2.1</b> Simple versus complex survey designs</a></li>
+<li class="chapter" data-level="1.2.1" data-path="introduction.html"><a href="introduction.html#my-assumptions-in-this-book"><i class="fa fa-check"></i><b>1.2.1</b> My assumptions in this book</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path=""><a href="#characteristics-of-your-survey"><i class="fa fa-check"></i><b>1.3</b> Characteristics of YOUR survey</a></li>
-<li class="chapter" data-level="1.4" data-path=""><a href="#example-from-the-american-community-survey"><i class="fa fa-check"></i><b>1.4</b> Example from the American Community Survey</a></li>
-<li class="chapter" data-level="1.5" data-path=""><a href="#basics-of-analyzing-survey-data"><i class="fa fa-check"></i><b>1.5</b> Basics of analyzing survey data</a></li>
-<li class="chapter" data-level="1.6" data-path=""><a href="#replicates-and-jack-knifes-and-expansions-oh-my"><i class="fa fa-check"></i><b>1.6</b> Replicates and jack knifes and expansions, oh my!</a></li>
-<li class="chapter" data-level="1.7" data-path=""><a href="#descriptive-analysis-of-survey-data"><i class="fa fa-check"></i><b>1.7</b> Descriptive analysis of survey data</a></li>
-<li class="chapter" data-level="1.8" data-path=""><a href="#tables-and-graphical-summaries"><i class="fa fa-check"></i><b>1.8</b> Tables and graphical summaries</a>
+<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#welcome-to-r."><i class="fa fa-check"></i><b>1.3</b> Welcome to R.</a></li>
+<li class="chapter" data-level="1.4" data-path="introduction.html"><a href="introduction.html#r-and-rstudio"><i class="fa fa-check"></i><b>1.4</b> R and Rstudio</a>
 <ul>
-<li class="chapter" data-level="" data-path=""><a href="#references"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="1.4.1" data-path="introduction.html"><a href="introduction.html#r-file-types"><i class="fa fa-check"></i><b>1.4.1</b> R file types</a></li>
+<li class="chapter" data-level="1.4.2" data-path="introduction.html"><a href="introduction.html#r-projects"><i class="fa fa-check"></i><b>1.4.2</b> R projects</a></li>
+<li class="chapter" data-level="1.4.3" data-path="introduction.html"><a href="introduction.html#r-data-files"><i class="fa fa-check"></i><b>1.4.3</b> R data files</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="introduction.html"><a href="introduction.html#getting-help-in-r"><i class="fa fa-check"></i><b>1.5</b> Getting help in R</a></li>
+<li class="chapter" data-level="1.6" data-path="introduction.html"><a href="introduction.html#r-packages"><i class="fa fa-check"></i><b>1.6</b> R packages</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="introduction.html"><a href="introduction.html#functions-within-packages"><i class="fa fa-check"></i><b>1.6.1</b> Functions within packages</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="introduction.html"><a href="introduction.html#your-r-user-environment"><i class="fa fa-check"></i><b>1.7</b> Your R user environment</a></li>
+<li class="chapter" data-level="1.8" data-path="introduction.html"><a href="introduction.html#some-simple-r-examples"><i class="fa fa-check"></i><b>1.8</b> Some Simple R examples</a>
+<ul>
+<li class="chapter" data-level="1.8.1" data-path="introduction.html"><a href="introduction.html#r-is-a-calculator"><i class="fa fa-check"></i><b>1.8.1</b> R is a calculator</a></li>
+</ul></li>
+<li class="chapter" data-level="1.9" data-path="introduction.html"><a href="introduction.html#variables-and-objects"><i class="fa fa-check"></i><b>1.9</b> Variables and objects</a>
+<ul>
+<li class="chapter" data-level="1.9.1" data-path="introduction.html"><a href="introduction.html#vectors"><i class="fa fa-check"></i><b>1.9.1</b> Vectors</a></li>
+</ul></li>
+<li class="chapter" data-level="1.10" data-path="introduction.html"><a href="introduction.html#variable-types"><i class="fa fa-check"></i><b>1.10</b> Variable types</a></li>
+<li class="chapter" data-level="1.11" data-path="introduction.html"><a href="introduction.html#dataframes"><i class="fa fa-check"></i><b>1.11</b> Dataframes</a>
+<ul>
+<li class="chapter" data-level="1.11.1" data-path="introduction.html"><a href="introduction.html#accessing-variables-in-dataframes"><i class="fa fa-check"></i><b>1.11.1</b> Accessing variables in dataframes</a></li>
+<li class="chapter" data-level="1.11.2" data-path="introduction.html"><a href="introduction.html#nicer-looking-tables"><i class="fa fa-check"></i><b>1.11.2</b> Nicer looking tables</a></li>
+</ul></li>
+<li class="chapter" data-level="1.12" data-path="introduction.html"><a href="introduction.html#real-data-example"><i class="fa fa-check"></i><b>1.12</b> Real data example</a></li>
+<li class="chapter" data-level="1.13" data-path="introduction.html"><a href="introduction.html#basic-descriptive-analysis-of-data"><i class="fa fa-check"></i><b>1.13</b> Basic Descriptive analysis of data</a>
+<ul>
+<li class="chapter" data-level="1.13.1" data-path="introduction.html"><a href="introduction.html#dataframe-summaries"><i class="fa fa-check"></i><b>1.13.1</b> Dataframe summaries</a></li>
+<li class="chapter" data-level="1.13.2" data-path="introduction.html"><a href="introduction.html#frequency-tables"><i class="fa fa-check"></i><b>1.13.2</b> Frequency tables</a></li>
+<li class="chapter" data-level="1.13.3" data-path="introduction.html"><a href="introduction.html#more-basic-statistical-summaries"><i class="fa fa-check"></i><b>1.13.3</b> More basic statistical summaries</a></li>
+<li class="chapter" data-level="1.13.4" data-path="introduction.html"><a href="introduction.html#measures-of-central-tendency"><i class="fa fa-check"></i><b>1.13.4</b> Measures of central tendency</a></li>
+<li class="chapter" data-level="1.13.5" data-path="introduction.html"><a href="introduction.html#mean-and-median"><i class="fa fa-check"></i><b>1.13.5</b> Mean and median</a></li>
+<li class="chapter" data-level="1.13.6" data-path="introduction.html"><a href="introduction.html#measures-of-variation"><i class="fa fa-check"></i><b>1.13.6</b> Measures of variation</a></li>
+</ul></li>
+<li class="chapter" data-level="1.14" data-path="introduction.html"><a href="introduction.html#the-tidyverse"><i class="fa fa-check"></i><b>1.14</b> The tidyverse</a>
+<ul>
+<li class="chapter" data-level="1.14.1" data-path="introduction.html"><a href="introduction.html#basic-dplyr"><i class="fa fa-check"></i><b>1.14.1</b> Basic dplyr</a></li>
+</ul></li>
+<li class="chapter" data-level="1.15" data-path="introduction.html"><a href="introduction.html#basic-ggplot"><i class="fa fa-check"></i><b>1.15</b> Basic ggplot</a>
+<ul>
+<li class="chapter" data-level="1.15.1" data-path="introduction.html"><a href="introduction.html#stem-and-leaf-plotsbox-and-whisker-plots"><i class="fa fa-check"></i><b>1.15.1</b> Stem and leaf plots/Box and Whisker plots</a></li>
+<li class="chapter" data-level="1.15.2" data-path="introduction.html"><a href="introduction.html#x-y-scatter-plots"><i class="fa fa-check"></i><b>1.15.2</b> X-Y Scatter plots</a></li>
+<li class="chapter" data-level="1.15.3" data-path="introduction.html"><a href="introduction.html#facet-plots"><i class="fa fa-check"></i><b>1.15.3</b> Facet plots</a></li>
+</ul></li>
+<li class="chapter" data-level="1.16" data-path="introduction.html"><a href="introduction.html#chapter-summary"><i class="fa fa-check"></i><b>1.16</b> Chapter summary</a></li>
+<li class="chapter" data-level="1.17" data-path="introduction.html"><a href="introduction.html#references"><i class="fa fa-check"></i><b>1.17</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="survey-data.html"><a href="survey-data.html"><i class="fa fa-check"></i><b>2</b> Survey Data</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="survey-data.html"><a href="survey-data.html#demographic-survey-data"><i class="fa fa-check"></i><b>2.1</b> Demographic Survey data</a></li>
+<li class="chapter" data-level="2.2" data-path="survey-data.html"><a href="survey-data.html#basics-of-survey-sampling"><i class="fa fa-check"></i><b>2.2</b> Basics of survey sampling</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="survey-data.html"><a href="survey-data.html#simple-versus-complex-survey-designs"><i class="fa fa-check"></i><b>2.2.1</b> Simple versus complex survey designs</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="survey-data.html"><a href="survey-data.html#characteristics-of-your-survey"><i class="fa fa-check"></i><b>2.3</b> Characteristics of YOUR survey</a></li>
+<li class="chapter" data-level="2.4" data-path="survey-data.html"><a href="survey-data.html#example-from-the-american-community-survey"><i class="fa fa-check"></i><b>2.4</b> Example from the American Community Survey</a></li>
+<li class="chapter" data-level="2.5" data-path="survey-data.html"><a href="survey-data.html#basics-of-analyzing-survey-data"><i class="fa fa-check"></i><b>2.5</b> Basics of analyzing survey data</a></li>
+<li class="chapter" data-level="2.6" data-path="survey-data.html"><a href="survey-data.html#replicates-and-jack-knifes-and-expansions-oh-my"><i class="fa fa-check"></i><b>2.6</b> Replicates and jack knifes and expansions, oh my!</a></li>
+<li class="chapter" data-level="2.7" data-path="survey-data.html"><a href="survey-data.html#descriptive-analysis-of-survey-data"><i class="fa fa-check"></i><b>2.7</b> Descriptive analysis of survey data</a></li>
+<li class="chapter" data-level="2.8" data-path="survey-data.html"><a href="survey-data.html#tables-and-graphical-summaries"><i class="fa fa-check"></i><b>2.8</b> Tables and graphical summaries</a>
+<ul>
+<li class="chapter" data-level="2.8.1" data-path="survey-data.html"><a href="survey-data.html#references-1"><i class="fa fa-check"></i><b>2.8.1</b> References</a></li>
+<li class="chapter" data-level="" data-path="survey-data.html"><a href="survey-data.html#references-2"><i class="fa fa-check"></i>References</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -186,7 +246,7 @@ div.csl-indent {
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Applied Demographic Data Analysis with R</a>
           </h1>
         </div>
 
@@ -194,19 +254,17 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<!--bookdown:title:end-->
-<!--bookdown:title:start-->
-<div id="survey-data" class="section level1" number="1">
-<h1><span class="header-section-number">Chapter 1</span> Survey Data</h1>
+<div id="survey-data" class="section level1" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Survey Data</h1>
 <p>This chapter is devoted to the descriptive analysis of complex survey data</p>
-<div id="demographic-survey-data" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> Demographic Survey data</h2>
+<div id="demographic-survey-data" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Demographic Survey data</h2>
 <p>The majority of demographic research relies on two or three main sources of information. First among these are population enumerations or censuses, followed by vital registration data on births and deaths and last but not least, data from surveys. Censuses and other population enumerations are typically undertaken by federal statistical agencies and demographers use this data once it’s disseminated from these agencies. Similarly, vital registration data are usually collected by governmental agencies, who oversee the collection and data quality for the data. Survey data on the other hand can come from a wide variety of sources.</p>
 <p>It’s not uncommon for us to go and collect our own survey data specific to a research project we have, typically on a specialized population that we are interested in learning about, but surveys can also be quite general in their scope and collect information on a wide variety of subjects. Owing to the mix of small and large-scale survey data collection efforts, survey data are often available on many different topics, locales and time periods. Of course we as demographers are typically interested in population-level analysis or generalization from our work, so the survey data we try to use are collected in rigorous manners, with much attention and forethought paid to ensure the data we collect can actually be representative of the <em>target population</em> we are trying to describe.</p>
 <p>In this chapter, I will introduce the nature of survey sampling as is often used in demographic data sources, and describe what to look for when first using a survey data source for you research. These topics are geared towards researchers and students who have not worked with survey data much in the past and will go over some very pragmatic things to keep in mind. Following this discussion, I will use a specific example from the US Census Bureau’s American Community Survey and illustrate how to apply these principals to this specific source. The final goal of this chapter is to show how to use R to analyze survey data and produce useful summaries from our surveys, both tabular and graphically.</p>
 </div>
-<div id="basics-of-survey-sampling" class="section level2" number="1.2">
-<h2><span class="header-section-number">1.2</span> Basics of survey sampling</h2>
+<div id="basics-of-survey-sampling" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Basics of survey sampling</h2>
 <p>To begin this section, I want to go over some of the simple terms from sampling that are very important to those of us who rely on survey data for our work. For many of the concepts from this chapter, I strongly recommend <span class="citation">Lohr (2019)</span> for the theoretical portions and <span class="citation">Lumley (2010)</span> for discussion of how R is used for complex survey data.</p>
 <p>The <strong>target population</strong> is the population that our survey has been designed to measure. For large national surveys, these are typically the population of the country of interest. For example, the Demographic and Health Survey (DHS) has it’s primary target population as women of childbearing ages in women of reproductive age and their young children living in households. Our <strong>observational units</strong> are the level at which we are collecting data, for surveys this is typically a person or a household, and our survey documentation will tell us what its unit of observation is. <strong>Sampling Units</strong> refer to the units that can serve for us to collect data from, for example we may not have a list of every school age child, but we may have a list of schools, so we may use schools as our sampling units and sample children within them. The <strong>sampling frame</strong> is the set of sampling units containing distinct sets of population members, this is usually the most recent population census, ideally the entire population, or following our school example from above, the entire listing of schools.</p>
 <p>These terms are ubiquitous in sampling, but other terminology also exists in many surveys and these terms relate to the nature of how the survey was actually carried out. Many times the surveys we end up using are not themselves <strong>simple random samples</strong>, but are instead some blend of stratified or cluster sample. For example, the DHS uses a stratified, cluster sample to collect its information. <strong>Strata</strong> refer to relatively homogeneous areas within the place we are trying to collect data. In the DHS, these are typically rural or urban areas of a country, as identified by the census. Within each strata, the DHS will choose <strong>clusters</strong> from which to sample from, this is a <strong>two-stage sampling method</strong>, where first the sampling frame is stratified, then clusters are selected. Clusters in the DHS are usually neighborhoods in urban areas and smaller towns or villages in rural areas.</p>
@@ -215,358 +273,239 @@ div.csl-indent {
 <img src="images/MLdata.png" alt="" />
 <p class="caption">Figure 1</p>
 </div>
-<div id="simple-versus-complex-survey-designs" class="section level3" number="1.2.1">
-<h3><span class="header-section-number">1.2.1</span> Simple versus complex survey designs</h3>
+<div id="simple-versus-complex-survey-designs" class="section level3" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> Simple versus complex survey designs</h3>
 <p>How the data we’re using is sampled has a major implication for how we analyze it. The majority of statistical tools assume that data come from simple random samples, because most methods assume independence of observations, regardless of which distribution or test statistic you are using. Violations of this assumption are a big problem when we go to analyze our data, because the non-independence of survey data are automatically in violation of a key assumption of any test. The stratified and clustered nature of many survey samples may also present problems for methods such as linear regression analysis which assume errors in the model are <strong>homoskedastic</strong>, or constant. When data are collected in a stratified or clustered method, the data may have less variation than a simple random sample, because individuals who live closely to one another often share other characteristics in common as well. Our statistical models don’t do well with this type of reduction in variation and we often have to resort to manipulations of our model parameters or standard errors of our statistics in order to make them coincide with how the data were collected.</p>
 <p>Not to fear! Data collected using public funds are typically required to be made available to the public with information on how to use them. Most surveys come with some kind of code book or user manual which describes how the data were collected and how you should go about using them. In these cases, it pays to read the manual because it will tell you the names of the stratification and clustering variables in the survey data. This will allow you to use the design of the survey in your analysis so that your statistical routines are corrected for the non-randomness and homogeneity in the survey data.</p>
 <p><strong>He’s not heavy, he’s my brother</strong></p>
-<p>Another important aspect of survey data are the use of weighting variables. Whenever we design a survey, we have our target population, or universe of respondents in mind. In the DHS, again, this is traditionally<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> women of childbearing age and their children <span class="citation">(ICF International 2012)</span>. When we collect a sample from this population, or sample may be, and typically is, imperfect. It is imperfect for many reasons, owing to the difficulty of sampling some members of the population, or their unwillingness to participate in our study. Part of designing an effective survey is knowing your universe or population, and its characteristics. This will let you know the probability of a particular person being in the sample. Of course, the more complicated the survey, the more complicated it is to know what this probability is. For example, if we were to sample people in the United States, using a stratified design based on rural and urban residence, we would need to know how many people lived in rural and urban areas within the country, as this would effect the probability of sampling a person in each type of area. This <strong>inclusion probability</strong> tells us how likely a given person is of being sampled. The inverse of the inclusion probability is called the <strong>sampling weight</strong>:</p>
+<p>Another important aspect of survey data are the use of weighting variables. Whenever we design a survey, we have our target population, or universe of respondents in mind. In the DHS, again, this is traditionally<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> women of childbearing age and their children <span class="citation">(ICF International 2012)</span>. When we collect a sample from this population, or sample may be, and typically is, imperfect. It is imperfect for many reasons, owing to the difficulty of sampling some members of the population, or their unwillingness to participate in our study. Part of designing an effective survey is knowing your universe or population, and its characteristics. This will let you know the probability of a particular person being in the sample. Of course, the more complicated the survey, the more complicated it is to know what this probability is. For example, if we were to sample people in the United States, using a stratified design based on rural and urban residence, we would need to know how many people lived in rural and urban areas within the country, as this would effect the probability of sampling a person in each type of area. This <strong>inclusion probability</strong> tells us how likely a given person is of being sampled. The inverse of the inclusion probability is called the <strong>sampling weight</strong>:</p>
 <p><span class="math inline">\(w_i = \frac{1} {\pi_i}\)</span></p>
 <p>where <span class="math inline">\(\pi_i\)</span> is the inclusion probability.</p>
 <p>Sampling weights are what we use to make our analyses of a survey representative of the larger population. They serve many purposes including unequal inclusion probabilities, differences in sample characteristics compared to the larger population, and differences in response rates across sample subgroups. All of these situations make the sample deviate from the population by affecting who the actual respondents included in the survey are. Differences in our sample when compared to the larger population can affect most all of our statistical analysis since again, most methods assume random sampling. The weights that are included in public data are the result of a rigorous process conducted by those who designed and implemented the survey itself, and most surveys in their user manuals or code books describe the process of how the weights are created. For example, the US Center for Disease Control and Prevention’s Behavioral Risk Factor Surveillance System (BRFSS) provides a very thorough description of how their final person weights are calculated <span class="citation">(CDC 2020)</span>. These weights include three primary factors, the <em>stratum weight</em>, which is a combination of the number of records in a sample strata and the density of phone lines in a given strata, combined with the number of phones in a sampled household and the number of adults in the household to produce the final design weight. These weights are then <strong>raked</strong> to eight different marginal totals, based on age, race/ethnicity, education, marital status, home ownership, gender by race/ethnicity, age by race/ethnicity and phone ownership<span class="citation">(CDC 2020)</span>. After this process, weights are interpretable as the number of people a given respondent in the survey represents in the population. So, if a respondent’s weight in the survey data is 100, they actually represent 100 people in the target population.</p>
 <p>Other types of weights also exist, and are commonly seen in federal data sources. A common kind of weight that includes information on both the probability of inclusion <strong>AND</strong> the stratified design of the survey are <strong>replicate weights</strong>. Replicate weights are multiple weights for each respondent, and there are as many weights as there are different levels of the stratification variable. Later in this chapter, we will discuss how replicate weights are used, as compared to single design weights in an example.</p>
 </div>
 </div>
-<div id="characteristics-of-your-survey" class="section level2" number="1.3">
-<h2><span class="header-section-number">1.3</span> Characteristics of YOUR survey</h2>
+<div id="characteristics-of-your-survey" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Characteristics of YOUR survey</h2>
 <p>Survey data that come from reputable sources, such as most federal agencies or repositories such as the Inter-university Consortium for Political and Social Research (ICPSR) at the University of Michigan in the United States, are accompanied by descriptions of the data source including when and where it was collected, what it’s target population is, and information on the design of the survey. This will include information on sample design, such as stratum or cluster variables, and design or replicate weights to be used when you conduct your analysis. I cannot stress enough that learning how your particular survey data source is designed, and how the designers recommend you use provided survey variables for your analysis, is imperative to ensure your analysis is correctly specified.</p>
 </div>
-<div id="example-from-the-american-community-survey" class="section level2" number="1.4">
-<h2><span class="header-section-number">1.4</span> Example from the American Community Survey</h2>
+<div id="example-from-the-american-community-survey" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> Example from the American Community Survey</h2>
 <p>Let’s look at an example of these ideas in a real data source. Throughout the book I will use several complex survey design data sources to illustrate various topics, in this chapter I will use data from the US Census Bureau’s American Community Survey (ACS) public use microdata sample (PUMS). We can actually use the <code>tidycensus</code> package <span class="citation">(Walker and Herman 2021)</span> to download ACS PUMS directly from the Census Bureau.</p>
 <p>This example shows how to extract the 2018 single-year PUMS for the state of Texas, and only keep variables related to person-records. The ACS has information on both people and households, but for now we’ll only look at the person records. Help on these functions can be found by typing <code>?pums_variables</code> and <code>?get_pums</code> in <code>R</code></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidycensus)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>pums_vars_18<span class="ot">&lt;-</span> pums_variables <span class="sc">%&gt;%</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year<span class="sc">==</span> <span class="dv">2018</span>, survey <span class="sc">==</span> <span class="st">&quot;acs1&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(var_code, var_label, data_type, level) <span class="sc">%&gt;%</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(level <span class="sc">==</span> <span class="st">&quot;person&quot;</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>TX_pums <span class="ot">&lt;-</span> <span class="fu">get_pums</span>(</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">variables =</span> <span class="fu">c</span>(<span class="st">&quot;PUMA&quot;</span>, <span class="st">&quot;SEX&quot;</span>, <span class="st">&quot;AGEP&quot;</span>, <span class="st">&quot;CIT&quot;</span>, <span class="st">&quot;JWTR&quot;</span>,<span class="st">&quot;JWRIP&quot;</span>, <span class="st">&quot;HISP&quot;</span>),</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">state =</span> <span class="st">&quot;TX&quot;</span>,</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">survey =</span> <span class="st">&quot;acs1&quot;</span>,</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">year =</span> <span class="dv">2018</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(TX_pums),</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">format =</span> <span class="st">&#39;html&#39;</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
-<table>
-<thead>
-<tr>
-<th style="text-align:left;">
-SERIALNO
-</th>
-<th style="text-align:right;">
-SPORDER
-</th>
-<th style="text-align:right;">
-WGTP
-</th>
-<th style="text-align:right;">
-PWGTP
-</th>
-<th style="text-align:right;">
-AGEP
-</th>
-<th style="text-align:right;">
-JWRIP
-</th>
-<th style="text-align:left;">
-PUMA
-</th>
-<th style="text-align:left;">
-ST
-</th>
-<th style="text-align:left;">
-CIT
-</th>
-<th style="text-align:left;">
-JWTR
-</th>
-<th style="text-align:left;">
-SEX
-</th>
-<th style="text-align:left;">
-HISP
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-2018GQ0000070
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-64
-</td>
-<td style="text-align:right;">
-24
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:left;">
-04302
-</td>
-<td style="text-align:left;">
-48
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
-bb
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
-01
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2018GQ0000079
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-260
-</td>
-<td style="text-align:right;">
-20
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:left;">
-00700
-</td>
-<td style="text-align:left;">
-48
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
-12
-</td>
-<td style="text-align:left;">
-2
-</td>
-<td style="text-align:left;">
-01
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2018GQ0000082
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-12
-</td>
-<td style="text-align:right;">
-31
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:left;">
-00900
-</td>
-<td style="text-align:left;">
-48
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
-11
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
-01
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2018GQ0000139
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-94
-</td>
-<td style="text-align:right;">
-92
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:left;">
-03304
-</td>
-<td style="text-align:left;">
-48
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
-bb
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
-01
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2018GQ0000166
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-60
-</td>
-<td style="text-align:right;">
-30
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:left;">
-00400
-</td>
-<td style="text-align:left;">
-48
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
-bb
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
-02
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2018GQ0000222
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-71
-</td>
-<td style="text-align:right;">
-75
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:left;">
-02200
-</td>
-<td style="text-align:left;">
-48
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
-bb
-</td>
-<td style="text-align:left;">
-2
-</td>
-<td style="text-align:left;">
-01
-</td>
-</tr>
-</tbody>
-</table>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="survey-data.html#cb199-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidycensus)</span>
+<span id="cb199-2"><a href="survey-data.html#cb199-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb199-3"><a href="survey-data.html#cb199-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb199-4"><a href="survey-data.html#cb199-4" aria-hidden="true" tabindex="-1"></a>pums_vars_18<span class="ot">&lt;-</span> pums_variables <span class="sc">%&gt;%</span></span>
+<span id="cb199-5"><a href="survey-data.html#cb199-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year<span class="sc">==</span> <span class="dv">2018</span>, survey <span class="sc">==</span> <span class="st">&quot;acs1&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb199-6"><a href="survey-data.html#cb199-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(var_code, var_label, data_type, level) <span class="sc">%&gt;%</span></span>
+<span id="cb199-7"><a href="survey-data.html#cb199-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(level <span class="sc">==</span> <span class="st">&quot;person&quot;</span>)</span>
+<span id="cb199-8"><a href="survey-data.html#cb199-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb199-9"><a href="survey-data.html#cb199-9" aria-hidden="true" tabindex="-1"></a>TX_pums <span class="ot">&lt;-</span> <span class="fu">get_pums</span>(</span>
+<span id="cb199-10"><a href="survey-data.html#cb199-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">variables =</span> <span class="fu">c</span>(<span class="st">&quot;PUMA&quot;</span>, <span class="st">&quot;SEX&quot;</span>, <span class="st">&quot;AGEP&quot;</span>, <span class="st">&quot;CIT&quot;</span>, <span class="st">&quot;JWTR&quot;</span>,<span class="st">&quot;JWRIP&quot;</span>, <span class="st">&quot;HISP&quot;</span>),</span>
+<span id="cb199-11"><a href="survey-data.html#cb199-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">state =</span> <span class="st">&quot;AL&quot;</span>,</span>
+<span id="cb199-12"><a href="survey-data.html#cb199-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">survey =</span> <span class="st">&quot;acs1&quot;</span>,</span>
+<span id="cb199-13"><a href="survey-data.html#cb199-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">year =</span> <span class="dv">2018</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="survey-data.html#cb200-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb200-2"><a href="survey-data.html#cb200-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(TX_pums),</span>
+<span id="cb200-3"><a href="survey-data.html#cb200-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">format =</span> <span class="st">&#39;html&#39;</span></span>
+<span id="cb200-4"><a href="survey-data.html#cb200-4" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <p>These data are also easily available from the Integrated Public Use Microdata Series (IPUMS) project housed at the University of Minnesota <span class="citation">(Ruggles et al. 2021)</span>. The IPUMS version of the data adds additional information to the data and homogenizes the data across multiple years to make using it easier. The following example will use the <code>ipumsr</code> package to read in an extract from IPUMS-USA.</p>
-<p>&lt;start&gt;</p>
 <p>After you create an IPUMS extract, right click on the DDI link and save that file to your computer. Then repeat this for the .DAT file. If you need help creating an IPUMS extract, their staff have created a tutorial for doing so (<a href="https://usa.ipums.org/usa/tutorials.shtml" class="uri">https://usa.ipums.org/usa/tutorials.shtml</a>).</p>
 <p>This will save the xml file that contains all the information on the data (what is contained in the data file) to your computer. When using IPUMS, it will have a name like <code>usa_xxxxx.xml</code> where the x’s represent the extract number.</p>
 <p>You will also need to download the data file, by right clicking the <strong>Download.DAT</strong> link in the above image. This will save a .gz file to your computer, again with a name like: <code>usa_xxxxx.dat.gz</code>. Make sure this file and the xml file from above are in the same folder.</p>
 <p><img src="images/impum1.png" /></p>
 <p>The fundamentals of using <code>ipumsr</code> is to specify the name of your <code>.xml</code> file from your extract, and as long as your <code>.tar.gz</code> file from your extract is in the same location, R will read the data. The files on my computer:</p>
 <p><img src="images/ipums_files.png" /></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ipumsr)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>ddi <span class="ot">&lt;-</span> <span class="fu">read_ipums_ddi</span>(<span class="at">ddi_file =</span> <span class="st">&quot;data/usa_00086.xml&quot;</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>ipums <span class="ot">&lt;-</span> <span class="fu">read_ipums_micro</span>(<span class="at">ddi =</span> ddi,</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">n_max =</span> <span class="dv">1000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="survey-data.html#cb201-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ipumsr)</span>
+<span id="cb201-2"><a href="survey-data.html#cb201-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb201-3"><a href="survey-data.html#cb201-3" aria-hidden="true" tabindex="-1"></a>ddi <span class="ot">&lt;-</span> <span class="fu">read_ipums_ddi</span>(<span class="at">ddi_file =</span> <span class="st">&quot;data/usa_00097.xml&quot;</span>)</span>
+<span id="cb201-4"><a href="survey-data.html#cb201-4" aria-hidden="true" tabindex="-1"></a>ipums <span class="ot">&lt;-</span> <span class="fu">read_ipums_micro</span>(<span class="at">ddi =</span> ddi)</span></code></pre></div>
 <p>Will read in the data, in this case, it is a subset of the 2008 to 2012 single year ACS. This extract is not all of the variables from the ACS, as that would be a very large file and for my purposes here, I don’t need that. My goal for the rest of the chapter is to illustrate how to use the IPUMS as an example of a complex survey design data set and the steps necessary to do so.</p>
 </div>
-<div id="basics-of-analyzing-survey-data" class="section level2" number="1.5">
-<h2><span class="header-section-number">1.5</span> Basics of analyzing survey data</h2>
+<div id="basics-of-analyzing-survey-data" class="section level2" number="2.5">
+<h2><span class="header-section-number">2.5</span> Basics of analyzing survey data</h2>
 <p>A fundamental part of analyzing complex survey data are knowing the variables within the data that contain the survey design information. The US Census Bureau has documented the desing of the survey in a publication <span class="citation">(US Census Bureau 2014)</span> The IPUMS version of the ACS has two variables <code>STRATA</code> and <code>CLUSTER</code> that describe the two stage process by which the data are collected. Here are a the first few lines of these from the data:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(ipums[, <span class="fu">c</span>(<span class="st">&quot;SERIAL&quot;</span>, <span class="st">&quot;STRATA&quot;</span>, <span class="st">&quot;CLUSTER&quot;</span>)],</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">n=</span><span class="dv">10</span>),</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">digits =</span> <span class="dv">14</span> )</span></code></pre></div>
-<p>For the ACS, the strata is</p>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="survey-data.html#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>)</span>
+<span id="cb202-2"><a href="survey-data.html#cb202-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb202-3"><a href="survey-data.html#cb202-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb202-4"><a href="survey-data.html#cb202-4" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(ipums[, <span class="fu">c</span>(<span class="st">&quot;SERIAL&quot;</span>, <span class="st">&quot;STRATA&quot;</span>, <span class="st">&quot;CLUSTER&quot;</span>)],</span>
+<span id="cb202-5"><a href="survey-data.html#cb202-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">n=</span><span class="dv">10</span>),</span>
+<span id="cb202-6"><a href="survey-data.html#cb202-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">digits =</span> <span class="dv">14</span> )</span></code></pre></div>
+<p>&lt;start&gt;</p>
+<p>For the ACS, the strata variable is named, ironically <code>STRATA</code> and the cluster variable <code>CLUSTER</code>. The IPUMS creates the <code>STRATA</code> variable based on the sampling strata in the ACS, and the <code>CLUSTER</code> variable based on households within a stratum. Often in surveys, the clusters may not be households, they could be smaller population aggregatees, such as neighborhoods and villages, as in the DHS.</p>
+<p>The data also come with housing unit weights and person unit weights, so your analysis can be either representative of housing units or people.</p>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="survey-data.html#cb203-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(ipums[, <span class="fu">c</span>(<span class="st">&quot;SERIAL&quot;</span>, <span class="st">&quot;STRATA&quot;</span>, <span class="st">&quot;CLUSTER&quot;</span>, <span class="st">&quot;HHWT&quot;</span>, <span class="st">&quot;PERWT&quot;</span>)],</span>
+<span id="cb203-2"><a href="survey-data.html#cb203-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">n=</span><span class="dv">10</span>),</span>
+<span id="cb203-3"><a href="survey-data.html#cb203-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">digits =</span> <span class="dv">14</span> )</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">SERIAL</th>
+<th align="right">STRATA</th>
+<th align="right">CLUSTER</th>
+<th align="right">HHWT</th>
+<th align="right">PERWT</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1189369</td>
+<td align="right">330148</td>
+<td align="right">2019011893691</td>
+<td align="right">67</td>
+<td align="right">67</td>
+</tr>
+<tr class="even">
+<td align="right">1189370</td>
+<td align="right">231948</td>
+<td align="right">2019011893701</td>
+<td align="right">43</td>
+<td align="right">43</td>
+</tr>
+<tr class="odd">
+<td align="right">1189371</td>
+<td align="right">690048</td>
+<td align="right">2019011893711</td>
+<td align="right">114</td>
+<td align="right">114</td>
+</tr>
+<tr class="even">
+<td align="right">1189372</td>
+<td align="right">430248</td>
+<td align="right">2019011893721</td>
+<td align="right">34</td>
+<td align="right">34</td>
+</tr>
+<tr class="odd">
+<td align="right">1189373</td>
+<td align="right">650048</td>
+<td align="right">2019011893731</td>
+<td align="right">35</td>
+<td align="right">35</td>
+</tr>
+<tr class="even">
+<td align="right">1189374</td>
+<td align="right">680548</td>
+<td align="right">2019011893741</td>
+<td align="right">19</td>
+<td align="right">19</td>
+</tr>
+<tr class="odd">
+<td align="right">1189375</td>
+<td align="right">340048</td>
+<td align="right">2019011893751</td>
+<td align="right">18</td>
+<td align="right">18</td>
+</tr>
+<tr class="even">
+<td align="right">1189376</td>
+<td align="right">60048</td>
+<td align="right">2019011893761</td>
+<td align="right">37</td>
+<td align="right">37</td>
+</tr>
+<tr class="odd">
+<td align="right">1189377</td>
+<td align="right">440048</td>
+<td align="right">2019011893771</td>
+<td align="right">76</td>
+<td align="right">76</td>
+</tr>
+<tr class="even">
+<td align="right">1189378</td>
+<td align="right">462348</td>
+<td align="right">2019011893781</td>
+<td align="right">10</td>
+<td align="right">10</td>
+</tr>
+</tbody>
+</table>
+<p>As can be seen in the first few cases, the <code>HHWT</code> variable is the same for everyone in a given household, but each person has a unique person weight showing that they each represent different numbers of people in the population.</p>
+<p>We can see how the weights inflate each person or household to the population by summing the weights. Below, I sum the person weights for the state of Texas, the sum is 26,976,940 million people, which is very close to the official estimate of the population in 2019 (<a href="https://www.census.gov/quickfacts/TX" class="uri">https://www.census.gov/quickfacts/TX</a>), we also see, by using the <code>n()</code> function, that there were 272,776 persons in the sample in 2010 living in Texas.</p>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="survey-data.html#cb204-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb204-2"><a href="survey-data.html#cb204-2" aria-hidden="true" tabindex="-1"></a>ipums<span class="sc">%&gt;%</span></span>
+<span id="cb204-3"><a href="survey-data.html#cb204-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(STATEFIP <span class="sc">==</span> <span class="dv">48</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb204-4"><a href="survey-data.html#cb204-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">tot_pop =</span> <span class="fu">sum</span>( PERWT ) , <span class="at">n_respond =</span> <span class="fu">n</span>())</span></code></pre></div>
+<pre><code>## # A tibble: 1 x 2
+##    tot_pop n_respond
+##      &lt;dbl&gt;     &lt;int&gt;
+## 1 28995881    272776</code></pre>
+<p>For housing units, we have to select a single person from the household in order for the same process to work, otherwise we would misrepresent the number of households in the state. We see there are 10,585,803 million housing units, and 114,016 unique households in the data.</p>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="survey-data.html#cb206-1" aria-hidden="true" tabindex="-1"></a>ipums<span class="sc">%&gt;%</span></span>
+<span id="cb206-2"><a href="survey-data.html#cb206-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(STATEFIP <span class="sc">==</span> <span class="dv">48</span>,</span>
+<span id="cb206-3"><a href="survey-data.html#cb206-3" aria-hidden="true" tabindex="-1"></a>         PERNUM <span class="sc">==</span> <span class="dv">1</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb206-4"><a href="survey-data.html#cb206-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">tothh =</span> <span class="fu">sum</span>( HHWT ) , <span class="at">n_housing =</span> <span class="fu">n</span>())</span></code></pre></div>
+<pre><code>## # A tibble: 1 x 2
+##      tothh n_housing
+##      &lt;dbl&gt;     &lt;int&gt;
+## 1 10585803    114016</code></pre>
+<p>This total is nearly identical to that from the <a href="https://data.census.gov/cedsci/table?t=Housing&amp;g=0400000US48&amp;y=2019&amp;tid=ACSDP1Y2019.DP04">Census’s ACS estimate</a>.</p>
+<p>This exercise shows that by using the provided weights in the survey, we can estimate the population size the sample was supposed to capture effectively. The <code>survey</code> package and the newer tidyverse package <code>srvyr</code> are designed to fully implement survey design and weighting and perform a wide variety of statistical summaries.</p>
+<p>The way these packages work, is that you provide the name of your data frame, and the survey design variables that are in your data and the package code performs the requested analysis, correcting for survey design and weighting to the appropriate population. The code below illustrates how to enter the survey design for the IPUMS-USA ACS. Some surveys will not have both a cluster and stratification variable, so again, it’s important to consult your survey documentation to find these for your data.</p>
+<p>The function <code>as_survey_design()</code> in this case takes three arguements, since we are piping the 2010 ACS into it, we don’t have to specify the name of the data. <code>ids</code> is the argument for the cluster variable, if your survey doesn’t have one, just leave it out. <code>strata</code> is where you specify the name of the survey stratification variable, and <code>weights</code> is where you specify the name of the appropriate weighting variable. In this case, I’m replicating the estimate of the housing units in Texas from above, so I’ll use the <code>HHWT</code> variable. The easiest way to get a total population estimate is to use the <code>survey_total()</code> function, which is equivalent to summing the weights as shown above, although in the case of the survey analysis commands in the <code>survey</code> and <code>srvyr</code> packages, the total will also be estimated with a standard error of the estimate.</p>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="survey-data.html#cb208-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(srvyr)</span>
+<span id="cb208-2"><a href="survey-data.html#cb208-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survey)</span>
+<span id="cb208-3"><a href="survey-data.html#cb208-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb208-4"><a href="survey-data.html#cb208-4" aria-hidden="true" tabindex="-1"></a>ipums<span class="sc">%&gt;%</span></span>
+<span id="cb208-5"><a href="survey-data.html#cb208-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(STATEFIP<span class="sc">==</span><span class="dv">48</span>, PERNUM<span class="sc">==</span><span class="dv">1</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb208-6"><a href="survey-data.html#cb208-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_survey_design</span>(<span class="at">cluster=</span> CLUSTER,</span>
+<span id="cb208-7"><a href="survey-data.html#cb208-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">strata =</span> STRATA,</span>
+<span id="cb208-8"><a href="survey-data.html#cb208-8" aria-hidden="true" tabindex="-1"></a>                   <span class="at">weights =</span> HHWT)<span class="sc">%&gt;%</span></span>
+<span id="cb208-9"><a href="survey-data.html#cb208-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">tothh =</span> <span class="fu">survey_total</span>())</span></code></pre></div>
+<p>In this case, our <code>tothh</code> estimate is identical to summing the weights, but new we also have an estimate of the precision of the estimate, so we could produce a more informed statistical estimate that in 2019, there were 10,585,803 <span class="math inline">\(\pm\)</span> 27,274.96 occupied housing units in the state.</p>
+<p>If your data come with replicate weights instead of strata and cluster variables, this can be specified using the <code>as_survey_rep()</code> command instead <code>as_survey_design()</code>. In this case, we have to specify all of the columns which correspond to the replicate weights in the data. There are likely many ways to do this, but below, I use a method that matches the column names using a regular expression, where we are looking for the string <code>REPWT</code>, followed by any number of numeric digits, that is what the <code>[0-9]+</code> portion tells R to do. Also, the ACS uses a balanced replicate weight construction, which also requires the case weight as well <span class="citation">(Ruggles et al. 2021)</span>, so we specify the replicate weight type as <code>BRR</code>. Again, this is specific to the ACS, and you need to consult your own code book for your survey for your design information.</p>
+<p>In this case, we get the same estimate for the total number of housing units, but a smaller variance in the estimate, which is often seen when using replicate weights.</p>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="survey-data.html#cb209-1" aria-hidden="true" tabindex="-1"></a>ipums<span class="sc">%&gt;%</span></span>
+<span id="cb209-2"><a href="survey-data.html#cb209-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(STATEFIP<span class="sc">==</span><span class="dv">48</span>, PERNUM<span class="sc">==</span><span class="dv">1</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb209-3"><a href="survey-data.html#cb209-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_survey_rep</span>(<span class="at">weight =</span> HHWT,</span>
+<span id="cb209-4"><a href="survey-data.html#cb209-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">repweights =</span><span class="fu">matches</span>(<span class="st">&quot;REPWT[0-9]+&quot;</span>),</span>
+<span id="cb209-5"><a href="survey-data.html#cb209-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">type =</span> <span class="st">&quot;JK1&quot;</span>,</span>
+<span id="cb209-6"><a href="survey-data.html#cb209-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">scale =</span> <span class="dv">4</span><span class="sc">/</span><span class="dv">80</span>,</span>
+<span id="cb209-7"><a href="survey-data.html#cb209-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">rscales =</span> <span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">80</span>),</span>
+<span id="cb209-8"><a href="survey-data.html#cb209-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">mse =</span> <span class="cn">TRUE</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb209-9"><a href="survey-data.html#cb209-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">tothh =</span> <span class="fu">survey_total</span>())</span></code></pre></div>
+<pre><code>##      tothh tothh_se
+## 1 10585803 15479.11</code></pre>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="survey-data.html#cb211-1" aria-hidden="true" tabindex="-1"></a>    rw<span class="ot">&lt;-</span>ipums<span class="sc">%&gt;%</span></span>
+<span id="cb211-2"><a href="survey-data.html#cb211-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(STATEFIP<span class="sc">==</span><span class="dv">48</span>, PERNUM<span class="sc">==</span><span class="dv">1</span>)</span>
+<span id="cb211-3"><a href="survey-data.html#cb211-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">select</span>(REPWT1<span class="sc">:</span>REPWT50)</span>
+<span id="cb211-4"><a href="survey-data.html#cb211-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb211-5"><a href="survey-data.html#cb211-5" aria-hidden="true" tabindex="-1"></a>    t1<span class="ot">&lt;-</span>survey<span class="sc">::</span><span class="fu">svrepdesign</span>(ipums[ipums<span class="sc">$</span>STATEFIP<span class="sc">==</span><span class="dv">48</span><span class="sc">&amp;</span>ipums<span class="sc">$</span>PERNUM<span class="sc">==</span><span class="dv">1</span>,], <span class="at">repweights =</span> rw, <span class="at">weights =</span> ipums<span class="sc">$</span>HHWT[ipums<span class="sc">$</span>STATEFIP<span class="sc">==</span><span class="dv">48</span><span class="sc">&amp;</span>ipums<span class="sc">$</span>PERNUM<span class="sc">==</span><span class="dv">1</span>], <span class="at">type=</span><span class="st">&quot;ACS&quot;</span>)</span>
+<span id="cb211-6"><a href="survey-data.html#cb211-6" aria-hidden="true" tabindex="-1"></a>    t1<span class="sc">$</span>variables<span class="sc">$</span>ones<span class="ot">&lt;-</span><span class="dv">1</span></span>
+<span id="cb211-7"><a href="survey-data.html#cb211-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">library</span>(survey)</span>
+<span id="cb211-8"><a href="survey-data.html#cb211-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb211-9"><a href="survey-data.html#cb211-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">svytotal</span>(<span class="sc">~</span>ones, <span class="at">design=</span>t1)</span></code></pre></div>
+<p>Of course we typically want to do more analysis than just estimate a population size, and typically we are interested in using survey data for comparisons and regression modeling. To carry out any sort of statistical testing on survey data, we must not only weight the data appropriately but we must also calculate all measures of variability correctly as well. Since surveys are stratified, the traditional formula for variances is not correct because under stratified sampling, all estimates are not only a function of the total sample, but also the within-strata sample averages and sample sizes. We can estimate the variances in our estimates using the design variables and sample weights in the survey analysis procedures, but there are options.</p>
 </div>
-<div id="replicates-and-jack-knifes-and-expansions-oh-my" class="section level2" number="1.6">
-<h2><span class="header-section-number">1.6</span> Replicates and jack knifes and expansions, oh my!</h2>
-<p>Most data sources will either have a single weight and or replicate weights</p>
+<div id="replicates-and-jack-knifes-and-expansions-oh-my" class="section level2" number="2.6">
+<h2><span class="header-section-number">2.6</span> Replicates and jack knifes and expansions, oh my!</h2>
+<p>When conducting your analysis, you may not have any choices of whether you should use replicate weights or design weights, because your survey may only have one of these. There are two main strategies to estimate variances in survey data, the <em>Taylor Series Approximation</em> also referred to as <em>linearization</em> and the use of <em>replicate weights</em>. The Taylor Series, or linearization method is an approximation to the true variance, but is likely the most commonly used technique when analyzing survey data using regression methods. <span class="citation">Lohr (2019)</span> describes the calculation of variances from simple and clustered random samples in her book, and by her admission, once one has a clustered random sample the variance calculations for simple calculations becomes much more complex.</p>
+<p>The problem is that we often want much more complicated calculations in our work and the variance formulas for anything other than simple ratios are not analytically known. The Taylor series approximation to the variance for complex and nonlinear terms such as ratios or estimates of regression parameters. The <code>survey</code> package in R will do this if you specify a survey design that includes strata or clusters, while if you specify replicate weights then it will use an appropriate technique depending on how the data were collected.</p>
+<p>Typical replicate methods include balanced replicates, where there are exactly two clusters within each stratum, jackknife methods, which effectively remove one cluster from the strata and perform all calculations without that cluster in the analysis, then average across all replicates, and bootstrap methods which randomly sample clusters within strata with replacement a large number of times to get an estimate of the quantities of interest.</p>
 </div>
-<div id="descriptive-analysis-of-survey-data" class="section level2" number="1.7">
-<h2><span class="header-section-number">1.7</span> Descriptive analysis of survey data</h2>
+<div id="descriptive-analysis-of-survey-data" class="section level2" number="2.7">
+<h2><span class="header-section-number">2.7</span> Descriptive analysis of survey data</h2>
 </div>
-<div id="tables-and-graphical-summaries" class="section level2" number="1.8">
-<h2><span class="header-section-number">1.8</span> Tables and graphical summaries</h2>
-<div id="references" class="section level3 unnumbered">
+<div id="tables-and-graphical-summaries" class="section level2" number="2.8">
+<h2><span class="header-section-number">2.8</span> Tables and graphical summaries</h2>
+<div id="references-1" class="section level3" number="2.8.1">
+<h3><span class="header-section-number">2.8.1</span> References</h3>
+</div>
+<div id="references-2" class="section level3 unnumbered">
 <h3>References</h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div class="csl-entry">
 CDC. 2020. <span>“Weighting the BRFSS Data.”</span> <a href="https://www.cdc.gov/brfss/annual_data/2019/pdf/weighting-2019-508.pdf">https://www.cdc.gov/brfss/annual_data/2019/pdf/weighting-2019-508.pdf</a>.
 </div>
 <div class="csl-entry">
+Iannone, Richard, Joe Cheng, and Barret Schloerke. 2020. <em>Gt: Easily Create Presentation-Ready Display Tables</em>. <a href="https://CRAN.R-project.org/package=gt">https://CRAN.R-project.org/package=gt</a>.
+</div>
+<div class="csl-entry">
 ICF International. 2012. <span>“Demographic and <span>Health</span> <span>Survey</span> <span>Sampling</span> and <span>Household</span> <span>Listing</span> <span>Manual</span>.”</span> ICF International.
+</div>
+<div class="csl-entry">
+Kleinman, Ken, and Nicholas J. Horton. 2014. <em>SAS and r: Data Management, Statistical Analysis, and Graphics, 2nd Edition</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="https://nhorton.people.amherst.edu/sasr2/">https://nhorton.people.amherst.edu/sasr2/</a>.
 </div>
 <div class="csl-entry">
 Lohr, Shron. 2019. <em>Sampling: Design and Analysis</em>. 2nd ed. Boca Raton: Routledge &amp; CRC Press.
@@ -583,10 +522,29 @@ US Census Bureau. 2014. <span>“American Community Survey Design and Methodolog
 <div class="csl-entry">
 Walker, Kyle, and Matt Herman. 2021. <em>Tidycensus: Load US Census Boundary and Attribute Data as ’Tidyverse’ and ’Sf’-Ready Data Frames</em>. <a href="https://CRAN.R-project.org/package=tidycensus">https://CRAN.R-project.org/package=tidycensus</a>.
 </div>
+<div class="csl-entry">
+Wickham, Hadley. 2016. <em>Ggplot2: Elegant Graphics for Data Analysis</em>. Springer-Verlag New York. <a href="https://ggplot2.tidyverse.org">https://ggplot2.tidyverse.org</a>.
+</div>
+<div class="csl-entry">
+———. n.d. <em><span>R Packages</span></em>. 1st ed. O’Reily. <a href="https://r-pkgs.org/">https://r-pkgs.org/</a>.
+</div>
+<div class="csl-entry">
+Wickham, Hadley, Mara Averick, Jennifer Bryan, Winston Chang, Lucy D’Agostino McGowan, Romain François, Garrett Grolemund, et al. 2019. <span>“Welcome to the <span class="nocase">tidyverse</span>.”</span> <em>Journal of Open Source Software</em> 4 (43): 1686. <a href="https://doi.org/10.21105/joss.01686">https://doi.org/10.21105/joss.01686</a>.
+</div>
+<div class="csl-entry">
+Wickham, Hadley, Romain François, Lionel Henry, and Kirill Müller. 2020. <em>Dplyr: A Grammar of Data Manipulation</em>. <a href="https://CRAN.R-project.org/package=dplyr">https://CRAN.R-project.org/package=dplyr</a>.
+</div>
+<div class="csl-entry">
+Wickham, Hadley, and Garrett Grolemund. 2017. <em>R for Data Science: Import, Tidy, Transform, Visualize, and Model Data</em>. 1st ed. Paperback; O’Reilly Media. <a href="http://r4ds.had.co.nz/">http://r4ds.had.co.nz/</a>.
+</div>
+<div class="csl-entry">
+Wickham, Hadley, and Evan Miller. 2020. <em>Haven: Import and Export ’SPSS’, ’Stata’ and ’SAS’ Files</em>. <a href="https://CRAN.R-project.org/package=haven">https://CRAN.R-project.org/package=haven</a>.
 </div>
 </div>
 </div>
 </div>
+</div>
+
 
 
 
@@ -595,8 +553,8 @@ Walker, Kyle, and Matt Herman. 2021. <em>Tidycensus: Load US Census Boundary and
 
 <div class="footnotes">
 <hr />
-<ol start="1">
-<li id="fn1"><p>The modern DHS collects information on couples, men and children, so the universe has been expanded away from just women of childbearing age and their children.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<ol start="2">
+<li id="fn2"><p>The modern DHS collects information on couples, men and children, so the universe has been expanded away from just women of childbearing age and their children.<a href="survey-data.html#fnref2" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -604,7 +562,7 @@ Walker, Kyle, and Matt Herman. 2021. <em>Tidycensus: Load US Census Boundary and
           </div>
         </div>
       </div>
-
+<a href="introduction.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>

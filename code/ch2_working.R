@@ -18,3 +18,7 @@ TX_pums <- get_pums(
 
 names(TX_pums)
 head(TX_pums)
+
+library(ipumsr)
+ddi<- read_ipums_ddi(ddi_file = "data/usa_00096.xml")
+ipums <- read_ipums_micro(ddi = ddi)
