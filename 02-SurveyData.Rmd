@@ -1,8 +1,13 @@
 ---
-output:
-  word_document: default
+output: html_document
 bibliography: book.bib
 ---
+
+```{r, include=FALSE, message=FALSE}
+library(tidyverse, quietly = T)
+library(ggplot2, quietly = T)
+theme_set(theme_classic())
+```
 
 # Survey Data
 
@@ -58,7 +63,7 @@ Let's look at an example of these ideas in a real data source. Throughout the bo
 
 This example shows how to extract the 2018 single-year PUMS for the state of Texas, and only keep variables related to person-records. The ACS has information on both people and households, but for now we'll only look at the person records. Help on these functions can be found by typing `?pums_variables` and `?get_pums` in `R`
 
-```{r ch2_1, eval=FALSE,results='hide', message=FALSE, warning=FALSE, include=TRUE}
+```{r ch2_11, eval=FALSE,results='hide', message=FALSE, warning=FALSE, include=TRUE}
 library(tidycensus)
 library(tidyverse)
 
@@ -97,7 +102,7 @@ The fundamentals of using `ipumsr` is to specify the name of your `.xml` file fr
 
 ![](images/ipums_files.png)
 
-```{r ch2_2,eval=TRUE,results='hide', message=FALSE, warning=FALSE, include=TRUE}
+```{r ch2_2x,eval=TRUE,results='hide', message=FALSE, warning=FALSE, include=TRUE}
 
 library(ipumsr)
 
@@ -112,7 +117,7 @@ Will read in the data, in this case, it is a subset of the 2008 to 2012 single y
 
 A fundamental part of analyzing complex survey data are knowing the variables within the data that contain the survey design information. The US Census Bureau has documented the desing of the survey in a publication [@uscensusbureau2014] The IPUMS version of the ACS has two variables `STRATA` and `CLUSTER` that describe the two stage process by which the data are collected. Here are a the first few lines of these from the data:
 
-```{r ch2_3,eval=TRUE,results='hide', message=FALSE, warning=FALSE, include=TRUE}
+```{r ,eval=TRUE,results='hide', message=FALSE, warning=FALSE, include=TRUE}
 options(scipen = 999)
 library(knitr)
   
@@ -122,13 +127,11 @@ kable(head(ipums[, c("SERIAL", "STRATA", "CLUSTER")],
 
 ```
 
-\<start\>
-
 For the ACS, the strata variable is named, ironically `STRATA` and the cluster variable `CLUSTER`. The IPUMS creates the `STRATA` variable based on the sampling strata in the ACS, and the `CLUSTER` variable based on households within a stratum. Often in surveys, the clusters may not be households, they could be smaller population aggregates, such as neighborhoods and villages, as in the DHS.
 
 The data also come with housing unit weights and person unit weights, so your analysis can be either representative of housing units or people.
 
-```{r 2_4}
+```{r }
 kable(head(ipums[, c("SERIAL", "STRATA", "CLUSTER", "HHWT", "PERWT")],
            n=10),
       digits = 14 )
@@ -140,12 +143,28 @@ sumwt<-sum(ipums$PERWT[ipums$STATEFIP==48])
 nres<-dim(ipums)[1]
 ```
 
-As can be seen in the first few cases, the `HHWT` variable is the same for everyone in a given household, but each person has a unique person weight showing that they each represent different numbers of people in the population.
+As can be seen in the first few cases, the `HHWT` variable is the same for everyone in a given household, but each person has a unique person weight showing that they each represent different numbers of people in the population. Further investigation of the housing and person weights allow us to see what these values actually look like.
 
-We can see how the weights inflate each person or household to the population by summing the weights. Below, I sum the person weights for the state of Texas, the sum is `r prettyNum(sumwt,big.mark=",",scientific=FALSE)` million people, which is very close to the official estimate of the population in 2019 (<https://www.census.gov/quickfacts/TX>), we also see, by using the `n()` function, that there were `r prettyNum(nres,big.mark=",",scientific=FALSE)` persons in the sample in 2010 living in Texas.
+```{r}
+summary(ipums$PERWT)
+```
+Here we see the minimum person weight is 1 and the maximum is `r max(ipums$PERWT)`, which tells us that at least on person in the data represents `r max(ipums$PERWT)` people in the population that year. A histogram of the weights can also show us the distribution of weights in the sample. 
+
+```{r, message=FALSE}
+library(ggplot2)
+
+ipums%>%
+  ggplot(aes(x = PERWT)) +
+    geom_histogram() + 
+  labs(title = "Histogram of ACS Person Weights, 2019")
+
+```
 
 
-```{r 2_5}
+We can see how the weights inflate each person or household to the population by summing the weights. Below, I sum the person weights for the state of Texas, the sum is `r prettyNum(sumwt,big.mark=",",scientific=FALSE)` million people, which is the same as the official estimate of the population in 2019 (<https://www.census.gov/quickfacts/TX>), we also see, by using the `n()` function, that there were `r prettyNum(nres,big.mark=",",scientific=FALSE)` persons in the sample in 2019 living in Texas.
+
+
+```{r}
 library(dplyr)
 ipums%>%
   filter(STATEFIP == 48)%>%
@@ -161,7 +180,7 @@ nhh<-length(unique(ipums$CLUSTER))
 For housing units, we have to select a single person from the household in order for the same process to work, otherwise we would misrepresent the number of households in the state. We see there are `r prettyNum(sumhh,big.mark=",",scientific=FALSE)` million housing units, and `r prettyNum(nhh,big.mark=",",scientific=FALSE)` unique households in the data.
 
 
-```{r 2_6}
+```{r }
 ipums%>%
   filter(STATEFIP == 48,
          PERNUM == 1)%>%
@@ -175,20 +194,72 @@ This exercise shows that by using the provided weights in the survey, we can est
 
 The way these packages work, is that you provide the name of your data frame, and the survey design variables that are in your data and the package code performs the requested analysis, correcting for survey design and weighting to the appropriate population. The code below illustrates how to enter the survey design for the IPUMS-USA ACS. Some surveys will not have both a cluster and stratification variable, so again, it's important to consult your survey documentation to find these for your data.
 
-The function `as_survey_design()` in this case takes three arguements, since we are piping the 2010 ACS into it, we don't have to specify the name of the data. `ids` is the argument for the cluster variable, if your survey doesn't have one, just leave it out. `strata` is where you specify the name of the survey stratification variable, and `weights` is where you specify the name of the appropriate weighting variable. In this case, I'm replicating the estimate of the housing units in Texas from above, so I'll use the `HHWT` variable. The easiest way to get a total population estimate is to use the `survey_total()` function, which is equivalent to summing the weights as shown above, although in the case of the survey analysis commands in the `survey` and `srvyr` packages, the total will also be estimated with a standard error of the estimate.
+The function `as_survey_design()` in this case takes three arguments, since we are piping the 2019 ACS into it, we don't have to specify the name of the data. `ids` is the argument for the cluster variable, if your survey doesn't have one, just leave it out. `strata` is where you specify the name of the survey stratification variable, and `weights` is where you specify the name of the appropriate weighting variable. In this case, I'm replicating the estimate of the housing units in Texas from above, so I'll use the `HHWT` variable. The easiest way to get a total population estimate is to use the `survey_total()` function, which is equivalent to summing the weights as shown above, although in the case of the survey analysis commands in the `survey` and `srvyr` packages, the total will also be estimated with a standard error of the estimate. 
 
-```{r ch2_8,eval=TRUE,results='hide', message=FALSE, warning=FALSE, include=TRUE}
+```{r ,eval=TRUE,results='hide', message=FALSE, warning=FALSE, include=TRUE}
 library(srvyr)
 library(survey)
 
 ipums%>%
-  filter(STATEFIP==48, PERNUM==1)%>%
+  filter(STATEFIP == 48, PERNUM == 1)%>%
   as_survey_design(cluster= CLUSTER,
                    strata = STRATA,
                    weights = HHWT)%>%
   summarize(tothh = survey_total())
 
 ```
+
+
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
+
+**A short aside about survey design options**
+The core definition of the ACS survey design is shown in the code above, and I highly recommend that you inspect the help file for the survey design functions `?as_survey_design` or `?svydesign`. An important option that often has to be specified is the `nest=TRUE` option. This if often necessary if PSU identifiers are not unique across strata. For example, the fictional data shown below has the PSU's values the same across strata.}
+
+
+
+```{r fake_svy}
+
+fake_survey<- data.frame(
+  strata = c(1,1,1,1,1,1,
+             2,2,2,2,2,2),
+  psu = c(1,1,1,2,2,3,
+          1,1,2,2,3,3),
+  weight = rpois(n = 12, lambda = 20))
+
+knitr::kable(fake_survey)
+
+```
+
+If we attempt to make a survey design from this, R would show an error.
+
+```{r, error=TRUE}
+fake_design<- fake_survey%>%
+  as_survey_design(ids = psu,
+                    strata=strata,
+                    weights = weight)
+
+```
+
+But if we include the `nest = TRUE` option, R doesn't give us the error:
+
+```{r}
+
+
+fake_design<- fake_survey%>%
+  as_survey_design(ids = psu,
+                  strata=strata,
+                  weights = weight, 
+                  nest = TRUE)
+fake_design
+```
+The ACS from IPUMS has unique CLUSTERs across strata, so we don't have to specify that argument when we declare our survey design. 
+</div>
+
+
+Back to our housing estimates. 
 
 ```{r, include=FALSE}
 se1<-ipums%>%
@@ -208,7 +279,7 @@ In this case, we get the same estimate for the total number of housing units, bu
 
 ```{r}
 ipums%>%
-  filter(STATEFIP==48, PERNUM==1)%>%
+  filter(STATEFIP == 48, PERNUM == 1)%>%
   as_survey_rep(weight = HHWT,
             repweights =matches("REPWT[0-9]+"),
             type = "JK1",
@@ -226,12 +297,22 @@ rw<-ipums%>%
 t1<-survey::svrepdesign(data=ipums[ipums$STATEFIP==48&ipums$PERNUM==1,],
                         repweights = rw,
                         weights = ipums$HHWT[ipums$STATEFIP==48&ipums$PERNUM==1],
-                        type="JK1",scale = .05, rscales = rep(1, ncol(rw)), mse=T)
+                        type="JK1",scale = .05, rscales = rep(1, ncol(rw)), mse= TRUE)
 
 t1$variables$ones<-1
 library(survey)
 
 svytotal(~ones, design=t1)
+```
+We can also define the survey design outside of a dplyr pipe if we want using the `survey` package.
+
+```{r}
+acs_design <- svydesign(ids = ~ CLUSTER, 
+                        strata= ~ STRATA, 
+                        weights = ~ PERWT, 
+                        data=ipums)
+
+acs_design
 ```
 
 
@@ -248,7 +329,7 @@ Typical replicate methods include balanced replicates, where there are exactly t
 
 ## Descriptive analysis of survey data
 
-
+The `survey` library allows many forms of descriptive and regression analysis. 
 
 ## Tables and graphical summaries
 

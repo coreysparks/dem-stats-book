@@ -22,3 +22,11 @@ head(TX_pums)
 library(ipumsr)
 ddi<- read_ipums_ddi(ddi_file = "data/usa_00096.xml")
 ipums <- read_ipums_micro(ddi = ddi)
+
+
+dhs<-haven::read_dta("data/zzir62dt/ZZIR62FL.DTA")
+dhs$v005<- dhs$v005/1000000
+dhsdes<-svydesign(ids = ~v021,
+                  strata=~v022,
+                  weights = ~v005,
+                  data=dhs)
