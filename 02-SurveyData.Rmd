@@ -331,9 +331,142 @@ Typical replicate methods include balanced replicates, where there are exactly t
 
 The `survey` library allows many forms of descriptive and regression analysis. 
 
-## Tables and graphical summaries
+#### Weighted frequencies and rates
 
-### References
+Basic frequency tables are very useful tools for examining bivariate associations in survey data. In the survey analysis packages in R, the basic tools for doing this are the `svytable()` function in `survey`, or via the `survey_total()` function in `srvyr`. First I will recode two variables in the ACS, the employment status to indicate if a respondent is currently employed, and the `MET2013` variable, which is the metropolitan area where the respondent was living. This will give us the ACS estimate for the employed and unemployed population in each Texas MSA. I first have to filter the data to be people of working age, who are in the labor force and living in a MSA. 
+
+```{r}
+
+ipums %>%
+  filter(EMPSTAT %in% 1:2,
+         AGE >= 16 & AGE <= 65, 
+         MET2013 != 0) %>%
+  mutate(employed = as.factor(case_when(.$EMPSTAT == 1 ~ "Employed",
+                              .$EMPSTAT == 2 ~ "Unemployed" )),
+         met_name = haven::as_factor(MET2013)) %>%
+  as_survey_design(cluster = CLUSTER,
+                   strata = STRATA,
+                   weights = PERWT) %>%
+  group_by(met_name, employed)%>%
+  summarize(emp_rate = survey_total()) %>%
+  head()
+```
+
+This is ok, but if we want the totals in columns versus rows, we need to reshape the data. To go from the current "long" form of the variables to a wide form, we can use `pivot_wider` in `dplyr`. 
+
+```{r}
+ipums %>%
+  filter(EMPSTAT %in% 1:2,
+         AGE >= 16 & AGE <= 65, 
+         MET2013 != 0) %>%
+  mutate(employed = as.factor(case_when(.$EMPSTAT == 1 ~ "Employed",
+                              .$EMPSTAT == 2 ~ "Unemployed" )),
+         met_name = haven::as_factor(MET2013)) %>%
+  as_survey_design(cluster = CLUSTER,
+                   strata = STRATA,
+                   weights = PERWT) %>%
+  group_by(met_name, employed)%>%
+  summarize(emp_rate = survey_total()) %>%  
+  pivot_wider(id = met_name,
+              names_from = employed,
+              values_from = c(emp_rate, emp_rate_se) ) %>%
+  head()
+  
+
+```
+
+Of course, if we want rates, this would imply us having to divide these columns to calculate the rate, but we can also get R to do this for us using `survey_mean()`. Since the `employed` variable is dichotomous, if we take the mean of its various levels, we get a proportion, in this case the employment and unemployment rates, respectively. 
+
+```{r}
+ipums %>%
+  filter(EMPSTAT %in% 1:2,
+         AGE >= 16 & AGE <= 65, 
+         MET2013 != 0) %>%
+  mutate(employed = as.factor(case_when(.$EMPSTAT == 1 ~ "Employed",
+                              .$EMPSTAT == 2 ~ "Unemployed" )),
+         met_name = haven::as_factor(MET2013)) %>%
+  as_survey_design(cluster = CLUSTER,
+                   strata = STRATA,
+                   weights = PERWT) %>%
+  group_by(met_name, employed)%>%
+  summarize(emp_rate = survey_mean()) %>%  
+  pivot_wider(id = met_name,
+              names_from = employed,
+              values_from = c(emp_rate, emp_rate_se) ) %>%
+  head()
+ 
+```
+
+```{r, include=FALSE}
+tx_rates<- ipums %>%
+  filter(EMPSTAT %in% 1:2,
+         AGE >= 16 & AGE <= 65, 
+         MET2013 != 0) %>%
+  mutate(employed = as.factor(case_when(.$EMPSTAT == 1 ~ "Employed",
+                              .$EMPSTAT == 2 ~ "Unemployed" )),
+         met_name = haven::as_factor(MET2013)) %>%
+  as_survey_design(cluster = CLUSTER,
+                   strata = STRATA,
+                   weights = PERWT) %>%
+  group_by(met_name, employed)%>%
+  summarize(emp_rate = survey_mean()) %>%  
+  pivot_wider(id = met_name,
+              names_from = employed,
+              values_from = c(emp_rate, emp_rate_se) ) %>%
+  head()
+ 
+```
+
+Which gets us the employment rate and the unemployment rate for each metropolitan area, with their associated standard errors. This is a general process that would work well for any grouping variable. If we create an object from this calculation, in this case I'll call it `tx_rates`, then we can also easily feed it into `ggplot` to visualize the rates with their associated 95% confidence intervals. The `geom_errorbar` addition to a `ggplot` object can add errors to estimates, which are great because we convey the uncertainty in the rates. 
+
+```{r}
+tx_rates%>%
+  ggplot()+
+  geom_bar(aes(x=met_name, y = emp_rate_Unemployed), stat = "identity")+
+  geom_errorbar(aes(x=met_name,
+                    ymin=emp_rate_Unemployed-1.96*emp_rate_se_Unemployed,
+                    ymax= emp_rate_Unemployed+1.96*emp_rate_se_Unemployed),
+                width=.25)+
+  scale_y_continuous(labels = scales::percent)+
+  labs(x = "MSA", 
+       y = "Unemployment Rate",
+       title = "Unmployment rate in Texas MSAs")+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+We see that among the first 6 MSAs in the state (that are in the ACS microdata), Corpus Christi has the highest unemployment rate a `r print(100*tx_rates$emp_rate_Unemployed[tx_rates$met_name =="Corpus Christi, TX"], digits = 3)`%, and College Station-Bryan has the lowest unemployment rate at `r print(100*tx_rates$emp_rate_Unemployed[tx_rates$met_name =="College Station-Bryan, TX"], digits = 3)`%. 
+
+We can also use these functions for continuous variables, say with incomes. In the code below, I pipe all the elements of the analysis together to illustrate the workflow that we can do to calculate the median income in each MSA and plot it along with its error. 
+
+```{r}
+ipums %>%
+  filter(EMPSTAT %in% 1:2,
+         AGE >= 16 & AGE <= 65, 
+         MET2013 != 0) %>%
+  mutate(income = ifelse(INCWAGE <= 0, NA, INCWAGE),
+         met_name = haven::as_factor(MET2013)) %>%
+  as_survey_design(cluster = CLUSTER,
+                   strata = STRATA,
+                   weights = PERWT) %>%
+  group_by(met_name)%>%
+  summarize(median_wage = survey_median(income, na.rm=T)) %>%  
+  head() %>%
+  ggplot()+
+  geom_bar(aes(x=met_name, y = median_wage), stat = "identity")+
+  geom_errorbar(aes(x=met_name,
+                    ymin=median_wage-1.96*median_wage_se,
+                    ymax= median_wage+1.96*median_wage_se),
+                width=.25)+
+  scale_y_continuous(labels = scales::dollar)+
+  labs(x = "MSA", 
+       y = "Median Wage",
+       title = "Median wage in Texas MSAs")+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+```
+Which shows that Austin-Round Rock has the highest median wage and Brownsville-Harlingen has the lowest median wage. 
+
+
+## References
 
 ```{r include = FALSE}
 # automatically create a bib database for R packages
