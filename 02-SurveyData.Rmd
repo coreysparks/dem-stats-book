@@ -1,17 +1,19 @@
 ---
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 bibliography: book.bib
 ---
 
 ```{r, include=FALSE, message=FALSE}
+rm(list=ls())
 library(tidyverse, quietly = T)
 library(ggplot2, quietly = T)
 theme_set(theme_classic())
 ```
+\newpage
 
 # Survey Data
-
-This chapter is devoted to the descriptive analysis of complex survey data
 
 ## Demographic Survey data
 
@@ -289,7 +291,7 @@ ipums%>%
   summarize(tothh = survey_total())
 ```
 
-```{r, eval=FALSE}
+```{r}
 rw<-ipums%>%
       filter(STATEFIP==48, PERNUM==1)%>%
       select(REPWT1:REPWT50)
@@ -376,6 +378,9 @@ ipums %>%
 ```
 
 Of course, if we want rates, this would imply us having to divide these columns to calculate the rate, but we can also get R to do this for us using `survey_mean()`. Since the `employed` variable is dichotomous, if we take the mean of its various levels, we get a proportion, in this case the employment and unemployment rates, respectively. 
+
+
+## How this differs from SRS
 
 ```{r}
 ipums %>%
@@ -464,6 +469,147 @@ ipums %>%
 
 ```
 Which shows that Austin-Round Rock has the highest median wage and Brownsville-Harlingen has the lowest median wage. 
+
+### Creating tables from survey data analysis
+
+Tabular output from our survey data analysis is possible through several different means. When using dplyr, our intermediate output of the anlaysis is always a data frame, and so any R method for printing data frames would work for simple tabular display. For instance, if we just use `knitr::kable()` on our workflow from above instead of piping into a plot we would get something like this:
+
+```{r, output = 'asis'}
+ipums %>%
+  filter(EMPSTAT %in% 1:2,
+         AGE >= 16 & AGE <= 65, 
+         MET2013 != 0) %>%
+  mutate(income = ifelse(INCWAGE <= 0, NA, INCWAGE),
+         met_name = haven::as_factor(MET2013)) %>%
+  as_survey_design(cluster = CLUSTER,
+                   strata = STRATA,
+                   weights = PERWT) %>%
+  group_by(met_name)%>%
+  summarize(median_wage = survey_median(income, na.rm=T)) %>%  
+  head() %>%
+  knitr::kable(format = "latex",
+               digits = 0,
+               caption = "Median Wages in Texas MSAs",
+               align = 'c',
+               col.names =c("MSA Name", "Median Wage", "Median Wage SE"))
+
+```
+Which is ok, but there are other ways to make tables for reports. The `gt` package [@Iannone2021] is built using tidyverse principles, and build tables in much the same way that `ggplot` builds plots, and fits easily into a dplyr workflow. Here, I use `gt` to produce a similar table to that from `knitr::kable` from above.
+
+```{r}
+library(gt, quietly = T)
+
+ipums %>%
+  filter(EMPSTAT %in% 1:2,
+         AGE >= 16 & AGE <= 65, 
+         MET2013 != 0) %>%
+  mutate(income = ifelse(INCWAGE <= 0, NA, INCWAGE),
+         met_name = haven::as_factor(MET2013)) %>%
+  as_survey_design(cluster = CLUSTER,
+                   strata = STRATA,
+                   weights = PERWT) %>%
+  group_by(met_name)%>%
+  summarize(median_wage = survey_median(income, na.rm=T)) %>%  
+  head()%>%
+  gt() %>%
+    tab_header(title = "Median Wages in Texas MSAs")%>%
+    cols_label(met_name = "MSA Name",
+                 median_wage = "Median Wage",
+                 median_wage_se = "Median Wage SE")%>%
+    fmt_number(columns = c( median_wage,  median_wage_se), 
+                 decimals = 0, use_seps = TRUE)
+
+
+```
+
+In general, the `gt` tables are much easier to make look nice, compared to basic tables, because they're much more customizable. The `gtsummary` package extends the table functionality by combining the summary functions like `dplyr` with the table structures of `gt`. Additionally, it will recognize survey design objects so that information can also be integrated into your workflow. The `gtsummary` presents a more descriptive statistical summary of the variables included, and acutally uses `dplyr` tools under the hood of the package. 
+
+In the code below, I first filter and mutate the IPUMS data to contain working age people who are employed, and who live in the six Texas cities featured in the examples above. I also create a new income variable that excludes all zero incomes, and drop levels of the `MET2013` variable that aren't in the list I specified. This pipes into the survey design function from the `survey` package, which pipes into the `tbl_svysummary` function which summarizes income for each MSA. This function has a lot of options to specify its output, and I recommend you consult the examples at the author's website[^surveydata-2] 
+
+[^surveydata-2]: http://www.danieldsjoberg.com/gtsummary/
+
+```{r}
+library(gtsummary)
+
+ipums %>%
+ filter(EMPSTAT == 1,
+         AGE >= 16 & AGE <= 65, 
+         MET2013 != 0, 
+         MET2013 %in% c(11100, 12420, 13140, 15180, 17780, 18580)) %>% 
+  mutate(income = ifelse(INCWAGE <= 0, NA, INCWAGE),
+         met_name = haven::as_factor(MET2013))%>%
+  select(met_name,  income, CLUSTER, STRATA, PERWT)%>%
+  droplevels()%>%
+  survey::svydesign(id = ~ CLUSTER,
+                   strata = ~ STRATA,
+                   weights = ~ PERWT,
+                data = .) %>%
+   tbl_svysummary(by = "met_name",
+                  missing = "no",
+                  include = c(met_name, income), 
+                  label = list(income = "Median Wage"))%>%
+  as_hux_table()
+
+```
+
+### Basic statistical testing on survey data. 
+
+To perform basic bivariate statistical tests for frequency tables, the `srvyr::svychisq` and `survey::svy_chisq` are the primary tools you need. These will test for basic independence among rows and columns of a frequecny table. Below is an example on how you would test for independence of labor force participation and gender in the IPUMS ACS data. 
+
+```{r}
+ipums %>%
+  filter(EMPSTAT != 0,
+         AGE >= 16 & AGE <= 65) %>%
+  mutate(lab_force_part = ifelse (test = EMPSTAT %in% c(1,2),
+                                  yes = 1,
+                                  no = 0), 
+         gender = ifelse(test = SEX ==1,
+                         yes = "Male",
+                         no = "Female")) %>%
+  as_survey_design(cluster = CLUSTER,
+                   strata = STRATA,
+                   weights = PERWT) %>%
+  svychisq(~lab_force_part+gender,
+                    design = .)
+  
+```
+
+The output above is for the survey adjusted chi square test [@rao_chi-squared_1984], which is actually calculated as an F-test in this case. We see a large F-test value, and a very small p value, which indicates that men and women have different labor force participation rates. Using our workflow from above, we can calculate the actual rates as well.
+
+```{r}
+
+ipums %>%
+  filter(EMPSTAT != 0,
+         AGE >= 16 & AGE <= 65) %>%
+  mutate(lab_force_part = ifelse (test = EMPSTAT %in% c(1,2),
+                                  yes = 1,
+                                  no = 0), 
+         gender = ifelse(test = SEX ==1,
+                         yes = "Male",
+                         no = "Female")) %>%
+  as_survey_design(cluster = CLUSTER,
+                   strata = STRATA,
+                   weights = PERWT) %>%
+  group_by(gender)%>%
+  summarize(lf_part_rate = survey_mean(lab_force_part, na.rm=T)) %>%  
+  head()%>%
+  gt() %>%
+    tab_header(title = "Labor Force Participation Rates in Texas")%>%
+    cols_label(gender = "Gender",
+                 lf_part_rate = "Labor Force Participation Rate",
+                lf_part_rate_se = "SE")%>%
+    fmt_number(columns = c( lf_part_rate,  lf_part_rate_se), 
+                 decimals = 3, use_seps = TRUE)
+
+```
+So we see that males have a much higher labor force participation rate, compared to females, and this puts the differences that we observed from the chi square test into better context. 
+
+
+## How sampling affects regression - a simple first look
+
+### Chapter summary
+
+The goal of this chapter was to review the complexities of demographic survey data sources. The analysis of these kinds of data have to proceed in a way that adheres to the design of the survey as well as the goal of population-level inference from the survey data. The use of person or housing unit weights are necessary to ensure that our statistical summaries and analysis are representative of the population that the survey was designed to measure. The incorporation of the sample design elements of primary sampling units and sampling strata are integral to the correct calculation of standard errors for any survey-based estimates we create. R, like most major statistical programs have several ways of dealing with these issues, and the libraries `survey` and `srvyr` are very flexible in the types of analysis they can perform, and can incorporate any survey design into the subsequent analysis that we carry out. 
 
 
 ## References
