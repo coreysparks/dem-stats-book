@@ -15,6 +15,12 @@ theme_set(theme_classic())
 
 # Survey Data
 
+## elaborate on SRS
+## more info on how sampling is
+## Long vs wide
+## larger data - 
+## goal - I want you to be able to do this
+
 ## Demographic Survey data
 
 The majority of demographic research relies on two or three main sources of information. First among these are population enumerations or censuses, followed by vital registration data on births and deaths and last but not least, data from surveys. Censuses and other population enumerations are typically undertaken by federal statistical agencies and demographers use this data once it's disseminated from these agencies. Similarly, vital registration data are usually collected by governmental agencies, who oversee the collection and data quality for the data. Survey data on the other hand can come from a wide variety of sources.
@@ -117,7 +123,7 @@ Will read in the data, in this case, it is a subset of the 2008 to 2012 single y
 
 ## Basics of analyzing survey data
 
-A fundamental part of analyzing complex survey data are knowing the variables within the data that contain the survey design information. The US Census Bureau has documented the desing of the survey in a publication [@uscensusbureau2014] The IPUMS version of the ACS has two variables `STRATA` and `CLUSTER` that describe the two stage process by which the data are collected. Here are a the first few lines of these from the data:
+A fundamental part of analyzing complex survey data are knowing the variables within the data that contain the survey design information. The US Census Bureau has documented the design of the survey in a publication [@uscensusbureau2014] The IPUMS version of the ACS has two variables `STRATA` and `CLUSTER` that describe the two stage process by which the data are collected. Here are a the first few lines of these from the data:
 
 ```{r ,eval=TRUE,results='hide', message=FALSE, warning=FALSE, include=TRUE}
 options(scipen = 999)
@@ -354,7 +360,7 @@ ipums %>%
   head()
 ```
 
-This is ok, but if we want the totals in columns versus rows, we need to reshape the data. To go from the current "long" form of the variables to a wide form, we can use `pivot_wider` in `dplyr`. 
+This is OK, but if we want the totals in columns versus rows, we need to reshape the data. To go from the current "long" form of the variables to a wide form, we can use `pivot_wider` in `dplyr`. 
 
 ```{r}
 ipums %>%
@@ -470,7 +476,7 @@ Which shows that Austin-Round Rock has the highest median wage and Brownsville-H
 
 ## Creating tables from survey data analysis
 
-Tabular output from our survey data analysis is possible through several different means. When using dplyr, our intermediate output of the anlaysis is always a data frame, and so any R method for printing data frames would work for simple tabular display. For instance, if we just use `knitr::kable()` on our workflow from above instead of piping into a plot we would get something like this:
+Tabular output from our survey data analysis is possible through several different means. When using dplyr, our intermediate output of the analysis is always a data frame, and so any R method for printing data frames would work for simple tabular display. For instance, if we just use `knitr::kable()` on our workflow from above instead of piping into a plot we would get something like this:
 
 ```{r, output = 'asis'}
 ipums %>%
@@ -492,7 +498,7 @@ ipums %>%
                col.names =c("MSA Name", "Median Wage", "Median Wage SE"))
 
 ```
-Which is ok, but there are other ways to make tables for reports. The `gt` package [@Iannone2021] is built using tidyverse principles, and build tables in much the same way that `ggplot` builds plots, and fits easily into a dplyr workflow. Here, I use `gt` to produce a similar table to that from `knitr::kable` from above.
+Which is OK, but there are other ways to make tables for reports. The `gt` package [@Iannone2021] is built using tidyverse principles, and build tables in much the same way that `ggplot` builds plots, and fits easily into a dplyr workflow. Here, I use `gt` to produce a similar table to that from `knitr::kable` from above.
 
 ```{r}
 library(gt, quietly = T)
@@ -520,9 +526,9 @@ ipums %>%
 
 ```
 
-In general, the `gt` tables are much easier to make look nice, compared to basic tables, because they're much more customizable. The `gtsummary` package extends the table functionality by combining the summary functions like `dplyr` with the table structures of `gt`. Additionally, it will recognize survey design objects so that information can also be integrated into your workflow. The `gtsummary` presents a more descriptive statistical summary of the variables included, and acutally uses `dplyr` tools under the hood of the package. 
+In general, the `gt` tables are much easier to make look nice, compared to basic tables, because they're much more customizable. The `gtsummary` package extends the table functionality by combining the summary functions like `dplyr` with the table structures of `gt`. Additionally, it will recognize survey design objects so that information can also be integrated into your workflow. The `gtsummary` presents a more descriptive statistical summary of the variables included, and actually uses `dplyr` tools under the hood of the package. 
 
-In the code below, I first filter and mutate the IPUMS data to contain working age people who are employed, and who live in the six Texas cities featured in the examples above. I also create a new income variable that excludes all zero incomes, and drop levels of the `MET2013` variable that aren't in the list I specified. This pipes into the survey design function from the `survey` package, which pipes into the `tbl_svysummary` function which summarizes income for each MSA. This function has a lot of options to specify its output, and I recommend you consult the examples at the author's website[^surveydata-2] 
+In the code below, I first filter and mutate the IPUMS data to contain working age people who are employed, and who live in the six Texas cities featured in the examples above. I also create a new income variable that excludes all zero incomes, and drop levels of the `MET2013` variable that aren't in the list I specified. This pipes into the survey design function from the `survey` package, which pipes into the `tbl_svysummary` function which summarizes income for each MSA. This function has a lot of options to specify its output, and I recommend you consult the examples at the author's website[^surveydata-2]. 
 
 [^surveydata-2]: http://www.danieldsjoberg.com/gtsummary/
 
@@ -551,19 +557,16 @@ ipums %>%
 ```
 
 
-<style>
-div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
-</style>
-<div class = "blue">
+<p class="comment">
 
 ### How this differs from simple random sampling
-So the big question I often get from students is "Do I really need to weight my analysis?" and of course, I say, "Of course!". Weights don't just inflate your data to the population, they serve a very important role in making sure your sample data aren't biased in their scope. Bias can enter into survey data in many forms, but nonresponse bias can dramatically affect population based estimates if key segments of our target population respond at low rates. Surveys will often deal with this by rigorous data collection strategies, but often the survey designers have to account for the added probability of nonresponse by modification of their basic weights. @Lohr2109 describes how this is done using a variety of methods including raking and post stratification, which typically separate the sample into subdivisions based on one or more demographic characteristic and produce weights based on how the sample deviates from the population composition. These methods are robust and are commonly used in large national surveys including the Behavioral Risk Factor Surveillance system (BRFSS). 
+So the big question I often get from students is "Do I really need to weight my analysis?" and of course, I say, "Of course!". Weights don't just inflate your data to the population, they serve a very important role in making sure your sample data aren't biased in their scope. Bias can enter into survey data in many forms, but nonresponse bias can dramatically affect population based estimates if key segments of our target population respond at low rates. Surveys will often deal with this by rigorous data collection strategies, but often the survey designers have to account for the added probability of nonresponse by modification of their basic weights. @Lohr2019 describes how this is done using a variety of methods including raking and post stratification, which typically separate the sample into subdivisions based on one or more demographic characteristic and produce weights based on how the sample deviates from the population composition. These methods are robust and are commonly used in large national surveys including the Behavioral Risk Factor Surveillance system (BRFSS). 
 
-Other reasons for weigting and why it matters are oversampling. Many surveys will do this in their data collection because an important element of thier target population may be small in overall size, so they will sample more respondants from that population subgroup than their proportion in the larger popouation would predict. For example, if a survey wanted to get detailed data on recent refugees to a country, and this group is small, say .1 percent of the overall population, they may design their study to have 10% of their survey respondents be refugees. This oversampling can be accounted for in the survey weights so the additional respondents are down-weighted to represent their fractoin of the target population, while still allowing the researchers to get a large sample from this group. Surveys such as the Early Childhood Longitudinal Surveys and the National Longitudinal Study of Adolescent to Adult Health (AddHealth) routinely oversample specific groups. For example the AddHealth oversamples black adolescents with college educated parents, Cuban, Puerto Rican, Chinese, and physically disabled adolescents. 
+Other reasons for weighting and why it matters are oversampling. Many surveys will do this in their data collection because an important element of their target population may be small in overall size, so they will sample more respondents from that population subgroup than their proportion in the larger population would predict. For example, if a survey wanted to get detailed data on recent refugees to a country, and this group is small, say .1 percent of the overall population, they may design their study to have 10% of their survey respondents be refugees. This oversampling can be accounted for in the survey weights so the additional respondents are down-weighted to represent their fraction of the target population, while still allowing the researchers to get a large sample from this group. Surveys such as the Early Childhood Longitudinal Surveys and the National Longitudinal Study of Adolescent to Adult Health (AddHealth) routinely over-sample specific groups. For example the AddHealth over-samples black adolescents with college educated parents, Cuban, Puerto Rican, Chinese, and physically disabled adolescents. 
 
 ### How do weights affect our estimates?
 
-In the code example below, I illustrate how not including sample weights affects the estimates generated. This in effect is how traditional statistical analysis assuming random sampling would do things. So in order to compare the weighted estimates to the unweighted estimates, all we need to do is use a non-survey design oriented method to produce our estimate, and compare it to the survey designe oriented method. Note that many surveys are designed to be *self-weighting*, so weights are not provided nor necessary, again, read the documentation for your specific survey for what it recommends. 
+In the code example below, I illustrate how not including sample weights affects the estimates generated. This in effect is how traditional statistical analysis assuming random sampling would do things. So in order to compare the weighted estimates to the unweighted estimates, all we need to do is use a non-survey design oriented method to produce our estimate, and compare it to the survey design oriented method. Note that many surveys are designed to be *self-weighting*, so weights are not provided nor necessary, again, read the documentation for your specific survey for what it recommends. 
 
 ```{r}
 srs<-ipums %>%
@@ -607,12 +610,7 @@ surv.est$estimate<-"Weighted"
 
 ```{r}
 merged <- rbind(srs, surv.est)
-merged%>%
-  ggplot()+
-  geom_bar(aes(y = emp_rate_se, x = met_name, fill = estimate),
-           stat = "identity",
-           position="dodge")
-merged%>%
+p1<-merged%>%
   ggplot(aes(y = emp_rate, x = met_name , color = estimate))+
   geom_point(stat="identity",
              cex=2)+
@@ -621,18 +619,35 @@ merged%>%
   scale_y_continuous(labels = scales::percent)+
   scale_color_discrete( name = "Estimate Type")%>%
   labs(x = "MSA", 
-       y = "Unemployment Rate Estimate",
-       title = "Unmployment rate in Texas MSAs",
-       subtitle = "Weighted vs Unweighted Estimates")+
+       y = "Employment Rate Estimate",
+       title = "Employment rate in Texas MSAs",
+       subtitle = "Rate estimates")+
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
-```
+p2<-merged%>%
+  ggplot(aes(y = emp_rate_se, x = met_name , color = estimate))+
+  geom_point(stat="identity",
+             cex=2)+
+  geom_line(aes(group = met_name),
+            col = "grey")+
+  scale_color_discrete()%>%
+  labs(x = "MSA", 
+       y = "Standard Error",
+       title = "",
+       subtitle = "Standard error of estimates")+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
-</div>
+library(patchwork)
+
+(p1 + p2)
+```
+We see that the difference in the weighted and unweighted estimates do vary by MSA, as do the standard errors of the estimates, with the survey-design calculated standard errors nearly always being higher than those assuming simple random sampling. If our data came from a survey with more extreme oversampling we would likely see larger differences in these estimates, and it is generally advisable to include both weights and survey design elements in all analysis of complex survey data. 
+
+</p>
 
 ## Basic statistical testing on survey data. 
 
-To perform basic bivariate statistical tests for frequency tables, the `srvyr::svychisq` and `survey::svy_chisq` are the primary tools you need. These will test for basic independence among rows and columns of a frequecny table. Below is an example on how you would test for independence of labor force participation and gender in the IPUMS ACS data. 
+To perform basic bivariate statistical tests for frequency tables, the `srvyr::svychisq` and `survey::svy_chisq` are the primary tools you need. These will test for basic independence among rows and columns of a frequency table. Below is an example on how you would test for independence of labor force participation and gender in the IPUMS ACS data. 
 
 ```{r}
 ipums %>%
@@ -680,10 +695,121 @@ ipums %>%
                  decimals = 3, use_seps = TRUE)
 
 ```
+
 So we see that males have a much higher labor force participation rate, compared to females, and this puts the differences that we observed from the chi square test into better context. 
 
+### Regression and survey design
 
-## How sampling affects regression - a simple first look
+The design of our surveys affect the most basic estimates we do, and likewise, the design affects the more complicated analysis as well. Regression models are the work horse of social science research and we will spend a significant amount of the chapters that follow on thorough inspection of them. In the context of this chapter, I felt like I need to show both how to include survey design in a regression model and illustrate that weighting and survey design matters in terms of the output from out models. This section is *NOT* a total coverage of these models, and is at best a short example. This example will go in a different direction and use data from the Demographic and Health Survey instead of the ACS. 
+
+The Demographic and Health Survey (DHS) data have been collected since the mid 1980's in over 90 countries around the world, and the DHS provides a public model data set that represents data on real households, without a specific national context. These data are provided to let people learn how to use the data before applying for access. The model data can be downloaded freely from the DHS[^surveydata-3] as a SAS or STATA format, or from my Github site[^surveydata-4] for this book. Below, I will read in the data from Github and recode child growth stunting relative to the WHO standard as an outcome[^surveydata-5] , and child age, rural residence and gender as predictors. 
+
+The DHS household file is arrayed with a column for every child, so we must reshape the data from wide to long format using `pivot_longer` for the variables for child height relative to the WHO standard (`hc70`), child gender `hc27`, and child age `hc1`. The other variables are common to the household, so we do not have to reshape them (per the `cols=` line below). We then recode the outcome and the predictors for our regression example.
+
+```{r}
+dhs_model_hh <- readRDS(
+  url("https://github.com/coreysparks/data/blob/master/dhs_model_hh.rds?raw=true")
+  )
+
+dhs_model_hh_sub <- dhs_model_hh%>%
+  select(hc27_01:hc27_20, 
+         hc70_01:hc70_20, 
+         hc1_01:hc1_20,
+         hv021, hv025, hv270, hv005, hv021, hv022)%>%
+  pivot_longer(cols = c(-hv021, -hv025, -hv270, -hv005, -hv021, -hv022), 
+               names_to  = c(".value", "child"),
+               names_sep = "_") %>%
+  na.omit()%>%
+  mutate(stunting = car::Recode(hc70, recodes = "-900:-200 = 1; 9996:9999 = NA; else = 0"),
+         gender = ifelse(test = hc27 == 1, yes = "male", no = "female"),
+         hh_wealth = as.factor(hv270),
+         age = hc1,
+         age2 = hc1^2,
+         rural = ifelse(test = hv025 ==2, yes = "rural", no = "urban"),
+         wt = hv005/1000000,
+         psu = hv021,
+         strata = hv022)
+
+
+dhs_model_des<- dhs_model_hh_sub%>%
+  as_survey_design(cluster = psu,
+                   strata = strata,
+                   weights = wt,
+                   nest = TRUE)
+summary(dhs_model_des)
+```
+Just for completeness, I create a bar chart showing the percent stunted by the two main variables, gender and rural residence. 
+
+```{r}
+dhs_model_des%>%
+  summarise(x_ = svyby(formula = ~ stunting,
+                              by = ~ gender + rural,
+                              design = .,
+                              FUN = svymean,
+                              na.rm=T))%>%
+  ggplot()+
+  geom_bar(aes(x = x_gender, y  = x_stunting, fill = x_rural),
+           stat="identity",
+           position="dodge")+
+  labs(x = "Child Gender", 
+       y = "Percent Stunted", 
+       title = "Percent Stunted by Gender and Rural Residence",
+       subtitle = "DHS Model Data")+
+  scale_y_continuous(labels = scales::percent)
+
+```
+
+Now I estimate two logistic regression models for the stunting outcome. The first assumes random sampling and the second includes the full survey design information.
+
+```{r, include=FALSE}
+options(scipen = 1, digits = 3)
+```
+
+For the unweighted regular logistic regression, we use the `glm()` function with `family = binomial (link = "logit")`. 
+
+```{r}
+library(broom)
+m1<-glm(stunting ~ age + age2 + rural + gender,
+              data = dhs_model_hh_sub,
+              family = binomial(link = "logit"))
+m1%>%
+  tidy()
+  
+```
+
+For the survey design model, you specify the design versus the data set name, otherwise the same code works just fine. 
+
+```{r}
+m2 <- dhs_model_des%>%
+  svyglm(stunting ~ age + age2 +rural + gender,
+         design = .,
+         family = binomial)
+
+m2%>%
+  tidy()
+
+```
+
+There are lots of ways to make a table from a regression model, but `stargazer` [@stargazer] is a simple way to present multiple models side by side. 
+
+```{r, results='asis', message=FALSE}
+stargazer::stargazer(m1, m2,
+                     keep.stat = "n",
+                     model.names = F,
+                     column.labels = c("Unweighted model", "Weighted Model"),
+                     type = "html",
+                     header = FALSE, 
+                     style = "demography",
+                     title = "Output from Unweighted and Weighted Regression Models")
+```
+
+In this case, we see that the coefficient estimates are very similar between the two models, but the coefficient standard errors are all smaller in the unweighted model. This is commonly what you see in this situation, because the survey deign model is actually using *clustered standard errors* instead of asymptotic standard errors [@cameron_practitioners_2015, @ibragimov_inference_2016]. While this example does not show an extreme difference, it is commonplace for t-statistics generated from clustered standard errors to have higher p-values than those using asymptotic standard errors. As a result, if the t-statistic is lower, and the p-value higher, you can easily get differences in your hypothesis tests for regression parameters. This is always something to be aware of as you analyze survey data.
+
+
+[^surveydata-3] https://dhsprogram.com/data/model-datasets.cfm
+[^surveydata-4] https://github.com/coreysparks/dem-stats-book
+[^surveydata-4] Per the [guide to DHS statistics ](https://dhsprogram.com/data/Guide-to-DHS-Statistics/index.cfm)
+
 
 ## Chapter summary
 

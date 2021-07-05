@@ -12,6 +12,8 @@ theme_set(theme_classic())
 
 # Introduction to R
 
+## why r in applied demography?
+
 ## Why R?
 
 I've used R for twenty years. I was also trained in SPSS and SAS along
