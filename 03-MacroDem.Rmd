@@ -39,10 +39,68 @@ Places in and of themselves can be thought of both in terms of data and in terms
 Typically when thinking about data on places, we are really referring to some sort of administrative geography, such as nations, states, region, and census tracts. While these are often readily available (and I'll show some R package that can easily get data from the web), we often have to use these as proxy measures of more interesting social spaces like neighborhoods and other types of activity spaces. These social spaces are harder to get data on, typically because they are more fluid in their definitions, and there is generally not a systematic effort to produce data on socially defined spaces on national scales. This is a big part of doing macro demography, defining the scale and the unit of analysis, both because we need to define the scope of our work, but also we are very much constrained by the availability of data for our projects. For instance, I may want to look at national scale inequality in mortality risk in neighborhoods in the United States, but you immediately face a couple of hurdles. No national data source identifies sub-city residential location for death certificates, also, what are neighborhoods? Again, they're probably some socially defined space that may not be available from a national scale source. To get around this, we may have to settle for a state-level analysis, because state vital registration systems will often allow researchers to use more fine-scale geographic data on death certificates (such as latitude/longitude of the decedent's residence), and once we have very fine scale geographic data on the vital events, we could potentially find data on some more socially defined spaces, perhaps from cities who often maintain geographic data on neighborhoods specific to that city. OK, so that's fine, but then you still run into the "what's my denominator" problem, where you have no baseline population data on the age and sex breakdown of the population, or even the population size of these places, because federal agencies don't produce estimates for such small scale areas. *This is frustrating*. Often when advising students on their dissertation projects, I have to have this moment of truth where I lay out the problems of the mixing of geographic scales for their projects, and the hard reality of the lack of data on so many things they would like to study. Often what happens is that we have to proxy our ideal places with places for which we can find data. You see this a lot in the population health literature, where people want to analyze *neighborhoods* but all they have are census tracts. Tracts aren't social spaces! They're arbitrary areas of 3 to 5 thousand people, that change every 10 years, that the Census uses to count people. Likewise, counties are very rich areas to find data for, but they are not really activity spaces or neighborhoods, but they may be areas that have some policy making authority (such as county health departments) that *could* be relevant for something. States are also nice geographies, they're very large, so you loose the ability to contextualize behavior on a fine spatial scale, but states make a lot of decisions that affect the lives of their residents, often more than national decisions. States have become very popular units of analysis in the health literature again, primarily as a result of differential adoption of portions of the Patient Protection and Affordable Care Act of 2010 [@soni2017a; @courtemanche2019]. This being said, many times when we do an analysis on places, that analysis has lots of limitations, which we must acknowledge, and analyses such as these are often called *ecological* analyses because we are examining associations at the macro scale, and we do not observe individual level outcomes.
 
 
+### US contexts
 
-US
+The US Census bureau produces a wide variety of geographic data products that are the most widely used forms of geographic data for demographic studies in the United States. The TIGER Line Files data consist of geographic data with census bureau GEOIDs attached so they can be linked to any number of federal statistical products. They do not contain demographic data themselves, but are easily linked. The `tigris` package in R provides a direct way to download any TIGER line file data type directly in a R session as either a *simple feature* class or as a *Spatial__DataFrame*. 
+Using the tigris package is very easy and its functions fit directly into the tidyverse as well. Below, I download two layers of information, first the state polygon for New York state, and the census tracts within the state and overlay the two datasets on each other. The package has a function for each type of geography that you would want, for example `states()` downloads state level geographies and `tracts()` does the same for census tracts. The functions have some common arguments, including `cb = TRUE/FALSE` so you can choose cartographic boundary files or not. Cartographic boundary files are lower resolution, smaller files that are often used for thematic mapping. Also `year = ` will allow you to get different annual vintages of the data. The `tracts()` function also allows you to obtain geographies for specific counties within a state.
 
-International data
+```{r, results='hide'}
+library(tigris)
+
+nyst <- states(cb = TRUE,
+               year = 2010) %>%
+  filter(NAME == "New York")
+
+nyst_ct <- tracts(state = "NY",
+                  cb = TRUE,
+                  year = 2010)
+
+ggplot(data=nyst)+
+  geom_sf(color = "red", 
+          lwd = 2)+
+   geom_sf(data = nyst_ct,
+           fill = NA,
+           color = "blue") + 
+  ggtitle(label = "New York State Census Tracts")
+
+```
+
+The IPUMS NHGIS project [^macrodem-1] is also a great source for demographic data on US places, and allows you to select many demographic tables for census data products going back to the 1790 census. When you perform an extract from the site, you can get both data tables and ESRI shapefiles for your requested geographies. The IPUMS staff have created several tutorials which go through how to construct a query from their site [^macrodem-2]. Below, I use the `sf` library to read in the geographic data from IPUMS and the tabular data and join them.
+
+```{r}
+library(sf)
+ipums_co <- read_sf("~/OneDrive - University of Texas at San Antonio/projects/book_data/US_county10_2000.shp")
+
+
+im_dat <- readr::read_csv("~/OneDrive - University of Texas at San Antonio/projects/book_data/nhgis0025_ds231_2005_county.csv")
+
+m_dat <- left_join(x = ipums_co,
+                   y = im_dat,
+                   by = c("GISJOIN" = "GISJOIN"))
+
+m_dat %>%
+  filter(STATE == "New York" )%>%
+  ggplot()+
+  geom_sf(aes (fill = AGWJ001))+
+  scale_color_viridis_c()+
+  ggtitle(label = "Infant Mortality Rate per 10,000 Live Births",
+          subtitle = "New York, 2005")
+```
+
+
+[^macrodem-1]: https://www.nhgis.org/
+[^macrodem-2]: https://www.nhgis.org/user-resources/users-guide
+
+\newpage 
+
+### International data
+
+Sources of international data exist in numerous sites on the internet. Personally, I frequently will use the DHS Spatial Data repository [^macrodem-3] to access data from DHS countries. They allow you to obtain both spatial administrative boundary data, as well as key indicators of maternal and child health at sub-national levels. 
+
+[^macrodem-3]: https://spatialdata.dhsprogram.com/home/
+
+\newpage
+## Statistical analysis of place-based data
 
 ## The linear model framework
 
@@ -58,7 +116,7 @@ $$\epsilon_i \sim Normal(0, \sigma_\epsilon)$$
 
 Where $\sigma_\epsilon ^2$ is the residual variance, or mean square error of the model. Under the strict assumptions of the linear model, the Gauss-Markov theorem says that the unbiased and minimum variance estimates of the $\beta$'s is:
 
-$$\beta_k = \frac{\sum (y_i - \bar{y})(x_i - \bar{x})}{\sum x_i - \bar{x}^2} = \frac{Cov(x,y)}{Var(x)}$$ [^macrodem-1]
+$$\beta_k = \frac{\sum (y_i - \bar{y})(x_i - \bar{x})}{\sum x_i - \bar{x}^2} = \frac{Cov(x,y)}{Var(x)}$$ [^macrodem-2]
 
 Which is often shown in the more compact matrix form:
 
@@ -72,6 +130,7 @@ $$y_i \sim Normal(X' \beta, \sigma_\epsilon)$$
 
 Which I prefer because it sets up the regression equation as the **linear predictor**, or linear combination (in the linear algebra sense) of the predictors and the model parameters for the mean of the outcome. This term, linear predictor, is a useful one, because as you get more and more accustomed to regression, you will see this same structure in every regression model you ever do. This is the fundamental workhorse of regression, where we get an estimated value for every combination of the observed predictors. Moreover, below when I present the **Generalized Linear Model**, it will be apparent that the linear predictor can be placed within a number of so-called **link functions** to scale it with the mean of the outcome.
 
+[^macrodem-2]: $\bar{y}= \text{mean of y}$, $\bar{x}= \text{mean of x}$
 \newpage
 
 The linear model has several assumptions that we need to be concerned with, notably:
