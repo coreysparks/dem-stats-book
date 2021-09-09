@@ -21,9 +21,10 @@ Prior to the advent in the 1960's of large scale social surveys like the General
 
 Paul Voss [-@voss_demography_2007] describes most demography (and certainly most demographic studies prior to the 1970's and 1980's) as **Macro** demography. Voss also mentions that prior to the availability of individual level microdata, all demography was macro-demography, and most demographic studies were spatial in nature, because demographic data were only available in spatial units corresponding to administrative areas. Typical types of geographic areas would be counties, census tracts, ZIP codes, state or nations.
 
-In the macro-demographic perspective on demography, observations are typically places, areas, or some other aggregate level of individuals. We do not observe the individual people themselves often times. An example of this is if you were to have access to an aggregate count of deaths in a region, even if the deaths were classified by age and sex, you still would be dealing with data that ignores, or has no index to the more nuanced characteristics of the individual decedents themselves. That being said, data such as these are invaluable, and most demographic summaries of individual-level data would aggregate based on the characteristics of the individuals any way. The macro scale principal is illustrated below, where all of the variables we observe are a scale above the individual person. 
+In the macro-demographic perspective on demography, observations are typically places, areas, or some other aggregate level of individuals. We do not observe the individual people themselves often times. An example of this is if you were to have access to an aggregate count of deaths in a region, even if the deaths were classified by age and sex, you still would be dealing with data that ignores, or has no index to the more nuanced characteristics of the individual decedents themselves. That being said, data such as these are invaluable, and most demographic summaries of individual-level data would aggregate based on the characteristics of the individuals any way. The macro scale principal is illustrated below, where all of the variables we observe are a scale above the individual person.
 
 ![Macro Level Proposition](images/macro2.png)
+
 Such **macro-level propositions** are hypothesized relationships among variables ($\rightarrow$) measured at a macro scale ($Z$ and $Y$), which ignores individual level data, mostly because we don't observe individuals ($x$ and $y$) in many of these kinds of analysis.
 
 If all we looked at were the individuals within the population, we would be overwhelmed by the variation that we would see, and we wouldn't be doing statistics anymore, we would be trying to process a million anecdotes, and the plural of anecdote is not data. By aggregating across basic demographic groups, such as age and sex, demographers begin to tease apart the differences that we are interested in. If we go a little further and, data willing, aggregate not only across these fundamental demographic groups, but also across some kind of place-based areal unit, then we adding an extremely important part of human existence: the **where** part of where we live.
@@ -38,11 +39,11 @@ Places in and of themselves can be thought of both in terms of data and in terms
 
 Typically when thinking about data on places, we are really referring to some sort of administrative geography, such as nations, states, region, and census tracts. While these are often readily available (and I'll show some R package that can easily get data from the web), we often have to use these as proxy measures of more interesting social spaces like neighborhoods and other types of activity spaces. These social spaces are harder to get data on, typically because they are more fluid in their definitions, and there is generally not a systematic effort to produce data on socially defined spaces on national scales. This is a big part of doing macro demography, defining the scale and the unit of analysis, both because we need to define the scope of our work, but also we are very much constrained by the availability of data for our projects. For instance, I may want to look at national scale inequality in mortality risk in neighborhoods in the United States, but you immediately face a couple of hurdles. No national data source identifies sub-city residential location for death certificates, also, what are neighborhoods? Again, they're probably some socially defined space that may not be available from a national scale source. To get around this, we may have to settle for a state-level analysis, because state vital registration systems will often allow researchers to use more fine-scale geographic data on death certificates (such as latitude/longitude of the decedent's residence), and once we have very fine scale geographic data on the vital events, we could potentially find data on some more socially defined spaces, perhaps from cities who often maintain geographic data on neighborhoods specific to that city. OK, so that's fine, but then you still run into the "what's my denominator" problem, where you have no baseline population data on the age and sex breakdown of the population, or even the population size of these places, because federal agencies don't produce estimates for such small scale areas. *This is frustrating*. Often when advising students on their dissertation projects, I have to have this moment of truth where I lay out the problems of the mixing of geographic scales for their projects, and the hard reality of the lack of data on so many things they would like to study. Often what happens is that we have to proxy our ideal places with places for which we can find data. You see this a lot in the population health literature, where people want to analyze *neighborhoods* but all they have are census tracts. Tracts aren't social spaces! They're arbitrary areas of 3 to 5 thousand people, that change every 10 years, that the Census uses to count people. Likewise, counties are very rich areas to find data for, but they are not really activity spaces or neighborhoods, but they may be areas that have some policy making authority (such as county health departments) that *could* be relevant for something. States are also nice geographies, they're very large, so you loose the ability to contextualize behavior on a fine spatial scale, but states make a lot of decisions that affect the lives of their residents, often more than national decisions. States have become very popular units of analysis in the health literature again, primarily as a result of differential adoption of portions of the Patient Protection and Affordable Care Act of 2010 [@soni2017a; @courtemanche2019]. This being said, many times when we do an analysis on places, that analysis has lots of limitations, which we must acknowledge, and analyses such as these are often called *ecological* analyses because we are examining associations at the macro scale, and we do not observe individual level outcomes.
 
+## US contexts
 
-### US contexts
+The US Census bureau produces a wide variety of geographic data products that are the most widely used forms of geographic data for demographic studies in the United States. The TIGER Line Files data consist of geographic data with census bureau GEOIDs attached so they can be linked to any number of federal statistical products. They do not contain demographic data themselves, but are easily linked. The `tigris` package in R provides a direct way to download any TIGER line file data type directly in a R session as either a *simple feature* class or as a \*Spatial\_\_DataFrame\* [@tigris].
 
-The US Census bureau produces a wide variety of geographic data products that are the most widely used forms of geographic data for demographic studies in the United States. The TIGER Line Files data consist of geographic data with census bureau GEOIDs attached so they can be linked to any number of federal statistical products. They do not contain demographic data themselves, but are easily linked. The `tigris` package in R provides a direct way to download any TIGER line file data type directly in a R session as either a *simple feature* class or as a *Spatial__DataFrame*. 
-Using the tigris package is very easy and its functions fit directly into the tidyverse as well. Below, I download two layers of information, first the state polygon for New York state, and the census tracts within the state and overlay the two datasets on each other. The package has a function for each type of geography that you would want, for example `states()` downloads state level geographies and `tracts()` does the same for census tracts. The functions have some common arguments, including `cb = TRUE/FALSE` so you can choose cartographic boundary files or not. Cartographic boundary files are lower resolution, smaller files that are often used for thematic mapping. Also `year = ` will allow you to get different annual vintages of the data. The `tracts()` function also allows you to obtain geographies for specific counties within a state.
+Using the tigris package is very easy and its functions fit directly into the tidyverse as well. Below, I download two layers of information, first the state polygon for New York state, and the census tracts within the state and overlay the two datasets on each other. The package has a function for each type of geography that you would want, for example `states()` downloads state level geographies and `tracts()` does the same for census tracts. The functions have some common arguments, including `cb = TRUE/FALSE` so you can choose cartographic boundary files or not. Cartographic boundary files are lower resolution, smaller files that are often used for thematic mapping. Also `year =` will allow you to get different annual vintages of the data. The `tracts()` function also allows you to obtain geographies for specific counties within a state.
 
 ```{r, results='hide'}
 library(tigris)
@@ -65,7 +66,54 @@ ggplot(data=nyst)+
 
 ```
 
-The IPUMS NHGIS project [^macrodem-1] is also a great source for demographic data on US places, and allows you to select many demographic tables for census data products going back to the 1790 census. When you perform an extract from the site, you can get both data tables and ESRI shapefiles for your requested geographies. The IPUMS staff have created several tutorials which go through how to construct a query from their site [^macrodem-2]. Below, I use the `sf` library to read in the geographic data from IPUMS and the tabular data and join them.
+### Tidycensus
+
+Another package the provides access to the US Census Bureau Decennial census summary file , the American Community Survey, Census population estimates, migration flow data and Census Public Use Microdata Sample (PUMS) data is `tidycensus` [@walker21]. The `tidycensus` package primarily works to allow users to use the Census Bureau's Application Programming Interface (API) to download Census summary file data for places within an R session. This removes the need to download separate files to your computer, and allows users to produce visualizations of Census data easily. The package is actively maintained and has several online tutorials on how to use it [^macrodem-1]. Depending on which data source you are interested in, there are functions that allow extracts from them. The ACS data is accessed through the `get_acs()` function, likewise the decennial census data is accessed using the `get_decennial()` function. The package also allows users to test for differences in ACS estimates either across time or between areas using the `significance()` function.
+
+The package requires users to obtain a developer API key from the Census Bureau's developer page[^macrodem-2] and install it on your local computer. The package has a function that helps you install the key to your `.Renviron` file. It is used like this:
+
+```{r, eval = FALSE}
+census_api_key(key = "yourkeyhere", install = TRUE)
+```
+
+which only needs to be done once.
+
+A basic use of the `tidycensus` package is to get data and produce maps of the indicators. This is done easily becuase `tidycensus` fits directly into general `dplyr` and `ggplot2` workflows. Below is an example of accessing 2019 ACS data on poverty rate estimates for New York census tracts from New York county.
+
+```{r, include = FALSE}
+options(tigris_use_cache = TRUE)
+```
+
+```{r, results = 'hide'}
+library(tidycensus)
+
+nyny <- get_acs(geography = "tract",
+                year = 2018,
+                state = "NY",
+                county = "061",
+                variables = "DP03_0119PE", 
+                output = "wide",
+                geometry = TRUE)
+
+nyny %>% 
+  rename (Poverty_Rt = DP03_0119PE)%>%
+  ggplot(aes(fill = Poverty_Rt))+
+  geom_sf()+
+  scale_color_viridis_c(option = "A")+
+  ggtitle ( label = "Poverty Rate in New York Census Tracts", 
+            subtitle = "2019 ACS Estimates")
+
+```
+
+The `tidycensus` package had a great array of functions and the author Kyle Waker has published a book on using it \<FILL IN CITATION\> which covers its many uses.
+
+[^macrodem-1]: $\bar{y}= \text{mean of y}$, $\bar{x}= \text{mean of x}$
+
+[^macrodem-2]: <http://api.census.gov/data/key_signup.html>
+
+### IPUMS NHGIS
+
+The IPUMS NHGIS project [^macrodem-3] is also a great source for demographic data on US places, and allows you to select many demographic tables for census data products going back to the 1790 census [@nhgis]. When you perform an extract from the site, you can get both data tables and ESRI shapefiles for your requested geographies. The IPUMS staff have created several tutorials which go through how to construct a query from their site [^macrodem-4]. Below, I use the `sf` library to read in the geographic data from IPUMS and the tabular data and join them.
 
 ```{r}
 library(sf)
@@ -87,19 +135,20 @@ m_dat %>%
           subtitle = "New York, 2005")
 ```
 
+\newpage
 
-[^macrodem-1]: https://www.nhgis.org/
-[^macrodem-2]: https://www.nhgis.org/user-resources/users-guide
+[^macrodem-3]: Link to AHRF codebook - ["https://data.hrsa.gov/DataDownload/AHRF/AHRF_USER_TECH_2019-2020.zip"](https://data.hrsa.gov/DataDownload/AHRF/AHRF_USER_TECH_2019-2020.zip)
 
-\newpage 
+[^macrodem-4]: More on this below
 
 ### International data
 
-Sources of international data exist in numerous sites on the internet. Personally, I frequently will use the DHS Spatial Data repository [^macrodem-3] to access data from DHS countries. They allow you to obtain both spatial administrative boundary data, as well as key indicators of maternal and child health at sub-national levels. 
-
-[^macrodem-3]: https://spatialdata.dhsprogram.com/home/
+Sources of international data exist in numerous sites on the internet. Personally, I frequently will use the DHS Spatial Data repository [^macrodem-5] to access data from DHS countries. They allow you to obtain both spatial administrative boundary data, as well as key indicators of maternal and child health at sub-national levels. The `rdhs` package allows you to perform queries from the spatial data repository and from the DHS microdata as well [@rdhs].
 
 \newpage
+
+[^macrodem-5]: More on this below
+
 ## Statistical analysis of place-based data
 
 ## The linear model framework
@@ -116,7 +165,7 @@ $$\epsilon_i \sim Normal(0, \sigma_\epsilon)$$
 
 Where $\sigma_\epsilon ^2$ is the residual variance, or mean square error of the model. Under the strict assumptions of the linear model, the Gauss-Markov theorem says that the unbiased and minimum variance estimates of the $\beta$'s is:
 
-$$\beta_k = \frac{\sum (y_i - \bar{y})(x_i - \bar{x})}{\sum x_i - \bar{x}^2} = \frac{Cov(x,y)}{Var(x)}$$ [^macrodem-2]
+$$\beta_k = \frac{\sum (y_i - \bar{y})(x_i - \bar{x})}{\sum x_i - \bar{x}^2} = \frac{Cov(x,y)}{Var(x)}$$ [^macrodem-6]
 
 Which is often shown in the more compact matrix form:
 
@@ -129,9 +178,6 @@ $$y_i \sim Normal(\beta_0 +\sum_k \beta_k x_{ki}, \sigma_\epsilon)$$ or even as:
 $$y_i \sim Normal(X' \beta, \sigma_\epsilon)$$
 
 Which I prefer because it sets up the regression equation as the **linear predictor**, or linear combination (in the linear algebra sense) of the predictors and the model parameters for the mean of the outcome. This term, linear predictor, is a useful one, because as you get more and more accustomed to regression, you will see this same structure in every regression model you ever do. This is the fundamental workhorse of regression, where we get an estimated value for every combination of the observed predictors. Moreover, below when I present the **Generalized Linear Model**, it will be apparent that the linear predictor can be placed within a number of so-called **link functions** to scale it with the mean of the outcome.
-
-[^macrodem-2]: $\bar{y}= \text{mean of y}$, $\bar{x}= \text{mean of x}$
-\newpage
 
 The linear model has several assumptions that we need to be concerned with, notably:
 
@@ -165,11 +211,11 @@ abline(a= mean(y2), b= 0, lty= 2)
 
 Our poor linear model would predict a decline in the outcome, while the outcome itself is perfectly stationary, as shown by the dashed line. In a more social science sensibility, the interpretation of the beta coefficients for the effect of $x$ on $y$ in this case will provide us a false conclusion of the relationship in the data. This is a really dangerous outcome for us in social science, because that's why we're doing statistics in the first place, to answer questions. The normality assumption above primarily affect predictions from the model, which, since the normal distribution is bound on $-\infty$ to $\infty$, can easily lead to a prediction outside of the realm of possibility, say for a dichotomous outcome, or a count, neither of which can have predicted values beyond 0 and 1, or less than 0.
 
-[^macrodem-1]: $\bar{y}= \text{mean of y}$, $\bar{x}= \text{mean of x}$
+[^macrodem-6]: Link to AHRF codebook - ["https://data.hrsa.gov/DataDownload/AHRF/AHRF_USER_TECH_2019-2020.zip"](https://data.hrsa.gov/DataDownload/AHRF/AHRF_USER_TECH_2019-2020.zip)
 
 ## Using the linear model in R
 
-The linear model is included in the base R `stats` package, and is accessed by the `lm()` function. In the example below, I use data from the U.S. Health Resources and Services Administration Area Health Resource File (AHRF), which is a produced annually and includes a wealth of information on current and historical data on health infrastructure in U.S. counties, as well as data from the Census Bureau, and the National Center for Health Statistics. The AHRF is publicly available, and we can read the data directly from the HHS website as a SAS format `.sas7bdat` data set within a ZIP archive. R can read this file to your local computer then extract it using the commands below. I would strongly encourage you consulting the AHRF codebook available from the HRSA website[^macrodem-2].
+The linear model is included in the base R `stats` package, and is accessed by the `lm()` function. In the example below, I use data from the U.S. Health Resources and Services Administration Area Health Resource File (AHRF), which is a produced annually and includes a wealth of information on current and historical data on health infrastructure in U.S. counties, as well as data from the Census Bureau, and the National Center for Health Statistics. The AHRF is publicly available, and we can read the data directly from the HHS website as a SAS format `.sas7bdat` data set within a ZIP archive. R can read this file to your local computer then extract it using the commands below. I would strongly encourage you consulting the AHRF codebook available from the HRSA website[^macrodem-7].
 
 ```{r, messages=FALSE}
 #create temoporary file on  your computer
@@ -284,7 +330,7 @@ ahrf_m%>%
 
 ```
 
-Once our data start to violate the assumptions of the linear model, the model becomes less and less useful. For instance, why make all of the strict assumptions about homoskedastic (I am contractually required by the statistics union to say this at least once) variances in the model residuals in order to use OLS, when you can use it's friend and brother, **Generalized Least Squares** (GLS, of course), which allows you to make useful and pragmatic changes to the OLS model structure to accommodate all of the fun and annoying things about real data, but still use the normal distribution to model our outcomes[^macrodem-3].
+Once our data start to violate the assumptions of the linear model, the model becomes less and less useful. For instance, why make all of the strict assumptions about homoskedastic (I am contractually required by the statistics union to say this at least once) variances in the model residuals in order to use OLS, when you can use it's friend and brother, **Generalized Least Squares** (GLS, of course), which allows you to make useful and pragmatic changes to the OLS model structure to accommodate all of the fun and annoying things about real data, but still use the normal distribution to model our outcomes[^macrodem-8].
 
 Generalized Least Squares adds a lot more flexibility to modeling normally distributed outcomes, basically by allowing us to modify the fundamental equations above to accommodate unequal variances, or the use of covariates on variances. Another way to write the OLS model above would be:
 
@@ -306,9 +352,9 @@ $$\sigma_{\epsilon}  = \Omega$$ which in turn modifies the estimation equation f
 
 $$\beta_{k_{GLS}} = (X' \Omega^{-1} X)^{-1} X' \Omega^{-1} Y$$ Applications of such models are more commonly seen in time series analysis, where the residuals of the model often have an autoregressive form, but when talking about place-based demography, more modifications of the model have been derived that allow for addressing another key assumption of independence among observations. This in fact is the realm of an entire field of econometrics, often called **spatial econometrics** [@anselin_spatial_1988; @chi_spatial_2020; @elhorst_spatial_2014; @lesage_introduction_2009]. In the next section, I show how some fundamental models that account for spatial association among observations can be estimates R packages.
 
-[^macrodem-2]: Link to AHRF codebook - ["https://data.hrsa.gov/DataDownload/AHRF/AHRF_USER_TECH_2019-2020.zip"](https://data.hrsa.gov/DataDownload/AHRF/AHRF_USER_TECH_2019-2020.zip)
+[^macrodem-7]: Link to AHRF codebook - ["https://data.hrsa.gov/DataDownload/AHRF/AHRF_USER_TECH_2019-2020.zip"](https://data.hrsa.gov/DataDownload/AHRF/AHRF_USER_TECH_2019-2020.zip)
 
-[^macrodem-3]: More on this below
+[^macrodem-8]: More on this below
 
 #### arf
 
