@@ -78,7 +78,7 @@ census_api_key(key = "yourkeyhere", install = TRUE)
 
 which only needs to be done once.
 
-A basic use of the `tidycensus` package is to get data and produce maps of the indicators. This is done easily becuase `tidycensus` fits directly into general `dplyr` and `ggplot2` workflows. Below is an example of accessing 2019 ACS data on poverty rate estimates for New York census tracts from New York county.
+A basic use of the `tidycensus` package is to get data and produce maps of the indicators. This is done easily because `tidycensus` fits directly into general `dplyr` and `ggplot2` workflows. Below is an example of accessing 2019 ACS data on poverty rate estimates for New York census tracts from New York county.
 
 ```{r, include = FALSE}
 options(tigris_use_cache = TRUE)
@@ -105,7 +105,7 @@ nyny %>%
 
 ```
 
-The `tidycensus` package had a great array of functions and the author Kyle Waker has published a book on using it \<FILL IN CITATION\> which covers its many uses.
+The `tidycensus` package had a great array of functions and the author Kyle Walker has published a book on using it \<FILL IN CITATION\> which covers its many uses.
 
 [^macrodem-1]: $\bar{y}= \text{mean of y}$, $\bar{x}= \text{mean of x}$
 
@@ -113,7 +113,9 @@ The `tidycensus` package had a great array of functions and the author Kyle Wake
 
 ### IPUMS NHGIS
 
-The IPUMS NHGIS project [^macrodem-3] is also a great source for demographic data on US places, and allows you to select many demographic tables for census data products going back to the 1790 census [@nhgis]. When you perform an extract from the site, you can get both data tables and ESRI shapefiles for your requested geographies. The IPUMS staff have created several tutorials which go through how to construct a query from their site [^macrodem-4]. Below, I use the `sf` library to read in the geographic data from IPUMS and the tabular data and join them.
+The IPUMS NHGIS project [^macrodem-3] is also a great source for demographic data on US places, and allows you to select many demographic tables for census data products going back to the 1790 census [@nhgis]. When you perform an extract from the site, you can get both data tables and ESRI shapefiles for your requested geographies. The IPUMS staff have created several tutorials which go through how to construct a query from their website [^macrodem-4]. Typical extracts include a series of CSV files and optional shapefiles containing the requested geographies.
+
+Below, I use the `sf` library to read in the geographic data from IPUMS and the tabular data and join them. Both the tabular data and the geographic data contain a key field named `GISJOIN` that allows for easy merging.
 
 ```{r}
 library(sf)
@@ -143,13 +145,15 @@ m_dat %>%
 
 ### International data
 
-Sources of international data exist in numerous sites on the internet. Personally, I frequently will use the DHS Spatial Data repository [^macrodem-5] to access data from DHS countries. They allow you to obtain both spatial administrative boundary data, as well as key indicators of maternal and child health at sub-national levels. The `rdhs` package allows you to perform queries from the spatial data repository and from the DHS microdata as well [@rdhs].
+Sources of international data exist in numerous sites on the internet. Personally, I frequently will use the DHS Spatial Data repository [^macrodem-5] to access data from DHS countries. They allow you to obtain both spatial administrative boundary data, as well as key indicators of maternal and child health at sub-national levels. The `rdhs` package allows you to perform queries from the spatial data repository and from the DHS microdata as well [@rdhs]. 
 
 \newpage
 
 [^macrodem-5]: More on this below
 
 ## Statistical analysis of place-based data
+
+### Exploratory analysis of place-based data
 
 ## The linear model framework
 
