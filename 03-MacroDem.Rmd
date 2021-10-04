@@ -145,7 +145,9 @@ m_dat %>%
 
 ### International data
 
-Sources of international data exist in numerous sites on the internet. Personally, I frequently will use the DHS Spatial Data repository [^macrodem-5] to access data from DHS countries. They allow you to obtain both spatial administrative boundary data, as well as key indicators of maternal and child health at sub-national levels. The `rdhs` package allows you to perform queries from the spatial data repository and from the DHS microdata as well [@rdhs]. 
+Sources of international data exist in numerous sites on the internet. Personally, I frequently will use the DHS Spatial Data repository [^macrodem-5] to access data from DHS countries. They allow you to obtain both spatial administrative boundary data, as well as key indicators of maternal and child health at sub-national levels as either tabular data or as shapefiles. 
+
+The `rdhs` package allows you to perform queries from the spatial data repository and from the DHS microdata as well [@rdhs]. 
 
 \newpage
 
