@@ -36,7 +36,7 @@ d <- dhs_data(countryIds = "UG",
 # d<-d%>%
 #     filter(SurveyId=="UG2016DHS")
 # get our related spatial data frame object
-sp <- download_boundaries(surveyId = d$SurveyId[1], method = "sf", )
+sp <- download_boundaries(surveyId = d$SurveyId[1], method = "sf" )
 
 library(tidyverse)
 sp<-left_join(sp$sdr_subnational_boundaries, d, by=c("REG_ID" = "RegionId"))
