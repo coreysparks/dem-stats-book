@@ -742,13 +742,11 @@ Just for completeness, I create a bar chart showing the percent stunted by the t
 
 ```{r}
 dhs_model_des%>%
-  summarise(x_ = svyby(formula = ~ stunting,
-                              by = ~ gender + rural,
-                              design = .,
-                              FUN = svymean,
+  group_by(gender, rural)%>%
+  summarise(stunting = survey_mean( stunting,design =.,
                               na.rm=T))%>%
   ggplot()+
-  geom_bar(aes(x = x_gender, y  = x_stunting, fill = x_rural),
+  geom_bar(aes(x = gender, y  = stunting, fill = rural),
            stat="identity",
            position="dodge")+
   labs(x = "Child Gender", 

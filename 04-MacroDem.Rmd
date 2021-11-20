@@ -13,6 +13,7 @@ library(tmap)
 library(ggplot2)
 library(tigris)
 library(sf)
+library(kableExtra)
 ```
 
 # Macro demographic data analysis
@@ -343,7 +344,7 @@ Here, we do a basic map of the outcome variable, and see the highest rates of lo
 
 ```{r, results="hide"}
 options(tigris_class="sf")
-
+library(tigris)
 usco<-counties(cb = T, year= 2015)
 
 usco$cofips<-usco$GEOID
@@ -407,11 +408,8 @@ ahrf_m%>%
 
 ```
 
-<<<<<<< Updated upstream
+
 Once our data start to violate the assumptions of the linear model, the model becomes less and less useful. For instance, why make all of the strict assumptions about homoskedastic (I am contractually required by the statistics union to say this at least once) variances in the model residuals in order to use OLS, when you can use it's friend and brother, **Generalized Least Squares** (GLS, of course), which allows you to make useful and pragmatic changes to the OLS model structure to accommodate all of the fun and annoying things about real data, but still use the normal distribution to model our outcomes[^macrodem-8].
-=======
-#Once our data start to violate the assumptions of the linear model, the model becomes less and less useful. For instance, why make all of the strict assumptions about homoskedastic (I am contractually required by the statistics union to say this at least once) variances in the model residuals in order to use OLS, when you can use it's friend and brother, **Generalized Least Squares** (GLS, of course), which allows you to make useful and pragmatic changes to the OLS model structure to accommodate all of the fun and annoying things about real data, but still use the normal distribution to model our outcomes[^macrodem-3].
-#>>>>>>> Stashed changes
 
 Generalized Least Squares adds a lot more flexibility to modeling normally distributed outcomes, basically by allowing us to modify the fundamental equations above to accommodate unequal variances, or the use of covariates on variances. Another way to write the OLS model above would be:
 
@@ -433,13 +431,13 @@ $$\sigma_{\epsilon}  = \Omega$$ which in turn modifies the estimation equation f
 
 $$\beta_{k_{GLS}} = (X' \Omega^{-1} X)^{-1} X' \Omega^{-1} Y$$ Applications of such models are more commonly seen in time series analysis, where the residuals of the model often have an autoregressive form, but when talking about place-based demography, more modifications of the model have been derived that allow for addressing another key assumption of independence among observations. This in fact is the realm of an entire field of econometrics, often called **spatial econometrics** [@anselin_spatial_1988; @chi_spatial_2020; @elhorst_spatial_2014; @lesage_introduction_2009]. In the next section, I show how some fundamental models that account for spatial association among observations can be estimates R packages.
 
-<<<<<<< Updated upstream
+
 
 [^macrodem-8]: Link to AHRF codebook - ["https://data.hrsa.gov/DataDownload/AHRF/AHRF_USER_TECH_2019-2020.zip"](https://data.hrsa.gov/DataDownload/AHRF/AHRF_USER_TECH_2019-2020.zip)
 
 #[^macrodem-9]: More on this below
 
-#### arf
+
 
 \newpage
 
@@ -469,7 +467,6 @@ The second way the binomial is used is when you have multiple trials, and you're
 
 =======
 
-<!-- #[^macrodem-2]: Link to AHRF codebook - ["https://data.hrsa.gov/DataDownload/AHRF/AHRF_USER_TECH_2019-2020.zip"](https://data.hrsa.gov/DataDownload/AHRF/AHRF_USER_TECH_2019-2020.zip) -->
 
 #[^macrodem-3]: More on this below
 
@@ -501,7 +498,7 @@ There are two ways the binomial distribution is typically used, the first is the
 
 The second way the binomial is used is when you have multiple trials, and you're trying to estimate the probability of the event occurring over multiple trials. In this case, your number of trials, $n$ can be large, and your number of successes, $y$ is the random variable under consideration. This is the basic makeup of a demographic rate, the count-based binomial.
 
->>>>>>> Stashed changes
+
 The mean of the binomial distribution is a proportion or a probability, $\pi$, which tells you how likely it is that the event your interested in occurs. Any model using the binomial distributor will be geared towards estimating the probability.
 
 When a variable is coded as binary, meaning either 1 or 0, the Bernoulli distribution is used, as in the logistic regression model. When coded like this, the model tries to use the other measured information to predict the 1 value versus the 0 value. So in the basic sense, we want to construct a model like:
@@ -663,6 +660,11 @@ summary(fit3)
 $$Y \sim NB (\lambda, \lambda+\lambda^2/\theta),$$ $$\text{   } E(Y) = \lambda,$$ $$\text{   } var(Y) = \lambda+\lambda^2/\theta$$ $$\lambda = log(\eta)$$ $$\eta = \beta_0 + \beta_1 x_1+ log(n)$$
 
 Now, R will not fit negative binomial models using survey design, so, we will fit them using sample weights only, then calculate the robust standard errors. We standardize the weights to equal the sample size, as opposed to the population size by dividing each person's weight by the mean weight.
+
+
+## side by side comparison of different specificaitons
+
+## have brief discussion of spatial models
 
 ## Extensions of the GLM framework when working with places
 
