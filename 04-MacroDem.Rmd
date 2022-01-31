@@ -196,10 +196,6 @@ Sources of international data exist in numerous sites on the internet. Personall
 [^macrodem-5]: More on this below
 
 
-## Statistical analysis of place-based data
-Whenever we have data on places 
-
-### Exploratory analysis of place-based data
 
 ## The linear model framework
 
@@ -220,8 +216,6 @@ $$
 \beta_k = \frac{\sum (y_i - \bar{y})(x_i - \bar{x})}{\sum x_i - \bar{x}^2} = \frac{Cov(x,y)}{Var(x)}
 $$ 
 
-<!-- [^macrodem-6] -->
-
 
 Which is often shown in the more compact matrix form:
 
@@ -240,26 +234,52 @@ y_i \sim Normal(X' \beta, \sigma_\epsilon)
 $$
 
 
-Which I prefer because it sets up the regression equation as the **linear predictor**, or linear combination (in the linear algebra sense) of the predictors and the model parameters for the mean of the outcome. This term, linear predictor, is a useful one, because as you get more and more accustomed to regression, you will see this same structure in every regression model you ever do. This is the fundamental workhorse of regression, where we get an estimated value for every combination of the observed predictors. Moreover, below when I present the **Generalized Linear Model**, it will be apparent that the linear predictor can be placed within a number of so-called **link functions** to scale it with the mean of the outcome.
+Which I prefer because it sets up the regression equation as the **linear predictor**, or linear combination (in the linear algebra sense) of the predictors and the model parameters for the mean of the outcome. This term, linear predictor, is a useful one, because as you get more and more accustomed to regression, you will see this same structure in every regression model you ever do. This is the fundamental workhorse of regression, where we get an estimated value for every combination of the observed predictors. Moreover, below when I present the **Generalized Linear Model**, it will be apparent that the linear predictor can be placed within a number of so-called **link functions** to ensure that the mean of the outcome agrees with the assumed distribution for the outcome.
 
 
 \newpage
+**start here** 
+The linear model has several assumptions that we need to be concerned with, the big four are
 
-The linear model has several assumptions that we need to be concerned with, notably:
+1)  *Normality of residuals*,
+2)  *Constant variance in residuals, or* _*homoskedasticity*_, and
+3)  *Linearity of the regression function*, and
+4)  *Independence of observations*
 
-1)  Normality of residuals,
-2)  Constant variance in residuals, or **homoskedasticity**, and
-3)  Linearity of the regression function, and
-4)  Independence of observations
+The normality assumption is linked to distributional assumption underlying the linear regression model. This states that the model residuals, calculated as $e_i = (\beta_0 +\sum_k \beta_k x_{ki}) - y_i$, or more compactly as $e_i =\hat{y_i} - y_i$ follow a normal distribution. If the errors around the mean function are not normally distributed, this can be an indicator that the linear model is not appropriate for the outcome under consideration. A commonly used graphical check of this is the *quantile-quantile* or Q-Q plot, which plots the residuals from a model against the hypothetical quantiles from a normal distribution. 
+
+The *homoskedasticity* assumption is also tied to the normal distributional assumption of the model, as see above, if we write the model in its distributional form, $y_i \sim Normal(X' \beta, \sigma_\epsilon)$, the term $ \sigma_\epsilon$ is a single parameter, meaning that we only have one of these in a linear regression model. This parameter determines the spread of the variation around the mean function. Larger values equal more spread around the mean, and smaller values equal less spread. A commonly used graphical procedure to detect lack of homoskedasticity, or *heteroskedasticity*, is an envelope plot, or a plot of the residuals against the fitted values from the model. Formal tests also exist including the *Breusch-Pagan test* and the modified version of this test dveloped by Cook and Weisberg **start here** 
+
+The linearity assumption of the model assumes that the true underlying relationship in the data can be modeled using a linear combination of the predictors and the parameters. I think a lot of people think this means
+
+
+## cook example
+```{r}
+x <- rnorm(100)
+y <- rnorm(100, mean = x, sd = .6*(x))
+
+plot(x, y )
+mod<- lm(y ~ x)
+summary(mod)
+plot(mod)
+
+library(sandwich)
+vc <- vcovHC(mod, type = "HC1")
+
+sqrt(diag(vc))
+
+lmtest::coeftest(mod, vcov. = vc)
+```
+
 
 If these assumptions are violated, then several things can happen. At best, our interpretation of the model coefficients could be wrong, meaning that, for instance a situation such as this arises:
 
 ```{r, include=FALSE}
 n <- 100 # number of data points
-t <-  seq(from=0, to = 2*pi, length.out=100)
+t <-  seq(from=0, to = pi, length.out=100)
 a <- 3
 b <- 2
-c.norm <- rnorm(n, 0, .1)
+c.norm <- rnorm(n, 0, 2)
 amp <- 1
 
 # generate data and calculate "y"
