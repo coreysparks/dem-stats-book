@@ -54,9 +54,9 @@ Typically when thinking about data on places, we are really referring to some so
 
 ## US contexts
 
-The US Census bureau produces a wide variety of geographic data products that are the most widely used forms of geographic data for demographic studies in the United States. The TIGER Line Files data consist of geographic data with census bureau GEOIDs attached so they can be linked to any number of federal statistical products. They do not contain demographic data themselves, but are easily linked. The `tigris` package in R provides a direct way to download any TIGER line file data type directly in a R session as either a *simple feature* class or as a \*Spatial\_\_DataFrame\* [@tigris].
+The US Census bureau produces a wide variety of geographic data products that are the most widely used forms of geographic data for demographic studies in the United States. The TIGER Line Files data consist of geographic data with census bureau GEOIDs attached so they can be linked to any number of federal statistical products. They do not contain demographic data themselves, but are easily linked. The `tigris` package in R provides a direct way to download any TIGER line file data type directly in a R session as either a *simple feature* class or as a *Spatial_DataFrame* [@tigris].
 
-Using the tigris package is very easy and its functions fit directly into the tidyverse as well. Below, I download two layers of information, first the state polygon for New York state, and the census tracts within the state and overlay the two datasets on each other. The package has a function for each type of geography that you would want, for example `states()` downloads state level geographies and `tracts()` does the same for census tracts. The functions have some common arguments, including `cb = TRUE/FALSE` so you can choose cartographic boundary files or not. Cartographic boundary files are lower resolution, smaller files that are often used for thematic mapping. Also `year =` will allow you to get different annual vintages of the data. The `tracts()` function also allows you to obtain geographies for specific counties within a state.
+Using the `tigris` package is very easy and its functions fit directly into the tidyverse as well. Below, I download two layers of information, first the state polygon for New York state, and the census tracts within the state and overlay the two datasets on each other. The package has a function for each type of geography that you would want, for example `states()` downloads state level geographies and `tracts()` does the same for census tracts. The functions have some common arguments, including `cb = TRUE/FALSE` so you can choose cartographic boundary files or not. Cartographic boundary files are lower resolution, smaller files that are often used for thematic mapping. Also `year =` will allow you to get different annual vintages of the data. The `tracts()` function also allows you to obtain geographies for specific counties within a state.
 
 ```{r, results='hide'}
 library(tigris)
@@ -196,6 +196,129 @@ Sources of international data exist in numerous sites on the internet. Personall
 [^macrodem-5]: More on this below
 
 
+## Statistical models for place-based data
+Data on places is often analysed in the same ways as data on individuals, with some notable complications. The remainder of this chapter introduces the regression framework for analyzing data at the macro level, first by a review of the linear model and its associated pitfalls, and then the generalized linear model with a specific focus on the analysis of demographic count outcomes that are commonly observed for places. 
+
+In the example below, I use data from the U.S. Health Resources and Services Administration Area Health Resource File (AHRF), which is a produced annually and includes a wealth of information on current and historical data on health infrastructure in U.S. counties, as well as data from the Census Bureau, and the National Center for Health Statistics. The AHRF is publicly available, and we can read the data directly from the HHS website as a SAS format `.sas7bdat` data set within a ZIP archive. R can read this file to your local computer then extract it using the commands below. I would strongly encourage you consulting the AHRF codebook available from the HRSA website[^macrodem-8].
+
+[^macrodem-8]: Link to AHRF codebook - ["https://data.hrsa.gov/DataDownload/AHRF/AHRF_USER_TECH_2019-2020.zip"](https://data.hrsa.gov/DataDownload/AHRF/AHRF_USER_TECH_2019-2020.zip)
+
+
+```{r, messages=FALSE}
+#create temporary file on  your computer
+temp <- tempfile()
+
+#Download the SAS dataset as a ZIP compressed archive
+download.file("https://data.hrsa.gov/DataDownload/AHRF/AHRF_2019-2020_SAS.zip", temp)
+
+#Read SAS data into R
+ahrf<-haven::read_sas(unz(temp,
+                          filename = "ahrf2020.sas7bdat"))
+
+rm(temp)
+
+```
+
+Next, I remove many of the variables in the AHRF and recode several others. In the analysis examples that follow in this chapter, I will focus on the outcome of low birth weight births, measured at the county level. 
+
+```{r}
+library(tidyverse)
+
+ahrf2<-ahrf%>%
+  mutate(cofips = f00004, 
+         coname = f00010,
+         state = f00011,
+         popn =  f1198416,
+         births1618 =  f1254616, 
+         lowbw1618 = f1255316,
+         fampov14 =  f1443214,
+         lbrate1618 = f1255316/f1254616,
+         rucc = as.factor(f0002013),
+         hpsa16 = case_when(.$f0978716 == 0 ~ 'no shortage',
+                            .$f0978716 == 1 ~ 'whole county shortage',
+                            .$f0978716 == 2 ~ 'partial county shortage'),
+         obgyn15_pc= 1000*( f1168415 / f1198416 ) )%>%
+  select(births1618,
+                lowbw1618,
+                lbrate1618,
+                state,
+                cofips,
+                coname,
+                popn,
+                fampov14,
+                rucc,
+                hpsa16,
+                obgyn15_pc)%>%
+  filter(complete.cases(.))%>%
+  as.data.frame()
+
+
+```
+
+In order to make a nice looking map of the outcome, I use the `tigris` package to fetch geographic data for US states and counties, then merge the county data to the AHRF data using `left_join()`
+
+```{r, results="hide"}
+options(tigris_class="sf")
+library(tigris)
+library(sf)
+usco<-counties(cb = T, year= 2016)
+
+usco$cofips<-usco$GEOID
+
+sts<-states(cb = T, year = 2016)
+
+sts<-st_boundary(sts)%>%
+  filter(!STATEFP %in% c("02", "15", "60", "66", "69", "72", "78"))%>%
+  st_transform(crs = 2163)
+
+ahrf_m<-left_join(usco, ahrf2,
+                    by = "cofips")%>%
+  filter(is.na(lbrate1618)==F, 
+         !STATEFP %in% c("02", "15", "60", "66", "69", "72", "78"))%>%
+  st_transform(crs = 2163)
+
+glimpse(ahrf_m)
+```
+There are a total of 2,418 observations in the data, because the HRSA restricts some counties with small numbers of births from the data. 
+
+Here is a `ggplot()` histogram of the low birth weight rate for US counties.
+
+```{r}
+ahrf_m%>%
+  ggplot()+
+  geom_histogram(aes(x = lbrate1618))+
+  labs(title = "Distribution of Low Birth Weight Rates in US Counties",
+       subtitle = "2016 - 2018")+
+       xlab("Rate")+
+  ylab ("Frequency")
+```
+Here, we do a basic map of the outcome variable for the continental US, and see the highest rates of low birth weight births in the US occur in the southeastern areas of the country. Notice, I do not color the boundaries of the counties in order to maximize the reader's ability to see the variation, instead I show lines between states by overlaying the `sts` layer from above. I also add cartographic options of a scale bar and a north arrow, which I personally believe should be on any map shown to the public. 
+
+```{r, fig.height=6, fig.width=10}
+library(tmap)
+
+tm_shape(ahrf_m)+
+  tm_polygons(col = "lbrate1618",
+              border.col = NULL,
+              title="% Low Birth Weight",
+              palette="Blues",
+              style="quantile",
+              n=5,
+              showNA=T, colorNA = "grey50")+
+   tm_format(format= "World",
+             main.title="US Low Birth Weight Rate by County",
+            legend.position =  c("left", "bottom"),
+            main.title.position =c("center"))+
+  tm_scale_bar(position = c(.1,0))+
+  tm_compass()+
+tm_shape(sts)+
+  tm_lines( col = "black")
+ 
+
+```
+
+When doing analysis of place-based data, maps are almost a fundamental aspect of the analysis and often convey much more information about the distribution of the outcome than either distribution plots or summary statistics. 
+
 
 ## The linear model framework
 
@@ -235,9 +358,6 @@ $$
 
 
 Which I prefer because it sets up the regression equation as the **linear predictor**, or linear combination (in the linear algebra sense) of the predictors and the model parameters for the mean of the outcome. This term, linear predictor, is a useful one, because as you get more and more accustomed to regression, you will see this same structure in every regression model you ever do. This is the fundamental workhorse of regression, where we get an estimated value for every combination of the observed predictors. Moreover, below when I present the **Generalized Linear Model**, it will be apparent that the linear predictor can be placed within a number of so-called **link functions** to ensure that the mean of the outcome agrees with the assumed distribution for the outcome.
-
-
-\newpage
 
 ## Assumptions of the OLS model
 
@@ -384,113 +504,7 @@ The linear model is included in the base R `stats` package, and is accessed by t
 The linear model is included in the base R `stats` package, and is accessed by the `lm()` function. There are many extensions to the linear model available in other packages the incorporate spatial, temporal and more complex modeling situations. 
 
 
-In the example below, I use data from the U.S. Health Resources and Services Administration Area Health Resource File (AHRF), which is a produced annually and includes a wealth of information on current and historical data on health infrastructure in U.S. counties, as well as data from the Census Bureau, and the National Center for Health Statistics. The AHRF is publicly available, and we can read the data directly from the HHS website as a SAS format `.sas7bdat` data set within a ZIP archive. R can read this file to your local computer then extract it using the commands below. I would strongly encourage you consulting the AHRF codebook available from the HRSA website[^macrodem-8].
 
-[^macrodem-8]: Link to AHRF codebook - ["https://data.hrsa.gov/DataDownload/AHRF/AHRF_USER_TECH_2019-2020.zip"](https://data.hrsa.gov/DataDownload/AHRF/AHRF_USER_TECH_2019-2020.zip)
-
-
-```{r, messages=FALSE}
-#create temporary file on  your computer
-temp <- tempfile()
-
-#Download the SAS dataset as a ZIP compressed archive
-download.file("https://data.hrsa.gov/DataDownload/AHRF/AHRF_2019-2020_SAS.zip", temp)
-
-#Read SAS data into R
-ahrf<-haven::read_sas(unz(temp,
-                          filename = "ahrf2020.sas7bdat"))
-
-rm(temp)
-
-```
-
-```{r}
-library(tidyverse)
-
-ahrf2<-ahrf%>%
-  mutate(cofips = f00004, 
-         coname = f00010,
-         state = f00011,
-         popn =  f1198416,
-         births1618 =  f1254616, 
-         lowbw1618 = f1255316,
-         fampov14 =  f1443214,
-         lbrate1618 = f1255316/f1254616,
-         rucc = as.factor(f0002013),
-         hpsa16 = case_when(.$f0978716 == 0 ~ 'no shortage',
-                            .$f0978716 == 1 ~ 'whole county shortage',
-                            .$f0978716 == 2 ~ 'partial county shortage'),
-         obgyn15_pc= 1000*( f1168415 / f1198416 ) )%>%
-  dplyr::select(births1618,
-                lowbw1618,
-                lbrate1618,
-                state,
-                cofips,
-                coname,
-                popn,
-                fampov14,
-                rucc,
-                hpsa16,
-                obgyn15_pc)%>%
-  filter(complete.cases(.))%>%
-  as.data.frame()
-
-summary(ahrf2)
-```
-
-Here, we do a basic map of the outcome variable, and see the highest rates of low birth weight births in the US.
-
-```{r, results="hide"}
-options(tigris_class="sf")
-library(tigris)
-library(sf)
-usco<-counties(cb = T, year= 2015)
-
-usco$cofips<-usco$GEOID
-
-sts<-states(cb = T, year = 2015)
-
-sts<-st_boundary(sts)%>%
-  filter(!STATEFP %in% c("02", "15", "60", "66", "69", "72", "78"))%>%
-  st_transform(crs = 2163)
-
-ahrf_m<-left_join(usco, ahrf2,
-                    by = "cofips")%>%
-  filter(is.na(lbrate1618)==F, 
-         !STATEFP %in% c("02", "15", "60", "66", "69", "72", "78"))%>%
-  st_transform(crs = 2163)
-
-```
-
-```{r}
-ahrf_m%>%
-  ggplot()+
-  geom_histogram(aes(lbrate1618))+
-  labs(title = "Distribution of Low Birth Weight Rates in US Counties",
-       subtitle = "2016 - 2018")+
-       xlab("Rate")+ ylab ("Frequency")
-```
-
-```{r, fig.height=10, fig.width=8}
-library(tmap)
-
-tm_shape(ahrf_m)+
-  tm_polygons(col = "lbrate1618",
-              border.col = NULL,
-              title="% Low Birth Weight",
-              palette="Blues",
-              style="quantile",
-              n=5 )+
-   tm_format("World",
-            title="US Low Birth Weight Rate by County",
-            legend.outside=T)+
-  tm_scale_bar(position = c("left", "bottom"))+
-  tm_compass()+
-tm_shape(sts)+
-  tm_lines( col = "black")
- 
-
-```
 
 
  In the next section, I show how some fundamental models that account for spatial association among observations can be estimates R packages.
