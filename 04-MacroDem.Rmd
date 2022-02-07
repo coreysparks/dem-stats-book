@@ -452,13 +452,17 @@ coeftest(lm1)
 coeftest(lm1, vcov  = vcovHC(lm1, type = "HC3"))
 ```
 
-#### Clustered standard errors
+The take away in this example is that non-constant variance can affect the standard errors of the model parameter estimates, and in turn affect the test statistics that we base all of our hypothesis tests on. In the particulars of this model there is not a lot of change, the `rucc02` parameter is barley significant once using the corrected standard errors, otherwise we see a very similar pattern in terms of what is significant in the model. 
 
+
+#### Clustered standard errors
+Another commonly used correction in regression modeling is the *clustered standard error*. These are commonplace and almost the default in the Stata programming environment, and are widely used in the field of economics. Clustering of standard errors attempts to correct for clustering in the residuals from the regression model. Clustering can happen for a wide variety of reasons, and as we saw in the previous chapter on survey data analysis, is often an artifact of how the data are collected. With place-based data, we may have clustering because the places are close to each other, or because the share some other characteristic that we have not measured in our regression model. In the case of our regression model, and in our descriptive analysis of our outcome, the map shown prior may indicate some form of *spatial correlation* in the outcome. While there are models to deal with such non-independence in place-based data, they are not a subject I will touch on here. Instead, we may use the state which each county is in as a proxy for the spatial clustering in the outcome, as one example of potential of a clustering term. 
 
 ```{r}
-coeftest(lm1, vcov  = vcovCL(lm1, cluster = ahrf_m$state))
+coeftest(lm1,
+         vcov  = vcovCL(lm1, cluster = ahrf_m$state))
 ```
-
+In this case, the `rucc02` and `rucc07` terms become marginally significant and the healthcare shortage areas lose their marginal significance. 
 
 #### Weighted Least Squares
 
@@ -469,11 +473,21 @@ $$y \sim Normal(\beta_0 +\sum_k \beta_k x_{ki}, \sigma_{\epsilon_i} )$$
 Where the term $\sigma_{\epsilon_i}$ represents the different variances for each observation. The weights in the model are often variables that represent an underlying factor that affects the variance in the estimates. In demography this is often the population size of a place, as places with smaller population sizes often have more volatility to their rate estimates. This approach has been used in the spatial demographic modeling of county mortality rates in the United States by several authors [@mclaughlin_differential_2007; @sparks_application_2010]. 
 
 ```{r}
-lm2 <- 
+lm2 <- lm(lbrate1618 ~  fampov14 + rucc + hpsa16,
+          data = ahrf_m,
+          weights = popn)
+summary(lm2)
 ```
 
+We see that by including the population size weights in the model, most of the parameters are no longer significant in the analysis, but the weights have not dealt with the non-constant variance issue totally:
 
+```{r}
+ncvTest(lm2)
+```
 
+But the overall size of the non-constant variance test is much lower than it was for the original model. 
+
+### Linearity assumption
 
 The linearity assumption of the model assumes that the true underlying relationship in the data can be modeled using a linear combination of the predictors and the parameters. I think a lot of people think this means that you cannot include square or polynomial terms in a regression model, but that is not the case. The assumption is concerned with the linearity of the parameters, not the predictor variables themselves. For example the standard linear model with one predictor, x is written:
 
@@ -523,7 +537,6 @@ In a more social science sensibility, the interpretation of the beta coefficient
 The normality assumption above primarily affect predictions from the model, which, since the normal distribution is bound on $-\infty$ to $\infty$, can easily lead to a prediction outside of the realm of possibility, say for a dichotomous outcome, or a count, neither of which can have predicted values beyond 0 and 1, or less than 0.
 
 
-
 ### Generalized Least Squares
 Once our data start to violate the assumptions of the linear model, the model becomes less and less useful. For instance, why make all of the strict assumptions about homoskedastic (I am contractually required by the statistics union to say this at least once) variances in the model residuals in order to use OLS, when you can use it's friend and brother, **Generalized Least Squares** (GLS, of course), which allows you to make useful and pragmatic changes to the OLS model structure to accommodate all of the fun and annoying things about real data, but still use the normal distribution to model our outcomes[^macrodem-9].
 
@@ -547,27 +560,18 @@ $$\sigma_{\epsilon}  = \Omega$$ which in turn modifies the estimation equation f
 
 $$\beta_{k_{GLS}} = (X' \Omega^{-1} X)^{-1} X' \Omega^{-1} Y$$ Applications of such models are more commonly seen in time series analysis, where the residuals of the model often have an autoregressive form, but when talking about place-based demography, more modifications of the model have been derived that allow for addressing another key assumption of independence among observations. This in fact is the realm of an entire field of econometrics, often called **spatial econometrics** [@anselin_spatial_1988; @chi_spatial_2020; @elhorst_spatial_2014; @lesage_introduction_2009].
 
-
-
-## cook example
 ```{r}
-x <- rnorm(100)
-y <- rnorm(100, mean = x, sd = .6*(x))
-
-plot(x, y )
-mod<- lm(y ~ x)
-summary(mod)
-plot(mod)
-
-library(sandwich)
-vc <- vcovHC(mod, type = "HC1")
-
-sqrt(diag(vc))
-
-lmtest::coeftest(mod, vcov. = vc)
+library(nlme)
+lm3<- gls(lbrate1618 ~  fampov14 + rucc + hpsa16,
+          data = ahrf_m, 
+          weights = varIdent(value =~ state)
+          )
+summary(lm3)
+AIC(lm3)
+AIC(lm1)
 ```
 
-\newpage
+
 
 
 
