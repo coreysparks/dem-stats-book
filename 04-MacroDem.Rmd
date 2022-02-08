@@ -530,7 +530,7 @@ abline(a= mean(y2), b= 0, lty= 2)
 
 Where the variable y is actually generated from a cosine curve with noise. Since the linear regression of y on x forces the y to change linearly with x, the model is absolutely unable to recover the underlying pattern in the data. 
 
-If these assumptions are violated, then several things can happen. At best, our interpretation of the model coefficients could be wrong, meaning that, as seen above, our model would suggest one relationship from the data, but in fact becuase the model was mis-specified, the relationship we discover is incorrect. Our poor linear model would predict a decline in the outcome, while the outcome itself is perfectly stationary, as shown by the dashed line.
+If these assumptions are violated, then several things can happen. At best, our interpretation of the model coefficients could be wrong, meaning that, as seen above, our model would suggest one relationship from the data, but in fact because the model was misspecified, the relationship we discover is incorrect. Our poor linear model would predict a decline in the outcome, while the outcome itself is perfectly stationary, as shown by the dashed line.
 
 In a more social science sensibility, the interpretation of the beta coefficients for the effect of $x$ on $y$ in this case will provide us a false conclusion of the relationship in the data. This is a really dangerous outcome for us in social science, because that's why we're doing statistics in the first place, to answer questions. 
 
@@ -540,11 +540,12 @@ The normality assumption above primarily affect predictions from the model, whic
 ### Generalized Least Squares
 Once our data start to violate the assumptions of the linear model, the model becomes less and less useful. For instance, why make all of the strict assumptions about homoskedastic (I am contractually required by the statistics union to say this at least once) variances in the model residuals in order to use OLS, when you can use it's friend and brother, **Generalized Least Squares** (GLS, of course), which allows you to make useful and pragmatic changes to the OLS model structure to accommodate all of the fun and annoying things about real data, but still use the normal distribution to model our outcomes[^macrodem-9].
 
-Generalized Least Squares adds a lot more flexibility to modeling normally distributed outcomes, basically by allowing us to modify the fundamental equations above to accommodate unequal variances, or the use of covariates on variances. Another way to write the OLS model above would be:
+Generalized Least Squares adds a lot more flexibility to modeling normally distributed outcomes, basically by allowing us to modify the fundamental equations above to accommodate unequal variances, or the use of covariates or stratification variables on variances. Another way to write the OLS model above would be:
 
 $$\epsilon_i \sim Normal(X'\beta, I\sigma_\epsilon)$$ Where $I$ is the **identity matrix**, which implies that for each observation, the variances in the residuals are all the same:
 
-$$\sigma_{\epsilon}  = I * \sigma_{\epsilon} = \begin{bmatrix}
+$$
+\sigma_{\epsilon}  = I * \sigma_{\epsilon} = \begin{bmatrix}
 1& 0& 0 \\
 0& 1& 0 \\
 0& 0& 1\\
@@ -552,21 +553,40 @@ $$\sigma_{\epsilon}  = I * \sigma_{\epsilon} = \begin{bmatrix}
 \sigma_{\epsilon}& 0& 0 \\
 0& \sigma_{\epsilon}& 0 \\
 0& 0 & \sigma_{\epsilon} \\
-\end{bmatrix}$$
+\end{bmatrix}
+$$
+
 
 Which shows the common variance for the three residuals. GLS allows us to relax this constant variance assumption, by at the minimum allowing the variances to be a function of a weighting variable (which produces **Weighted Least Squares**), or some covariate. In the most basic presentation of this principle, this makes the residuals have some other, non-constant form of:
 
 $$\sigma_{\epsilon}  = \Omega$$ which in turn modifies the estimation equation for the $\beta$'s to:
 
-$$\beta_{k_{GLS}} = (X' \Omega^{-1} X)^{-1} X' \Omega^{-1} Y$$ Applications of such models are more commonly seen in time series analysis, where the residuals of the model often have an autoregressive form, but when talking about place-based demography, more modifications of the model have been derived that allow for addressing another key assumption of independence among observations. This in fact is the realm of an entire field of econometrics, often called **spatial econometrics** [@anselin_spatial_1988; @chi_spatial_2020; @elhorst_spatial_2014; @lesage_introduction_2009].
+$$\beta_{k_{GLS}} = (X' \Omega^{-1} X)^{-1} X' \Omega^{-1} Y$$ Applications of such models are more commonly seen in time series modeling and longitudinal analysis, where the residuals of the model often have an autoregressive form to allow individuals to be correlated with themselves over time, but when talking about place-based demography, more modifications of the model have been derived that allow for addressing another key assumption of independence among observations and nonconstant variances. This in fact is the realm of an entire field of econometrics, often called **spatial econometrics** [@anselin_spatial_1988; @chi_spatial_2020; @elhorst_spatial_2014; @lesage_introduction_2009].
+
+The `gls()` function in the `nlme` library is very flexible at modeling heteroskedasticity using several types of variance functions. The general principle of the gls model in terms of modeling heteroskedasticity is that the OLS model residual variance $\sigma_{\epsilon}$ is now not a constant, but a function of covariates or different variances based on a stratifiation variable. This generates a model for the residual variances of the form: 
+
+$$Var(\epsilon_i |\beta) = \sigma^2 g$$
+
+Where the $g$ function can be the effect of a covariate, which would allow the variance to increase or decrease as function of that variable, or a set of strata, where the variance can be different in two or more groups. Below, I first show the model above fit using `gls()` instead of `lm()`, then extend the model to include heteroskedasticity based on the population size of the county, and state-specific variance terms [@pinheiro_mixed-effects_2000].
 
 ```{r}
 library(nlme)
+lm1<- gls(lbrate1618 ~  fampov14 + rucc + hpsa16,
+          data = ahrf_m)
+
+lm2<- gls(lbrate1618 ~  fampov14 + rucc + hpsa16,
+          data = ahrf_m, 
+          weights = varFixed(~popn) )
+
 lm3<- gls(lbrate1618 ~  fampov14 + rucc + hpsa16,
           data = ahrf_m, 
-          weights = varIdent(value =~ state)
-          )
+          weights = varIdent(form = ~1|factor(state) ) )
+```
+
+
+```{r}
 summary(lm3)
+anova(lm1,lm2, lm3)
 AIC(lm3)
 AIC(lm1)
 ```
