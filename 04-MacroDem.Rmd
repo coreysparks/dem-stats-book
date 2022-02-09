@@ -165,7 +165,7 @@ The IPUMS NHGIS project [^macrodem-3] is also a great source for demographic dat
 
 ```{r}
 library(sf)
-ipums_co <- read_sf("~/OneDrive - University of Texas at San Antonio/projects/book_data/US_county10_2000.shp")
+ipums_co <- read_sf("../data/US_county10_2000.shp")
 
 
 im_dat <- readr::read_csv("~/OneDrive - University of Texas at San Antonio/projects/book_data/nhgis0025_ds231_2005_county.csv")
@@ -571,22 +571,37 @@ Where the $g$ function can be the effect of a covariate, which would allow the v
 
 ```{r}
 library(nlme)
-lm1<- gls(lbrate1618 ~  fampov14 + rucc + hpsa16,
+lm1g<- gls(lbrate1618 ~  fampov14 + rucc + hpsa16,
           data = ahrf_m)
 
-lm2<- gls(lbrate1618 ~  fampov14 + rucc + hpsa16,
+summary(lm1g)
+
+```
+
+These are the same results, in terms of the regression coefficients as returned by `lm()`. If we include a `varFixed()` term, we can regress the residual variance term on a covariate, in this case I select the population size. 
+
+```{r}
+lm2g<- gls(lbrate1618 ~  fampov14 + rucc + hpsa16,
           data = ahrf_m, 
           weights = varFixed(~popn) )
+summary(lm2g)
 
+```
+
+This model shows some very different effects after controlling for non-constant variance. For instance, the `whole county shortage` effect is now much more significant in the model, compared to the `lm1` model. 
+
+The final model includes a separate variance for each state using the `varIdent()` term.
+
+```{r}
 lm3<- gls(lbrate1618 ~  fampov14 + rucc + hpsa16,
           data = ahrf_m, 
           weights = varIdent(form = ~1|factor(state) ) )
+summary(lm3)
 ```
-
+Which also provides similar results to `lm1`. So, which model is better for this particular outcome? One way to examine relative model fit is to compare the Akaike Informaiton Criteria for the three models. Since the three models `lm1g`, `lm2` and `lm3` are all fit by `gls()`, we can compare them.  
 
 ```{r}
-summary(lm3)
-anova(lm1,lm2, lm3)
+
 AIC(lm3)
 AIC(lm1)
 ```
