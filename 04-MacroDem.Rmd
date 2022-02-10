@@ -165,10 +165,10 @@ The IPUMS NHGIS project [^macrodem-3] is also a great source for demographic dat
 
 ```{r}
 library(sf)
-ipums_co <- read_sf("../data/US_county10_2000.shp")
+ipums_co <- read_sf("data/US_county10_2000.shp")
 
 
-im_dat <- readr::read_csv("~/OneDrive - University of Texas at San Antonio/projects/book_data/nhgis0025_ds231_2005_county.csv")
+im_dat <- readr::read_csv("data/nhgis0025_ds231_2005_county.csv")
 
 m_dat <- left_join(x = ipums_co,
                    y = im_dat,
@@ -598,15 +598,83 @@ lm3<- gls(lbrate1618 ~  fampov14 + rucc + hpsa16,
           weights = varIdent(form = ~1|factor(state) ) )
 summary(lm3)
 ```
-Which also provides similar results to `lm1`. So, which model is better for this particular outcome? One way to examine relative model fit is to compare the Akaike Informaiton Criteria for the three models. Since the three models `lm1g`, `lm2` and `lm3` are all fit by `gls()`, we can compare them.  
+Which also provides similar results to `lm1`. So, which model is better for this particular outcome? One way to examine relative model fit is to compare the Akaike Information Criteria (AIC) for the three models. The AIC consists of two components, one showing overall model deviance, or residual variance and a penalty term for the number of parameters in a model. A general form of it is: 
+
+$$
+AIC = -2LL(\theta) + 2k
+$$
+Where the term $-2LL(\theta)$ is the model -2 Log likelihood, or *deviance*, and $2k$ is a penalty term with $k$ being the number of parameters. 
+
+Since the three models `lm1g`, `lm2` and `lm3` are all fit by `gls()`, and fit to the same dataset, we can compare them.  
 
 ```{r}
+AIC( lm1g,  lm2g, lm3)
+```
 
-AIC(lm3)
-AIC(lm1)
+The `AIC()` function calculates AIC for each model, and we see that `lm3` has the lowest of the three, suggesting that the non-constant variance across states is a better representation than the effects of population size on the residual variance, in this case. 
+
+#### Further model comparisons
+
+R has a general method of comparing models using $F$ tests or Likelihood Ratio Tests. These are often used when comparing nested models, where one model is a simplified version of another. We have such models above in our `gls()` models. The `lm1g` model is a simplified version of the `lm3` model because it doesn't contain the extra parameters modeling the unequal variances. The `anova()` method can compare the models to see if the extra parameters are explaining the model deviance (or variation) better. 
+
+```{r}
+anova(lm1g, lm3)
+```
+
+Here the likelihood ratio test `L.Ratio` shows a significant decrease in the `logLik` in model `lm3`, suggesting that it better explains the data than `lm1g` does. The likelihood ratio is calculated as $2*LL_2 - LL_1$, or in the case above `2*(-9555.287--9777.261)`. The `anova` method is very useful for comparing alternative models and can be used on most of the models shown in this book. 
+
+### Predictions and marginal means
+
+Working with fitted values from a regression is one of the least taught aspects of modeling. Since the models are fundamentally doing very fancy averaging, the estimated, or fitted values from the model can often be very useful to us as we try to explain the results of our models. Remember, the fitted values of the model are just:
+
+$$
+\hat{y}_i = \sum \hat{\beta_k} x_{ki}
+$$
+
+or the linear combination of the estimated model parameters and the $k$ observed predictors, $x_{ki}$. Most models in R have a `fitted()` method to extract the fitted values of the outcome variable for each observation. 
+
+For example, here are the first six fitted values from the original `lm1` OLS model, the `gls()` heteroskedastic model `lm3` model, and the first six values of the outcome:
+
+```{r}
+data.frame(name = head(ahrf_m$NAME),
+           lm1 = head(fitted(lm1)),
+lm3 = head(fitted(lm3)), 
+observed = head(ahrf_m$lbrate1618))
+
 ```
 
 
+
+```{r}
+library(emmeans)
+
+rg<-ref_grid(lm3, at=list(fampov14 = c(5, 11, 20)))
+
+means <- emmeans(rg, specs = c("fampov14", "rucc"))
+
+means
+```
+
+
+```{r}
+ahrf_m$fitted_lm3 <- predict(lm3)
+
+ahrf_m$resid <- resid(lm3)
+
+actual <-tm_shape(ahrf_m)+
+  tm_polygons("lbrate1618",palette = "Blues",n=6,style="fisher", border.col = NULL,colorNA = "grey50")+tm_shape(sts)+
+  tm_lines( col = "black")
+
+fit<-tm_shape(ahrf_m)+
+  tm_polygons("fitted_lm3",palette = "Blues",n=6,style="fisher", border.col = NULL,colorNA = "grey50")+tm_shape(sts)+
+  tm_lines( col = "black")
+resids<-tm_shape(ahrf_m)+
+  tm_polygons("resid", palette = "RdBu",n=6,style="fisher", midpoint = NA, border.col = NULL,colorNA = "grey50")+tm_shape(sts)+
+  tm_lines( col = "black")
+
+
+tmap_arrange(actual, fit, resids, nrow=2)
+```
 
 
 
