@@ -58,7 +58,7 @@ The US Census bureau produces a wide variety of geographic data products that ar
 
 Using the `tigris` package is very easy and its functions fit directly into the tidyverse as well. Below, I download two layers of information, first the state polygon for New York state, and the census tracts within the state and overlay the two datasets on each other. The package has a function for each type of geography that you would want, for example `states()` downloads state level geographies and `tracts()` does the same for census tracts. The functions have some common arguments, including `cb = TRUE/FALSE` so you can choose cartographic boundary files or not. Cartographic boundary files are lower resolution, smaller files that are often used for thematic mapping. Also `year =` will allow you to get different annual vintages of the data. The `tracts()` function also allows you to obtain geographies for specific counties within a state.
 
-```{r, results='hide'}
+```{r, results='hide',  error=TRUE}
 library(tigris)
 
 nyst <- states(cb = TRUE,
@@ -376,7 +376,11 @@ This stores the model data and parameter estimates in the object called `lm1`. Y
 summary(lm1)
 ```
 
-We see that there is a significant positive association between family poverty and the low birth weight rate, we also see that there is a tendency for more rural areas to have lower low birth weight rates than the largest cities (`rucc01`). There is a marginally significant association between a county being a healthcare shortage area and the low birth weight rate. Overall the model is explaining about a third of the variation in the outcome, as seen in the adjusted R-Square value of .3667.  
+We see that there is a significant positive association between family poverty and the low birth weight rate, we also see that there is a tendency for more rural areas to have lower low birth weight rates than the largest cities (Reference level = `rucc01`). There is a marginally significant association between a county being a healthcare shortage area and the low birth weight rate. Overall the model is explaining about a third of the variation in the outcome, as seen in the adjusted R-Square value of .3667.
+
+#### A not on interpretation
+
+It is important to remember, when describing results for place-based data, to avoid using language centered on individuals. For instance, with reference to the `fampov14` variable, we cannot say that families living in poverty are more likely to have a low birth weight birth, instead, we must focus on discussion on *places* with higher rates of poverty having a higher rate of low birth weight births. Ascribing individual risk from an ecological analysis is an example of the *ecological fallacy* often seen when doing place-based analysis, and we must be aware of it when framing our questions and describing our results. 
 
 The `gtsummary` package [@gtsummary] provides a very nice interface to produce much better looking summaries of models.
 
@@ -636,58 +640,116 @@ or the linear combination of the estimated model parameters and the $k$ observed
 For example, here are the first six fitted values from the original `lm1` OLS model, the `gls()` heteroskedastic model `lm3` model, and the first six values of the outcome:
 
 ```{r}
-data.frame(name = head(ahrf_m$NAME),
-           lm1 = head(fitted(lm1)),
-lm3 = head(fitted(lm3)), 
-observed = head(ahrf_m$lbrate1618))
+library(gt)
+
+fits<- data.frame(
+  name = head( ahrf_m$NAME ),
+  lm1 = head( fitted ( lm1 )),
+  lm3 = head( fitted( lm3 )), 
+  observed = head( ahrf_m$lbrate1618 )
+  )
+
+fits%>%
+  gt()
 
 ```
 
 
+We can also easily construct the map of the observed, fitted values and residuals from the model using `tmap`. 
 
-```{r}
-library(emmeans)
-
-rg<-ref_grid(lm3, at=list(fampov14 = c(5, 11, 20)))
-
-means <- emmeans(rg, specs = c("fampov14", "rucc"))
-
-means
-```
-
-
-```{r}
+```{r, fig.width=10, fig.height=8}
 ahrf_m$fitted_lm3 <- predict(lm3)
 
 ahrf_m$resid <- resid(lm3)
 
 actual <-tm_shape(ahrf_m)+
-  tm_polygons("lbrate1618",palette = "Blues",n=6,style="fisher", border.col = NULL,colorNA = "grey50")+tm_shape(sts)+
+  tm_polygons("lbrate1618",
+              palette = "Blues",
+              n=6,
+              style="fisher",
+              border.col = NULL,
+              colorNA = "grey50")+
+  tm_shape(sts)+
   tm_lines( col = "black")
 
 fit<-tm_shape(ahrf_m)+
-  tm_polygons("fitted_lm3",palette = "Blues",n=6,style="fisher", border.col = NULL,colorNA = "grey50")+tm_shape(sts)+
+  tm_polygons("fitted_lm3",
+              palette = "Blues",
+              n=6,
+              style="fisher", 
+              border.col = NULL,
+              colorNA = "grey50")+
+  tm_shape(sts)+
   tm_lines( col = "black")
+
 resids<-tm_shape(ahrf_m)+
-  tm_polygons("resid", palette = "RdBu",n=6,style="fisher", midpoint = NA, border.col = NULL,colorNA = "grey50")+tm_shape(sts)+
+  tm_polygons("resid",
+              palette = "RdBu",
+              n=6,
+              style="fisher",
+              midpoint = NA,
+              border.col = NULL,
+              colorNA = "grey50")+
+  tm_shape(sts)+
   tm_lines( col = "black")
 
 
 tmap_arrange(actual, fit, resids, nrow=2)
 ```
 
+This map layout shows the observed rates, the fitted rates from the `lm3` model and the residuals from the model. Mapping residuals from models run on place-based data can show areas within the data where the model is consistently under or over-estimating the outcome. For instance in the example above, we see consistently high residuals in several of the south eastern states, and the mountain west, and several areas where the residuals are consistently negative, meaning we are over-estimating the rate. This can be instructive as to other variables we may be leaving out of the model that follow similar spatial distributions of the residuals. If such spatially patterned residuals are observed, it is generally a good idea to consider a statistical model that incorporates some kind of spatially explicit model specification. 
+
+There are more systematic methods for generating predictions from a model that allow us to marginalize the estimates across other variables and to generate counter factual or hypothetical rates using combinations of $x$ values that may not be observed in the data. The `emmeans` package is very good at this and also accommodates many types of models. For instance if we would like the marginal means for counties by their healthcare shortage area type, after controlling for the other variables in our model, we can request that.
+
+```{r}
+library(emmeans)
+rg<- ref_grid(lm3)
+
+mu1 <- emmeans(rg, specs ="hpsa16" )
+mu1%>%
+  as.data.frame()%>%
+  gt()
+```
+
+Which unsurprisingly does not tell us much, because the health care shortage area variable in `lm3` was not a significant predictor of the low birth weight rate. We can include more than one margin in the function, and include specific values we wish to highlight. For instance, let's compare three hypothetical counties with three different poverty rates, we can use the `summary(ahrf_m$fampov14)` to see the first and third quartiles of the distribution and the mean, we will use these as our theoretical values.
+
+```{r}
+rg<-ref_grid(lm3,
+             at=list( fampov14 = c(7.8, 11.6, 14.3) ) )
+
+means <- emmeans(rg, specs = c("fampov14", "rucc"))
+
+means%>%
+  as.data.frame()%>%
+  ggplot(aes(x=rucc, y=emmean))+
+  geom_line(aes(group=factor(fampov14), color=factor(fampov14)))+
+  theme_classic()
+```
+
+Which illustrates the differences in the poverty rates on the low birth weight rate across the rural-urban continuum. The use of these marginal means is very useful when illustrating the effects of covariates in regression models, and to effectively illustrate interactions in such models. For instance, if we estimate the model below, which interacts the poverty rate with the rural-urban continuum code, 
 
 
+```{r}
+lm3i<- gls(lbrate1618 ~  fampov14 * rucc + hpsa16,
+          data = ahrf_m, 
+          weights = varIdent(form = ~1|factor(state) ) )
+```
 
 
- In the next section, I show how some fundamental models that account for spatial association among observations can be estimates R packages.
+```{r}
+rg<-ref_grid(lm3i,
+             at=list( fampov14 = c(7.8, 11.6, 14.3) ) )
 
+means <- emmeans(rg, specs = c("fampov14", "rucc"))
 
+means%>%
+  as.data.frame()%>%
+  ggplot(aes(x=rucc, y=emmean))+
+  geom_line(aes(group=factor(fampov14), color=factor(fampov14)))+
+  theme_classic()
+```
 
-[^macrodem-9]: Link to AHRF codebook - ["https://data.hrsa.gov/DataDownload/AHRF/AHRF_USER_TECH_2019-2020.zip"](https://data.hrsa.gov/DataDownload/AHRF/AHRF_USER_TECH_2019-2020.zip)
-
-#[^macrodem-9]: More on this below
-
+We can see that in the most rural areas, (the `09` level of `rucc`), the differences by poverty rate are less than in more metropolitan areas, such as the `02` or `03` levels. 
 
 
 \newpage

@@ -114,7 +114,7 @@ The fundamentals of using `ipumsr` is to specify the name of your `.xml` file fr
 
 library(ipumsr)
 
-ddi <- read_ipums_ddi(ddi_file = "~/OneDrive - University of Texas at San Antonio/projects/book_data//usa_00097.xml")
+ddi <- read_ipums_ddi(ddi_file = "data/usa_00097.xml")
 ipums <- read_ipums_micro(ddi = ddi)
 
 ```
