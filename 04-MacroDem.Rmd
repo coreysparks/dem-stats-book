@@ -238,6 +238,7 @@ ahrf2<-ahrf%>%
                             .$f0978716 == 1 ~ 'whole county shortage',
                             .$f0978716 == 2 ~ 'partial county shortage'),
          obgyn15_pc= 1000*( f1168415 / f1198416 ) )%>%
+  mutate(rucc = droplevels(rucc, ""))%>%
   select(births1618,
                 lowbw1618,
                 lbrate1618,
@@ -726,13 +727,14 @@ means%>%
   theme_classic()
 ```
 
-Which illustrates the differences in the poverty rates on the low birth weight rate across the rural-urban continuum. The use of these marginal means is very useful when illustrating the effects of covariates in regression models, and to effectively illustrate interactions in such models. For instance, if we estimate the model below, which interacts the poverty rate with the rural-urban continuum code, 
+Which illustrates the differences in the poverty rates on the low birth weight rate across the rural-urban continuum. The use of these marginal means is very useful when illustrating the effects of covariates in regression models, and to effectively illustrate interactions in such models. For instance, if we estimate the model below, which interacts the poverty rate with the rural-urban continuum code: 
 
 
 ```{r}
 lm3i<- gls(lbrate1618 ~  fampov14 * rucc + hpsa16,
           data = ahrf_m, 
           weights = varIdent(form = ~1|factor(state) ) )
+
 ```
 
 
@@ -751,22 +753,77 @@ means%>%
 
 We can see that in the most rural areas, (the `09` level of `rucc`), the differences by poverty rate are less than in more metropolitan areas, such as the `02` or `03` levels. 
 
+#### Use of OLS for place-based models
+The OLS model and its extensions are a very useful staring place when analyzing data on places. For nothing more than the interpretive ease of the models estimates, it presents a very attractive choice for ecological modeling. The extension of the model through weighted and generalized least square allows for more flexible modeling to accommodate non-constant variance that often arises. Further extensions of the model by techniques of spatial econometrics further allow for direct incorporation of spatially correlated and lagged effects of covariates and model error terms to better deal with the idiosyncrasies of place-based data [@chi_spatial_2020; @elhorst_spatial_2014; @lesage_introduction_2009]. These methods have seen wide use in demographic research over the past twenty years. Despite the fundamental flexibility of the OLS model, it may still not present the best solution when modeling demographic rates. One glaring reason is that if our outcomes are measured as rates, which are effectively probabilities, then the model can easily lead to estimates of predicted values that are either negative or greater than one, either of which presenting an issue for limited outcomes. In fact, this is why I am a strong proponent of not using the linear model for estimating probabilities. The next section of the book turns to the use of the *Generalized Linear Model* [@nelder_generalized_1972; @mccullagh_generalized_1998] as an alternative modeling strategy, especially when considering place-based data, when data are measured either as rates or as relative risks. 
+
 
 \newpage
 
 ## Basics of Genearlized Linear Models
 
-Up until now, we have been relying on linear statistical models which assumed the Normal distribution for our outcomes. A broader class of regression models, are ***Generalized Linear Models*** [@nelder_generalized_1972; @mccullagh_generalized_1998], or **GLM**s, which allow for linear regression for outcomes that are not assumed to come from a Normal distribution.
+Up until now, we have been relying on linear statistical models which assumed the Normal distribution for our outcomes. A broader class of regression models, are ***Generalized Linear Models*** [@nelder_generalized_1972; @mccullagh_generalized_1998], or **GLM**s, which allow for the estimation of a linear regression specification for outcomes that are not assumed to come from a Normal distribution.
 
-GLMs are a class of statistical models that link the mean of the specified distribution to a linear combination of covariates by some form of ***link function***. For example, the Normal distribution has the mean, $\mu$, which is typically estimated using the ***linear mean function*** :
+GLMs are a class of statistical models that link the mean of the specified distribution to a linear combination of covariates by some form of ***link function***. For example, the Normal distribution used by the OLS model has the mean, $\mu$, which is typically estimated using the ***linear mean function*** :
 
-$$\mu = \beta_0 + \beta_1 x_1$$ Which describes the line that estimates the mean of the outcome variable as a linear function of the predictor variable $x_1$. This model uses an ***identity link*** meaning there is no transformation of the linear mean function as it is connected to the mean of the outcome.
+$$\mu = \beta_0 + \beta_1 x_1$$ 
+Which describes the line that estimates the mean of the outcome variable as a linear function of the predictor variable $x_1$. The OLS, or Gaussian GLM model uses an ***identity link*** meaning there is no transformation of the linear mean function as it is connected to the mean of the outcome.
 
 This can be written as:
 
 $$g(u) = g(E(Y)) = \beta_0 + \beta_1 x_1$$
 
-Where $g()$ is the link function, linking the mean of the Normal distribution to the linear mean function of the model.
+Where $g()$ is the link function, linking the mean of the Normal distribution to the linear mean function of the model. The equivalent GLM model to the `lm1` model from the previous section is:
+
+```{r}
+glm1<- glm(lbrate1618 ~  fampov14 + rucc + hpsa16,
+          data = ahrf_m, 
+          family =gaussian)
+
+lm1_t<-lm1%>%
+  tbl_regression()
+
+
+glm1_t<-glm1%>%
+  tbl_regression()
+
+t_m <- tbl_merge(
+    tbls = list(lm1_t, glm1_t),
+    tab_spanner = c("**OLS**", "**GLM**")
+  )
+t_m
+
+```
+
+Which shows the exact same output for both models, as it should be. The output shown by `summary(lm1)` and `summary(glm1)` is different though, but the same results can be recovered. 
+
+```{r}
+summary(glm1)
+
+```
+
+This output shows the same coefficients, and hypothesis test results compared to `summary(lm1)`, but the residual variances are reported differently. The GLM summary reports the Null and Residual deviance instead of the Residual standard errors reported by `summary(lm1)`. If we take the residual deviance and divide it by the residual degrees of freedom, and take the square root, we get the residual standard error reported by `summary(lm1)`:
+
+```{r}
+sqrt(glm1$deviance/glm1$df.residual)
+summary(lm1)$sigma
+```
+
+The deviance in the GLM model is calculated in the same way as the residual sums of squares:
+
+
+
+```{r}
+
+```
+
+
+```{r}
+glm2<- glm(lbrate1618 ~  fampov14 + rucc + hpsa16,
+          data = ahrf_m, 
+          family =gaussian(link = "inverse"))
+
+```
+
 
 Different distributions have different link functions....
 
