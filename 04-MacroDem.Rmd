@@ -535,6 +535,54 @@ abline(a= mean(y2), b= 0, lty= 2)
 
 Where the variable y is actually generated from a cosine curve with noise. Since the linear regression of y on x forces the y to change linearly with x, the model is absolutely unable to recover the underlying pattern in the data. 
 
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
+
+**A note on splines**
+
+If the data clearly do not display a linear trend, I personally automatically look to *splines* as a means to model the non-linearity in relationship. Splines are a method of constructing a model based on connecting either linear or non-linear functions across a series of breaks or **_knots_** along the data in which the form of the function changes. 
+
+Mathematically, knots can be written as:
+
+$$Y(x) = \begin{Bmatrix}
+F_1(x) \text {  for  } x\in [x_1, x_2]\\ 
+F_2(x) \text {  for  } x\in [x_2, x_3]\\ 
+\cdots \\ 
+F_{k}(x) \text {  for  } x\in [x_{k-1}, x_k]\\
+
+\end{Bmatrix}$$
+
+Where each of the $F_k (x)$ functions imply a different form in the interval between $x\in [x_{k-1}, x_k]$, where the $k$ breaks are at a given knot in the data. Most splines are nonlinear functions, usustally cubic polynomials, and the spline model combines a series of these polynomials to model nonlinearities in the relationship between predictors and outcomes. A relatively recent invention, *Genearlized Additive Models* or *GAMs* are a way to model an outcome with both linear and non-linear terms together. The GAM model forms the linear predctor of a model can be constructed as:
+
+$$E(y)= \beta_0 + f(x_1) + \beta_1 x_2$$
+where the $f(x_1)$ term is a regression spline of one of the variables. The models can be a mixture of linear and smooth terms. Here is an example of using a B-spline within the `lm()` model to fit a smooth regression function to the messy nonlinear model above. 
+
+```{r}
+
+library(splines)
+
+sm<- lm(y2~bs(t, df = 5))
+
+plot(t, y2, t="p",
+     ylim=range(y2) * c(1, 1.2),
+     main="Nice Spline Model,\nFit to Nonlinear Outcome",
+     ylab ="y",
+     xlab= "x")
+
+t<-seq(from = min(t),to = max(t), length.out = length(y2))
+
+lines(t, predict( lm (y2 ~ bs(t, df = 5)),
+                 data.frame(t = t)),
+      col=3)
+
+```
+
+I really think splines, and GAMs are an excellent addition to the modeling world and have started teaching them in my own methods courses. In the world of demography, especially, with age affecting everything, there is no need to constantly assume relationships are purely linear, and splines offer an excelent method to explore such relationships.
+
+</div>
+
 If these assumptions are violated, then several things can happen. At best, our interpretation of the model coefficients could be wrong, meaning that, as seen above, our model would suggest one relationship from the data, but in fact because the model was misspecified, the relationship we discover is incorrect. Our poor linear model would predict a decline in the outcome, while the outcome itself is perfectly stationary, as shown by the dashed line.
 
 In a more social science sensibility, the interpretation of the beta coefficients for the effect of $x$ on $y$ in this case will provide us a false conclusion of the relationship in the data. This is a really dangerous outcome for us in social science, because that's why we're doing statistics in the first place, to answer questions. 
@@ -602,7 +650,10 @@ lm3<- gls(lbrate1618 ~  fampov14 + rucc + hpsa16,
           data = ahrf_m, 
           weights = varIdent(form = ~1|factor(state) ) )
 summary(lm3)
+
 ```
+
+
 Which also provides similar results to `lm1`. So, which model is better for this particular outcome? One way to examine relative model fit is to compare the Akaike Information Criteria (AIC) for the three models. The AIC consists of two components, one showing overall model deviance, or residual variance and a penalty term for the number of parameters in a model. A general form of it is: 
 
 $$
@@ -610,13 +661,22 @@ AIC = -2LL(\theta) + 2k
 $$
 Where the term $-2LL(\theta)$ is the model -2 Log likelihood, or *deviance*, and $2k$ is a penalty term with $k$ being the number of parameters. 
 
-Since the three models `lm1g`, `lm2` and `lm3` are all fit by `gls()`, and fit to the same dataset, we can compare them.  
+Since the three models `lm1g`, `lm2` and `lm3` are all fit by `gls()`, and fit to the same dataset, we can compare them. We can even add another model with a smooth spline effect of poverty:
+
 
 ```{r}
-AIC( lm1g,  lm2g, lm3)
+lm3s<- gls(lbrate1618 ~  bs(fampov14, df=4) + rucc + hpsa16,
+          data = ahrf_m, 
+          weights = varIdent(form = ~1|factor(state) ) )
+summary(lm3s)
+
 ```
 
-The `AIC()` function calculates AIC for each model, and we see that `lm3` has the lowest of the three, suggesting that the non-constant variance across states is a better representation than the effects of population size on the residual variance, in this case. 
+```{r}
+AIC( lm1g,  lm2g, lm3, lm3s)
+```
+
+The `AIC()` function calculates AIC for each model, and we see that `lm3s` has the lowest of the three, suggesting that the non-constant variance across states is a better representation than the effects of population size on the residual variance, and that the nonlinear effect of poverty is also present in this case. 
 
 #### Further model comparisons
 
@@ -700,11 +760,14 @@ tmap_arrange(actual, fit, resids, nrow=2)
 
 This map layout shows the observed rates, the fitted rates from the `lm3` model and the residuals from the model. Mapping residuals from models run on place-based data can show areas within the data where the model is consistently under or over-estimating the outcome. For instance in the example above, we see consistently high residuals in several of the south eastern states, and the mountain west, and several areas where the residuals are consistently negative, meaning we are over-estimating the rate. This can be instructive as to other variables we may be leaving out of the model that follow similar spatial distributions of the residuals. If such spatially patterned residuals are observed, it is generally a good idea to consider a statistical model that incorporates some kind of spatially explicit model specification. 
 
+
+#### More on predicted values
+ 
 There are more systematic methods for generating predictions from a model that allow us to marginalize the estimates across other variables and to generate counter factual or hypothetical rates using combinations of $x$ values that may not be observed in the data. The `emmeans` package is very good at this and also accommodates many types of models. For instance if we would like the marginal means for counties by their healthcare shortage area type, after controlling for the other variables in our model, we can request that.
 
 ```{r}
 library(emmeans)
-rg<- ref_grid(lm3)
+rg<- ref_grid(lm3s)
 
 mu1 <- emmeans(rg, specs ="hpsa16" )
 mu1%>%
@@ -716,7 +779,7 @@ Which unsurprisingly does not tell us much, because the health care shortage are
 
 ```{r}
 rg<-ref_grid(lm3,
-             at=list( fampov14 = c(7.8, 11.6, 14.3) ) )
+             at=list( fampov14 = c(1.8,7.8, 11.6, 14.3, 52.1) ) )
 
 means <- emmeans(rg, specs = c("fampov14", "rucc"))
 
@@ -761,14 +824,9 @@ The OLS model and its extensions are a very useful staring place when analyzing 
 
 ## Basics of Genearlized Linear Models
 
-Up until now, we have been relying on linear statistical models which assumed the Normal distribution for our outcomes. A broader class of regression models, are ***Generalized Linear Models*** [@nelder_generalized_1972; @mccullagh_generalized_1998], or **GLM**s, which allow for the estimation of a linear regression specification for outcomes that are not assumed to come from a Normal distribution.
-
-GLMs are a class of statistical models that link the mean of the specified distribution to a linear combination of covariates by some form of ***link function***. For example, the Normal distribution used by the OLS model has the mean, $\mu$, which is typically estimated using the ***linear mean function*** :
-
+Up until now, we have been relying on linear statistical models which assumed the Normal distribution for our outcomes. A broader class of regression models, are ***Generalized Linear Models*** [@nelder_generalized_1972; @mccullagh_generalized_1998], or **GLM**s, which allow for the estimation of a linear regression specification for outcomes that are not assumed to come from a Normal distribution. GLMs are a class of statistical models with three underlying components: A probability density appropriate to the outcome, a link function and a linear predictor. The ***link function*** is some mathematical function that links the mean of the specified probability distribution to the linear predictor of regression parameters and covariates. For example, the Normal distribution used by the OLS model has the mean, $\mu$, which is typically estimated using the ***linear mean function*** :
 $$\mu = \beta_0 + \beta_1 x_1$$ 
-Which describes the line that estimates the mean of the outcome variable as a linear function of the predictor variable $x_1$. The OLS, or Gaussian GLM model uses an ***identity link*** meaning there is no transformation of the linear mean function as it is connected to the mean of the outcome.
-
-This can be written as:
+Which describes the line that estimates the mean of the outcome variable as a linear function of $\beta$ parameters and the predictor variable $x_1$. The OLS, or *Gaussian* GLM model uses an ***identity link*** meaning there is no transformation of the linear mean function as it is connected to the mean of the outcome. This can be written as:
 
 $$g(u) = g(E(Y)) = \beta_0 + \beta_1 x_1$$
 
@@ -798,7 +856,6 @@ Which shows the exact same output for both models, as it should be. The output s
 
 ```{r}
 summary(glm1)
-
 ```
 
 This output shows the same coefficients, and hypothesis test results compared to `summary(lm1)`, but the residual variances are reported differently. The GLM summary reports the Null and Residual deviance instead of the Residual standard errors reported by `summary(lm1)`. If we take the residual deviance and divide it by the residual degrees of freedom, and take the square root, we get the residual standard error reported by `summary(lm1)`:
@@ -810,22 +867,32 @@ summary(lm1)$sigma
 
 The deviance in the GLM model is calculated in the same way as the residual sums of squares:
 
-
-
 ```{r}
+sum((fitted(lm1)-ahrf_m$lbrate1618 )^2)
+glm1$deviance
 
 ```
 
+We do not need to assume the identity function is the only one for the Gaussian GLM, for instance, the logarithmic link function can change the model to:
+
+$$
+ln(Y) = \beta_0 + \beta_1 x_1 \\
+Y = exp(\beta_0 + \beta_1 x_1) \\
+Y = exp(\beta_0) * exp(\beta_1 x_1)
+$$
+Which changes the model to no longer be additive in terms of the parameters for the logarithmic link function. 
 
 ```{r}
 glm2<- glm(lbrate1618 ~  fampov14 + rucc + hpsa16,
           data = ahrf_m, 
-          family =gaussian(link = "inverse"))
+          family =gaussian(link = "log"))
+AIC(glm1, glm2)
 
 ```
+In this case, the identity link function is preferred because of the lower AIC.
 
 
-Different distributions have different link functions....
+**Different distributions have different link functions....**
 
 The linear model is appropriate for the Normal distribution, because this distribution can take any value from $- \infty$ to $\infty$. Other distributions do not have this wide range, so transformations of the linear mean function must be used so that the linear model remains on the scale of the data.
 
