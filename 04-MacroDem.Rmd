@@ -574,7 +574,7 @@ plot(t, y2, t="p",
 t<-seq(from = min(t),to = max(t), length.out = length(y2))
 
 lines(t, predict( lm (y2 ~ bs(t, df = 5)),
-                 data.frame(t = t)),
+                 data.frame(t = t), lwd = 1.5),
       col=3)
 
 ```
@@ -894,59 +894,72 @@ In this case, the identity link function is preferred because of the lower AIC.
 
 **Different distributions have different link functions....**
 
-The linear model is appropriate for the Normal distribution, because this distribution can take any value from $- \infty$ to $\infty$. Other distributions do not have this wide range, so transformations of the linear mean function must be used so that the linear model remains on the scale of the data.
-
-You have probably seen the binomial distribution in either a basic statistics course, remember the coin flips? Or in the context of a logistic regression model.
-
-There are two ways the binomial distribution is typically used, the first is the context of logistic regression, where a special case of the binomial is used, called the ***Bernoulli*** distribution. This is the case of the binomial when there is basically a single coin flip, and you're trying to figure out the probability that it is heads (or tails). This is said to be a single ***trial***, and the outcome is either 1 or 0 (heads or tails).
-
-The second way the binomial is used is when you have multiple trials, and you're trying to estimate the probability of the event occurring over multiple trials. In this case, your number of trials, $n$ can be large, and your number of successes, $y$ is the random variable under consideration. This is the basic makeup of a demographic rate, the count-based binomial.
-
-=======
+The identity link function is appropriate for the Normal distribution, because this distribution can take any value from $- \infty$ to $\infty$, and so the linear mean function can also take those values, theoretically. Other distributions may not have this wide of a numeric range, so appropriate link functions have to be used to transform the linear mean function to the scale of the mean of a particular distribution. The most common distributions for the generalized linear model and their common link functions are shown below, along with common expressions for the mean and variance of their respective distributions.
 
 
-#[^macrodem-3]: More on this below
+|   Distribution   | Mean    | Variance |  Link Function      | Range of Outcome |  
+|:------------:|:----------------:|:----------------:|:----------------:|:----------------:|
+|   Gaussian    | $\mu$ |$\sigma^2$ | Identity    | $(-\infty ,  \infty)$ |
+|   Binomial  | $\pi$ | $n\pi(1-\pi)$ | $log \left (\frac{\pi}{1-\pi} \right )$    | $\frac{0,1,2,...n}{n}$ |
+|   Poisson    | $\lambda$ | $\lambda$ | $log (\lambda)$    | $(0,1,2,...)$ |
+|   Gamma    | $\mu$ | $\phi \mu^2$ | $log (\mu)$    | $(0, \infty)$ |
+|   Negative Binomial | $n(1-p)/p$ | $n(1-p)/p^2$ | $log (\mu)$    | $(0,1,2,...)$ |
+| Student-t | $\mu$ | $\frac{\sigma^2 \nu}{\nu-2}$| Identity | $-\infty ,  \infty$ |
 
-#### arf
+While these are not all possible distributions for the GLM, these are distributions that are both widely used and commonly present not only in R but in other software as well. The `VGAM` package adds a much wider selection of both univariate and bivariate distributions for discrete and continuous outcomes. 
 
-\newpage
+```{r}
+glmb<- glm(cbind(lowbw1618, births1618-lowbw1618) ~  fampov14 + rucc + hpsa16,
+          data = ahrf_m, 
+          family = binomial)
+summary(glmb)
+pchisq(deviance(glmb), df.residual(glmb), lower=F)
+pchisq(deviance(mod2), df.residual(mod2), lower=F)
 
-## Basics of Genearlized Linear Models
+plot(density(residuals(glmb, type="pearson")))
+plot(density(rstandard(glmb, type="deviance")))
+library(statmod)
+scatter.smooth(predict(glmb, type='response'), rstandard(glmb, type='deviance'), col='gray')
 
-Up until now, we have been relying on linear statistical models which assumed the Normal distribution for our outcomes. A broader class of regression models, are ***Generalized Linear Models*** [@nelder_generalized_1972; @mccullagh_generalized_1998], or **GLM**s, which allow for linear regression for outcomes that are not assumed to come from a Normal distribution.
+scatter.smooth(sqrt(predict(glmb, type='response')), qresid(glmb), col='gray')
+scatter.smooth(predict(glmb, type='response'), qresid(glmb), col='gray')
+scatter.smooth(predict(glmb, type='response')~ ahrf_m$fampov14, col='gray')
+plot(residuals(glmb)~ predict(glmb, type="link"))
+plot(predict(glmb)~residuals(glmb, type="pearson"))
+plot(predict(mod2)~residuals(mod2, type="pearson"))
+```
 
-GLMs are a class of statistical models that link the mean of the specified distribution to a linear combination of covariates by some form of ***link function***. For example, the Normal distribution has the mean, $\mu$, which is typically estimated using the ***linear mean function*** :
+```{r}
+library(dispmod)
+mod2 <- glm.binomial.disp(glmb)
 
-$$\mu = \beta_0 + \beta_1 x_1$$ Which describes the line that estimates the mean of the outcome variable as a linear function of the predictor variable $x_1$. This model uses an ***identity link*** meaning there is no transformation of the linear mean function as it is connected to the mean of the outcome.
-
-This can be written as:
-
-$$g(u) = g(E(Y)) = \beta_0 + \beta_1 x_1$$
-
-Where $g()$ is the link function, linking the mean of the Normal distribution to the linear mean function of the model.
-
-Different distributions have different link functions....
-
-The linear model is appropriate for the Normal distribution, because this distribution can take any value from $- \infty$ to $\infty$. Other distributions do not have this wide range, so transformations of the linear mean function must be used so that the linear model remains on the scale of the data.
-
-You have probably seen the binomial distribution in either a basic statistics course, remember the coin flips? Or in the context of a logistic regression model.
-
-There are two ways the binomial distribution is typically used, the first is the context of logistic regression, where a special case of the binomial is used, called the ***Bernoulli*** distribution. This is the case of the binomial when there is basically a single coin flip, and you're trying to figure out the probability that it is heads (or tails). This is said to be a single ***trial***, and the outcome is either 1 or 0 (heads or tails).
-
-The second way the binomial is used is when you have multiple trials, and you're trying to estimate the probability of the event occurring over multiple trials. In this case, your number of trials, $n$ can be large, and your number of successes, $y$ is the random variable under consideration. This is the basic makeup of a demographic rate, the count-based binomial.
+mod2$dispersion
+summary(mod2)
 
 
-The mean of the binomial distribution is a proportion or a probability, $\pi$, which tells you how likely it is that the event your interested in occurs. Any model using the binomial distributor will be geared towards estimating the probability.
+glmp<- glm(lowbw1618 ~ offset(log( births1618))+ fampov14 + rucc + hpsa16,
+          data = ahrf_m, 
+          family = poisson)
+summary(glmp)
 
-When a variable is coded as binary, meaning either 1 or 0, the Bernoulli distribution is used, as in the logistic regression model. When coded like this, the model tries to use the other measured information to predict the 1 value versus the 0 value. So in the basic sense, we want to construct a model like:
+library(dispmod)
+mod3 <- glm.poisson.disp(glmp)
 
-$$Pr(y=1) =\pi =  \text{some function of predictors}$$
+mod3$dispersion
 
-The good thing is that, when we have count data, not just 1's and 0's, the same thing happens. The ratio or successes ($y$) to trials ($n$) is used to estimate $\pi$ and we build a model for that rate:
+AIC(glmb, glmp)
+
+```
+
+### Binomial Distribution
+
+You have probably seen the binomial distribution in either a basic statistics course, remember the coin flips? Or in the context of a logistic regression model. There are two ways the binomial distribution is typically used, the first is the context of logistic regression, where a special case of the binomial is used, called the ***Bernoulli*** distribution. This is the case of the binomial when there is basically a single coin flip, and you're trying to estimate the probability that it is heads (or tails). This is said to be a single ***trial***, and the outcome is either 1 or 0 (heads or tails). We will spend time in chapter 5 discussing the logistic regression model in the context of individual level data. 
+
+The second way the binomial is used is when you have multiple trials, and you're trying to estimate the probability of the event occurring over these trials. In this case, your number of trials, $n$ can be large, and your number of successes, $y$ is the random variable under consideration. This usage of the binomial has a wide applicability for place-based demographic analysis, as the basic distribution for a demographic rate. I will commonly refer to this as the *count-based binomial distribution*.
+
+The mean of the binomial distribution is a proportion or a probability, $\pi$, which tells you the probability of the event of interest occurs. Any model using the binomial distributor will be geared towards estimating this probability. The good thing is that, when we have count data, not just 1's and 0's, the same thing happens. The ratio or successes ($y$) to trials ($n$) is used to estimate $\pi$ and we build a model for that mean rate:
 
 $$\text{Binomial} \binom{n}{y} = \frac{y}{n} = \pi = \text{some function of predictors}$$
-
-## Binary outcome variables
 
 The ratio $\frac{y}{n}$ is a rate or probability, and as such has very strict bounds. Probabilities cannot be less than 0 or greater than 1, so again, we should not use the Normal distribution here, since it is valid for all real numbers. Instead, we are using the binomial, but we still run into the problem of having a strictly bounded value, $\pi$ that we are trying to estimate with a linear function.
 
@@ -954,67 +967,24 @@ Enter the link function again.
 
 The binomial distribution typically uses either a [logit](https://en.wikipedia.org/wiki/Logit) or [probit](https://en.wikipedia.org/wiki/Probit) link function, but others such as the [complementary log-log link function](http://data.princeton.edu/wws509/notes/c3s7.html) are also used in certain circumstances. For now we will use the *logit* function.
 
-The logit transforms the probability, $\pi$, which is bound on the interval $[0,1]$ into a new limitless interval similar to the normal distribution of $[-\infty, \infty]$. The transformation is knows a the log-odds transformation, or logit for short.
+The logit transforms the probability, $\pi$, which is bound on the interval $[0,1]$ into a new unbounded interval similar to the normal distribution of $[-\infty, \infty]$. The transformation is knows a the *log-odd*s transformation, or *logit* for short. The odds of an event happening are the probability that something happens, divided by the probability it does not happen, in this case:
 
-The odds of an event happening are the probability that something happens, divided by the probability it does not happen, in this case:
-
-$$\text{odds }{\pi} = \frac{\pi}{(1-\pi)}$$
+$$\text{odds}({\pi}) = \frac{\pi}{(1-\pi)}$$
 
 Which is bound on the interval $[0, \infty]$, when we take the natural log of the odds, the value is transformed into the linear space, of $[-\infty, \infty]$.
 
-$$\text{log-odds }{\pi} = log  \left ( \frac{\pi}{(1-\pi)}  \right) $$
+$$\text{log-odds }({\pi}) = log  \left ( \frac{\pi}{(1-\pi)}  \right) $$
 
 This can be modeled using a linear function of covariates now, without worrying about the original boundary problem:
 
-$$log  \left ( \frac{\pi}{(1-\pi)}  \right) = \beta_0 +\beta_1 x_1$$
+$$log  \left ( \frac{\pi}{1-\pi}  \right) = \beta_0 +\beta_1 x_1$$
 
 or more compactly:
 
 $$logit (\pi)  = \beta_0 +\beta_1 x_1$$
 
-## Binomial model for counts
 
-You have probably seen the binomial distribution in either a basic statistics course, remember the coin flips? Or in the context of a logistic regression model.
-
-There are two ways the binomial distribution is typically used, the first is the context of logistic regression, where a special case of the binomial is used, called the ***Bernoulli*** distribution. This is the case of the binomial when there is basically a single coin flip, and you're trying to figure out the probability that it is heads (or tails). This is said to be a single ***trial***, and the outcome is either 1 or 0 (heads or tails).
-
-The second way the binomial is used is when you have multiple trials, and you're trying to estimate the probability of the event occurring over multiple trials. In this case, your number of trials, $n$ can be large, and your number of successes, $y$ is the random variable under consideration. This is the basic makeup of a demographic rate, the count-based binomial.
-
-The mean of the binomial distribution is a proportion or a probability, $\pi$, which tells you how likely it is that the event your interested in occurs. Any model using the binomial distributor will be geared towards estimating the probability.
-
-When a variable is coded as binary, meaning either 1 or 0, the Bernoulli distribution is used, as in the logistic regression model. When coded like this, the model tries to use the other measured information to predict the 1 value versus the 0 value. So in the basic sense, we want to construct a model like:
-
-$$Pr(y=1) =\pi =  \text{some function of predictors}$$
-
-The good thing is that, when we have count data, not just 1's and 0's, the same thing happens. The ratio or successes ($y$) to trials ($n$) is used to estimate $\pi$ and we build a model for that rate:
-
-$$\text{Binomial} \binom{n}{y} = \frac{y}{n} = \pi = \text{some function of predictors}$$
-
-## Binomial regression models
-
-The ratio $\frac{y}{n}$ is a rate or probability, and as such has very strict bounds. Probabilities cannot be less than 0 or greater than 1, so again, we should not use the Normal distribution here, since it is valid for all real numbers. Instead, we are using the binomial, but we still run into the problem of having a strictly bounded value, $\pi$ that we are trying to estimate with a linear function.
-
-Enter the link function again.
-
-The binomial distribution typically uses either a [logit](https://en.wikipedia.org/wiki/Logit) or [probit](https://en.wikipedia.org/wiki/Probit) link function, but others such as the [complementary log-log link function](http://data.princeton.edu/wws509/notes/c3s7.html) are also used in certain circumstances. For now we will use the logit function.
-
-The logit transforms the probability, $\pi$, which is bound on the interval $[0,1]$ into a new limitless interval similar to the normal distribution of $[-\infty, \infty]$. The transformation is knows a the log-odds transformation, or logit for short.
-
-The odds of an event happening are the probability that something happens, divided by the probability it does not happen, in this case:
-
-$$\text{odds }{\pi} = \frac{\pi}{(1-\pi)}$$
-
-Which is bound on the interval $[0, \infty]$, when we take the natural log of the odds, the value is transformed into the linear space, of $[-\infty, \infty]$.
-
-$$\text{log-odds }{\pi} = log  \left ( \frac{\pi}{(1-\pi)}  \right) $$
-
-This can be modeled using a linear function of covariates now, without worrying about the original boundary problem:
-
-$$log  \left ( \frac{\pi}{(1-\pi)}  \right) = \beta_0 +\beta_1 x_1$$ or more compactly:
-
-$$log it(\pi)  = \beta_0 +\beta_1 x_1$$
-
-## Poisson distribution modeling
+## Poisson distribution 
 
 The mean of the Poisson distribution, $(\lambda)$, is really the average count for the outcome ($y$). We have several ways of modeling the Poisson count:
 
@@ -1085,6 +1055,9 @@ This allows us to include a rough proxy for a dispersion parameter for the distr
 fit3<-glm(healthdays~factor(race_eth)+factor(educ)+factor(agec), data=brfss_17, family=quasipoisson)
 summary(fit3)
 ```
+
+### Modeling dispersion properly
+
 
 ## Other count models - Negative binomial
 

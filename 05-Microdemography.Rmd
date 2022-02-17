@@ -333,4 +333,8 @@ We can extend this framework to include effects of *individual characteristics o
 We can re-express the hazard rate with both these conditions as:
 
 $$h(t|x) = \lim_{\Delta t \rightarrow 0} \frac{Pr(t \leqslant T \leqslant t + \Delta t | T \geqslant t, x)}{\Delta t}$$
+## Logistic regression
+When a variable is coded as binary, meaning either 1 or 0, the Bernoulli distribution is used, as in the logistic regression model. When coded like this, the model tries to use the other measured information to predict the 1 value versus the 0 value. So in the basic sense, we want to construct a model like:
+
+$$Pr(y=1) =\pi =  \text{some function of predictors}$$
 
