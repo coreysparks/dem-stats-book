@@ -983,6 +983,107 @@ or more compactly:
 
 $$logit (\pi)  = \beta_0 +\beta_1 x_1$$
 
+#### Binomial regression 
+
+The `glm()` function can estimate the count binomial model using the syntax `cbind( y, n-y)` in the outcome portion of the model formula. 
+
+```{r}
+glmb<- glm(cbind(lowbw1618, births1618-lowbw1618) ~  fampov14 + rucc + hpsa16,
+          data = ahrf_m, 
+          family = binomial)
+
+glmb%>%
+  tbl_regression()
+
+
+```
+
+The output above shows the results of the model. The coefficients are on the log-odds scale, and typically would be converted to an odds-ratio by exponentiating them. 
+
+```{r}
+glmb%>%
+  tbl_regression(exponentiate=TRUE)
+```
+
+In this case, the odds ratio interpretation is not as clear as in the case of the Bernoulli case, in the context of individuals. When I interpret the coefficients for the count binomial, I describe them as *percent changes in the mean*. For example, the `fampov14` odds ratio is `r round(exp(coef(glmb)[2]), 2)`, I describe this result as: The low birth weight rate increases by 2 percent for every 1 percentage point increase in the poverty rate. We can see this by using the fitted values from `emmeans`, here I generate two cases where `fampov14` is exactly 1 percentage point different, and you can see the difference in the estimated rates. 
+
+```{r}
+rg <- ref_grid(glmb, at=list( fampov14 = c(5, 6) ) ) 
+emmeans(rg, specs = "fampov14", type = "response")
+```
+
+We can calculate the percentage change in these two estimates:
+
+```{r}
+(.0750 - .0735)/.0750
+```
+
+and confirm that it is 2 percent.
+
+#### Application of the binomial to age standardization
+The Binomial is very useful for conducting standardization of rates between groups to measure the differences. 
+
+```{r, eval=FALSE, include=FALSE}
+library(wonderapi)
+mylist <- list(list("Group Results By", "D76.V5"))
+
+mylist <- list( 
+               list("B_2", "D76.V7"),
+               list("B_3", "D76.V5"))
+
+mydata <- getData(TRUE, "Detailed Mortality", mylist)
+head(mydata)
+
+
+mylist <- list(list("And By", "Gender"))
+mydata0 <- getData(TRUE, "Detailed Mortality", mylist)
+head(mydata0)
+```
+
+To show an example of how to do age standardization, I use data from the [CDC Wonder Compressed Mortality file](https://wonder.cdc.gov/mortSQL.html). The data are for the states of Texas and California, and are the numbers of deaths and population at risk in 13 age groups. 
+
+```{r}
+txca <- readr::read_delim(url("https://raw.githubusercontent.com/coreysparks/dem-stats-book/master/data/CMF_TX_CA_age.txt?token=GHSAT0AAAAAABQZ5VMKYY4UY4W35G4LJWAAYQZAPEA"),
+                          delim = "\t",
+                          quote = "\"",
+                          skip=1,
+                          col_names = c("State",
+                                        "State_Code",
+                                        "Age_Group",
+                                        "Age_Group_Code",
+                                        "Deaths",
+                                        "Population",
+                                        "Crude.Rate")
+                          )
+
+txca%>%
+  gt()
+```
+
+```{r}
+txca%>%
+  group_by(State)%>%
+  summarise(p_pop = Population/sum(Population))%>%
+  ungroup()%>%
+  mutate(age = rep(1:13, 2))%>%
+  ggplot(aes(x = age, y = p_pop,group=State, color= State))+
+  geom_line(lwd=2)+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+
+To do age standardization using the regression framework, we have to control for the differences in the age structure of the two populations (Texas and California)
+
+```{r}
+glmb_s <- glm(cbind(Deaths, Population-Deaths)~ factor(Age_Group)+State, data=txca, family=binomial)
+
+glmb_s%>%
+  tbl_regression(exp = TRUE)
+```
+
+Which shows that Texas has a standardized mortality rate 17 percent higher than California. 
+
+
 
 ## Poisson distribution 
 
