@@ -1,4 +1,4 @@
-"Notes"	"State"	"State Code"	"Age Group"	"Age Group Code"	Deaths	Population	Crude Rate
+"State"	"State Code"	"Age Group"	"Age Group Code"	Deaths	Population	Crude Rate
 	"California"	"06"	"< 1 year"	"1"	46975	9136914	514.1
 	"California"	"06"	"1-4 years"	"1-4"	8620	36217989	23.8
 	"California"	"06"	"5-9 years"	"5-9"	5227	45670182	11.4
