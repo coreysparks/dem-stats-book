@@ -1065,45 +1065,75 @@ txca%>%
   group_by(State)%>%
   summarise(p_pop = Population/sum(Population))%>%
   ungroup()%>%
-  mutate(age = rep(1:13, 2))%>%
+  mutate(age = forcats::fct_relevel(txca$Age_Group,"< 1 year",
+                                    "1-4 years",
+                                     "5-9 years",
+                                    "10-14 years",
+                                    "15-19 years",
+                                    "20-24 years",
+                                    "25-34 years",
+                                    "35-44 years",
+                                    "45-54 years",
+                                    "55-64 years",
+                                    "65-74 years",
+                                    "75-84 years", "85+ years"
+                                    ))%>%
   ggplot(aes(x = age, y = p_pop,group=State, color= State))+
   geom_line(lwd=2)+
+  ylab("% in Age" )+
+  xlab ("Age group")+
+  ggtitle("Age distribution in Texas and California")+
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
+We see that the age distribution of Texas is slightly younger than California, also the large peak at 25-34 year age group is because the data adopt a 10 year age interval after age 25.
 
-
-To do age standardization using the regression framework, we have to control for the differences in the age structure of the two populations (Texas and California)
+To do age standardization using the regression framework, we have to control for the differences in the age structure of the two populations (Texas and California) by regressing the mortality rate on the Age structure, the difference between the states after doing this is the difference in the age-standardized rate. 
 
 ```{r}
-glmb_s <- glm(cbind(Deaths, Population-Deaths)~ factor(Age_Group)+State, data=txca, family=binomial)
+glmb_s <- glm(cbind(Deaths, Population-Deaths) ~ factor(Age_Group)+State,
+              data=txca,
+              family=binomial)
 
 glmb_s%>%
   tbl_regression(exp = TRUE)
+
+AIC(glmb_s, glmp_s, glmp_E)
+
 ```
 
-Which shows that Texas has a standardized mortality rate 17 percent higher than California. 
-
-
+Which shows that Texas has a standardized mortality rate 17 percent higher than California.
 
 ## Poisson distribution 
 
-The mean of the Poisson distribution, $(\lambda)$, is really the average count for the outcome ($y$). We have several ways of modeling the Poisson count:
+Another distribution commonly used in the analysis of place-based data is the Poisson distribution. The Poisson is applicable to outcomes that are positive integers, and is commonly used in epdiemiology as a model of relative risk of a disease or mortality. The Poisson has a single parameter, the mean, $\lambda$, and it is really the average count for the outcome ($y$). We have several ways of modeling a count outcome with the Poisson
 
--   *Pure count model* If each area has the same risk set, or population size, then we can model the mean as-is. This would lead to a model that looks like:
+-   *Pure count model* If each area or place has the same total area, risk set, or population size, then we can model the mean as-is. This would lead to a model that looks like:
 
-$$log(y)= \beta_0 + \beta_1 x_1$$
+$$log(\lambda)= \beta_0 + \beta_1 x_1$$
 
-When we see the $\beta_1$ parameter in this model in computer output, it is on the log-scale, since that is the scale of the outcome for the Poisson model. In order to interpret the $\beta_1$, we have to ***exponentiate*** it. When we do this, the parameter is interpreted as the percentage change in the mean of the outcome, for a 1 unit change in $x_1$. For instance if we estimate a model and see in the output that $\beta_1 = \text{.025}$, then $\exp(\beta_1) = \text{exp}(\text{.025}) = \text{1.025}$, or for a 1 unit increase in $x_1$, the mean of $y$ increases by 1.025. So if the mean of $y$ is 10, when $x_1$ = 0, then the mean is $10*(1.025*1)$ or $10.25$ when $x_1$ = 1.
+When we see the $\beta_1$ parameter in this model in computer output, it is on the log-scale, since that is the scale of the outcome for the Poisson model. In order to interpret the $\beta_1$, we have to ***exponentiate*** it. When we do this, the parameter is interpreted as the *percentage change in the mean of the outcome*, for a 1 unit change in $x_1$. For instance if we estimate a model and see in the output that $\beta_1 = \text{.025}$, then $\exp(\beta_1) = \text{exp}(\text{.025}) = \text{1.025}$, or for a 1 unit increase in $x_1$, the mean of $y$ increases by 1.025. So if the mean of $y$ is 10, when $x_1$ = 0, then the mean is $10*(1.025*1)$ or $10.25$ when $x_1$ = 1.
 
--   *Rate model* The second type of modeling strategy is a model for a rate of occurrence. This model includes an ***offset term*** in the model to incorporate unequal population sizes, this is the most common way the data are analyzed in demographic research. This offset term can be thought of as the denominator for the rate, and we can show how it is put into the model.
+-   *Rate model* The second type of modeling strategy used in the Poisson model is for a rate of occurrence. This model includes an ***offset term*** in the model to incorporate unequal population sizes, this is the most common way the data are analyzed in demographic research. This offset term can be thought of as the denominator for the rate, and we can show how it is put into the model.
 
-If $n$ is the population size for each place, then, we want to do a regression on the rate of occurrence of our outcome. The rate is typically expressed as a proportion, or probability $rate = \frac{y}{n}$:
+If $n$ is the population size for each place, then, we want to do a regression on the rate of occurrence of our outcome. The rate is typically expressed as a proportion, or probability $rate = \frac{y}{n}$, as seen in the Binomial distribution earlier:
 
-$$log(y/n)= \beta_0 + \beta_1 x_1$$ $$log(y) - log(n)= \beta_0 + \beta_1 x_1$$
-
-$$log(y)= \beta_0 + \beta_1 x_1 + log(n)$$
+$$
+log(y/n)= \beta_0 + \beta_1 x_1 \\
+log(y) - log(n)= \beta_0 + \beta_1 x_1\\
+log(y)= \beta_0 + \beta_1 x_1 + log(n)
+$$
 
 Similar to the example from before, when interpreting the effect of $\beta_1$ in this model, we also have to exponentiate it. In this case, the interpretation would not be related to the overall count, but to the rate of occurrence. So, if as before, the $\beta_1 = \text{.025}$, then $\exp(\beta_1) = \text{exp}(\text{.025}) = \text{1.025}$, or for a 1 unit increase in $x_1$, the ***rate*** of occurrence of $y$ increases by 1.025. If, in this case the average mortality rate was $10/500 = 0.02$ when $x_1$ = 0, then the rate is $0.02*(1.025*1)$ or $0.0205$ when $x_1$ = 1.
+
+```{r}
+glmp_s <- glm(Deaths  ~offset(log(Population)) + factor(Age_Group)+State,
+              data=txca,
+              family=poisson)
+
+glmp_s%>%
+  tbl_regression(exp = TRUE)
+
+```
 
 ## Relative risk analysis
 
@@ -1117,6 +1147,19 @@ The model for the mean of the outcome would look like this:
 
 $$log(y)= \beta_0 + \beta_1 x_1  + log(E)$$.
 
+```{r}
+txca$E<- txca$Population*(sum(txca$Deaths/sum(txca$Population)))
+
+glmp_E <- glm(Deaths  ~offset(log(E)) + factor(Age_Group)+State,
+              data=txca,
+              family=poisson)
+
+glmp_E%>%
+  tbl_regression(exp = TRUE)
+
+```
+
+
 ## Overdispersion
 
 When using the Poisson GLM, you often run into *overdispersion* \* What's overdispersion? For the Poisson distribution, the mean and the variance are functions of one another (variance = mean for Poisson). So when you have more variability than you expect in your data, you have overdispersion. This basically says your data do not fit your model, and is a problem because overdispersion leads to standard errors for our model parameters that are too small. But, we can fit other models that do not make such assumptions, or allow there to be more variability.
@@ -1128,16 +1171,15 @@ When using the Poisson GLM, you often run into *overdispersion* \* What's overdi
 The `svyglm()` function includes a scaling term for overdispersion, so this is already taken into account. But if you have data that aren't a complex survey, we can measure this ourselves using the residual deviance.
 
 ```{r, eval=FALSE}
-fit2<-glm(healthdays~factor(race_eth)+factor(educ)+factor(agec), data=brfss_17, family=poisson)
-summary(fit2)
-scale<-sqrt(fit2$deviance/fit2$df.residual)
+scale<-sqrt(glmp_s$deviance/glmp_s$df.residual)
 scale
 ```
 
 The deviance can also be a test of model fit, using a chi square distribution, with degrees of freedom equal to the residual d.f. (n-p):
 
 ```{r, eval=FALSE}
-1-pchisq(fit2$deviance, df = fit2$df.residual)
+1-pchisq(glmp_s$deviance, df = glmp_s$df.residual)
+
 ```
 
 So, this p value is 0, which means the model does not fit the data.
@@ -1153,11 +1195,25 @@ $$var(Y) = \lambda $$
 This allows us to include a rough proxy for a dispersion parameter for the distribution. Naturally this is fixed at 1 for basic models, and estimated in the quasi models, we can look to see if is much bigger than 1. If overdispersion is present and not accounted for you could identify a relationship as being significant when it is not!
 
 ```{r, eval=FALSE}
-fit3<-glm(healthdays~factor(race_eth)+factor(educ)+factor(agec), data=brfss_17, family=quasipoisson)
-summary(fit3)
+glmqp <- glm(Deaths  ~offset(log(Population)) + factor(Age_Group)+State,
+              data=txca,
+              family=quasipoisson)
+
+glmqp%>%
+  tbl_regression(exp = TRUE)
+
 ```
 
 ### Modeling dispersion properly
+
+```{r}
+library(dispmod)
+
+glmp_d <- glm.poisson.disp(glmp_s)
+
+glmp_d%>%
+  tbl_regression()
+```
 
 
 ## Other count models - Negative binomial
@@ -1172,8 +1228,26 @@ $$Y \sim NB (\lambda, \lambda+\lambda^2/\theta),$$ $$\text{   } E(Y) = \lambda,$
 
 Now, R will not fit negative binomial models using survey design, so, we will fit them using sample weights only, then calculate the robust standard errors. We standardize the weights to equal the sample size, as opposed to the population size by dividing each person's weight by the mean weight.
 
+```{r}
+library(MASS)
+glmnb<- glm.nb(Deaths ~ offset(log(Population))+factor(Age_Group)+State,
+               data=txca)
+
+glmnb%>%
+  tbl_regression()
+
+AIC(glmb_s, glmp_s, glmnb)
+
+glmn<- glm(Deaths/Population ~ factor(Age_Group)+State,
+           family=gaussian,
+               data=txca)
+summary(fitted(glmn)<0)
+```
+
 
 ## side by side comparison of different specificaitons
+
+
 
 ## have brief discussion of spatial models
 
