@@ -7,6 +7,11 @@ bibliography: book.bib
 
 \newpage
 
+```{r, echo=FALSE}
+knitr::opts_chunk$set(error=TRUE)
+```
+
+
 ```{r, include = FALSE}
 library(tidyverse)
 library(tmap)
@@ -908,48 +913,6 @@ The identity link function is appropriate for the Normal distribution, because t
 
 While these are not all possible distributions for the GLM, these are distributions that are both widely used and commonly present not only in R but in other software as well. The `VGAM` package adds a much wider selection of both univariate and bivariate distributions for discrete and continuous outcomes. 
 
-```{r}
-glmb<- glm(cbind(lowbw1618, births1618-lowbw1618) ~  fampov14 + rucc + hpsa16,
-          data = ahrf_m, 
-          family = binomial)
-summary(glmb)
-pchisq(deviance(glmb), df.residual(glmb), lower=F)
-pchisq(deviance(mod2), df.residual(mod2), lower=F)
-
-plot(density(residuals(glmb, type="pearson")))
-plot(density(rstandard(glmb, type="deviance")))
-library(statmod)
-scatter.smooth(predict(glmb, type='response'), rstandard(glmb, type='deviance'), col='gray')
-
-scatter.smooth(sqrt(predict(glmb, type='response')), qresid(glmb), col='gray')
-scatter.smooth(predict(glmb, type='response'), qresid(glmb), col='gray')
-scatter.smooth(predict(glmb, type='response')~ ahrf_m$fampov14, col='gray')
-plot(residuals(glmb)~ predict(glmb, type="link"))
-plot(predict(glmb)~residuals(glmb, type="pearson"))
-plot(predict(mod2)~residuals(mod2, type="pearson"))
-```
-
-```{r}
-library(dispmod)
-mod2 <- glm.binomial.disp(glmb)
-
-mod2$dispersion
-summary(mod2)
-
-
-glmp<- glm(lowbw1618 ~ offset(log( births1618))+ fampov14 + rucc + hpsa16,
-          data = ahrf_m, 
-          family = poisson)
-summary(glmp)
-
-library(dispmod)
-mod3 <- glm.poisson.disp(glmp)
-
-mod3$dispersion
-
-AIC(glmb, glmp)
-
-```
 
 ### Binomial Distribution
 
@@ -1008,8 +971,11 @@ glmb%>%
 In this case, the odds ratio interpretation is not as clear as in the case of the Bernoulli case, in the context of individuals. When I interpret the coefficients for the count binomial, I describe them as *percent changes in the mean*. For example, the `fampov14` odds ratio is `r round(exp(coef(glmb)[2]), 2)`, I describe this result as: The low birth weight rate increases by 2 percent for every 1 percentage point increase in the poverty rate. We can see this by using the fitted values from `emmeans`, here I generate two cases where `fampov14` is exactly 1 percentage point different, and you can see the difference in the estimated rates. 
 
 ```{r}
-rg <- ref_grid(glmb, at=list( fampov14 = c(5, 6) ) ) 
-emmeans(rg, specs = "fampov14", type = "response")
+rg <- ref_grid(glmb,
+               at=list( fampov14 = c(5, 6) ) ) 
+emmeans(rg,
+        specs = "fampov14",
+        type = "response")
 ```
 
 We can calculate the percentage change in these two estimates:
@@ -1021,26 +987,7 @@ We can calculate the percentage change in these two estimates:
 and confirm that it is 2 percent.
 
 #### Application of the binomial to age standardization
-The Binomial is very useful for conducting standardization of rates between groups to measure the differences. 
-
-```{r, eval=FALSE, include=FALSE}
-library(wonderapi)
-mylist <- list(list("Group Results By", "D76.V5"))
-
-mylist <- list( 
-               list("B_2", "D76.V7"),
-               list("B_3", "D76.V5"))
-
-mydata <- getData(TRUE, "Detailed Mortality", mylist)
-head(mydata)
-
-
-mylist <- list(list("And By", "Gender"))
-mydata0 <- getData(TRUE, "Detailed Mortality", mylist)
-head(mydata0)
-```
-
-To show an example of how to do age standardization, I use data from the [CDC Wonder Compressed Mortality file](https://wonder.cdc.gov/mortSQL.html). The data are for the states of Texas and California, and are the numbers of deaths and population at risk in 13 age groups. 
+The Binomial is very useful for conducting standardization of rates between groups to measure the differences. To show an example of how to do age standardization, I use data from the [CDC Wonder Compressed Mortality file](https://wonder.cdc.gov/mortSQL.html). The data are for the states of Texas and California for the year 2016, and are the numbers of deaths and population at risk in 13 age groups. 
 
 ```{r}
 txca <- readr::read_delim(url("https://raw.githubusercontent.com/coreysparks/dem-stats-book/master/data/CMF_TX_CA_age.txt?token=GHSAT0AAAAAABQZ5VMKYY4UY4W35G4LJWAAYQZAPEA"),
@@ -1054,7 +1001,9 @@ txca <- readr::read_delim(url("https://raw.githubusercontent.com/coreysparks/dem
                                         "Deaths",
                                         "Population",
                                         "Crude.Rate")
-                          )
+                          )%>%
+  filter(Age_Group != "Not Stated")%>%
+  mutate(Population = as.numeric(Population), Deaths = as.numeric(Deaths))
 
 txca%>%
   gt()
@@ -1063,7 +1012,7 @@ txca%>%
 ```{r}
 txca%>%
   group_by(State)%>%
-  summarise(p_pop = Population/sum(Population))%>%
+  summarise(p_pop = Population/sum(Population ))%>%
   ungroup()%>%
   mutate(age = forcats::fct_relevel(txca$Age_Group,"< 1 year",
                                     "1-4 years",
@@ -1097,11 +1046,9 @@ glmb_s <- glm(cbind(Deaths, Population-Deaths) ~ factor(Age_Group)+State,
 glmb_s%>%
   tbl_regression(exp = TRUE)
 
-AIC(glmb_s, glmp_s, glmp_E)
-
 ```
 
-Which shows that Texas has a standardized mortality rate 17 percent higher than California.
+Which shows that Texas has a standardized mortality rate `r (round(exp(coef(glmb_s)[14]),2)-1)*100` percent higher than California.
 
 ## Poisson distribution 
 
@@ -1111,9 +1058,9 @@ Another distribution commonly used in the analysis of place-based data is the Po
 
 $$log(\lambda)= \beta_0 + \beta_1 x_1$$
 
-When we see the $\beta_1$ parameter in this model in computer output, it is on the log-scale, since that is the scale of the outcome for the Poisson model. In order to interpret the $\beta_1$, we have to ***exponentiate*** it. When we do this, the parameter is interpreted as the *percentage change in the mean of the outcome*, for a 1 unit change in $x_1$. For instance if we estimate a model and see in the output that $\beta_1 = \text{.025}$, then $\exp(\beta_1) = \text{exp}(\text{.025}) = \text{1.025}$, or for a 1 unit increase in $x_1$, the mean of $y$ increases by 1.025. So if the mean of $y$ is 10, when $x_1$ = 0, then the mean is $10*(1.025*1)$ or $10.25$ when $x_1$ = 1.
+When we see the $\beta_1$ parameter in this model in computer output, it is on the log-scale, since that is the scale of the outcome for the Poisson model. In order to interpret the $\beta_1$, we have to ***exponentiate*** it. When we do this, the parameter is interpreted as the *percentage change in the mean of the outcome*, for a 1 unit change in $x_1$. For instance if we estimate a model and see in the output that $\beta_1 = \text{.025}$, then $\exp(\beta_1) = \text{exp}(\text{.025}) = \text{1.025}$, or for a 1 unit increase in $x_1$, the mean of $y$ increases by 1.025. So if the mean of $y$ is 10, when $x_1$ = 0, then the mean is $10*(1.025*1)$ or $10.25$ when $x_1$ = 1. This application of the Poisson is rare in demographic research because places rarely have either equal populations or areas, so the *Rate Model* or the *Relative Risk Model* are much more commonly used. 
 
--   *Rate model* The second type of modeling strategy used in the Poisson model is for a rate of occurrence. This model includes an ***offset term*** in the model to incorporate unequal population sizes, this is the most common way the data are analyzed in demographic research. This offset term can be thought of as the denominator for the rate, and we can show how it is put into the model.
+-   *Rate model* The second type of modeling strategy used in the Poisson model is for a rate of occurrence. This model includes an ***offset term*** in the model to incorporate unequal population sizes, this is the most common way the data are analyzed in demographic research. This offset term can be thought of as the denominator for the rate, and we can show how it is included in the model.
 
 If $n$ is the population size for each place, then, we want to do a regression on the rate of occurrence of our outcome. The rate is typically expressed as a proportion, or probability $rate = \frac{y}{n}$, as seen in the Binomial distribution earlier:
 
@@ -1123,10 +1070,22 @@ log(y) - log(n)= \beta_0 + \beta_1 x_1\\
 log(y)= \beta_0 + \beta_1 x_1 + log(n)
 $$
 
-Similar to the example from before, when interpreting the effect of $\beta_1$ in this model, we also have to exponentiate it. In this case, the interpretation would not be related to the overall count, but to the rate of occurrence. So, if as before, the $\beta_1 = \text{.025}$, then $\exp(\beta_1) = \text{exp}(\text{.025}) = \text{1.025}$, or for a 1 unit increase in $x_1$, the ***rate*** of occurrence of $y$ increases by 1.025. If, in this case the average mortality rate was $10/500 = 0.02$ when $x_1$ = 0, then the rate is $0.02*(1.025*1)$ or $0.0205$ when $x_1$ = 1.
+Similar to the example from before, when interpreting the effect of $\beta_1$ in this model, we also have to exponentiate it. In this case, the interpretation would not be related to the overall count, but to the rate of occurrence. So, if as before, the $\beta_1 = \text{.025}$, then $\exp(\beta_1) = \text{exp}(\text{.025}) = \text{1.025}$, or for a 1 unit increase in $x_1$, the ***rate*** of occurrence of $y$ increases by a factor of 1.025. 
+
+This model includes the natural log of the population size in the `offset()` function on the right side of the model formula. R will not estimate a regression coefficient for this term, and as in the equation above, the term just represents a scale factor for the outcome. 
+
+
+**Note on offsets**
+It is important to ensure that all of the populations in a particular analysis have non-zero counts, because if the model sees $log(0)$ in data, it will generate an error, because this is not a number.
 
 ```{r}
-glmp_s <- glm(Deaths  ~offset(log(Population)) + factor(Age_Group)+State,
+log(0)
+```
+
+The Poisson model with a population offset is specified as:
+
+```{r}
+glmp_s <- glm(Deaths ~ offset(log(Population)) + factor(Age_Group) + State,
               data=txca,
               family=poisson)
 
@@ -1134,68 +1093,102 @@ glmp_s%>%
   tbl_regression(exp = TRUE)
 
 ```
+This result is very close to that from the Binomial model, where we see after age standardization, Texas has a `r (round(exp(coef(glmp_s)[14]),2)-1)*100` percent higher mortality rate overall than California.
 
 ## Relative risk analysis
 
 The third type of model for the Poisson distribution focuses on the idea of the relative risk of an event, and uses the ***Standardized risk ratio*** as its currency.
 
--   The *Standardized risk ratio* incorporates differential exposure due to population size as an ***expected count*** of the outcome in the offset term, and are typically seen in epidemiological studies. The expected count $E$, incorporates the different population sizes of each area by estimating the number of events that should occur, if the area followed a given rate of occurrence.
-
-The expected count is calculated by multiplying the average rate of occurrence, $r$, by the population size, $n$: $E_i = r * n_i$, where $r = \frac{\sum y_i}{\sum n_i}$, is the overall rate in the population. This method is commonly referred to as ***internal standaridization*** because we are using the data at hand to estimate the overall rate of occurrence, versus using a rate from some other published source.
+-   The *Standardized risk ratio* incorporates differential exposure due to population size as an ***expected count*** of the outcome in the offset term, and are typically seen in epidemiological studies. The expected count $E$, incorporates the different population sizes of each area by estimating the number of events that **should occur**, if the area followed a given rate of occurrence. The expected count is calculated by multiplying the average rate of occurrence, $r$, by the population size, $n$: $E_i = r * n_i$, where $r = \frac{\sum y_i}{\sum n_i}$, is the overall rate in the population. This method is commonly referred to as ***internal standardization*** because we are using the data at hand to estimate the overall rate of occurrence, versus using a rate from some other published source.
 
 The model for the mean of the outcome would look like this:
 
 $$log(y)= \beta_0 + \beta_1 x_1  + log(E)$$.
 
-```{r}
-txca$E<- txca$Population*(sum(txca$Deaths/sum(txca$Population)))
+And is specified very similarly to the rate model above. First, I show how to calculate the expected number of deaths in the data. A naive method of calculating the expected counts is  to use the crude death rate as $r$, or we can use an age-specific death rate. 
 
-glmp_E <- glm(Deaths  ~offset(log(E)) + factor(Age_Group)+State,
-              data=txca,
+```{r}
+#crude death rate
+txca$E<- txca$Population*(sum(txca$Deaths/sum(txca$Population)))
+```
+
+In this calculation, the `Population` variable is multiplied by $r$, which is the sum of all deaths, divided by all populations. 
+
+The age-specific expected count is a little more involved. We first have to sum all deaths and populations by age, then calculate the age specific rate, then join this back to the original data based on the `Age_Group` variable. Is this the only way to do this, no, but it works in this example. Alternatively, we could get another age schedule of mortality rates and merge it to these data and standardize our data to that mortality shedule.
+
+```{r}
+
+#Age specific death rate
+txca2<- txca%>%
+  group_by(Age_Group)%>%
+  summarise(ndeaths = sum(Deaths), npop=sum(Population))%>%
+  mutate(r_age = ndeaths/npop)%>%
+  ungroup()%>%
+  left_join(., txca, by = "Age_Group")%>%
+  arrange(State, Age_Group)%>%
+  mutate(E_age = Population * r_age)
+
+txca2%>%
+  select(State, Age_Group, Deaths, Population, E, E_age)%>%
+  gt()
+```
+In this table, you can see the age-specifc expected counts of deaths are much more in line with the age-specific mortality rate, and the numbers of expected deaths are much more similar to the observed pattern of deaths, when compared to the expected counts derived from the crude death rate. 
+
+```{r}
+glmp_E <- glm(Deaths ~ offset(log(E)) + factor(Age_Group)+State,
+              data=txca2,
               family=poisson)
 
-glmp_E%>%
-  tbl_regression(exp = TRUE)
+glmp_Eage <- glm(Deaths ~ offset(log(E_age)) + factor(Age_Group)+State,
+              data=txca2,
+              family=poisson)
+
+m1 <- glmp_E%>%
+  tbl_regression(exp = T)
+m2 <- glmp_Eage%>%
+  tbl_regression(exp = T)
+
+m_all <- tbl_merge(list(m1, m2))
+
+m_all
 
 ```
 
+This result is identical in terms of the difference between states, as the rate model above, and the results are invariant to the choice of the standard used, although when the age-specific expected count is used, the overall mortality pattern becomes insignificant in the model. This is an example of, despite different denominator/offset terms, we can achieve the same comparison from either the rate model or the model for relative risks. 
 
 ## Overdispersion
 
-When using the Poisson GLM, you often run into *overdispersion* \* What's overdispersion? For the Poisson distribution, the mean and the variance are functions of one another (variance = mean for Poisson). So when you have more variability than you expect in your data, you have overdispersion. This basically says your data do not fit your model, and is a problem because overdispersion leads to standard errors for our model parameters that are too small. But, we can fit other models that do not make such assumptions, or allow there to be more variability.
+When using the Poisson GLM, you often run into *overdispersion*. What's overdispersion you might ask? For the Poisson distribution, the mean and the variance are functions of one another (variance = mean for Poisson). So when you have more variability than you expect in your data, you have overdispersion. This basically says that your data do not fit your model, and is a problem because overdispersion leads to standard errors for our model parameters that are too small typically. But, we can fit other models that do not make such assumptions, or allow there to be more variability.
 
-**An easy check on this is to compare the residual deviance to the residual degrees of freedom. They ratio should be 1 if the model fits the data.**
 
-## NOTE
-
-The `svyglm()` function includes a scaling term for overdispersion, so this is already taken into account. But if you have data that aren't a complex survey, we can measure this ourselves using the residual deviance.
+#### Checking for overdispersion
+An easy check on this is to compare the residual deviance to the residual degrees of freedom. They ratio should be 1 if the model fits the data.
 
 ```{r, eval=FALSE}
-scale<-sqrt(glmp_s$deviance/glmp_s$df.residual)
+scale<-sqrt(glmp_E$deviance/glmp_E$df.residual)
 scale
 ```
 
-The deviance can also be a test of model fit, using a chi square distribution, with degrees of freedom equal to the residual d.f. (n-p):
+Here, we see for the Poisson model, the scale factor is over 6, which shows evidence of overdispersion in the data. The residual deviance can also be used as a goodness of fit test for the model, because the deviance has been shown to be distributed as a $\chi^2$ distribution, with degrees of freedom equal to the residual d.f. (n-p):
 
 ```{r, eval=FALSE}
-1-pchisq(glmp_s$deviance, df = glmp_s$df.residual)
+1-pchisq(glmp_E$deviance,
+         df = glmp_E$df.residual)
 
 ```
 
-So, this p value is 0, which means the model does not fit the data.
+So, this p value is 0, which means the model does not fit the data. If the goodness of fit test had a p-value over 5 percent, we could conclude that the model in fact did fit the data.
 
 ## Modeling Overdispersion via a Quasi distribution
 
-For the Poisson , we can fit a "quasi" distribution that adds an extra parameter to allow the mean-variance relationship to not be constant. For Poisson we get:
+For the Poisson and the Binomial, we can fit a "quasi" distribution that adds an extra parameter to allow the mean-variance relationship to not be constant. For Poisson we get:
 
-$$var(Y) = \lambda * \phi$$ , instead of
+$Var(Y) = \lambda * \phi$, instead of $Var(Y) = \lambda$
 
-$$var(Y) = \lambda $$
-
-This allows us to include a rough proxy for a dispersion parameter for the distribution. Naturally this is fixed at 1 for basic models, and estimated in the quasi models, we can look to see if is much bigger than 1. If overdispersion is present and not accounted for you could identify a relationship as being significant when it is not!
+This accessory parameter $\phi$ allows us to include a rough proxy for a dispersion parameter for the distribution. Naturally this is fixed at 1 for the normal Poisson model, and estimated in the quasi models, we can look to see if is much bigger than 1. If overdispersion is present and not accounted for you could identify a relationship as being significant when it is not!
 
 ```{r, eval=FALSE}
-glmqp <- glm(Deaths  ~offset(log(Population)) + factor(Age_Group)+State,
+glmqp <- glm(Deaths ~ offset(log(E)) + factor(Age_Group)+State,
               data=txca,
               family=quasipoisson)
 
@@ -1204,17 +1197,53 @@ glmqp%>%
 
 ```
 
+While the overall pattern and substantive interpretation of the regular Poisson and the quasiPoisson models are identical, the standard errors of the parameters are not. We can see this by forming their ratios. The standard errors of the model parameters can be extracted from the `summary()$coefficients` of a model, specifically the second column of this table.
+
+```{r}
+sum1<- summary(glmp_E)$coef[, 2]
+sum2<- summary(glmqp)$coef[, 2]
+
+data.frame(Poisson = sum1,
+           QPoisson= sum2,
+           coef = names(coef(glmp_E)))%>%
+  ggplot(aes(y = QPoisson/Poisson, x= coef))+
+  geom_point()+
+  ylab("Ratio of Standard Errors" )+
+  xlab ("Parameter")+
+  ggtitle("Ratio of Standard Errors in Poisson and QuasiPoisson Models")+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+
+```
+
+This highly meaningful plot shows the ratio of all the standard errors is the same and is equal to the square root of the quasiPoisson dispersion parameter $\phi$, which can be seen in `summary(glmqp)$dispersion`, in this case it is `r sqrt(round(summary(glmqp)$dispersion, 2))`, which is extremely close to the `scale` we calculated earlier. 
+
 ### Modeling dispersion properly
 
 ```{r}
 library(dispmod)
 
-glmp_d <- glm.poisson.disp(glmp_s)
+glmp_d <- glm.poisson.disp(glmp_E, verbose = F)
 
 glmp_d%>%
   tbl_regression()
 ```
+```{r}
+sum1<- summary(glmp_E)$coef[, 2]
+sum2<- summary(glmp_d)$coef[, 2]
 
+data.frame(Poisson = sum1,
+           QPoisson= sum2,
+           coef = names(coef(glmp_E)))%>%
+  ggplot(aes(y = QPoisson/Poisson, x= coef))+
+  geom_point()+
+  ylab("Ratio of Standard Errors" )+
+  xlab ("Parameter")+
+  ggtitle("Ratio of Standard Errors in Poisson and Dispersed Poisson Models")+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+
+```
 
 ## Other count models - Negative binomial
 
