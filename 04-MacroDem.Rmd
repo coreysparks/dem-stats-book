@@ -1039,6 +1039,21 @@ We see that the age distribution of Texas is slightly younger than California, a
 To do age standardization using the regression framework, we have to control for the differences in the age structure of the two populations (Texas and California) by regressing the mortality rate on the Age structure, the difference between the states after doing this is the difference in the age-standardized rate. 
 
 ```{r}
+txca<- txca%>%
+  mutate(Age_Group = forcats::fct_relevel(txca$Age_Group,"< 1 year",
+                                    "1-4 years",
+                                     "5-9 years",
+                                    "10-14 years",
+                                    "15-19 years",
+                                    "20-24 years",
+                                    "25-34 years",
+                                    "35-44 years",
+                                    "45-54 years",
+                                    "55-64 years",
+                                    "65-74 years",
+                                    "75-84 years", "85+ years"
+                                    ))
+
 glmb_s <- glm(cbind(Deaths, Population-Deaths) ~ factor(Age_Group)+State,
               data=txca,
               family=binomial)
@@ -1216,19 +1231,31 @@ data.frame(Poisson = sum1,
 
 ```
 
-This highly meaningful plot shows the ratio of all the standard errors is the same and is equal to the square root of the quasiPoisson dispersion parameter $\phi$, which can be seen in `summary(glmqp)$dispersion`, in this case it is `r sqrt(round(summary(glmqp)$dispersion, 2))`, which is extremely close to the `scale` we calculated earlier. 
+This **highly meaningful** plot shows the ratio of all the standard errors is the same and is equal to the square root of the quasiPoisson dispersion parameter $\phi$, which can be seen in `summary(glmqp)$dispersion`, in this case it is `r sqrt(round(summary(glmqp)$dispersion, 2))`, which is extremely close to the `scale` we calculated earlier. The quasiPoisson model has a disadvantage however, in that, per the `?glm` documentation, is fit via quasi-likelihood methods and as such cannot be compared using AIC to other models.
+
 
 ### Modeling dispersion properly
+The `dispmod` package implements the method of Breslow [-@breslow_extra-poisson_1984] which adds an extra parameter to account for the overdispersion in the Poisson, and is fit via regular maximum likelihood, so it is comparable to other models. Effectively, this takes either a model fit via `glm()` with either a Binomial or Poisson family, and performs a re-weighted estimate of the model parameters. 
 
 ```{r}
 library(dispmod)
 
-glmp_d <- glm.poisson.disp(glmp_E, verbose = F)
+glmp_d <- glm.poisson.disp(glmp_E,
+                           verbose = F)
 
 glmp_d%>%
-  tbl_regression()
+  tbl_regression(exp = T)
+
 ```
+
+In this example the difference between California and Texas is now larger at a 24% higher mortality rate in Texas. How does this model compare to the regular Poisson model?
+
 ```{r}
+AIC(glmp_E, glmp_d)
+```
+The dispersed model shows a much lower AIC suggesting that the dispersion accounted for in the the Breslow model is likely important. We can see how the dispersed Poisson model's standard errors compare to those of the regular Poisson using the same plot we saw earlier:
+
+```{r, echo=FALSE}
 sum1<- summary(glmp_E)$coef[, 2]
 sum2<- summary(glmp_d)$coef[, 2]
 
@@ -1244,6 +1271,8 @@ data.frame(Poisson = sum1,
 
 
 ```
+
+In this case, the standard errors are not just a monotone transformation of the Poisson model errors, they each have their own scaling, which shows the dispersed Poisson model is doing something different compared to the quasiPoisson model. 
 
 ## Other count models - Negative binomial
 
