@@ -1272,9 +1272,67 @@ data.frame(Poisson = sum1,
 
 ```
 
-In this case, the standard errors are not just a monotone transformation of the Poisson model errors, they each have their own scaling, which shows the dispersed Poisson model is doing something different compared to the quasiPoisson model. 
+In this case, the standard errors are not just a monotone transformation of the Poisson model errors, they each have their own scaling, which shows the dispersed Poisson model is doing something different compared to the quasiPoisson model by not using a single scaling factor for all the standard errors. 
 
-## Other count models - Negative binomial
+## Other count models 
+
+
+The Poisson and Binomial models are probably the most commonly used models for rates and proportions, but other models exist that offer more flexibility. Specifically the Beta distribution and the Negative Binomial distribution. 
+
+### Beta distribution model
+
+The Beta distribution is a commonly used model for the prior distribution for the mean of the Binomial, as it has values between 0 and 1, but it is not used as often as an outcome distribution. It is indeed quite flexible as an outcome distribution for proportions because of its range of support, but also because it has an additional dispersion parameter, unlike the Binomial, so the pitfalls of overdispersion often present in the Binomial can be avoided. The `betareg` package [@betareg] implements the Beta regression model. The distribution has density:
+
+$$
+f(y:p,q) = \frac{\Gamma(p +
+q)}{\Gamma(p)\Gamma(q)}x^{p - 1}(1 - x)^{q - 1}
+$$
+Where $\Gamma$ is the Gamma function. The distribution, as parameterized in `betareg` has mean and variance:
+
+$$
+\mu = p/(p+q) \\
+Var = \mu (1-\mu)/ (1+\phi)
+$$
+
+Where $phi$ is a precision parameter. The model is linked to the linear predictor using one of the same link functions as the Binomial model: Logit, Probit or Complementary Log-Log.
+
+$$g(\mu_i) = X'\beta = \eta_i$$
+The Logit link is parameterized as:
+
+$$logit(g(\mu)) = log(\mu / (1-\mu))$$
+As described in their article on the `betareg` package [@cribari-neto_beta_2010], the model can also include a separate model for dispersion, so you can model the variance in the data as well as the mean. 
+
+The `betareg::betareg()` function implements model, and here is an application of the model to the low birth weight data used earlier:
+
+
+```{r}
+library(betareg)
+glm_beta<-betareg(I(lbrate1618/1000) ~  fampov14 + rucc + hpsa16, 
+                  data=ahrf_m)
+
+summary(glm_beta)
+```
+
+And the model with a separate model for the dispersion can be estimated by including a second formula separated by a `|` as:
+
+```{r}
+
+library(betareg)
+glm_beta_o<-betareg(I(lbrate1618/1000) ~  fampov14 + rucc + hpsa16 | scale(popn), 
+                  data=ahrf_m)
+
+summary(glm_beta_o)
+```
+
+The AIC can be used to determine if the dispersion model is preferred to the regular beta regression.
+```{r}
+AIC(glm_beta, glm_beta_o)
+
+```
+
+In this case, the dispersion model is preferred since the AIC is `r round(abs(diff(AIC(glm_beta, glm_beta_o)[,2])),2)` points lower for the dispersion model.
+
+### Negative binomial model
 
 -   Of course, we could just fit other distributional models to our data, popular choices are:
 
@@ -1282,13 +1340,19 @@ In this case, the standard errors are not just a monotone transformation of the 
 
 -   Effectively adds a shape parameter to Poisson
 
-$$Y \sim NB (\lambda, \lambda+\lambda^2/\theta),$$ $$\text{   } E(Y) = \lambda,$$ $$\text{   } var(Y) = \lambda+\lambda^2/\theta$$ $$\lambda = log(\eta)$$ $$\eta = \beta_0 + \beta_1 x_1+ log(n)$$
+$$
+Y \sim NB (\lambda, \lambda+\lambda^2/\theta) \\
+E(Y) = \lambda \\
+\text{   } var(Y) = \lambda+\lambda^2/\theta \\
+\lambda = log(\eta) \\ 
+\eta = \beta_0 + \beta_1 x_1+ log(n)
+$$
 
 Now, R will not fit negative binomial models using survey design, so, we will fit them using sample weights only, then calculate the robust standard errors. We standardize the weights to equal the sample size, as opposed to the population size by dividing each person's weight by the mean weight.
 
 ```{r}
 library(MASS)
-glmnb<- glm.nb(Deaths ~ offset(log(Population))+factor(Age_Group)+State,
+glmnb<- glm.nb(Deaths ~ offset(log(Population)) + factor(Age_Group) +  State,
                data=txca)
 
 glmnb%>%
