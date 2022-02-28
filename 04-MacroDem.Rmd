@@ -244,7 +244,7 @@ ahrf2<-ahrf%>%
                             .$f0978716 == 2 ~ 'partial county shortage'),
          obgyn15_pc= 1000*( f1168415 / f1198416 ) )%>%
   mutate(rucc = droplevels(rucc, ""))%>%
-  select(births1618,
+  dplyr::select(births1618,
                 lowbw1618,
                 lbrate1618,
                 state,
@@ -990,7 +990,7 @@ and confirm that it is 2 percent.
 The Binomial is very useful for conducting standardization of rates between groups to measure the differences. To show an example of how to do age standardization, I use data from the [CDC Wonder Compressed Mortality file](https://wonder.cdc.gov/mortSQL.html). The data are for the states of Texas and California for the year 2016, and are the numbers of deaths and population at risk in 13 age groups. 
 
 ```{r}
-txca <- readr::read_delim(url("https://raw.githubusercontent.com/coreysparks/dem-stats-book/master/data/CMF_TX_CA_age.txt?token=GHSAT0AAAAAABQZ5VMKYY4UY4W35G4LJWAAYQZAPEA"),
+txca <- readr::read_delim(url("https://raw.githubusercontent.com/coreysparks/dem-stats-book/master/data/CMF_TX_CA_age.txt?token=GHSAT0AAAAAABQZ5VMKFA7HBM5RY4QA3ORCYRGDHDA"),
                           delim = "\t",
                           quote = "\"",
                           skip=1,
@@ -1334,28 +1334,42 @@ In this case, the dispersion model is preferred since the AIC is `r round(abs(di
 
 ### Negative binomial model
 
--   Of course, we could just fit other distributional models to our data, popular choices are:
-
--   Negative binomial
-
--   Effectively adds a shape parameter to Poisson
+When overdispersion is present, many researchers will automatically turn to the Negative Binomial as an alternative. The Negative Binomial sounds like it is some alternative to the Binomial distribution, but it is more like the Poisson. It effectively adds a second parameter to a model for integer counts. The model has been parameterized in several ways. The most common are the NB1 and NB2 models. The difference is how the model allows the variance to increase with the mean. The NB1 model allows for variance to increase linearly with the mean:
 
 $$
-Y \sim NB (\lambda, \lambda+\lambda^2/\theta) \\
+Y \sim NB (\lambda, \lambda+ \theta \lambda) \\
 E(Y) = \lambda \\
-\text{   } var(Y) = \lambda+\lambda^2/\theta \\
+\text{   } var(Y) = \lambda+\theta\lambda \\
+\lambda = log(\eta) \\ 
+\eta = \beta_0 + \beta_1 x_1+ log(n)
+$$
+The NB2 model, which is the most commonly implemented in software, allows the variance to increase as a square with the mean.
+
+$$
+Y \sim NB (\lambda, \lambda+ \theta \lambda^2) \\
+E(Y) = \lambda \\
+\text{   } var(Y) = \lambda+ \theta \lambda^2 \\
 \lambda = log(\eta) \\ 
 \eta = \beta_0 + \beta_1 x_1+ log(n)
 $$
 
-Now, R will not fit negative binomial models using survey design, so, we will fit them using sample weights only, then calculate the robust standard errors. We standardize the weights to equal the sample size, as opposed to the population size by dividing each person's weight by the mean weight.
+The base R `glm()` does not offer the NB1 model by default, but the standard `MASS` package [@venables_ripley] has the `glm.nb()` function. An alternative is the highly flexible `gamlss` package[@gamlss], which includes the NB2 model, as well as a host of other distributions, plus the ability to model mean and variance, similar to how `betareg()` was achieving for the Beta distribution.  
 
 ```{r}
 library(MASS)
 glmnb<- glm.nb(Deaths ~ offset(log(Population)) + factor(Age_Group) +  State,
                data=txca)
 
+library(gamlss)
+
+glmnb2<-gamlss(Deaths ~ offset(log(Population)) + factor(Age_Group) +  State,
+               family = NBII,
+               data=txca)
+
 glmnb%>%
+  tbl_regression()
+
+glmnb2%>%
   tbl_regression()
 
 AIC(glmb_s, glmp_s, glmnb)
