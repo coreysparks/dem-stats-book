@@ -375,7 +375,7 @@ ipums %>%
                    weights = PERWT) %>%
   group_by(met_name, employed)%>%
   summarize(emp_rate = survey_total()) %>%  
-  pivot_wider(id = met_name,
+  pivot_wider(id_cols = met_name,
               names_from = employed,
               values_from = c(emp_rate, emp_rate_se) ) %>%
   head()
@@ -399,7 +399,7 @@ ipums %>%
                    weights = PERWT) %>%
   group_by(met_name, employed)%>%
   summarize(emp_rate = survey_mean()) %>%  
-  pivot_wider(id = met_name,
+  pivot_wider(id_cols = met_name,
               names_from = employed,
               values_from = c(emp_rate, emp_rate_se) ) %>%
   head()
@@ -419,7 +419,7 @@ tx_rates<- ipums %>%
                    weights = PERWT) %>%
   group_by(met_name, employed)%>%
   summarize(emp_rate = survey_mean()) %>%  
-  pivot_wider(id = met_name,
+  pivot_wider(id_cols = met_name,
               names_from = employed,
               values_from = c(emp_rate, emp_rate_se) ) %>%
   head()

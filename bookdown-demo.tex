@@ -148,7 +148,7 @@
 
 \title{Applied Demographic Data Analysis with R}
 \author{Corey S. Sparks}
-\date{2022-02-04}
+\date{2022-03-01}
 
 \begin{document}
 \maketitle
@@ -720,9 +720,8 @@ functions have conflicts. For example, if I load \texttt{dplyr}, I see:
 
 \begin{figure}
 \centering
-\includegraphics{C:/Users/ozd504/Documents/Github/dem-stats-book/images/dplyrconflict.png}
-\caption{Conflict
-messages}
+\includegraphics{images/dplyrconflict.png}
+\caption{Conflict messages}
 \end{figure}
 
 As you use R more, you will learn which packages have conflicts, and
@@ -771,7 +770,7 @@ underlying code can be seen by:
 ##         sort(x, partial = half)[half]
 ##     else mean(sort(x, partial = half + 0L:1L)[half + 0L:1L])
 ## }
-## <bytecode: 0x0000000021ad12f0>
+## <bytecode: 0x00000000142bd1d8>
 ## <environment: namespace:stats>
 \end{verbatim}
 
@@ -810,9 +809,8 @@ for a function's arguments, use the help operator, \texttt{?}. For example
 
 \begin{figure}
 \centering
-\includegraphics{C:/Users/ozd504/Documents/Github/dem-stats-book/images/meandoc.png}
-\caption{Mean Function
-Help}
+\includegraphics{images/meandoc.png}
+\caption{Mean Function Help}
 \end{figure}
 
 When using a new function, it's always advised to check out the help
@@ -1748,7 +1746,7 @@ x & y & group \\
 6 & 21 & C \\ 
 7 & 23 & C \\ 
 8 & 25 & C \\ 
- \bottomrule
+\bottomrule
 \end{longtable}
 
 \hypertarget{real-data-example}{%
@@ -2838,7 +2836,7 @@ The fundamentals of using \texttt{ipumsr} is to specify the name of your \texttt
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(ipumsr)}
 
-\NormalTok{ddi }\OtherTok{\textless{}{-}} \FunctionTok{read\_ipums\_ddi}\NormalTok{(}\AttributeTok{ddi\_file =} \StringTok{"\textasciitilde{}/OneDrive {-} University of Texas at San Antonio/projects/book\_data//usa\_00097.xml"}\NormalTok{)}
+\NormalTok{ddi }\OtherTok{\textless{}{-}} \FunctionTok{read\_ipums\_ddi}\NormalTok{(}\AttributeTok{ddi\_file =} \StringTok{"data/usa\_00097.xml"}\NormalTok{)}
 \NormalTok{ipums }\OtherTok{\textless{}{-}} \FunctionTok{read\_ipums\_micro}\NormalTok{(}\AttributeTok{ddi =}\NormalTok{ ddi)}
 \end{Highlighting}
 \end{Shaded}
@@ -3005,29 +3003,29 @@ The core definition of the ACS survey design is shown in the code above, and I h
 \hline
 strata & psu & weight\\
 \hline
-1 & 1 & 19\\
+1 & 1 & 15\\
 \hline
-1 & 1 & 22\\
+1 & 1 & 18\\
 \hline
-1 & 1 & 17\\
+1 & 1 & 21\\
 \hline
-1 & 2 & 25\\
+1 & 2 & 24\\
 \hline
-1 & 2 & 17\\
+1 & 2 & 23\\
 \hline
-1 & 3 & 17\\
+1 & 3 & 23\\
 \hline
-2 & 1 & 18\\
+2 & 1 & 16\\
 \hline
-2 & 1 & 21\\
-\hline
-2 & 2 & 23\\
+2 & 1 & 17\\
 \hline
 2 & 2 & 23\\
 \hline
-2 & 3 & 19\\
+2 & 2 & 16\\
 \hline
-2 & 3 & 18\\
+2 & 3 & 13\\
+\hline
+2 & 3 & 27\\
 \hline
 \end{tabular}
 
@@ -3212,7 +3210,7 @@ This is OK, but if we want the totals in columns versus rows, we need to reshape
                    \AttributeTok{weights =}\NormalTok{ PERWT) }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{group\_by}\NormalTok{(met\_name, employed)}\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{summarize}\NormalTok{(}\AttributeTok{emp\_rate =} \FunctionTok{survey\_total}\NormalTok{()) }\SpecialCharTok{\%\textgreater{}\%}  
-  \FunctionTok{pivot\_wider}\NormalTok{(}\AttributeTok{id =}\NormalTok{ met\_name,}
+  \FunctionTok{pivot\_wider}\NormalTok{(}\AttributeTok{id\_cols =}\NormalTok{ met\_name,}
               \AttributeTok{names\_from =}\NormalTok{ employed,}
               \AttributeTok{values\_from =} \FunctionTok{c}\NormalTok{(emp\_rate, emp\_rate\_se) ) }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{head}\NormalTok{()}
@@ -3248,7 +3246,7 @@ Of course, if we want rates, this would imply us having to divide these columns 
                    \AttributeTok{weights =}\NormalTok{ PERWT) }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{group\_by}\NormalTok{(met\_name, employed)}\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{summarize}\NormalTok{(}\AttributeTok{emp\_rate =} \FunctionTok{survey\_mean}\NormalTok{()) }\SpecialCharTok{\%\textgreater{}\%}  
-  \FunctionTok{pivot\_wider}\NormalTok{(}\AttributeTok{id =}\NormalTok{ met\_name,}
+  \FunctionTok{pivot\_wider}\NormalTok{(}\AttributeTok{id\_cols =}\NormalTok{ met\_name,}
               \AttributeTok{names\_from =}\NormalTok{ employed,}
               \AttributeTok{values\_from =} \FunctionTok{c}\NormalTok{(emp\_rate, emp\_rate\_se) ) }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{head}\NormalTok{()}
@@ -3415,7 +3413,7 @@ Beaumont-Port Arthur, TX & $40,000$ & $1,784$ \\
 Brownsville-Harlingen, TX & $25,200$ & $1,020$ \\ 
 College Station-Bryan, TX & $30,000$ & $1,529$ \\ 
 Corpus Christi, TX & $34,000$ & $1,428$ \\ 
- \bottomrule
+\bottomrule
 \end{longtable}
 
 In general, the \texttt{gt} tables are much easier to make look nice, compared to basic tables, because they're much more customizable. The \texttt{gtsummary} package extends the table functionality by combining the summary functions like \texttt{dplyr} with the table structures of \texttt{gt}. Additionally, it will recognize survey design objects so that information can also be integrated into your workflow. The \texttt{gtsummary} presents a more descriptive statistical summary of the variables included, and actually uses \texttt{dplyr} tools under the hood of the package.
@@ -3425,7 +3423,15 @@ In the code below, I first filter and mutate the IPUMS data to contain working a
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(gtsummary)}
+\end{Highlighting}
+\end{Shaded}
 
+\begin{verbatim}
+## #Uighur
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \NormalTok{ipums }\SpecialCharTok{\%\textgreater{}\%}
  \FunctionTok{filter}\NormalTok{(EMPSTAT }\SpecialCharTok{==} \DecValTok{1}\NormalTok{,}
 \NormalTok{         AGE }\SpecialCharTok{\textgreater{}=} \DecValTok{16} \SpecialCharTok{\&}\NormalTok{ AGE }\SpecialCharTok{\textless{}=} \DecValTok{65}\NormalTok{, }
@@ -3670,7 +3676,7 @@ Gender & Labor Force Participation Rate & SE \\
 \midrule
 Female & $0.674$ & $0.002$ \\ 
 Male & $0.797$ & $0.002$ \\ 
- \bottomrule
+\bottomrule
 \end{longtable}
 
 So we see that males have a much higher labor force participation rate, compared to females, and this puts the differences that we observed from the chi square test into better context.
@@ -3884,7 +3890,7 @@ Prior to the advent in the 1960's of large scale social surveys like the General
 
 Paul Voss \citeyearpar{voss_demography_2007} describes most demography (and certainly most demographic studies prior to the 1970's and 1980's) as \textbf{Macro} demography. Voss also mentions that prior to the availability of individual level microdata, all demography was macro-demography, and most demographic studies were spatial in nature, because demographic data were only available in spatial units corresponding to administrative areas. Typical types of geographic areas would be counties, census tracts, ZIP codes, state or nations.
 
-\textless\textless\textless\textless\textless\textless\textless{} Updated upstream In the macro-demographic perspective on demography, observations are typically places, areas, or some other aggregate level of individuals. We do not observe the individual people themselves often times. An example of this is if you were to have access to an aggregate count of deaths in a region, even if the deaths were classified by age and sex, you still would be dealing with data that ignores, or has no index to the more nuanced characteristics of the individual decedents themselves. That being said, data such as these are invaluable, and most demographic summaries of individual-level data would aggregate based on the characteristics of the individuals any way. The macro scale principal is illustrated below, where all of the variables we observe are a scale above the individual person.
+In the macro-demographic perspective on demography, observations are typically places, areas, or some other aggregate level of individuals. We do not observe the individual people themselves often times. An example of this is if you were to have access to an aggregate count of deaths in a region, even if the deaths were classified by age and sex, you still would be dealing with data that ignores, or has no index to the more nuanced characteristics of the individual decedents themselves. That being said, data such as these are invaluable, and most demographic summaries of individual-level data would aggregate based on the characteristics of the individuals any way. The macro scale principal is illustrated below, where all of the variables we observe are a scale above the individual person.
 
 \begin{figure}
 \centering
@@ -3953,7 +3959,7 @@ Using the \texttt{tigris} package is very easy and its functions fit directly in
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-120-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-121-1.pdf}
 
 \hypertarget{tidycensus}{%
 \subsubsection{Tidycensus}\label{tidycensus}}
@@ -3970,7 +3976,7 @@ The package requires users to obtain a developer API key from the Census Bureau'
 
 which only needs to be done once.
 
-A basic use of the \texttt{tidycensus} package is to get data and produce maps of the indicators. This is done easily because \texttt{tidycensus} fits directly into general \texttt{dplyr} and \texttt{ggplot2} workflows. Below is an example of accessing 2019 ACS data on poverty rate estimates for New York census tracts from New York county, New York. The sytax takes several arguments indicating what level of census geography you want, the year of the estimates, the details of states and counties you may want, and which ACS tables you want. Here I use the Data Profile table for the percentage estimate of families with incomes below the poverty line. The \texttt{output\ =\ "wide"} option is useful if you get multiple estimates, as it arrages them into columns, one for each estimate.
+A basic use of the \texttt{tidycensus} package is to get data and produce maps of the indicators. This is done easily because \texttt{tidycensus} fits directly into general \texttt{dplyr} and \texttt{ggplot2} workflows. Below is an example of accessing 2019 ACS data on poverty rate estimates for New York census tracts from New York county, New York. The syntax takes several arguments indicating what level of census geography you want, the year of the estimates, the details of states and counties you may want, and which ACS tables you want. Here I use the Data Profile table for the percentage estimate of families with incomes below the poverty line. The \texttt{output\ =\ "wide"} option is useful if you get multiple estimates, as it arranges them into columns, one for each estimate.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4107,7 +4113,7 @@ The \texttt{geometry\ =\ TRUE} option also download the TIGER line file for the 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-125-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-126-1.pdf}
 
 The \texttt{tidycensus} package had a great array of functions and the author Kyle Walker has published a book on using it \emph{FILL IN CITATION} which covers its many uses.
 
@@ -4127,7 +4133,7 @@ One common task that we should do when visualizing ACS estimates is to examine t
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-126-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-127-1.pdf}
 
 which shows areas with the highest coefficient of variations mostly adjacent to Central Park and on the lower west side of Manhattan. These are also the areas with the lowest poverty rates in the city, so the estimates have low precision because so few respondents report incomes below the poverty line.
 
@@ -4139,10 +4145,10 @@ The IPUMS NHGIS project \footnote{Link to AHRF codebook - \href{https://data.hrs
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(sf)}
-\NormalTok{ipums\_co }\OtherTok{\textless{}{-}} \FunctionTok{read\_sf}\NormalTok{(}\StringTok{"\textasciitilde{}/OneDrive {-} University of Texas at San Antonio/projects/book\_data/US\_county10\_2000.shp"}\NormalTok{)}
+\NormalTok{ipums\_co }\OtherTok{\textless{}{-}} \FunctionTok{read\_sf}\NormalTok{(}\StringTok{"data/US\_county10\_2000.shp"}\NormalTok{)}
 
 
-\NormalTok{im\_dat }\OtherTok{\textless{}{-}}\NormalTok{ readr}\SpecialCharTok{::}\FunctionTok{read\_csv}\NormalTok{(}\StringTok{"\textasciitilde{}/OneDrive {-} University of Texas at San Antonio/projects/book\_data/nhgis0025\_ds231\_2005\_county.csv"}\NormalTok{)}
+\NormalTok{im\_dat }\OtherTok{\textless{}{-}}\NormalTok{ readr}\SpecialCharTok{::}\FunctionTok{read\_csv}\NormalTok{(}\StringTok{"data/nhgis0025\_ds231\_2005\_county.csv"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4173,7 +4179,7 @@ The IPUMS NHGIS project \footnote{Link to AHRF codebook - \href{https://data.hrs
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-127-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-128-1.pdf}
 
 \hypertarget{international-data}{%
 \subsubsection{International data}\label{international-data}}
@@ -4223,7 +4229,8 @@ Next, I remove many of the variables in the AHRF and recode several others. In t
 \NormalTok{                            .}\SpecialCharTok{$}\NormalTok{f0978716 }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\textasciitilde{}} \StringTok{\textquotesingle{}whole county shortage\textquotesingle{}}\NormalTok{,}
 \NormalTok{                            .}\SpecialCharTok{$}\NormalTok{f0978716 }\SpecialCharTok{==} \DecValTok{2} \SpecialCharTok{\textasciitilde{}} \StringTok{\textquotesingle{}partial county shortage\textquotesingle{}}\NormalTok{),}
          \AttributeTok{obgyn15\_pc=} \DecValTok{1000}\SpecialCharTok{*}\NormalTok{( f1168415 }\SpecialCharTok{/}\NormalTok{ f1198416 ) )}\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{select}\NormalTok{(births1618,}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{rucc =} \FunctionTok{droplevels}\NormalTok{(rucc, }\StringTok{""}\NormalTok{))}\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(births1618,}
 \NormalTok{                lowbw1618,}
 \NormalTok{                lbrate1618,}
 \NormalTok{                state,}
@@ -4286,7 +4293,7 @@ Here is a \texttt{ggplot()} histogram of the low birth weight rate for US counti
 ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 \end{verbatim}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-131-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-132-1.pdf}
 Here, we do a basic map of the outcome variable for the continental US, and see the highest rates of low birth weight births in the US occur in the southeastern areas of the country. Notice, I do not color the boundaries of the counties in order to maximize the reader's ability to see the variation, instead I show lines between states by overlaying the \texttt{sts} layer from above. I also add cartographic options of a scale bar and a north arrow, which I personally believe should be on any map shown to the public.
 
 \begin{Shaded}
@@ -4312,7 +4319,7 @@ Here, we do a basic map of the outcome variable for the continental US, and see 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-132-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-133-1.pdf}
 
 When doing analysis of place-based data, maps are almost a fundamental aspect of the analysis and often convey much more information about the distribution of the outcome than either distribution plots or summary statistics.
 
@@ -4405,7 +4412,12 @@ This stores the model data and parameter estimates in the object called \texttt{
 ## F-statistic:  123 on 11 and 2312 DF,  p-value: <2e-16
 \end{verbatim}
 
-We see that there is a significant positive association between family poverty and the low birth weight rate, we also see that there is a tendency for more rural areas to have lower low birth weight rates than the largest cities (\texttt{rucc01}). There is a marginally significant association between a county being a healthcare shortage area and the low birth weight rate. Overall the model is explaining about a third of the variation in the outcome, as seen in the adjusted R-Square value of .3667.
+We see that there is a significant positive association between family poverty and the low birth weight rate, we also see that there is a tendency for more rural areas to have lower low birth weight rates than the largest cities (Reference level = \texttt{rucc01}). There is a marginally significant association between a county being a healthcare shortage area and the low birth weight rate. Overall the model is explaining about a third of the variation in the outcome, as seen in the adjusted R-Square value of .3667.
+
+\hypertarget{a-not-on-interpretation}{%
+\paragraph{A not on interpretation}\label{a-not-on-interpretation}}
+
+It is important to remember, when describing results for place-based data, to avoid using language centered on individuals. For instance, with reference to the \texttt{fampov14} variable, we cannot say that families living in poverty are more likely to have a low birth weight birth, instead, we must focus on discussion on \emph{places} with higher rates of poverty having a higher rate of low birth weight births. Ascribing individual risk from an ecological analysis is an example of the \emph{ecological fallacy} often seen when doing place-based analysis, and we must be aware of it when framing our questions and describing our results.
 
 The \texttt{gtsummary} package \citep{gtsummary} provides a very nice interface to produce much better looking summaries of models.
 
@@ -4488,7 +4500,7 @@ We can check these for our model above easily:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-136-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-137-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4499,7 +4511,7 @@ We can check these for our model above easily:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-136-2.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-137-2.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4507,10 +4519,262 @@ We can check these for our model above easily:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-136-3.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-137-3.pdf}
 While the overall distribution of the residuals is fairly normal based on the histogram and the comparison to the normal density plot, the q-q plot shows that the tails of the distribution are not well modeled by the normal distribution because there are several observations that are too far below or above the theoretical line (dotted line).
 
 The \emph{homoskedasticity} assumption is also tied to the normal distributional assumption of the model, as see above, if we write the model in its distributional form, \(y_i \sim Normal(X' \beta, \sigma_\epsilon)\), the term \$ \sigma\_\epsilon\$ is a single parameter, meaning that we only have one of these in a linear regression model. This parameter determines the spread of the variation around the mean function. Larger values equal more spread around the mean, and smaller values equal less spread. A commonly used graphical procedure to detect lack of homoskedasticity, or \emph{heteroskedasticity}, is an envelope plot, or a plot of the residuals against the fitted values from the model. Formal tests also exist including the \emph{Breusch-Pagan test} and the modified version of this test developed by Cook and Weisberg {[}cite{]}
+
+A graphical check of this assumption is easily done from the model fit:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(lm1, }\AttributeTok{which =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-138-1.pdf} \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-138-2.pdf}
+These plots show some evidence that the error variances are non-constant. The first plot has the very characteristic ``fish'' or ``cone'' shape, where the error variances increase as the fitted values increase. We can also do a formal test using functions from the \texttt{car} package:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(car)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: carData
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'car'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:purrr':
+## 
+##     some
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:dplyr':
+## 
+##     recode
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ncvTest}\NormalTok{(lm1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Non-constant Variance Score Test 
+## Variance formula: ~ fitted.values 
+## Chisquare = 469, Df = 1, p = <2e-16
+\end{verbatim}
+
+Which again shows more statistical evidence of the non-constant variance in residuals.
+
+\hypertarget{correction-for-non-constant-variance}{%
+\paragraph{Correction for non-constant variance}\label{correction-for-non-constant-variance}}
+
+The assumption of homoskedasticity is important for two reasons, first is related to prediction from the model, but the second is related to the test statistics derived from the model. In order to test our hypothesis that \(x\) is related to \(y\), we form the ratio of the \(\beta_1\) parameter to its error, this is typically either a \(z\), \(t\) or Wald \(\chi^2\) statistic, depending on which procedure you're using.
+
+\[t = \frac{\hat{\beta_1}}{se(\beta_1))}\]
+The term \(se(\beta_1)\) is the estimated standard error of the parameter, and is calculated using the ratio of the residual standard deviation and the square root of the sums of squares of the \(x\):
+
+\[se(\beta_1) = \frac{\sigma_{\epsilon}}{\sqrt{\sum(x - \bar{x})^2}}\]
+
+or in the matrix terms:
+
+\[Var(\beta) = \sigma_{\epsilon}(X'X)^{-1}\]
+
+if the term \(\sigma_{\epsilon}\) is not constant then the standard error of each parameter in the model is incorrect. Corrections for heteroskedasticity are commonplace in the social sciences, and are usually attributed to White \citeyearpar{white_1980} and MacKinnon and White \citeyearpar{mackinnon_white_1985} with many additions since the original publication, notably Long and Ervin \citeyearpar{long_using_2000}. These corrections use the empirically observed error terms and avoid the assumption of common variance in all residuals.
+
+The \texttt{coeftest()} function in the \texttt{lmtest} package is one option to correct for heteroskedasticity in regression models. It allows for various correction types, with the ``HC3'' type \citep{long_using_2000} being the default for linear models. Below, I show the default tests assuming constant variance and the corrected tests.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(sandwich)}
+\FunctionTok{library}\NormalTok{(lmtest)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: zoo
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'zoo'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     as.Date, as.Date.numeric
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{coeftest}\NormalTok{(lm1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## t test of coefficients:
+## 
+##                               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)                    62.2692     1.1890   52.37  < 2e-16 ***
+## fampov14                        2.2581     0.0685   32.98  < 2e-16 ***
+## rucc02                         -1.9185     1.2008   -1.60  0.11025    
+## rucc03                         -3.3866     1.2506   -2.71  0.00682 ** 
+## rucc04                         -6.6548     1.4064   -4.73  2.4e-06 ***
+## rucc05                         -5.9628     1.9374   -3.08  0.00211 ** 
+## rucc06                         -3.9418     1.1432   -3.45  0.00057 ***
+## rucc07                         -4.0073     1.2817   -3.13  0.00179 ** 
+## rucc08                          0.4511     2.1106    0.21  0.83077    
+## rucc09                         -3.8837     2.2912   -1.70  0.09020 .  
+## hpsa16partial county shortage  -0.6622     1.0077   -0.66  0.51115    
+## hpsa16whole county shortage     2.3621     1.2533    1.88  0.05960 .  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{coeftest}\NormalTok{(lm1, }\AttributeTok{vcov  =} \FunctionTok{vcovHC}\NormalTok{(lm1, }\AttributeTok{type =} \StringTok{"HC3"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## t test of coefficients:
+## 
+##                               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)                     62.269      1.149   54.17  < 2e-16 ***
+## fampov14                         2.258      0.113   19.90  < 2e-16 ***
+## rucc02                          -1.919      0.975   -1.97  0.04929 *  
+## rucc03                          -3.387      1.064   -3.18  0.00147 ** 
+## rucc04                          -6.655      1.209   -5.50  4.1e-08 ***
+## rucc05                          -5.963      1.956   -3.05  0.00233 ** 
+## rucc06                          -3.942      1.097   -3.59  0.00033 ***
+## rucc07                          -4.007      1.301   -3.08  0.00210 ** 
+## rucc08                           0.451      2.428    0.19  0.85262    
+## rucc09                          -3.884      3.297   -1.18  0.23894    
+## hpsa16partial county shortage   -0.662      0.854   -0.78  0.43841    
+## hpsa16whole county shortage      2.362      1.269    1.86  0.06286 .  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+The take away in this example is that non-constant variance can affect the standard errors of the model parameter estimates, and in turn affect the test statistics that we base all of our hypothesis tests on. In the particulars of this model there is not a lot of change, the \texttt{rucc02} parameter is barley significant once using the corrected standard errors, otherwise we see a very similar pattern in terms of what is significant in the model.
+
+\hypertarget{clustered-standard-errors}{%
+\paragraph{Clustered standard errors}\label{clustered-standard-errors}}
+
+Another commonly used correction in regression modeling is the \emph{clustered standard error}. These are commonplace and almost the default in the Stata programming environment, and are widely used in the field of economics. Clustering of standard errors attempts to correct for clustering in the residuals from the regression model. Clustering can happen for a wide variety of reasons, and as we saw in the previous chapter on survey data analysis, is often an artifact of how the data are collected. With place-based data, we may have clustering because the places are close to each other, or because the share some other characteristic that we have not measured in our regression model. In the case of our regression model, and in our descriptive analysis of our outcome, the map shown prior may indicate some form of \emph{spatial correlation} in the outcome. While there are models to deal with such non-independence in place-based data, they are not a subject I will touch on here. Instead, we may use the state which each county is in as a proxy for the spatial clustering in the outcome, as one example of potential of a clustering term.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{coeftest}\NormalTok{(lm1,}
+         \AttributeTok{vcov  =} \FunctionTok{vcovCL}\NormalTok{(lm1, }\AttributeTok{cluster =}\NormalTok{ ahrf\_m}\SpecialCharTok{$}\NormalTok{state))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## t test of coefficients:
+## 
+##                               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)                     62.269      2.437   25.55  < 2e-16 ***
+## fampov14                         2.258      0.288    7.83  7.2e-15 ***
+## rucc02                          -1.919      1.153   -1.66   0.0964 .  
+## rucc03                          -3.387      1.424   -2.38   0.0175 *  
+## rucc04                          -6.655      1.351   -4.93  8.9e-07 ***
+## rucc05                          -5.963      2.603   -2.29   0.0221 *  
+## rucc06                          -3.942      1.281   -3.08   0.0021 ** 
+## rucc07                          -4.007      2.113   -1.90   0.0580 .  
+## rucc08                           0.451      2.596    0.17   0.8621    
+## rucc09                          -3.884      4.732   -0.82   0.4119    
+## hpsa16partial county shortage   -0.662      1.187   -0.56   0.5770    
+## hpsa16whole county shortage      2.362      1.804    1.31   0.1905    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+In this case, the \texttt{rucc02} and \texttt{rucc07} terms become marginally significant and the healthcare shortage areas lose their marginal significance.
+
+\hypertarget{weighted-least-squares}{%
+\paragraph{Weighted Least Squares}\label{weighted-least-squares}}
+
+Another method of dealing with non-constant error variance is the method of weighted least squares. This method modifies the model somewhat to be:
+
+\[y \sim Normal(\beta_0 +\sum_k \beta_k x_{ki}, \sigma_{\epsilon_i} )\]
+
+Where the term \(\sigma_{\epsilon_i}\) represents the different variances for each observation. The weights in the model are often variables that represent an underlying factor that affects the variance in the estimates. In demography this is often the population size of a place, as places with smaller population sizes often have more volatility to their rate estimates. This approach has been used in the spatial demographic modeling of county mortality rates in the United States by several authors \citep{mclaughlin_differential_2007, sparks_application_2010}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lm2 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(lbrate1618 }\SpecialCharTok{\textasciitilde{}}\NormalTok{  fampov14 }\SpecialCharTok{+}\NormalTok{ rucc }\SpecialCharTok{+}\NormalTok{ hpsa16,}
+          \AttributeTok{data =}\NormalTok{ ahrf\_m,}
+          \AttributeTok{weights =}\NormalTok{ popn)}
+\FunctionTok{summary}\NormalTok{(lm2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = lbrate1618 ~ fampov14 + rucc + hpsa16, data = ahrf_m, 
+##     weights = popn)
+## 
+## Weighted Residuals:
+##    Min     1Q Median     3Q    Max 
+## -42957  -2122   -106   2333  27618 
+## 
+## Coefficients:
+##                               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)                    65.5450     0.9854   66.52  < 2e-16 ***
+## fampov14                        1.8333     0.0634   28.93  < 2e-16 ***
+## rucc02                         -0.6346     0.6662   -0.95  0.34090    
+## rucc03                         -1.6737     0.9379   -1.78  0.07448 .  
+## rucc04                         -4.3839     1.3152   -3.33  0.00087 ***
+## rucc05                         -3.3140     2.1631   -1.53  0.12564    
+## rucc06                         -1.8707     1.3521   -1.38  0.16663    
+## rucc07                         -2.1260     1.8039   -1.18  0.23869    
+## rucc08                          3.9206     4.3312    0.91  0.36545    
+## rucc09                         -0.2144     4.9303   -0.04  0.96532    
+## hpsa16partial county shortage  -1.8507     0.9352   -1.98  0.04794 *  
+## hpsa16whole county shortage     0.2179     1.6542    0.13  0.89523    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 4620 on 2312 degrees of freedom
+## Multiple R-squared:  0.283,  Adjusted R-squared:  0.28 
+## F-statistic:   83 on 11 and 2312 DF,  p-value: <2e-16
+\end{verbatim}
+
+We see that by including the population size weights in the model, most of the parameters are no longer significant in the analysis, but the weights have not dealt with the non-constant variance issue totally:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ncvTest}\NormalTok{(lm2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Non-constant Variance Score Test 
+## Variance formula: ~ fitted.values 
+## Chisquare = 84.5, Df = 1, p = <2e-16
+\end{verbatim}
+
+But the overall size of the non-constant variance test is much lower than it was for the original model.
+
+\hypertarget{linearity-assumption}{%
+\subsubsection{Linearity assumption}\label{linearity-assumption}}
 
 The linearity assumption of the model assumes that the true underlying relationship in the data can be modeled using a linear combination of the predictors and the parameters. I think a lot of people think this means that you cannot include square or polynomial terms in a regression model, but that is not the case. The assumption is concerned with the linearity of the parameters, not the predictor variables themselves. For example the standard linear model with one predictor, x is written:
 
@@ -4532,231 +4796,886 @@ When this actually comes into our experience is when our data are actually gener
 
 Where the variable y is actually generated from a cosine curve with noise. Since the linear regression of y on x forces the y to change linearly with x, the model is absolutely unable to recover the underlying pattern in the data.
 
-If these assumptions are violated, then several things can happen. At best, our interpretation of the model coefficients could be wrong, meaning that, as seen above, our model would suggest one relationship from the data, but in fact becuase the model was mis-specified, the relationship we discover is incorrect. Our poor linear model would predict a decline in the outcome, while the outcome itself is perfectly stationary, as shown by the dashed line.
+\textbf{A note on splines}
+
+If the data clearly do not display a linear trend, I personally automatically look to \emph{splines} as a means to model the non-linearity in relationship. Splines are a method of constructing a model based on connecting either linear or non-linear functions across a series of breaks or \textbf{\emph{knots}} along the data in which the form of the function changes.
+
+Mathematically, knots can be written as:
+
+\$\$
+Y(x) =
+
+\begin{Bmatrix}
+F_1(x) \text {  for  } x\in [x_1, x_2]\\ 
+F_2(x) \text {  for  } x\in [x_2, x_3]\\ 
+\cdots \\ 
+F_{k}(x) \text {  for  } x\in [x_{k-1}, x_k]\\
+
+\end{Bmatrix}
+
+\$\$
+
+Where each of the \(F_k (x)\) functions imply a different form in the interval between \(x\in [x_{k-1}, x_k]\), where the \(k\) breaks are at a given knot in the data. Most splines are nonlinear functions, usually cubic polynomials, and the spline model combines a series of these polynomials to model nonlinearities in the relationship between predictors and outcomes. A relatively recent invention, \emph{Generalized Additive Models} or \emph{GAMs} are a way to model an outcome with both linear and non-linear terms together. The GAM model forms the linear predictor of a model can be constructed as:
+
+\[E(y)= \beta_0 + f(x_1) + \beta_1 x_2\]
+where the \(f(x_1)\) term is a regression spline of one of the variables. The models can be a mixture of linear and smooth terms. Here is an example of using a B-spline within the \texttt{lm()} model to fit a smooth regression function to the messy nonlinear model above.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(splines)}
+
+\NormalTok{sm}\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(y2}\SpecialCharTok{\textasciitilde{}}\FunctionTok{bs}\NormalTok{(t, }\AttributeTok{df =} \DecValTok{5}\NormalTok{))}
+
+\FunctionTok{plot}\NormalTok{(t, y2, }\AttributeTok{t=}\StringTok{"p"}\NormalTok{,}
+     \AttributeTok{ylim=}\FunctionTok{range}\NormalTok{(y2) }\SpecialCharTok{*} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\FloatTok{1.2}\NormalTok{),}
+     \AttributeTok{main=}\StringTok{"Nice Spline Model,}\SpecialCharTok{\textbackslash{}n}\StringTok{Fit to Nonlinear Outcome"}\NormalTok{,}
+     \AttributeTok{ylab =}\StringTok{"y"}\NormalTok{,}
+     \AttributeTok{xlab=} \StringTok{"x"}\NormalTok{)}
+
+\NormalTok{t}\OtherTok{\textless{}{-}}\FunctionTok{seq}\NormalTok{(}\AttributeTok{from =} \FunctionTok{min}\NormalTok{(t),}\AttributeTok{to =} \FunctionTok{max}\NormalTok{(t), }\AttributeTok{length.out =} \FunctionTok{length}\NormalTok{(y2))}
+
+\FunctionTok{lines}\NormalTok{(t, }\FunctionTok{predict}\NormalTok{( }\FunctionTok{lm}\NormalTok{ (y2 }\SpecialCharTok{\textasciitilde{}} \FunctionTok{bs}\NormalTok{(t, }\AttributeTok{df =} \DecValTok{5}\NormalTok{)),}
+                 \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{t =}\NormalTok{ t), }\AttributeTok{lwd =} \FloatTok{1.5}\NormalTok{),}
+      \AttributeTok{col=}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-145-1.pdf}
+
+I really think splines, and GAMs are an excellent addition to the modeling world and have started teaching them in my own methods courses. In the world of demography, especially, with age affecting everything, there is no need to constantly assume relationships are purely linear, and splines offer an excellent method to explore such relationships.
+
+If these assumptions are violated, then several things can happen. At best, our interpretation of the model coefficients could be wrong, meaning that, as seen above, our model would suggest one relationship from the data, but in fact because the model was misspecified, the relationship we discover is incorrect. Our poor linear model would predict a decline in the outcome, while the outcome itself is perfectly stationary, as shown by the dashed line.
 
 In a more social science sensibility, the interpretation of the beta coefficients for the effect of \(x\) on \(y\) in this case will provide us a false conclusion of the relationship in the data. This is a really dangerous outcome for us in social science, because that's why we're doing statistics in the first place, to answer questions.
 
 The normality assumption above primarily affect predictions from the model, which, since the normal distribution is bound on \(-\infty\) to \(\infty\), can easily lead to a prediction outside of the realm of possibility, say for a dichotomous outcome, or a count, neither of which can have predicted values beyond 0 and 1, or less than 0.
 
-\hypertarget{correction-for-non-constant-variance}{%
-\paragraph{Correction for non-constant variance}\label{correction-for-non-constant-variance}}
-
-The assumption of homoskedasticity is important for two reasons, first is related to prediction from the model, but the second is related to the test statistics derived from the model. In order to test our hypothesis that \(x\) is related to \(y\), we form the ratio of the \(\beta_1\) parameter to its error, this is typically either a \(z\), \(t\) or Wald \(\chi^2\) statistic, depending on which procedure you're using.
-
-\[t = \frac{\hat{\beta_1}}{se(\beta_1))}\]
-The term \(se(\beta_1)\) is the estimated standard error of the parameter, and is calculated using the ratio of the residual standard deviation and the square root of the sums of squares of the \(x\):
-
-\[se(\beta_1) = \frac{\sigma_{\epsilon}}{\sqrt{\sum(x - \bar{x})^2}}\]
-
-or in the matrix terms:
-
-\[Var(\beta) = \sigma_{\epsilon}(X'X)^{-1}\]
-
-if the term \(\sigma_{\epsilon}\) is not constant then the standard error of each parameter in the model is incorrect. Corrections for heteroskedasticity are commonplace in the social sciences, and are usually attributed to White \citeyearpar{white_1980} and MacKinnon and White \citeyearpar{mackinnon_white_1985} with many additions since the original publication, notably Long and Ervin \citeyearpar{long_using_2000}. These corrections use the empirically observed error terms and avoid the assumption of common variance in all residuals.
-
-\hypertarget{weighted-least-squares}{%
-\paragraph{Weighted Least Squares}\label{weighted-least-squares}}
-
-Another method of dealing with non-constant error variance is the method of weighted least squares. This method modifies the model somewhat to be:
-
-\[y \sim Normal(\beta_0 +\sum_k \beta_k x_{ki}, \sigma_{\epsilon_i} )\]
-
-Where the term \(\sigma_{\epsilon_i}\) represents the different variances for each observation. The weights in the model are often variables that represent an underlying factor that affects the variance in the estimates. In demography this is often the population size of a place, as places with smaller population sizes often have more volatility to their rate estimates. This approach has been used in the spatial demographic modeling of county mortality rates in the United States by several authors \citep{mclaughlin_differential_2007, sparks_application_2010}.
-
 \hypertarget{generalized-least-squares}{%
 \subsubsection{Generalized Least Squares}\label{generalized-least-squares}}
 
-Once our data start to violate the assumptions of the linear model, the model becomes less and less useful. For instance, why make all of the strict assumptions about homoskedastic (I am contractually required by the statistics union to say this at least once) variances in the model residuals in order to use OLS, when you can use it's friend and brother, \textbf{Generalized Least Squares} (GLS, of course), which allows you to make useful and pragmatic changes to the OLS model structure to accommodate all of the fun and annoying things about real data, but still use the normal distribution to model our outcomes\footnote{Link to AHRF codebook - \href{https://data.hrsa.gov/DataDownload/AHRF/AHRF_USER_TECH_2019-2020.zip}{``https://data.hrsa.gov/DataDownload/AHRF/AHRF\_USER\_TECH\_2019-2020.zip''}}.
+Once our data start to violate the assumptions of the linear model, the model becomes less and less useful. For instance, why make all of the strict assumptions about homoskedastic (I am contractually required by the statistics union to say this at least once) variances in the model residuals in order to use OLS, when you can use it's friend and brother, \textbf{Generalized Least Squares} (GLS, of course), which allows you to make useful and pragmatic changes to the OLS model structure to accommodate all of the fun and annoying things about real data, but still use the normal distribution to model our outcomes{[}\^{}macrodem-9{]}.
 
-Generalized Least Squares adds a lot more flexibility to modeling normally distributed outcomes, basically by allowing us to modify the fundamental equations above to accommodate unequal variances, or the use of covariates on variances. Another way to write the OLS model above would be:
+Generalized Least Squares adds a lot more flexibility to modeling normally distributed outcomes, basically by allowing us to modify the fundamental equations above to accommodate unequal variances, or the use of covariates or stratification variables on variances. Another way to write the OLS model above would be:
 
 \[\epsilon_i \sim Normal(X'\beta, I\sigma_\epsilon)\] Where \(I\) is the \textbf{identity matrix}, which implies that for each observation, the variances in the residuals are all the same:
 
-\[\sigma_{\epsilon}  = I * \sigma_{\epsilon} = \begin{bmatrix}
+\[
+\sigma_{\epsilon}  = I * \sigma_{\epsilon} = \begin{Bmatrix}
 1& 0& 0 \\
 0& 1& 0 \\
 0& 0& 1\\
-\end{bmatrix} *\sigma_{\epsilon} = \begin{bmatrix}
+\end{Bmatrix} *\sigma_{\epsilon} = \begin{Bmatrix}
 \sigma_{\epsilon}& 0& 0 \\
 0& \sigma_{\epsilon}& 0 \\
 0& 0 & \sigma_{\epsilon} \\
-\end{bmatrix}\]
+\end{Bmatrix}
+\]
 
 Which shows the common variance for the three residuals. GLS allows us to relax this constant variance assumption, by at the minimum allowing the variances to be a function of a weighting variable (which produces \textbf{Weighted Least Squares}), or some covariate. In the most basic presentation of this principle, this makes the residuals have some other, non-constant form of:
 
 \[\sigma_{\epsilon}  = \Omega\] which in turn modifies the estimation equation for the \(\beta\)'s to:
 
-\[\beta_{k_{GLS}} = (X' \Omega^{-1} X)^{-1} X' \Omega^{-1} Y\] Applications of such models are more commonly seen in time series analysis, where the residuals of the model often have an autoregressive form, but when talking about place-based demography, more modifications of the model have been derived that allow for addressing another key assumption of independence among observations. This in fact is the realm of an entire field of econometrics, often called \textbf{spatial econometrics} \citep{anselin_spatial_1988, chi_spatial_2020, elhorst_spatial_2014, lesage_introduction_2009}.
+\[\beta_{k_{GLS}} = (X' \Omega^{-1} X)^{-1} X' \Omega^{-1} Y\] Applications of such models are more commonly seen in time series modeling and longitudinal analysis, where the residuals of the model often have an autoregressive form to allow individuals to be correlated with themselves over time, but when talking about place-based demography, more modifications of the model have been derived that allow for addressing another key assumption of independence among observations and nonconstant variances. This in fact is the realm of an entire field of econometrics, often called \textbf{spatial econometrics} \citep{anselin_spatial_1988, chi_spatial_2020, elhorst_spatial_2014, lesage_introduction_2009}.
 
-\hypertarget{cook-example}{%
-\subsection{cook example}\label{cook-example}}
+The \texttt{gls()} function in the \texttt{nlme} library is very flexible at modeling heteroskedasticity using several types of variance functions. The general principle of the gls model in terms of modeling heteroskedasticity is that the OLS model residual variance \(\sigma_{\epsilon}\) is now not a constant, but a function of covariates or different variances based on a stratification variable. This generates a model for the residual variances of the form:
+
+\[Var(\epsilon_i |\beta) = \sigma^2 g\]
+
+Where the \(g\) function can be the effect of a covariate, which would allow the variance to increase or decrease as function of that variable, or a set of strata, where the variance can be different in two or more groups. Below, I first show the model above fit using \texttt{gls()} instead of \texttt{lm()}, then extend the model to include heteroskedasticity based on the population size of the county, and state-specific variance terms \citep{pinheiro_mixed-effects_2000}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{100}\NormalTok{)}
-\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{100}\NormalTok{, }\AttributeTok{mean =}\NormalTok{ x, }\AttributeTok{sd =}\NormalTok{ .}\DecValTok{6}\SpecialCharTok{*}\NormalTok{(x))}
+\FunctionTok{library}\NormalTok{(nlme)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## Warning in rnorm(100, mean = x, sd = 0.6 * (x)): NAs produced
+## 
+## Attaching package: 'nlme'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:dplyr':
+## 
+##     collapse
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{plot}\NormalTok{(x, y )}
+\NormalTok{lm1g}\OtherTok{\textless{}{-}} \FunctionTok{gls}\NormalTok{(lbrate1618 }\SpecialCharTok{\textasciitilde{}}\NormalTok{  fampov14 }\SpecialCharTok{+}\NormalTok{ rucc }\SpecialCharTok{+}\NormalTok{ hpsa16,}
+          \AttributeTok{data =}\NormalTok{ ahrf\_m)}
+
+\FunctionTok{summary}\NormalTok{(lm1g)}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-138-1.pdf}
+\begin{verbatim}
+## Generalized least squares fit by REML
+##   Model: lbrate1618 ~ fampov14 + rucc + hpsa16 
+##   Data: ahrf_m 
+##     AIC   BIC logLik
+##   19581 19655  -9777
+## 
+## Coefficients:
+##                               Value Std.Error t-value p-value
+## (Intercept)                    62.3     1.189    52.4  0.0000
+## fampov14                        2.3     0.068    33.0  0.0000
+## rucc02                         -1.9     1.201    -1.6  0.1102
+## rucc03                         -3.4     1.251    -2.7  0.0068
+## rucc04                         -6.7     1.406    -4.7  0.0000
+## rucc05                         -6.0     1.937    -3.1  0.0021
+## rucc06                         -3.9     1.143    -3.4  0.0006
+## rucc07                         -4.0     1.282    -3.1  0.0018
+## rucc08                          0.5     2.111     0.2  0.8308
+## rucc09                         -3.9     2.291    -1.7  0.0902
+## hpsa16partial county shortage  -0.7     1.008    -0.7  0.5111
+## hpsa16whole county shortage     2.4     1.253     1.9  0.0596
+## 
+##  Correlation: 
+##                               (Intr) fmpv14 rucc02 rucc03 rucc04 rucc05 rucc06
+## fampov14                      -0.381                                          
+## rucc02                        -0.364 -0.121                                   
+## rucc03                        -0.342 -0.114  0.462                            
+## rucc04                        -0.298 -0.160  0.416  0.399                     
+## rucc05                        -0.207 -0.144  0.305  0.293  0.269              
+## rucc06                        -0.317 -0.245  0.521  0.501  0.453  0.336       
+## rucc07                        -0.281 -0.242  0.467  0.449  0.410  0.304  0.525
+## rucc08                        -0.140 -0.163  0.288  0.278  0.248  0.186  0.344
+## rucc09                        -0.101 -0.226  0.274  0.265  0.241  0.182  0.334
+## hpsa16partial county shortage -0.560 -0.131 -0.068 -0.078 -0.043 -0.024 -0.070
+## hpsa16whole county shortage   -0.390 -0.235 -0.035 -0.045  0.017  0.015 -0.105
+##                               rucc07 rucc08 rucc09 hps16pcs
+## fampov14                                                   
+## rucc02                                                     
+## rucc03                                                     
+## rucc04                                                     
+## rucc05                                                     
+## rucc06                                                     
+## rucc07                                                     
+## rucc08                         0.298                       
+## rucc09                         0.292  0.204                
+## hpsa16partial county shortage -0.058 -0.051 -0.037         
+## hpsa16whole county shortage   -0.035 -0.132 -0.097  0.693  
+## 
+## Standardized residuals:
+##     Min      Q1     Med      Q3     Max 
+## -5.5085 -0.6324 -0.0752  0.5677  4.7545 
+## 
+## Residual standard error: 16.4 
+## Degrees of freedom: 2324 total; 2312 residual
+\end{verbatim}
+
+These are the same results, in terms of the regression coefficients as returned by \texttt{lm()}. If we include a \texttt{varFixed()} term, we can regress the residual variance term on a covariate, in this case I select the population size.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{mod}\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(y }\SpecialCharTok{\textasciitilde{}}\NormalTok{ x)}
-\FunctionTok{summary}\NormalTok{(mod)}
+\NormalTok{lm2g}\OtherTok{\textless{}{-}} \FunctionTok{gls}\NormalTok{(lbrate1618 }\SpecialCharTok{\textasciitilde{}}\NormalTok{  fampov14 }\SpecialCharTok{+}\NormalTok{ rucc }\SpecialCharTok{+}\NormalTok{ hpsa16,}
+          \AttributeTok{data =}\NormalTok{ ahrf\_m, }
+          \AttributeTok{weights =} \FunctionTok{varFixed}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{popn) )}
+\FunctionTok{summary}\NormalTok{(lm2g)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Generalized least squares fit by REML
+##   Model: lbrate1618 ~ fampov14 + rucc + hpsa16 
+##   Data: ahrf_m 
+##     AIC   BIC logLik
+##   21560 21635 -10767
+## 
+## Variance function:
+##  Structure: fixed weights
+##  Formula: ~popn 
+## 
+## Coefficients:
+##                               Value Std.Error t-value p-value
+## (Intercept)                    64.5     1.799    35.9  0.0000
+## fampov14                        2.0     0.067    30.1  0.0000
+## rucc02                         -3.7     2.014    -1.8  0.0699
+## rucc03                         -3.7     1.984    -1.9  0.0589
+## rucc04                         -6.5     2.334    -2.8  0.0055
+## rucc05                         -6.0     2.950    -2.0  0.0410
+## rucc06                         -2.5     1.662    -1.5  0.1277
+## rucc07                         -2.3     1.730    -1.3  0.1824
+## rucc08                          0.5     2.129     0.3  0.7970
+## rucc09                         -2.9     2.182    -1.3  0.1910
+## hpsa16partial county shortage   0.2     1.301     0.1  0.8865
+## hpsa16whole county shortage     5.2     1.420     3.7  0.0002
+## 
+##  Correlation: 
+##                               (Intr) fmpv14 rucc02 rucc03 rucc04 rucc05 rucc06
+## fampov14                      -0.269                                          
+## rucc02                        -0.537 -0.065                                   
+## rucc03                        -0.550 -0.045  0.536                            
+## rucc04                        -0.466 -0.088  0.463  0.466                     
+## rucc05                        -0.363 -0.085  0.367  0.370  0.328              
+## rucc06                        -0.603 -0.163  0.649  0.655  0.568  0.452       
+## rucc07                        -0.591 -0.169  0.627  0.631  0.555  0.441  0.776
+## rucc08                        -0.431 -0.174  0.508  0.513  0.439  0.350  0.637
+## rucc09                        -0.409 -0.234  0.500  0.503  0.435  0.348  0.632
+## hpsa16partial county shortage -0.464 -0.092 -0.062 -0.062 -0.063 -0.048 -0.109
+## hpsa16whole county shortage   -0.429 -0.215 -0.016 -0.027  0.038  0.031 -0.050
+##                               rucc07 rucc08 rucc09 hps16pcs
+## fampov14                                                   
+## rucc02                                                     
+## rucc03                                                     
+## rucc04                                                     
+## rucc05                                                     
+## rucc06                                                     
+## rucc07                                                     
+## rucc08                         0.609                       
+## rucc09                         0.605  0.512                
+## hpsa16partial county shortage -0.100 -0.101 -0.087         
+## hpsa16whole county shortage    0.001 -0.099 -0.070  0.767  
+## 
+## Standardized residuals:
+##     Min      Q1     Med      Q3     Max 
+## -7.5535 -0.4806 -0.0605  0.3114  8.6854 
+## 
+## Residual standard error: 0.11 
+## Degrees of freedom: 2324 total; 2312 residual
+\end{verbatim}
+
+This model shows some very different effects after controlling for non-constant variance. For instance, the \texttt{whole\ county\ shortage} effect is now much more significant in the model, compared to the \texttt{lm1} model.
+
+The final model includes a separate variance for each state using the \texttt{varIdent()} term.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lm3}\OtherTok{\textless{}{-}} \FunctionTok{gls}\NormalTok{(lbrate1618 }\SpecialCharTok{\textasciitilde{}}\NormalTok{  fampov14 }\SpecialCharTok{+}\NormalTok{ rucc }\SpecialCharTok{+}\NormalTok{ hpsa16,}
+          \AttributeTok{data =}\NormalTok{ ahrf\_m, }
+          \AttributeTok{weights =} \FunctionTok{varIdent}\NormalTok{(}\AttributeTok{form =} \SpecialCharTok{\textasciitilde{}}\DecValTok{1}\SpecialCharTok{|}\FunctionTok{factor}\NormalTok{(state) ) )}
+\FunctionTok{summary}\NormalTok{(lm3)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Generalized least squares fit by REML
+##   Model: lbrate1618 ~ fampov14 + rucc + hpsa16 
+##   Data: ahrf_m 
+##     AIC   BIC logLik
+##   19233 19583  -9555
+## 
+## Variance function:
+##  Structure: Different standard deviations per stratum
+##  Formula: ~1 | factor(state) 
+##  Parameter estimates:
+##    21    01    04    05    06    08    09    11    12    13    16    17    18 
+## 1.000 1.665 1.467 1.344 1.417 2.344 0.415 0.935 0.869 1.462 1.249 0.853 0.727 
+##    48    49    50    22    23    24    25    26    27    28    29    30    33 
+## 1.005 0.996 0.678 1.521 0.556 1.076 0.363 0.880 0.869 2.139 1.067 0.859 0.352 
+##    34    35    36    37    38    39    40    41    42    44    45    46    47 
+## 0.586 1.668 0.883 1.276 1.345 0.759 0.910 0.979 0.716 0.773 1.496 2.271 0.923 
+##    51    53    54    55    10    32    19    20    56    31 
+## 1.415 1.165 1.404 0.810 0.849 1.374 0.803 0.938 1.571 1.160 
+## 
+## Coefficients:
+##                               Value Std.Error t-value p-value
+## (Intercept)                    61.0     0.964    63.3  0.0000
+## fampov14                        2.2     0.063    35.2  0.0000
+## rucc02                         -1.6     0.930    -1.7  0.0952
+## rucc03                         -2.7     0.999    -2.7  0.0074
+## rucc04                         -6.8     1.054    -6.4  0.0000
+## rucc05                         -7.1     1.629    -4.3  0.0000
+## rucc06                         -5.3     0.896    -5.9  0.0000
+## rucc07                         -6.2     1.029    -6.0  0.0000
+## rucc08                         -0.4     1.855    -0.2  0.8363
+## rucc09                         -3.8     2.056    -1.9  0.0641
+## hpsa16partial county shortage  -0.4     0.805    -0.5  0.6148
+## hpsa16whole county shortage     0.7     1.057     0.7  0.5082
+## 
+##  Correlation: 
+##                               (Intr) fmpv14 rucc02 rucc03 rucc04 rucc05 rucc06
+## fampov14                      -0.425                                          
+## rucc02                        -0.330 -0.118                                   
+## rucc03                        -0.300 -0.112  0.415                            
+## rucc04                        -0.281 -0.137  0.396  0.369                     
+## rucc05                        -0.155 -0.132  0.262  0.244  0.236              
+## rucc06                        -0.275 -0.238  0.476  0.446  0.423  0.284       
+## rucc07                        -0.232 -0.230  0.417  0.390  0.374  0.253  0.467
+## rucc08                        -0.105 -0.142  0.235  0.221  0.207  0.140  0.280
+## rucc09                        -0.058 -0.215  0.222  0.209  0.199  0.138  0.272
+## hpsa16partial county shortage -0.592 -0.112 -0.037 -0.042 -0.028 -0.026 -0.037
+## hpsa16whole county shortage   -0.390 -0.189 -0.015 -0.026  0.019  0.016 -0.106
+##                               rucc07 rucc08 rucc09 hps16pcs
+## fampov14                                                   
+## rucc02                                                     
+## rucc03                                                     
+## rucc04                                                     
+## rucc05                                                     
+## rucc06                                                     
+## rucc07                                                     
+## rucc08                         0.236                       
+## rucc09                         0.233  0.147                
+## hpsa16partial county shortage -0.036 -0.032 -0.019         
+## hpsa16whole county shortage   -0.031 -0.110 -0.076  0.654  
+## 
+## Standardized residuals:
+##    Min     Q1    Med     Q3    Max 
+## -3.711 -0.574  0.080  0.733  3.805 
+## 
+## Residual standard error: 13.8 
+## Degrees of freedom: 2324 total; 2312 residual
+\end{verbatim}
+
+Which also provides similar results to \texttt{lm1}. So, which model is better for this particular outcome? One way to examine relative model fit is to compare the Akaike Information Criteria (AIC) for the three models. The AIC consists of two components, one showing overall model deviance, or residual variance and a penalty term for the number of parameters in a model. A general form of it is:
+
+\[
+AIC = -2LL(\theta) + 2k
+\]
+Where the term \(-2LL(\theta)\) is the model -2 Log likelihood, or \emph{deviance}, and \(2k\) is a penalty term with \(k\) being the number of parameters.
+
+Since the three models \texttt{lm1g}, \texttt{lm2} and \texttt{lm3} are all fit by \texttt{gls()}, and fit to the same dataset, we can compare them. We can even add another model with a smooth spline effect of poverty:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lm3s}\OtherTok{\textless{}{-}} \FunctionTok{gls}\NormalTok{(lbrate1618 }\SpecialCharTok{\textasciitilde{}}  \FunctionTok{bs}\NormalTok{(fampov14, }\AttributeTok{df=}\DecValTok{4}\NormalTok{) }\SpecialCharTok{+}\NormalTok{ rucc }\SpecialCharTok{+}\NormalTok{ hpsa16,}
+          \AttributeTok{data =}\NormalTok{ ahrf\_m, }
+          \AttributeTok{weights =} \FunctionTok{varIdent}\NormalTok{(}\AttributeTok{form =} \SpecialCharTok{\textasciitilde{}}\DecValTok{1}\SpecialCharTok{|}\FunctionTok{factor}\NormalTok{(state) ) )}
+\FunctionTok{summary}\NormalTok{(lm3s)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Generalized least squares fit by REML
+##   Model: lbrate1618 ~ bs(fampov14, df = 4) + rucc + hpsa16 
+##   Data: ahrf_m 
+##     AIC   BIC logLik
+##   19167 19535  -9519
+## 
+## Variance function:
+##  Structure: Different standard deviations per stratum
+##  Formula: ~1 | factor(state) 
+##  Parameter estimates:
+##    21    01    04    05    06    08    09    11    12    13    16    17    18 
+## 1.000 1.802 1.528 1.440 1.539 2.510 0.458 0.896 0.917 1.579 1.285 0.901 0.782 
+##    48    49    50    22    23    24    25    26    27    28    29    30    33 
+## 1.017 1.067 0.735 1.702 0.618 1.159 0.407 0.956 0.911 2.441 1.150 0.910 0.363 
+##    34    35    36    37    38    39    40    41    42    44    45    46    47 
+## 0.633 1.676 0.958 1.332 1.365 0.818 0.987 1.061 0.759 0.815 1.556 1.000 0.982 
+##    51    53    54    55    10    32    19    20    56    31 
+## 1.501 1.250 1.484 0.855 0.915 1.456 0.843 1.016 1.711 1.246 
+## 
+## Coefficients:
+##                               Value Std.Error t-value p-value
+## (Intercept)                    65.3      2.23   29.31  0.0000
+## bs(fampov14, df = 4)1           4.6      3.03    1.51  0.1307
+## bs(fampov14, df = 4)2          51.0      3.14   16.25  0.0000
+## bs(fampov14, df = 4)3          72.7      8.46    8.60  0.0000
+## bs(fampov14, df = 4)4          16.0     11.31    1.41  0.1582
+## rucc02                         -1.8      0.95   -1.89  0.0591
+## rucc03                         -3.0      1.01   -2.97  0.0030
+## rucc04                         -7.0      1.07   -6.54  0.0000
+## rucc05                         -8.0      1.61   -4.95  0.0000
+## rucc06                         -5.7      0.91   -6.31  0.0000
+## rucc07                         -6.4      1.03   -6.21  0.0000
+## rucc08                         -0.8      1.85   -0.45  0.6497
+## rucc09                         -3.8      2.01   -1.92  0.0556
+## hpsa16partial county shortage  -0.5      0.80   -0.69  0.4934
+## hpsa16whole county shortage     0.6      1.04    0.58  0.5650
+## 
+##  Correlation: 
+##                               (Intr) b(14,d=4)1 b(14,d=4)2 b(14,d=4)3
+## bs(fampov14, df = 4)1         -0.907                                 
+## bs(fampov14, df = 4)2         -0.157 -0.005                          
+## bs(fampov14, df = 4)3         -0.527  0.664     -0.533               
+## bs(fampov14, df = 4)4         -0.089  0.053      0.318     -0.304    
+## rucc02                         0.011 -0.166     -0.133     -0.073    
+## rucc03                        -0.008 -0.129     -0.146     -0.034    
+## rucc04                        -0.002 -0.132     -0.134     -0.060    
+## rucc05                         0.006 -0.088     -0.128     -0.034    
+## rucc06                         0.001 -0.142     -0.190     -0.081    
+## rucc07                        -0.011 -0.120     -0.139     -0.100    
+## rucc08                        -0.015 -0.040     -0.115     -0.019    
+## rucc09                         0.006 -0.063     -0.076     -0.095    
+## hpsa16partial county shortage -0.166 -0.091     -0.123     -0.029    
+## hpsa16whole county shortage   -0.143 -0.042     -0.096     -0.055    
+##                               b(14,d=4)4 rucc02 rucc03 rucc04 rucc05 rucc06
+## bs(fampov14, df = 4)1                                                      
+## bs(fampov14, df = 4)2                                                      
+## bs(fampov14, df = 4)3                                                      
+## bs(fampov14, df = 4)4                                                      
+## rucc02                        -0.036                                       
+## rucc03                        -0.038      0.435                            
+## rucc04                        -0.035      0.414  0.388                     
+## rucc05                        -0.032      0.282  0.265  0.255              
+## rucc06                        -0.043      0.495  0.466  0.441  0.304       
+## rucc07                        -0.035      0.433  0.406  0.390  0.269  0.482
+## rucc08                        -0.019      0.243  0.231  0.216  0.150  0.290
+## rucc09                        -0.114      0.231  0.216  0.207  0.146  0.283
+## hpsa16partial county shortage -0.031     -0.012 -0.023 -0.009 -0.003 -0.013
+## hpsa16whole county shortage   -0.054     -0.006 -0.019  0.026  0.027 -0.096
+##                               rucc07 rucc08 rucc09 hps16pcs
+## bs(fampov14, df = 4)1                                      
+## bs(fampov14, df = 4)2                                      
+## bs(fampov14, df = 4)3                                      
+## bs(fampov14, df = 4)4                                      
+## rucc02                                                     
+## rucc03                                                     
+## rucc04                                                     
+## rucc05                                                     
+## rucc06                                                     
+## rucc07                                                     
+## rucc08                         0.243                       
+## rucc09                         0.245  0.152                
+## hpsa16partial county shortage -0.015 -0.022 -0.015         
+## hpsa16whole county shortage   -0.018 -0.107 -0.073  0.650  
+## 
+## Standardized residuals:
+##     Min      Q1     Med      Q3     Max 
+## -3.6648 -0.5814  0.0801  0.7267  3.8703 
+## 
+## Residual standard error: 12.9 
+## Degrees of freedom: 2324 total; 2309 residual
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{AIC}\NormalTok{( lm1g,  lm2g, lm3, lm3s)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in AIC.default(lm1g, lm2g, lm3, lm3s): models are not all fitted to the
+## same number of observations
+\end{verbatim}
+
+\begin{verbatim}
+##      df   AIC
+## lm1g 13 19581
+## lm2g 13 21560
+## lm3  61 19233
+## lm3s 64 19167
+\end{verbatim}
+
+The \texttt{AIC()} function calculates AIC for each model, and we see that \texttt{lm3s} has the lowest of the three, suggesting that the non-constant variance across states is a better representation than the effects of population size on the residual variance, and that the nonlinear effect of poverty is also present in this case.
+
+\hypertarget{further-model-comparisons}{%
+\paragraph{Further model comparisons}\label{further-model-comparisons}}
+
+R has a general method of comparing models using \(F\) tests or Likelihood Ratio Tests. These are often used when comparing nested models, where one model is a simplified version of another. We have such models above in our \texttt{gls()} models. The \texttt{lm1g} model is a simplified version of the \texttt{lm3} model because it doesn't contain the extra parameters modeling the unequal variances. The \texttt{anova()} method can compare the models to see if the extra parameters are explaining the model deviance (or variation) better.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{anova}\NormalTok{(lm1g, lm3)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      Model df   AIC   BIC logLik   Test L.Ratio p-value
+## lm1g     1 13 19581 19655  -9777                       
+## lm3      2 61 19233 19583  -9555 1 vs 2     444  <.0001
+\end{verbatim}
+
+Here the likelihood ratio test \texttt{L.Ratio} shows a significant decrease in the \texttt{logLik} in model \texttt{lm3}, suggesting that it better explains the data than \texttt{lm1g} does. The likelihood ratio is calculated as \(2*LL_2 - LL_1\), or in the case above \texttt{2*(-9555.287-\/-9777.261)}. The \texttt{anova} method is very useful for comparing alternative models and can be used on most of the models shown in this book.
+
+\hypertarget{predictions-and-marginal-means}{%
+\subsubsection{Predictions and marginal means}\label{predictions-and-marginal-means}}
+
+Working with fitted values from a regression is one of the least taught aspects of modeling. Since the models are fundamentally doing very fancy averaging, the estimated, or fitted values from the model can often be very useful to us as we try to explain the results of our models. Remember, the fitted values of the model are just:
+
+\[
+\hat{y}_i = \sum \hat{\beta_k} x_{ki}
+\]
+
+or the linear combination of the estimated model parameters and the \(k\) observed predictors, \(x_{ki}\). Most models in R have a \texttt{fitted()} method to extract the fitted values of the outcome variable for each observation.
+
+For example, here are the first six fitted values from the original \texttt{lm1} OLS model, the \texttt{gls()} heteroskedastic model \texttt{lm3} model, and the first six values of the outcome:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(gt)}
+
+\NormalTok{fits}\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{name =} \FunctionTok{head}\NormalTok{( ahrf\_m}\SpecialCharTok{$}\NormalTok{NAME ),}
+  \AttributeTok{lm1 =} \FunctionTok{head}\NormalTok{( }\FunctionTok{fitted}\NormalTok{ ( lm1 )),}
+  \AttributeTok{lm3 =} \FunctionTok{head}\NormalTok{( }\FunctionTok{fitted}\NormalTok{( lm3 )), }
+  \AttributeTok{observed =} \FunctionTok{head}\NormalTok{( ahrf\_m}\SpecialCharTok{$}\NormalTok{lbrate1618 )}
+\NormalTok{  )}
+
+\NormalTok{fits}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{gt}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\captionsetup[table]{labelformat=empty,skip=1pt}
+\begin{longtable}{lrrr}
+\toprule
+name & lm1 & lm3 & observed \\ 
+\midrule
+Anderson & 83.2 & 79.9 & 87.8 \\ 
+Bullitt & 79.4 & 78.0 & 84.5 \\ 
+Clark & 85.4 & 84.2 & 89.2 \\ 
+Daviess & 86.2 & 85.0 & 81.3 \\ 
+Hardin & 82.2 & 81.3 & 78.5 \\ 
+Harrison & 83.2 & 79.9 & 81.9 \\ 
+\bottomrule
+\end{longtable}
+
+We can also easily construct the map of the observed, fitted values and residuals from the model using \texttt{tmap}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ahrf\_m}\SpecialCharTok{$}\NormalTok{fitted\_lm3 }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(lm3)}
+
+\NormalTok{ahrf\_m}\SpecialCharTok{$}\NormalTok{resid }\OtherTok{\textless{}{-}} \FunctionTok{resid}\NormalTok{(lm3)}
+
+\NormalTok{actual }\OtherTok{\textless{}{-}}\FunctionTok{tm\_shape}\NormalTok{(ahrf\_m)}\SpecialCharTok{+}
+  \FunctionTok{tm\_polygons}\NormalTok{(}\StringTok{"lbrate1618"}\NormalTok{,}
+              \AttributeTok{palette =} \StringTok{"Blues"}\NormalTok{,}
+              \AttributeTok{n=}\DecValTok{6}\NormalTok{,}
+              \AttributeTok{style=}\StringTok{"fisher"}\NormalTok{,}
+              \AttributeTok{border.col =} \ConstantTok{NULL}\NormalTok{,}
+              \AttributeTok{colorNA =} \StringTok{"grey50"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{tm\_shape}\NormalTok{(sts)}\SpecialCharTok{+}
+  \FunctionTok{tm\_lines}\NormalTok{( }\AttributeTok{col =} \StringTok{"black"}\NormalTok{)}
+
+\NormalTok{fit}\OtherTok{\textless{}{-}}\FunctionTok{tm\_shape}\NormalTok{(ahrf\_m)}\SpecialCharTok{+}
+  \FunctionTok{tm\_polygons}\NormalTok{(}\StringTok{"fitted\_lm3"}\NormalTok{,}
+              \AttributeTok{palette =} \StringTok{"Blues"}\NormalTok{,}
+              \AttributeTok{n=}\DecValTok{6}\NormalTok{,}
+              \AttributeTok{style=}\StringTok{"fisher"}\NormalTok{, }
+              \AttributeTok{border.col =} \ConstantTok{NULL}\NormalTok{,}
+              \AttributeTok{colorNA =} \StringTok{"grey50"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{tm\_shape}\NormalTok{(sts)}\SpecialCharTok{+}
+  \FunctionTok{tm\_lines}\NormalTok{( }\AttributeTok{col =} \StringTok{"black"}\NormalTok{)}
+
+\NormalTok{resids}\OtherTok{\textless{}{-}}\FunctionTok{tm\_shape}\NormalTok{(ahrf\_m)}\SpecialCharTok{+}
+  \FunctionTok{tm\_polygons}\NormalTok{(}\StringTok{"resid"}\NormalTok{,}
+              \AttributeTok{palette =} \StringTok{"RdBu"}\NormalTok{,}
+              \AttributeTok{n=}\DecValTok{6}\NormalTok{,}
+              \AttributeTok{style=}\StringTok{"fisher"}\NormalTok{,}
+              \AttributeTok{midpoint =} \ConstantTok{NA}\NormalTok{,}
+              \AttributeTok{border.col =} \ConstantTok{NULL}\NormalTok{,}
+              \AttributeTok{colorNA =} \StringTok{"grey50"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{tm\_shape}\NormalTok{(sts)}\SpecialCharTok{+}
+  \FunctionTok{tm\_lines}\NormalTok{( }\AttributeTok{col =} \StringTok{"black"}\NormalTok{)}
+
+
+\FunctionTok{tmap\_arrange}\NormalTok{(actual, fit, resids, }\AttributeTok{nrow=}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-153-1.pdf}
+
+This map layout shows the observed rates, the fitted rates from the \texttt{lm3} model and the residuals from the model. Mapping residuals from models run on place-based data can show areas within the data where the model is consistently under or over-estimating the outcome. For instance in the example above, we see consistently high residuals in several of the south eastern states, and the mountain west, and several areas where the residuals are consistently negative, meaning we are over-estimating the rate. This can be instructive as to other variables we may be leaving out of the model that follow similar spatial distributions of the residuals. If such spatially patterned residuals are observed, it is generally a good idea to consider a statistical model that incorporates some kind of spatially explicit model specification.
+
+\hypertarget{more-on-predicted-values}{%
+\paragraph{More on predicted values}\label{more-on-predicted-values}}
+
+There are more systematic methods for generating predictions from a model that allow us to marginalize the estimates across other variables and to generate counter factual or hypothetical rates using combinations of \(x\) values that may not be observed in the data. The \texttt{emmeans} package is very good at this and also accommodates many types of models. For instance if we would like the marginal means for counties by their healthcare shortage area type, after controlling for the other variables in our model, we can request that.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(emmeans)}
+\NormalTok{rg}\OtherTok{\textless{}{-}} \FunctionTok{ref\_grid}\NormalTok{(lm3s)}
+
+\NormalTok{mu1 }\OtherTok{\textless{}{-}} \FunctionTok{emmeans}\NormalTok{(rg, }\AttributeTok{specs =}\StringTok{"hpsa16"}\NormalTok{ )}
+\NormalTok{mu1}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{as.data.frame}\NormalTok{()}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{gt}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\captionsetup[table]{labelformat=empty,skip=1pt}
+\begin{longtable}{crrrrr}
+\toprule
+hpsa16 & emmean & SE & df & lower.CL & upper.CL \\ 
+\midrule
+no shortage & 65.8 & 1.30 & 2309 & 63.3 & 68.4 \\ 
+partial county shortage & 65.3 & 1.13 & 2309 & 63.1 & 67.5 \\ 
+whole county shortage & 66.4 & 1.33 & 2309 & 63.8 & 69.0 \\ 
+\bottomrule
+\end{longtable}
+
+Which unsurprisingly does not tell us much, because the health care shortage area variable in \texttt{lm3} was not a significant predictor of the low birth weight rate. We can include more than one margin in the function, and include specific values we wish to highlight. For instance, let's compare three hypothetical counties with three different poverty rates, we can use the \texttt{summary(ahrf\_m\$fampov14)} to see the first and third quartiles of the distribution and the mean, we will use these as our theoretical values.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rg}\OtherTok{\textless{}{-}}\FunctionTok{ref\_grid}\NormalTok{(lm3,}
+             \AttributeTok{at=}\FunctionTok{list}\NormalTok{( }\AttributeTok{fampov14 =} \FunctionTok{c}\NormalTok{(}\FloatTok{1.8}\NormalTok{,}\FloatTok{7.8}\NormalTok{, }\FloatTok{11.6}\NormalTok{, }\FloatTok{14.3}\NormalTok{, }\FloatTok{52.1}\NormalTok{) ) )}
+
+\NormalTok{means }\OtherTok{\textless{}{-}} \FunctionTok{emmeans}\NormalTok{(rg, }\AttributeTok{specs =} \FunctionTok{c}\NormalTok{(}\StringTok{"fampov14"}\NormalTok{, }\StringTok{"rucc"}\NormalTok{))}
+
+\NormalTok{means}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{as.data.frame}\NormalTok{()}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{rucc, }\AttributeTok{y=}\NormalTok{emmean))}\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{group=}\FunctionTok{factor}\NormalTok{(fampov14), }\AttributeTok{color=}\FunctionTok{factor}\NormalTok{(fampov14)))}\SpecialCharTok{+}
+  \FunctionTok{theme\_classic}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-155-1.pdf}
+
+Which illustrates the differences in the poverty rates on the low birth weight rate across the rural-urban continuum. The use of these marginal means is very useful when illustrating the effects of covariates in regression models, and to effectively illustrate interactions in such models. For instance, if we estimate the model below, which interacts the poverty rate with the rural-urban continuum code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lm3i}\OtherTok{\textless{}{-}} \FunctionTok{gls}\NormalTok{(lbrate1618 }\SpecialCharTok{\textasciitilde{}}\NormalTok{  fampov14 }\SpecialCharTok{*}\NormalTok{ rucc }\SpecialCharTok{+}\NormalTok{ hpsa16,}
+          \AttributeTok{data =}\NormalTok{ ahrf\_m, }
+          \AttributeTok{weights =} \FunctionTok{varIdent}\NormalTok{(}\AttributeTok{form =} \SpecialCharTok{\textasciitilde{}}\DecValTok{1}\SpecialCharTok{|}\FunctionTok{factor}\NormalTok{(state) ) )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rg}\OtherTok{\textless{}{-}}\FunctionTok{ref\_grid}\NormalTok{(lm3i,}
+             \AttributeTok{at=}\FunctionTok{list}\NormalTok{( }\AttributeTok{fampov14 =} \FunctionTok{c}\NormalTok{(}\FloatTok{7.8}\NormalTok{, }\FloatTok{11.6}\NormalTok{, }\FloatTok{14.3}\NormalTok{) ) )}
+
+\NormalTok{means }\OtherTok{\textless{}{-}} \FunctionTok{emmeans}\NormalTok{(rg, }\AttributeTok{specs =} \FunctionTok{c}\NormalTok{(}\StringTok{"fampov14"}\NormalTok{, }\StringTok{"rucc"}\NormalTok{))}
+
+\NormalTok{means}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{as.data.frame}\NormalTok{()}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{rucc, }\AttributeTok{y=}\NormalTok{emmean))}\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{group=}\FunctionTok{factor}\NormalTok{(fampov14), }\AttributeTok{color=}\FunctionTok{factor}\NormalTok{(fampov14)))}\SpecialCharTok{+}
+  \FunctionTok{theme\_classic}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-157-1.pdf}
+
+We can see that in the most rural areas, (the \texttt{09} level of \texttt{rucc}), the differences by poverty rate are less than in more metropolitan areas, such as the \texttt{02} or \texttt{03} levels.
+
+\hypertarget{use-of-ols-for-place-based-models}{%
+\paragraph{Use of OLS for place-based models}\label{use-of-ols-for-place-based-models}}
+
+The OLS model and its extensions are a very useful staring place when analyzing data on places. For nothing more than the interpretive ease of the models estimates, it presents a very attractive choice for ecological modeling. The extension of the model through weighted and generalized least square allows for more flexible modeling to accommodate non-constant variance that often arises. Further extensions of the model by techniques of spatial econometrics further allow for direct incorporation of spatially correlated and lagged effects of covariates and model error terms to better deal with the idiosyncrasies of place-based data \citep{chi_spatial_2020, elhorst_spatial_2014, lesage_introduction_2009}. These methods have seen wide use in demographic research over the past twenty years. Despite the fundamental flexibility of the OLS model, it may still not present the best solution when modeling demographic rates. One glaring reason is that if our outcomes are measured as rates, which are effectively probabilities, then the model can easily lead to estimates of predicted values that are either negative or greater than one, either of which presenting an issue for limited outcomes. In fact, this is why I am a strong proponent of not using the linear model for estimating probabilities. The next section of the book turns to the use of the \emph{Generalized Linear Model} \citep{nelder_generalized_1972, mccullagh_generalized_1998} as an alternative modeling strategy, especially when considering place-based data, when data are measured either as rates or as relative risks.
+
+\newpage
+
+\hypertarget{basics-of-generalized-linear-models}{%
+\subsection{Basics of Generalized Linear Models}\label{basics-of-generalized-linear-models}}
+
+Up until now, we have been relying on linear statistical models which assumed the Normal distribution for our outcomes. A broader class of regression models, are \textbf{\emph{Generalized Linear Models}} \citep{nelder_generalized_1972, mccullagh_generalized_1998}, or \textbf{GLM}s, which allow for the estimation of a linear regression specification for outcomes that are not assumed to come from a Normal distribution. GLMs are a class of statistical models with three underlying components: A probability density appropriate to the outcome, a link function and a linear predictor. The \textbf{\emph{link function}} is some mathematical function that links the mean of the specified probability distribution to the linear predictor of regression parameters and covariates. For example, the Normal distribution used by the OLS model has the mean, \(\mu\), which is typically estimated using the \textbf{\emph{linear mean function}} :
+\[\mu = \beta_0 + \beta_1 x_1\]
+Which describes the line that estimates the mean of the outcome variable as a linear function of \(\beta\) parameters and the predictor variable \(x_1\). The OLS, or \emph{Gaussian} GLM model uses an \textbf{\emph{identity link}} meaning there is no transformation of the linear mean function as it is connected to the mean of the outcome. This can be written as:
+
+\[g(u) = g(E(Y)) = \beta_0 + \beta_1 x_1\]
+
+Where \(g()\) is the link function, linking the mean of the Normal distribution to the linear mean function of the model. The equivalent GLM model to the \texttt{lm1} model from the previous section is:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{glm1}\OtherTok{\textless{}{-}} \FunctionTok{glm}\NormalTok{(lbrate1618 }\SpecialCharTok{\textasciitilde{}}\NormalTok{  fampov14 }\SpecialCharTok{+}\NormalTok{ rucc }\SpecialCharTok{+}\NormalTok{ hpsa16,}
+          \AttributeTok{data =}\NormalTok{ ahrf\_m, }
+          \AttributeTok{family =}\NormalTok{gaussian)}
+
+\NormalTok{lm1\_t}\OtherTok{\textless{}{-}}\NormalTok{lm1}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{tbl\_regression}\NormalTok{()}
+
+
+\NormalTok{glm1\_t}\OtherTok{\textless{}{-}}\NormalTok{glm1}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{tbl\_regression}\NormalTok{()}
+
+\NormalTok{t\_m }\OtherTok{\textless{}{-}} \FunctionTok{tbl\_merge}\NormalTok{(}
+    \AttributeTok{tbls =} \FunctionTok{list}\NormalTok{(lm1\_t, glm1\_t),}
+    \AttributeTok{tab\_spanner =} \FunctionTok{c}\NormalTok{(}\StringTok{"**OLS**"}\NormalTok{, }\StringTok{"**GLM**"}\NormalTok{)}
+\NormalTok{  )}
+\NormalTok{t\_m}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Table printed with `knitr::kable()`, not {gt}. Learn why at
+## https://www.danieldsjoberg.com/gtsummary/articles/rmarkdown.html
+## To suppress this message, include `message = FALSE` in code chunk header.
+\end{verbatim}
+
+\begin{tabular}{l|c|c|c|c|c|c}
+\hline
+**Characteristic** & **Beta** & **95\% CI** & **p-value** & **Beta** & **95\% CI** & **p-value**\\
+\hline
+\% Families Below Poverty Level 2014-18 & 2.3 & 2.1, 2.4 & <0.001 & 2.3 & 2.1, 2.4 & <0.001\\
+\hline
+rucc &  &  &  &  &  & \\
+\hline
+01 &  &  &  &  &  & \\
+\hline
+02 & -1.9 & -4.3, 0.44 & 0.11 & -1.9 & -4.3, 0.44 & 0.11\\
+\hline
+03 & -3.4 & -5.8, -0.93 & 0.007 & -3.4 & -5.8, -0.94 & 0.007\\
+\hline
+04 & -6.7 & -9.4, -3.9 & <0.001 & -6.7 & -9.4, -3.9 & <0.001\\
+\hline
+05 & -6.0 & -9.8, -2.2 & 0.002 & -6.0 & -9.8, -2.2 & 0.002\\
+\hline
+06 & -3.9 & -6.2, -1.7 & <0.001 & -3.9 & -6.2, -1.7 & <0.001\\
+\hline
+07 & -4.0 & -6.5, -1.5 & 0.002 & -4.0 & -6.5, -1.5 & 0.002\\
+\hline
+08 & 0.45 & -3.7, 4.6 & 0.8 & 0.45 & -3.7, 4.6 & 0.8\\
+\hline
+09 & -3.9 & -8.4, 0.61 & 0.090 & -3.9 & -8.4, 0.61 & 0.090\\
+\hline
+hpsa16 &  &  &  &  &  & \\
+\hline
+no shortage &  &  &  &  &  & \\
+\hline
+partial county shortage & -0.66 & -2.6, 1.3 & 0.5 & -0.66 & -2.6, 1.3 & 0.5\\
+\hline
+whole county shortage & 2.4 & -0.10, 4.8 & 0.060 & 2.4 & -0.09, 4.8 & 0.060\\
+\hline
+\end{tabular}
+
+Which shows the exact same output for both models, as it should be. The output shown by \texttt{summary(lm1)} and \texttt{summary(glm1)} is different though, but the same results can be recovered.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(glm1)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## 
 ## Call:
-## lm(formula = y ~ x)
+## glm(formula = lbrate1618 ~ fampov14 + rucc + hpsa16, family = gaussian, 
+##     data = ahrf_m)
 ## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -1.1454 -0.1859 -0.0719  0.0454  1.4529 
+## Deviance Residuals: 
+##    Min      1Q  Median      3Q     Max  
+## -90.11  -10.35   -1.23    9.29   77.78  
 ## 
 ## Coefficients:
-##             Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)    0.101      0.104    0.97     0.34    
-## x              0.791      0.111    7.13    3e-09 ***
+##                               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)                    62.2692     1.1890   52.37  < 2e-16 ***
+## fampov14                        2.2581     0.0685   32.98  < 2e-16 ***
+## rucc02                         -1.9185     1.2008   -1.60  0.11025    
+## rucc03                         -3.3866     1.2506   -2.71  0.00682 ** 
+## rucc04                         -6.6548     1.4064   -4.73  2.4e-06 ***
+## rucc05                         -5.9628     1.9374   -3.08  0.00211 ** 
+## rucc06                         -3.9418     1.1432   -3.45  0.00057 ***
+## rucc07                         -4.0073     1.2817   -3.13  0.00179 ** 
+## rucc08                          0.4511     2.1106    0.21  0.83077    
+## rucc09                         -3.8837     2.2912   -1.70  0.09020 .  
+## hpsa16partial county shortage  -0.6622     1.0077   -0.66  0.51115    
+## hpsa16whole county shortage     2.3621     1.2533    1.88  0.05960 .  
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 0.44 on 52 degrees of freedom
-##   (46 observations deleted due to missingness)
-## Multiple R-squared:  0.495,  Adjusted R-squared:  0.485 
-## F-statistic: 50.9 on 1 and 52 DF,  p-value: 3.03e-09
+## (Dispersion parameter for gaussian family taken to be 268)
+## 
+##     Null deviance: 981607  on 2323  degrees of freedom
+## Residual deviance: 618734  on 2312  degrees of freedom
+## AIC: 19599
+## 
+## Number of Fisher Scoring iterations: 2
 \end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{plot}\NormalTok{(mod)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-138-2.pdf} \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-138-3.pdf} \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-138-4.pdf} \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-138-5.pdf}
+This output shows the same coefficients, and hypothesis test results compared to \texttt{summary(lm1)}, but the residual variances are reported differently. The GLM summary reports the Null and Residual deviance instead of the Residual standard errors reported by \texttt{summary(lm1)}. If we take the residual deviance and divide it by the residual degrees of freedom, and take the square root, we get the residual standard error reported by \texttt{summary(lm1)}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(sandwich)}
-\NormalTok{vc }\OtherTok{\textless{}{-}} \FunctionTok{vcovHC}\NormalTok{(mod, }\AttributeTok{type =} \StringTok{"HC1"}\NormalTok{)}
-
-\FunctionTok{sqrt}\NormalTok{(}\FunctionTok{diag}\NormalTok{(vc))}
+\FunctionTok{sqrt}\NormalTok{(glm1}\SpecialCharTok{$}\NormalTok{deviance}\SpecialCharTok{/}\NormalTok{glm1}\SpecialCharTok{$}\NormalTok{df.residual)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## (Intercept)           x 
-##      0.0607      0.1046
+## [1] 16.4
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{lmtest}\SpecialCharTok{::}\FunctionTok{coeftest}\NormalTok{(mod, }\AttributeTok{vcov. =}\NormalTok{ vc)}
+\FunctionTok{summary}\NormalTok{(lm1)}\SpecialCharTok{$}\NormalTok{sigma}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## 
-## t test of coefficients:
-## 
-##             Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)   0.1005     0.0607    1.66      0.1    
-## x             0.7911     0.1046    7.56  6.3e-10 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## [1] 16.4
 \end{verbatim}
 
-\newpage
+The deviance in the GLM model is calculated in the same way as the residual sums of squares:
 
-In the next section, I show how some fundamental models that account for spatial association among observations can be estimates R packages.
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sum}\NormalTok{((}\FunctionTok{fitted}\NormalTok{(lm1)}\SpecialCharTok{{-}}\NormalTok{ahrf\_m}\SpecialCharTok{$}\NormalTok{lbrate1618 )}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
-\#\footnote{Link to AHRF codebook - \href{https://data.hrsa.gov/DataDownload/AHRF/AHRF_USER_TECH_2019-2020.zip}{``https://data.hrsa.gov/DataDownload/AHRF/AHRF\_USER\_TECH\_2019-2020.zip''}}: More on this below
+\begin{verbatim}
+## [1] 618734
+\end{verbatim}
 
-\newpage
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{glm1}\SpecialCharTok{$}\NormalTok{deviance}
+\end{Highlighting}
+\end{Shaded}
 
-\hypertarget{basics-of-genearlized-linear-models}{%
-\subsection{Basics of Genearlized Linear Models}\label{basics-of-genearlized-linear-models}}
+\begin{verbatim}
+## [1] 618734
+\end{verbatim}
 
-Up until now, we have been relying on linear statistical models which assumed the Normal distribution for our outcomes. A broader class of regression models, are \textbf{\emph{Generalized Linear Models}} \citep{nelder_generalized_1972, mccullagh_generalized_1998}, or \textbf{GLM}s, which allow for linear regression for outcomes that are not assumed to come from a Normal distribution.
+We do not need to assume the identity function is the only one for the Gaussian GLM, for instance, the logarithmic link function can change the model to:
 
-GLMs are a class of statistical models that link the mean of the specified distribution to a linear combination of covariates by some form of \textbf{\emph{link function}}. For example, the Normal distribution has the mean, \(\mu\), which is typically estimated using the \textbf{\emph{linear mean function}} :
+\[
+ln(Y) = \beta_0 + \beta_1 x_1 \\
+Y = exp(\beta_0 + \beta_1 x_1) \\
+Y = exp(\beta_0) * exp(\beta_1 x_1)
+\]
+Which changes the model to no longer be additive in terms of the parameters for the logarithmic link function.
 
-\[\mu = \beta_0 + \beta_1 x_1\] Which describes the line that estimates the mean of the outcome variable as a linear function of the predictor variable \(x_1\). This model uses an \textbf{\emph{identity link}} meaning there is no transformation of the linear mean function as it is connected to the mean of the outcome.
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{glm2}\OtherTok{\textless{}{-}} \FunctionTok{glm}\NormalTok{(lbrate1618 }\SpecialCharTok{\textasciitilde{}}\NormalTok{  fampov14 }\SpecialCharTok{+}\NormalTok{ rucc }\SpecialCharTok{+}\NormalTok{ hpsa16,}
+          \AttributeTok{data =}\NormalTok{ ahrf\_m, }
+          \AttributeTok{family =}\FunctionTok{gaussian}\NormalTok{(}\AttributeTok{link =} \StringTok{"log"}\NormalTok{))}
+\FunctionTok{AIC}\NormalTok{(glm1, glm2)}
+\end{Highlighting}
+\end{Shaded}
 
-This can be written as:
+\begin{verbatim}
+##      df   AIC
+## glm1 13 19599
+## glm2 13 19687
+\end{verbatim}
 
-\[g(u) = g(E(Y)) = \beta_0 + \beta_1 x_1\]
+In this case, the identity link function is preferred because of the lower AIC.
 
-Where \(g()\) is the link function, linking the mean of the Normal distribution to the linear mean function of the model.
+\textbf{Different distributions have different link functions\ldots.}
 
-Different distributions have different link functions\ldots.
+The identity link function is appropriate for the Normal distribution, because this distribution can take any value from \(- \infty\) to \(\infty\), and so the linear mean function can also take those values, theoretically. Other distributions may not have this wide of a numeric range, so appropriate link functions have to be used to transform the linear mean function to the scale of the mean of a particular distribution. The most common distributions for the generalized linear model and their common link functions are shown below, along with common expressions for the mean and variance of their respective distributions.
 
-The linear model is appropriate for the Normal distribution, because this distribution can take any value from \(- \infty\) to \(\infty\). Other distributions do not have this wide range, so transformations of the linear mean function must be used so that the linear model remains on the scale of the data.
+\begin{longtable}[]{@{}
+  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1628}}
+  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2093}}
+  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2093}}
+  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2093}}
+  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2093}}@{}}
+\toprule
+\begin{minipage}[b]{\linewidth}\centering
+Distribution
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Mean
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Variance
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Link Function
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Range of Outcome
+\end{minipage} \\
+\midrule
+\endhead
+Gaussian & \(\mu\) & \(\sigma^2\) & Identity & \((-\infty , \infty)\) \\
+Binomial & \(\pi\) & \(n\pi(1-\pi)\) & \(log \left (\frac{\pi}{1-\pi} \right )\) & \(\frac{0,1,2,...n}{n}\) \\
+Poisson & \(\lambda\) & \(\lambda\) & \(log (\lambda)\) & \((0,1,2,...)\) \\
+Gamma & \(\mu\) & \(\phi \mu^2\) & \(log (\mu)\) & \((0, \infty)\) \\
+Negative Binomial & \(n(1-p)/p\) & \(n(1-p)/p^2\) & \(log (\mu)\) & \((0,1,2,...)\) \\
+Student-t & \(\mu\) & \(\frac{\sigma^2 \nu}{\nu-2}\) & Identity & \(-\infty , \infty\) \\
+\bottomrule
+\end{longtable}
 
-You have probably seen the binomial distribution in either a basic statistics course, remember the coin flips? Or in the context of a logistic regression model.
+While these are not all possible distributions for the GLM, these are distributions that are both widely used and commonly present not only in R but in other software as well. The \texttt{VGAM} package adds a much wider selection of both univariate and bivariate distributions for discrete and continuous outcomes.
 
-There are two ways the binomial distribution is typically used, the first is the context of logistic regression, where a special case of the binomial is used, called the \textbf{\emph{Bernoulli}} distribution. This is the case of the binomial when there is basically a single coin flip, and you're trying to figure out the probability that it is heads (or tails). This is said to be a single \textbf{\emph{trial}}, and the outcome is either 1 or 0 (heads or tails).
+\hypertarget{binomial-distribution}{%
+\subsubsection{Binomial Distribution}\label{binomial-distribution}}
 
-The second way the binomial is used is when you have multiple trials, and you're trying to estimate the probability of the event occurring over multiple trials. In this case, your number of trials, \(n\) can be large, and your number of successes, \(y\) is the random variable under consideration. This is the basic makeup of a demographic rate, the count-based binomial.
+You have probably seen the binomial distribution in either a basic statistics course, remember the coin flips? Or in the context of a logistic regression model. There are two ways the binomial distribution is typically used, the first is the context of logistic regression, where a special case of the binomial is used, called the \textbf{\emph{Bernoulli}} distribution. This is the case of the binomial when there is basically a single coin flip, and you're trying to estimate the probability that it is heads (or tails). This is said to be a single \textbf{\emph{trial}}, and the outcome is either 1 or 0 (heads or tails). We will spend time in chapter 5 discussing the logistic regression model in the context of individual level data.
 
-=======
+The second way the binomial is used is when you have multiple trials, and you're trying to estimate the probability of the event occurring over these trials. In this case, your number of trials, \(n\) can be large, and your number of successes, \(y\) is the random variable under consideration. This usage of the binomial has a wide applicability for place-based demographic analysis, as the basic distribution for a demographic rate. I will commonly refer to this as the \emph{count-based binomial distribution}.
 
-\#\footnote{Link to AHRF codebook - \href{https://data.hrsa.gov/DataDownload/AHRF/AHRF_USER_TECH_2019-2020.zip}{``https://data.hrsa.gov/DataDownload/AHRF/AHRF\_USER\_TECH\_2019-2020.zip''}}: More on this below
-
-\hypertarget{arf}{%
-\paragraph{arf}\label{arf}}
-
-\newpage
-
-\hypertarget{basics-of-genearlized-linear-models-1}{%
-\subsection{Basics of Genearlized Linear Models}\label{basics-of-genearlized-linear-models-1}}
-
-Up until now, we have been relying on linear statistical models which assumed the Normal distribution for our outcomes. A broader class of regression models, are \textbf{\emph{Generalized Linear Models}} \citep{nelder_generalized_1972, mccullagh_generalized_1998}, or \textbf{GLM}s, which allow for linear regression for outcomes that are not assumed to come from a Normal distribution.
-
-GLMs are a class of statistical models that link the mean of the specified distribution to a linear combination of covariates by some form of \textbf{\emph{link function}}. For example, the Normal distribution has the mean, \(\mu\), which is typically estimated using the \textbf{\emph{linear mean function}} :
-
-\[\mu = \beta_0 + \beta_1 x_1\] Which describes the line that estimates the mean of the outcome variable as a linear function of the predictor variable \(x_1\). This model uses an \textbf{\emph{identity link}} meaning there is no transformation of the linear mean function as it is connected to the mean of the outcome.
-
-This can be written as:
-
-\[g(u) = g(E(Y)) = \beta_0 + \beta_1 x_1\]
-
-Where \(g()\) is the link function, linking the mean of the Normal distribution to the linear mean function of the model.
-
-Different distributions have different link functions\ldots.
-
-The linear model is appropriate for the Normal distribution, because this distribution can take any value from \(- \infty\) to \(\infty\). Other distributions do not have this wide range, so transformations of the linear mean function must be used so that the linear model remains on the scale of the data.
-
-You have probably seen the binomial distribution in either a basic statistics course, remember the coin flips? Or in the context of a logistic regression model.
-
-There are two ways the binomial distribution is typically used, the first is the context of logistic regression, where a special case of the binomial is used, called the \textbf{\emph{Bernoulli}} distribution. This is the case of the binomial when there is basically a single coin flip, and you're trying to figure out the probability that it is heads (or tails). This is said to be a single \textbf{\emph{trial}}, and the outcome is either 1 or 0 (heads or tails).
-
-The second way the binomial is used is when you have multiple trials, and you're trying to estimate the probability of the event occurring over multiple trials. In this case, your number of trials, \(n\) can be large, and your number of successes, \(y\) is the random variable under consideration. This is the basic makeup of a demographic rate, the count-based binomial.
-
-The mean of the binomial distribution is a proportion or a probability, \(\pi\), which tells you how likely it is that the event your interested in occurs. Any model using the binomial distributor will be geared towards estimating the probability.
-
-When a variable is coded as binary, meaning either 1 or 0, the Bernoulli distribution is used, as in the logistic regression model. When coded like this, the model tries to use the other measured information to predict the 1 value versus the 0 value. So in the basic sense, we want to construct a model like:
-
-\[Pr(y=1) =\pi =  \text{some function of predictors}\]
-
-The good thing is that, when we have count data, not just 1's and 0's, the same thing happens. The ratio or successes (\(y\)) to trials (\(n\)) is used to estimate \(\pi\) and we build a model for that rate:
+The mean of the binomial distribution is a proportion or a probability, \(\pi\), which tells you the probability of the event of interest occurs. Any model using the binomial distributor will be geared towards estimating this probability. The good thing is that, when we have count data, not just 1's and 0's, the same thing happens. The ratio or successes (\(y\)) to trials (\(n\)) is used to estimate \(\pi\) and we build a model for that mean rate:
 
 \[\text{Binomial} \binom{n}{y} = \frac{y}{n} = \pi = \text{some function of predictors}\]
-
-\hypertarget{binary-outcome-variables}{%
-\subsection{Binary outcome variables}\label{binary-outcome-variables}}
 
 The ratio \(\frac{y}{n}\) is a rate or probability, and as such has very strict bounds. Probabilities cannot be less than 0 or greater than 1, so again, we should not use the Normal distribution here, since it is valid for all real numbers. Instead, we are using the binomial, but we still run into the problem of having a strictly bounded value, \(\pi\) that we are trying to estimate with a linear function.
 
@@ -4764,96 +5683,460 @@ Enter the link function again.
 
 The binomial distribution typically uses either a \href{https://en.wikipedia.org/wiki/Logit}{logit} or \href{https://en.wikipedia.org/wiki/Probit}{probit} link function, but others such as the \href{http://data.princeton.edu/wws509/notes/c3s7.html}{complementary log-log link function} are also used in certain circumstances. For now we will use the \emph{logit} function.
 
-The logit transforms the probability, \(\pi\), which is bound on the interval \([0,1]\) into a new limitless interval similar to the normal distribution of \([-\infty, \infty]\). The transformation is knows a the log-odds transformation, or logit for short.
+The logit transforms the probability, \(\pi\), which is bound on the interval \([0,1]\) into a new unbounded interval similar to the normal distribution of \([-\infty, \infty]\). The transformation is knows a the \emph{log-odd}s transformation, or \emph{logit} for short. The odds of an event happening are the probability that something happens, divided by the probability it does not happen, in this case:
 
-The odds of an event happening are the probability that something happens, divided by the probability it does not happen, in this case:
-
-\[\text{odds }{\pi} = \frac{\pi}{(1-\pi)}\]
+\[\text{odds}({\pi}) = \frac{\pi}{(1-\pi)}\]
 
 Which is bound on the interval \([0, \infty]\), when we take the natural log of the odds, the value is transformed into the linear space, of \([-\infty, \infty]\).
 
-\[\text{log-odds }{\pi} = log  \left ( \frac{\pi}{(1-\pi)}  \right) \]
+\[\text{log-odds }({\pi}) = log  \left ( \frac{\pi}{(1-\pi)}  \right) \]
 
 This can be modeled using a linear function of covariates now, without worrying about the original boundary problem:
 
-\[log  \left ( \frac{\pi}{(1-\pi)}  \right) = \beta_0 +\beta_1 x_1\]
+\[log  \left ( \frac{\pi}{1-\pi}  \right) = \beta_0 +\beta_1 x_1\]
 
 or more compactly:
 
 \[logit (\pi)  = \beta_0 +\beta_1 x_1\]
 
-\hypertarget{binomial-model-for-counts}{%
-\subsection{Binomial model for counts}\label{binomial-model-for-counts}}
+\hypertarget{binomial-regression}{%
+\paragraph{Binomial regression}\label{binomial-regression}}
 
-You have probably seen the binomial distribution in either a basic statistics course, remember the coin flips? Or in the context of a logistic regression model.
+The \texttt{glm()} function can estimate the count binomial model using the syntax \texttt{cbind(\ y,\ n-y)} in the outcome portion of the model formula.
 
-There are two ways the binomial distribution is typically used, the first is the context of logistic regression, where a special case of the binomial is used, called the \textbf{\emph{Bernoulli}} distribution. This is the case of the binomial when there is basically a single coin flip, and you're trying to figure out the probability that it is heads (or tails). This is said to be a single \textbf{\emph{trial}}, and the outcome is either 1 or 0 (heads or tails).
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{glmb}\OtherTok{\textless{}{-}} \FunctionTok{glm}\NormalTok{(}\FunctionTok{cbind}\NormalTok{(lowbw1618, births1618}\SpecialCharTok{{-}}\NormalTok{lowbw1618) }\SpecialCharTok{\textasciitilde{}}\NormalTok{  fampov14 }\SpecialCharTok{+}\NormalTok{ rucc }\SpecialCharTok{+}\NormalTok{ hpsa16,}
+          \AttributeTok{data =}\NormalTok{ ahrf\_m, }
+          \AttributeTok{family =}\NormalTok{ binomial)}
 
-The second way the binomial is used is when you have multiple trials, and you're trying to estimate the probability of the event occurring over multiple trials. In this case, your number of trials, \(n\) can be large, and your number of successes, \(y\) is the random variable under consideration. This is the basic makeup of a demographic rate, the count-based binomial.
+\NormalTok{glmb}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{tbl\_regression}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
 
-The mean of the binomial distribution is a proportion or a probability, \(\pi\), which tells you how likely it is that the event your interested in occurs. Any model using the binomial distributor will be geared towards estimating the probability.
+\begin{verbatim}
+## Table printed with `knitr::kable()`, not {gt}. Learn why at
+## https://www.danieldsjoberg.com/gtsummary/articles/rmarkdown.html
+## To suppress this message, include `message = FALSE` in code chunk header.
+\end{verbatim}
 
-When a variable is coded as binary, meaning either 1 or 0, the Bernoulli distribution is used, as in the logistic regression model. When coded like this, the model tries to use the other measured information to predict the 1 value versus the 0 value. So in the basic sense, we want to construct a model like:
+\begin{tabular}{l|c|c|c}
+\hline
+**Characteristic** & **log(OR)** & **95\% CI** & **p-value**\\
+\hline
+\% Families Below Poverty Level 2014-18 & 0.02 & 0.02, 0.02 & <0.001\\
+\hline
+rucc &  &  & \\
+\hline
+01 &  &  & \\
+\hline
+02 & -0.01 & -0.02, -0.01 & 0.003\\
+\hline
+03 & -0.02 & -0.04, -0.01 & <0.001\\
+\hline
+04 & -0.06 & -0.08, -0.04 & <0.001\\
+\hline
+05 & -0.04 & -0.07, -0.01 & 0.004\\
+\hline
+06 & -0.02 & -0.04, -0.01 & 0.014\\
+\hline
+07 & -0.03 & -0.06, -0.01 & 0.016\\
+\hline
+08 & 0.04 & -0.02, 0.10 & 0.2\\
+\hline
+09 & -0.03 & -0.10, 0.03 & 0.3\\
+\hline
+hpsa16 &  &  & \\
+\hline
+no shortage &  &  & \\
+\hline
+partial county shortage & -0.02 & -0.03, 0.00 & 0.011\\
+\hline
+whole county shortage & 0.00 & -0.02, 0.03 & 0.8\\
+\hline
+\end{tabular}
 
-\[Pr(y=1) =\pi =  \text{some function of predictors}\]
+The output above shows the results of the model. The coefficients are on the log-odds scale, and typically would be converted to an odds-ratio by exponentiating them.
 
-The good thing is that, when we have count data, not just 1's and 0's, the same thing happens. The ratio or successes (\(y\)) to trials (\(n\)) is used to estimate \(\pi\) and we build a model for that rate:
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{glmb}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{tbl\_regression}\NormalTok{(}\AttributeTok{exponentiate=}\ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
-\[\text{Binomial} \binom{n}{y} = \frac{y}{n} = \pi = \text{some function of predictors}\]
+\begin{verbatim}
+## Table printed with `knitr::kable()`, not {gt}. Learn why at
+## https://www.danieldsjoberg.com/gtsummary/articles/rmarkdown.html
+## To suppress this message, include `message = FALSE` in code chunk header.
+\end{verbatim}
 
-\hypertarget{binomial-regression-models}{%
-\subsection{Binomial regression models}\label{binomial-regression-models}}
+\begin{tabular}{l|c|c|c}
+\hline
+**Characteristic** & **OR** & **95\% CI** & **p-value**\\
+\hline
+\% Families Below Poverty Level 2014-18 & 1.02 & 1.02, 1.02 & <0.001\\
+\hline
+rucc &  &  & \\
+\hline
+01 &  &  & \\
+\hline
+02 & 0.99 & 0.98, 0.99 & 0.003\\
+\hline
+03 & 0.98 & 0.96, 0.99 & <0.001\\
+\hline
+04 & 0.95 & 0.93, 0.96 & <0.001\\
+\hline
+05 & 0.96 & 0.93, 0.99 & 0.004\\
+\hline
+06 & 0.98 & 0.96, 0.99 & 0.014\\
+\hline
+07 & 0.97 & 0.94, 0.99 & 0.016\\
+\hline
+08 & 1.05 & 0.98, 1.11 & 0.2\\
+\hline
+09 & 0.97 & 0.90, 1.03 & 0.3\\
+\hline
+hpsa16 &  &  & \\
+\hline
+no shortage &  &  & \\
+\hline
+partial county shortage & 0.98 & 0.97, 1.00 & 0.011\\
+\hline
+whole county shortage & 1.00 & 0.98, 1.03 & 0.8\\
+\hline
+\end{tabular}
 
-The ratio \(\frac{y}{n}\) is a rate or probability, and as such has very strict bounds. Probabilities cannot be less than 0 or greater than 1, so again, we should not use the Normal distribution here, since it is valid for all real numbers. Instead, we are using the binomial, but we still run into the problem of having a strictly bounded value, \(\pi\) that we are trying to estimate with a linear function.
+In this case, the odds ratio interpretation is not as clear as in the case of the Bernoulli case, in the context of individuals. When I interpret the coefficients for the count binomial, I describe them as \emph{percent changes in the mean}. For example, the \texttt{fampov14} odds ratio is 1.02, I describe this result as: The low birth weight rate increases by 2 percent for every 1 percentage point increase in the poverty rate. We can see this by using the fitted values from \texttt{emmeans}, here I generate two cases where \texttt{fampov14} is exactly 1 percentage point different, and you can see the difference in the estimated rates.
 
-Enter the link function again.
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rg }\OtherTok{\textless{}{-}} \FunctionTok{ref\_grid}\NormalTok{(glmb,}
+               \AttributeTok{at=}\FunctionTok{list}\NormalTok{( }\AttributeTok{fampov14 =} \FunctionTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{) ) ) }
+\FunctionTok{emmeans}\NormalTok{(rg,}
+        \AttributeTok{specs =} \StringTok{"fampov14"}\NormalTok{,}
+        \AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
-The binomial distribution typically uses either a \href{https://en.wikipedia.org/wiki/Logit}{logit} or \href{https://en.wikipedia.org/wiki/Probit}{probit} link function, but others such as the \href{http://data.princeton.edu/wws509/notes/c3s7.html}{complementary log-log link function} are also used in certain circumstances. For now we will use the logit function.
+\begin{verbatim}
+##  fampov14   prob       SE  df asymp.LCL asymp.UCL
+##         5 0.0735 0.000474 Inf    0.0726    0.0745
+##         6 0.0750 0.000470 Inf    0.0741    0.0760
+## 
+## Results are averaged over the levels of: rucc, hpsa16 
+## Confidence level used: 0.95 
+## Intervals are back-transformed from the logit scale
+\end{verbatim}
 
-The logit transforms the probability, \(\pi\), which is bound on the interval \([0,1]\) into a new limitless interval similar to the normal distribution of \([-\infty, \infty]\). The transformation is knows a the log-odds transformation, or logit for short.
+We can calculate the percentage change in these two estimates:
 
-The odds of an event happening are the probability that something happens, divided by the probability it does not happen, in this case:
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(.}\DecValTok{0750} \SpecialCharTok{{-}}\NormalTok{ .}\DecValTok{0735}\NormalTok{)}\SpecialCharTok{/}\NormalTok{.}\DecValTok{0750}
+\end{Highlighting}
+\end{Shaded}
 
-\[\text{odds }{\pi} = \frac{\pi}{(1-\pi)}\]
+\begin{verbatim}
+## [1] 0.02
+\end{verbatim}
 
-Which is bound on the interval \([0, \infty]\), when we take the natural log of the odds, the value is transformed into the linear space, of \([-\infty, \infty]\).
+and confirm that it is 2 percent.
 
-\[\text{log-odds }{\pi} = log  \left ( \frac{\pi}{(1-\pi)}  \right) \]
+\hypertarget{application-of-the-binomial-to-age-standardization}{%
+\paragraph{Application of the binomial to age standardization}\label{application-of-the-binomial-to-age-standardization}}
 
-This can be modeled using a linear function of covariates now, without worrying about the original boundary problem:
+The Binomial is very useful for conducting standardization of rates between groups to measure the differences. To show an example of how to do age standardization, I use data from the \href{https://wonder.cdc.gov/mortSQL.html}{CDC Wonder Compressed Mortality file}. The data are for the states of Texas and California for the year 2016, and are the numbers of deaths and population at risk in 13 age groups.
 
-\[log  \left ( \frac{\pi}{(1-\pi)}  \right) = \beta_0 +\beta_1 x_1\] or more compactly:
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{txca }\OtherTok{\textless{}{-}}\NormalTok{ readr}\SpecialCharTok{::}\FunctionTok{read\_delim}\NormalTok{(}\FunctionTok{url}\NormalTok{(}\StringTok{"https://raw.githubusercontent.com/coreysparks/dem{-}stats{-}book/master/data/CMF\_TX\_CA\_age.txt?token=GHSAT0AAAAAABQZ5VMKFA7HBM5RY4QA3ORCYRGDHDA"}\NormalTok{),}
+                          \AttributeTok{delim =} \StringTok{"}\SpecialCharTok{\textbackslash{}t}\StringTok{"}\NormalTok{,}
+                          \AttributeTok{quote =} \StringTok{"}\SpecialCharTok{\textbackslash{}"}\StringTok{"}\NormalTok{,}
+                          \AttributeTok{skip=}\DecValTok{1}\NormalTok{,}
+                          \AttributeTok{col\_names =} \FunctionTok{c}\NormalTok{(}\StringTok{"State"}\NormalTok{,}
+                                        \StringTok{"State\_Code"}\NormalTok{,}
+                                        \StringTok{"Age\_Group"}\NormalTok{,}
+                                        \StringTok{"Age\_Group\_Code"}\NormalTok{,}
+                                        \StringTok{"Deaths"}\NormalTok{,}
+                                        \StringTok{"Population"}\NormalTok{,}
+                                        \StringTok{"Crude.Rate"}\NormalTok{)}
+\NormalTok{                          )}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(Age\_Group }\SpecialCharTok{!=} \StringTok{"Not Stated"}\NormalTok{)}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Population =} \FunctionTok{as.numeric}\NormalTok{(Population), }\AttributeTok{Deaths =} \FunctionTok{as.numeric}\NormalTok{(Deaths))}
+\end{Highlighting}
+\end{Shaded}
 
-\[log it(\pi)  = \beta_0 +\beta_1 x_1\]
+\begin{verbatim}
+## Rows: 28 Columns: 7
+## -- Column specification --------------------------------------------------------
+## Delimiter: "\t"
+## chr (7): State, State_Code, Age_Group, Age_Group_Code, Deaths, Population, C...
+## 
+## i Use `spec()` to retrieve the full column specification for this data.
+## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+\end{verbatim}
 
-\hypertarget{poisson-distribution-modeling}{%
-\subsection{Poisson distribution modeling}\label{poisson-distribution-modeling}}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{txca}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{gt}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
 
-The mean of the Poisson distribution, \((\lambda)\), is really the average count for the outcome (\(y\)). We have several ways of modeling the Poisson count:
+\captionsetup[table]{labelformat=empty,skip=1pt}
+\begin{longtable}{llllrrl}
+\toprule
+State & State\_Code & Age\_Group & Age\_Group\_Code & Deaths & Population & Crude.Rate \\ 
+\midrule
+California & 06 & < 1 year & 1 & 2057 & 498832 & 412.4 \\ 
+California & 06 & 1-4 years & 1-4 & 397 & 1988540 & 20.0 \\ 
+California & 06 & 5-9 years & 5-9 & 253 & 2539626 & 10.0 \\ 
+California & 06 & 10-14 years & 10-14 & 277 & 2522475 & 11.0 \\ 
+California & 06 & 15-19 years & 15-19 & 1076 & 2579986 & 41.7 \\ 
+California & 06 & 20-24 years & 20-24 & 2090 & 2812191 & 74.3 \\ 
+California & 06 & 25-34 years & 25-34 & 5201 & 5917785 & 87.9 \\ 
+California & 06 & 35-44 years & 35-44 & 7032 & 5159932 & 136.3 \\ 
+California & 06 & 45-54 years & 45-54 & 16370 & 5195297 & 315.1 \\ 
+California & 06 & 55-64 years & 55-64 & 34176 & 4688718 & 728.9 \\ 
+California & 06 & 65-74 years & 65-74 & 45834 & 3089002 & 1483.8 \\ 
+California & 06 & 75-84 years & 75-84 & 59121 & 1535300 & 3850.8 \\ 
+California & 06 & 85+ years & 85+ & 88331 & 722333 & 12228.6 \\ 
+Texas & 48 & < 1 year & 1 & 2287 & 405899 & 563.4 \\ 
+Texas & 48 & 1-4 years & 1-4 & 433 & 1613272 & 26.8 \\ 
+Texas & 48 & 5-9 years & 5-9 & 276 & 2038319 & 13.5 \\ 
+Texas & 48 & 10-14 years & 10-14 & 319 & 2029062 & 15.7 \\ 
+Texas & 48 & 15-19 years & 15-19 & 999 & 1970588 & 50.7 \\ 
+Texas & 48 & 20-24 years & 20-24 & 1829 & 2005169 & 91.2 \\ 
+Texas & 48 & 25-34 years & 25-34 & 4405 & 4085728 & 107.8 \\ 
+Texas & 48 & 35-44 years & 35-44 & 6292 & 3726287 & 168.9 \\ 
+Texas & 48 & 45-54 years & 45-54 & 13636 & 3519013 & 387.5 \\ 
+Texas & 48 & 55-64 years & 55-64 & 28663 & 3116019 & 919.9 \\ 
+Texas & 48 & 65-74 years & 65-74 & 37506 & 2008449 & 1867.4 \\ 
+Texas & 48 & 75-84 years & 75-84 & 44144 & 957001 & 4612.7 \\ 
+Texas & 48 & 85+ years & 85+ & 51173 & 387790 & 13196.1 \\ 
+\bottomrule
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{txca}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(State)}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{p\_pop =}\NormalTok{ Population}\SpecialCharTok{/}\FunctionTok{sum}\NormalTok{(Population ))}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ungroup}\NormalTok{()}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{age =}\NormalTok{ forcats}\SpecialCharTok{::}\FunctionTok{fct\_relevel}\NormalTok{(txca}\SpecialCharTok{$}\NormalTok{Age\_Group,}\StringTok{"\textless{} 1 year"}\NormalTok{,}
+                                    \StringTok{"1{-}4 years"}\NormalTok{,}
+                                     \StringTok{"5{-}9 years"}\NormalTok{,}
+                                    \StringTok{"10{-}14 years"}\NormalTok{,}
+                                    \StringTok{"15{-}19 years"}\NormalTok{,}
+                                    \StringTok{"20{-}24 years"}\NormalTok{,}
+                                    \StringTok{"25{-}34 years"}\NormalTok{,}
+                                    \StringTok{"35{-}44 years"}\NormalTok{,}
+                                    \StringTok{"45{-}54 years"}\NormalTok{,}
+                                    \StringTok{"55{-}64 years"}\NormalTok{,}
+                                    \StringTok{"65{-}74 years"}\NormalTok{,}
+                                    \StringTok{"75{-}84 years"}\NormalTok{, }\StringTok{"85+ years"}
+\NormalTok{                                    ))}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ age, }\AttributeTok{y =}\NormalTok{ p\_pop,}\AttributeTok{group=}\NormalTok{State, }\AttributeTok{color=}\NormalTok{ State))}\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{lwd=}\DecValTok{2}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{ylab}\NormalTok{(}\StringTok{"\% in Age"}\NormalTok{ )}\SpecialCharTok{+}
+  \FunctionTok{xlab}\NormalTok{ (}\StringTok{"Age group"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"Age distribution in Texas and California"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'State'. You can override using the
+## `.groups` argument.
+\end{verbatim}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-168-1.pdf}
+We see that the age distribution of Texas is slightly younger than California, also the large peak at 25-34 year age group is because the data adopt a 10 year age interval after age 25.
+
+To do age standardization using the regression framework, we have to control for the differences in the age structure of the two populations (Texas and California) by regressing the mortality rate on the Age structure, the difference between the states after doing this is the difference in the age-standardized rate.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{txca}\OtherTok{\textless{}{-}}\NormalTok{ txca}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Age\_Group =}\NormalTok{ forcats}\SpecialCharTok{::}\FunctionTok{fct\_relevel}\NormalTok{(txca}\SpecialCharTok{$}\NormalTok{Age\_Group,}\StringTok{"\textless{} 1 year"}\NormalTok{,}
+                                    \StringTok{"1{-}4 years"}\NormalTok{,}
+                                     \StringTok{"5{-}9 years"}\NormalTok{,}
+                                    \StringTok{"10{-}14 years"}\NormalTok{,}
+                                    \StringTok{"15{-}19 years"}\NormalTok{,}
+                                    \StringTok{"20{-}24 years"}\NormalTok{,}
+                                    \StringTok{"25{-}34 years"}\NormalTok{,}
+                                    \StringTok{"35{-}44 years"}\NormalTok{,}
+                                    \StringTok{"45{-}54 years"}\NormalTok{,}
+                                    \StringTok{"55{-}64 years"}\NormalTok{,}
+                                    \StringTok{"65{-}74 years"}\NormalTok{,}
+                                    \StringTok{"75{-}84 years"}\NormalTok{, }\StringTok{"85+ years"}
+\NormalTok{                                    ))}
+
+\NormalTok{glmb\_s }\OtherTok{\textless{}{-}} \FunctionTok{glm}\NormalTok{(}\FunctionTok{cbind}\NormalTok{(Deaths, Population}\SpecialCharTok{{-}}\NormalTok{Deaths) }\SpecialCharTok{\textasciitilde{}} \FunctionTok{factor}\NormalTok{(Age\_Group)}\SpecialCharTok{+}\NormalTok{State,}
+              \AttributeTok{data=}\NormalTok{txca,}
+              \AttributeTok{family=}\NormalTok{binomial)}
+
+\NormalTok{glmb\_s}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{tbl\_regression}\NormalTok{(}\AttributeTok{exp =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Table printed with `knitr::kable()`, not {gt}. Learn why at
+## https://www.danieldsjoberg.com/gtsummary/articles/rmarkdown.html
+## To suppress this message, include `message = FALSE` in code chunk header.
+\end{verbatim}
+
+\begin{tabular}{l|c|c|c}
+\hline
+**Characteristic** & **OR** & **95\% CI** & **p-value**\\
+\hline
+factor(Age\_Group) &  &  & \\
+\hline
+< 1 year &  &  & \\
+\hline
+1-4 years & 0.05 & 0.04, 0.05 & <0.001\\
+\hline
+5-9 years & 0.02 & 0.02, 0.03 & <0.001\\
+\hline
+10-14 years & 0.03 & 0.02, 0.03 & <0.001\\
+\hline
+15-19 years & 0.09 & 0.09, 0.10 & <0.001\\
+\hline
+20-24 years & 0.17 & 0.16, 0.18 & <0.001\\
+\hline
+25-34 years & 0.20 & 0.19, 0.21 & <0.001\\
+\hline
+35-44 years & 0.31 & 0.30, 0.32 & <0.001\\
+\hline
+45-54 years & 0.72 & 0.70, 0.75 & <0.001\\
+\hline
+55-64 years & 1.70 & 1.65, 1.75 & <0.001\\
+\hline
+65-74 years & 3.48 & 3.38, 3.59 & <0.001\\
+\hline
+75-84 years & 9.07 & 8.80, 9.35 & <0.001\\
+\hline
+85+ years & 30.4 & 29.5, 31.3 & <0.001\\
+\hline
+State &  &  & \\
+\hline
+California &  &  & \\
+\hline
+Texas & 1.20 & 1.19, 1.21 & <0.001\\
+\hline
+\end{tabular}
+
+Which shows that Texas has a standardized mortality rate 20 percent higher than California.
+
+\hypertarget{poisson-distribution}{%
+\subsection{Poisson distribution}\label{poisson-distribution}}
+
+Another distribution commonly used in the analysis of place-based data is the Poisson distribution. The Poisson is applicable to outcomes that are positive integers, and is commonly used in epidemiology as a model of relative risk of a disease or mortality. The Poisson has a single parameter, the mean, \(\lambda\), and it is really the average count for the outcome (\(y\)). We have several ways of modeling a count outcome with the Poisson
 
 \begin{itemize}
 \tightlist
 \item
-  \emph{Pure count model} If each area has the same risk set, or population size, then we can model the mean as-is. This would lead to a model that looks like:
+  \emph{Pure count model} If each area or place has the same total area, risk set, or population size, then we can model the mean as-is. This would lead to a model that looks like:
 \end{itemize}
 
-\[log(y)= \beta_0 + \beta_1 x_1\]
+\[log(\lambda)= \beta_0 + \beta_1 x_1\]
 
-When we see the \(\beta_1\) parameter in this model in computer output, it is on the log-scale, since that is the scale of the outcome for the Poisson model. In order to interpret the \(\beta_1\), we have to \textbf{\emph{exponentiate}} it. When we do this, the parameter is interpreted as the percentage change in the mean of the outcome, for a 1 unit change in \(x_1\). For instance if we estimate a model and see in the output that \(\beta_1 = \text{.025}\), then \(\exp(\beta_1) = \text{exp}(\text{.025}) = \text{1.025}\), or for a 1 unit increase in \(x_1\), the mean of \(y\) increases by 1.025. So if the mean of \(y\) is 10, when \(x_1\) = 0, then the mean is \(10*(1.025*1)\) or \(10.25\) when \(x_1\) = 1.
+When we see the \(\beta_1\) parameter in this model in computer output, it is on the log-scale, since that is the scale of the outcome for the Poisson model. In order to interpret the \(\beta_1\), we have to \textbf{\emph{exponentiate}} it. When we do this, the parameter is interpreted as the \emph{percentage change in the mean of the outcome}, for a 1 unit change in \(x_1\). For instance if we estimate a model and see in the output that \(\beta_1 = \text{.025}\), then \(\exp(\beta_1) = \text{exp}(\text{.025}) = \text{1.025}\), or for a 1 unit increase in \(x_1\), the mean of \(y\) increases by 1.025. So if the mean of \(y\) is 10, when \(x_1\) = 0, then the mean is \(10*(1.025*1)\) or \(10.25\) when \(x_1\) = 1. This application of the Poisson is rare in demographic research because places rarely have either equal populations or areas, so the \emph{Rate Model} or the \emph{Relative Risk Model} are much more commonly used.
 
 \begin{itemize}
 \tightlist
 \item
-  \emph{Rate model} The second type of modeling strategy is a model for a rate of occurrence. This model includes an \textbf{\emph{offset term}} in the model to incorporate unequal population sizes, this is the most common way the data are analyzed in demographic research. This offset term can be thought of as the denominator for the rate, and we can show how it is put into the model.
+  \emph{Rate model} The second type of modeling strategy used in the Poisson model is for a rate of occurrence. This model includes an \textbf{\emph{offset term}} in the model to incorporate unequal population sizes, this is the most common way the data are analyzed in demographic research. This offset term can be thought of as the denominator for the rate, and we can show how it is included in the model.
 \end{itemize}
 
-If \(n\) is the population size for each place, then, we want to do a regression on the rate of occurrence of our outcome. The rate is typically expressed as a proportion, or probability \(rate = \frac{y}{n}\):
+If \(n\) is the population size for each place, then, we want to do a regression on the rate of occurrence of our outcome. The rate is typically expressed as a proportion, or probability \(rate = \frac{y}{n}\), as seen in the Binomial distribution earlier:
 
-\[log(y/n)= \beta_0 + \beta_1 x_1\] \[log(y) - log(n)= \beta_0 + \beta_1 x_1\]
+\[
+log(y/n)= \beta_0 + \beta_1 x_1 \\
+log(y) - log(n)= \beta_0 + \beta_1 x_1\\
+log(y)= \beta_0 + \beta_1 x_1 + log(n)
+\]
 
-\[log(y)= \beta_0 + \beta_1 x_1 + log(n)\]
+Similar to the example from before, when interpreting the effect of \(\beta_1\) in this model, we also have to exponentiate it. In this case, the interpretation would not be related to the overall count, but to the rate of occurrence. So, if as before, the \(\beta_1 = \text{.025}\), then \(\exp(\beta_1) = \text{exp}(\text{.025}) = \text{1.025}\), or for a 1 unit increase in \(x_1\), the \textbf{\emph{rate}} of occurrence of \(y\) increases by a factor of 1.025.
 
-Similar to the example from before, when interpreting the effect of \(\beta_1\) in this model, we also have to exponentiate it. In this case, the interpretation would not be related to the overall count, but to the rate of occurrence. So, if as before, the \(\beta_1 = \text{.025}\), then \(\exp(\beta_1) = \text{exp}(\text{.025}) = \text{1.025}\), or for a 1 unit increase in \(x_1\), the \textbf{\emph{rate}} of occurrence of \(y\) increases by 1.025. If, in this case the average mortality rate was \(10/500 = 0.02\) when \(x_1\) = 0, then the rate is \(0.02*(1.025*1)\) or \(0.0205\) when \(x_1\) = 1.
+This model includes the natural log of the population size in the \texttt{offset()} function on the right side of the model formula. R will not estimate a regression coefficient for this term, and as in the equation above, the term just represents a scale factor for the outcome.
+
+\textbf{Note on offsets}
+It is important to ensure that all of the populations in a particular analysis have non-zero counts, because if the model sees \(log(0)\) in data, it will generate an error, because this is not a number.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{log}\NormalTok{(}\DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -Inf
+\end{verbatim}
+
+The Poisson model with a population offset is specified as:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{glmp\_s }\OtherTok{\textless{}{-}} \FunctionTok{glm}\NormalTok{(Deaths }\SpecialCharTok{\textasciitilde{}} \FunctionTok{offset}\NormalTok{(}\FunctionTok{log}\NormalTok{(Population)) }\SpecialCharTok{+} \FunctionTok{factor}\NormalTok{(Age\_Group) }\SpecialCharTok{+}\NormalTok{ State,}
+              \AttributeTok{data=}\NormalTok{txca,}
+              \AttributeTok{family=}\NormalTok{poisson)}
+
+\NormalTok{glmp\_s}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{tbl\_regression}\NormalTok{(}\AttributeTok{exp =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Table printed with `knitr::kable()`, not {gt}. Learn why at
+## https://www.danieldsjoberg.com/gtsummary/articles/rmarkdown.html
+## To suppress this message, include `message = FALSE` in code chunk header.
+\end{verbatim}
+
+\begin{tabular}{l|c|c|c}
+\hline
+**Characteristic** & **IRR** & **95\% CI** & **p-value**\\
+\hline
+factor(Age\_Group) &  &  & \\
+\hline
+< 1 year &  &  & \\
+\hline
+1-4 years & 0.05 & 0.04, 0.05 & <0.001\\
+\hline
+5-9 years & 0.02 & 0.02, 0.03 & <0.001\\
+\hline
+10-14 years & 0.03 & 0.03, 0.03 & <0.001\\
+\hline
+15-19 years & 0.10 & 0.09, 0.10 & <0.001\\
+\hline
+20-24 years & 0.17 & 0.16, 0.18 & <0.001\\
+\hline
+25-34 years & 0.20 & 0.19, 0.21 & <0.001\\
+\hline
+35-44 years & 0.31 & 0.30, 0.32 & <0.001\\
+\hline
+45-54 years & 0.72 & 0.70, 0.75 & <0.001\\
+\hline
+55-64 years & 1.69 & 1.64, 1.74 & <0.001\\
+\hline
+65-74 years & 3.44 & 3.33, 3.54 & <0.001\\
+\hline
+75-84 years & 8.73 & 8.47, 9.00 & <0.001\\
+\hline
+85+ years & 26.6 & 25.8, 27.4 & <0.001\\
+\hline
+State &  &  & \\
+\hline
+California &  &  & \\
+\hline
+Texas & 1.19 & 1.18, 1.19 & <0.001\\
+\hline
+\end{tabular}
+
+This result is very close to that from the Binomial model, where we see after age standardization, Texas has a 19 percent higher mortality rate overall than California.
 
 \hypertarget{relative-risk-analysis}{%
 \subsection{Relative risk analysis}\label{relative-risk-analysis}}
@@ -4863,91 +6146,746 @@ The third type of model for the Poisson distribution focuses on the idea of the 
 \begin{itemize}
 \tightlist
 \item
-  The \emph{Standardized risk ratio} incorporates differential exposure due to population size as an \textbf{\emph{expected count}} of the outcome in the offset term, and are typically seen in epidemiological studies. The expected count \(E\), incorporates the different population sizes of each area by estimating the number of events that should occur, if the area followed a given rate of occurrence.
+  The \emph{Standardized risk ratio} incorporates differential exposure due to population size as an \textbf{\emph{expected count}} of the outcome in the offset term, and are typically seen in epidemiological studies. The expected count \(E\), incorporates the different population sizes of each area by estimating the number of events that \textbf{should occur}, if the area followed a given rate of occurrence. The expected count is calculated by multiplying the average rate of occurrence, \(r\), by the population size, \(n\): \(E_i = r * n_i\), where \(r = \frac{\sum y_i}{\sum n_i}\), is the overall rate in the population. This method is commonly referred to as \textbf{\emph{internal standardization}} because we are using the data at hand to estimate the overall rate of occurrence, versus using a rate from some other published source.
 \end{itemize}
-
-The expected count is calculated by multiplying the average rate of occurrence, \(r\), by the population size, \(n\): \(E_i = r * n_i\), where \(r = \frac{\sum y_i}{\sum n_i}\), is the overall rate in the population. This method is commonly referred to as \textbf{\emph{internal standaridization}} because we are using the data at hand to estimate the overall rate of occurrence, versus using a rate from some other published source.
 
 The model for the mean of the outcome would look like this:
 
 \[log(y)= \beta_0 + \beta_1 x_1  + log(E)\].
 
-\hypertarget{overdispersion}{%
-\subsection{Overdispersion}\label{overdispersion}}
-
-When using the Poisson GLM, you often run into \emph{overdispersion} * What's overdispersion? For the Poisson distribution, the mean and the variance are functions of one another (variance = mean for Poisson). So when you have more variability than you expect in your data, you have overdispersion. This basically says your data do not fit your model, and is a problem because overdispersion leads to standard errors for our model parameters that are too small. But, we can fit other models that do not make such assumptions, or allow there to be more variability.
-
-\textbf{An easy check on this is to compare the residual deviance to the residual degrees of freedom. They ratio should be 1 if the model fits the data.}
-
-\hypertarget{note}{%
-\subsection{NOTE}\label{note}}
-
-The \texttt{svyglm()} function includes a scaling term for overdispersion, so this is already taken into account. But if you have data that aren't a complex survey, we can measure this ourselves using the residual deviance.
+And is specified very similarly to the rate model above. First, I show how to calculate the expected number of deaths in the data. A naive method of calculating the expected counts is to use the crude death rate as \(r\), or we can use an age-specific death rate.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{fit2}\OtherTok{\textless{}{-}}\FunctionTok{glm}\NormalTok{(healthdays}\SpecialCharTok{\textasciitilde{}}\FunctionTok{factor}\NormalTok{(race\_eth)}\SpecialCharTok{+}\FunctionTok{factor}\NormalTok{(educ)}\SpecialCharTok{+}\FunctionTok{factor}\NormalTok{(agec), }\AttributeTok{data=}\NormalTok{brfss\_17, }\AttributeTok{family=}\NormalTok{poisson)}
-\FunctionTok{summary}\NormalTok{(fit2)}
-\NormalTok{scale}\OtherTok{\textless{}{-}}\FunctionTok{sqrt}\NormalTok{(fit2}\SpecialCharTok{$}\NormalTok{deviance}\SpecialCharTok{/}\NormalTok{fit2}\SpecialCharTok{$}\NormalTok{df.residual)}
+\CommentTok{\#crude death rate}
+\NormalTok{txca}\SpecialCharTok{$}\NormalTok{E}\OtherTok{\textless{}{-}}\NormalTok{ txca}\SpecialCharTok{$}\NormalTok{Population}\SpecialCharTok{*}\NormalTok{(}\FunctionTok{sum}\NormalTok{(txca}\SpecialCharTok{$}\NormalTok{Deaths}\SpecialCharTok{/}\FunctionTok{sum}\NormalTok{(txca}\SpecialCharTok{$}\NormalTok{Population)))}
+\end{Highlighting}
+\end{Shaded}
+
+In this calculation, the \texttt{Population} variable is multiplied by \(r\), which is the sum of all deaths, divided by all populations.
+
+The age-specific expected count is a little more involved. We first have to sum all deaths and populations by age, then calculate the age specific rate, then join this back to the original data based on the \texttt{Age\_Group} variable. Is this the only way to do this, no, but it works in this example. Alternatively, we could get another age schedule of mortality rates and merge it to these data and standardize our data to that mortality schedule.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Age specific death rate}
+\NormalTok{txca2}\OtherTok{\textless{}{-}}\NormalTok{ txca}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(Age\_Group)}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{ndeaths =} \FunctionTok{sum}\NormalTok{(Deaths), }\AttributeTok{npop=}\FunctionTok{sum}\NormalTok{(Population))}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{r\_age =}\NormalTok{ ndeaths}\SpecialCharTok{/}\NormalTok{npop)}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ungroup}\NormalTok{()}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{left\_join}\NormalTok{(., txca, }\AttributeTok{by =} \StringTok{"Age\_Group"}\NormalTok{)}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(State, Age\_Group)}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{E\_age =}\NormalTok{ Population }\SpecialCharTok{*}\NormalTok{ r\_age)}
+
+\NormalTok{txca2}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(State, Age\_Group, Deaths, Population, E, E\_age)}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{gt}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\captionsetup[table]{labelformat=empty,skip=1pt}
+\begin{longtable}{lcrrrr}
+\toprule
+State & Age\_Group & Deaths & Population & E & E\_age \\ 
+\midrule
+California & < 1 year & 2057 & 498832 & 3376 & 2395 \\ 
+California & 1-4 years & 397 & 1988540 & 13457 & 458 \\ 
+California & 5-9 years & 253 & 2539626 & 17187 & 293 \\ 
+California & 10-14 years & 277 & 2522475 & 17071 & 330 \\ 
+California & 15-19 years & 1076 & 2579986 & 17460 & 1176 \\ 
+California & 20-24 years & 2090 & 2812191 & 19031 & 2288 \\ 
+California & 25-34 years & 5201 & 5917785 & 40048 & 5683 \\ 
+California & 35-44 years & 7032 & 5159932 & 34919 & 7737 \\ 
+California & 45-54 years & 16370 & 5195297 & 35159 & 17889 \\ 
+California & 55-64 years & 34176 & 4688718 & 31730 & 37751 \\ 
+California & 65-74 years & 45834 & 3089002 & 20904 & 50503 \\ 
+California & 75-84 years & 59121 & 1535300 & 10390 & 63613 \\ 
+California & 85+ years & 88331 & 722333 & 4888 & 90772 \\ 
+Texas & < 1 year & 2287 & 405899 & 2747 & 1949 \\ 
+Texas & 1-4 years & 433 & 1613272 & 10918 & 372 \\ 
+Texas & 5-9 years & 276 & 2038319 & 13794 & 236 \\ 
+Texas & 10-14 years & 319 & 2029062 & 13731 & 266 \\ 
+Texas & 15-19 years & 999 & 1970588 & 13336 & 899 \\ 
+Texas & 20-24 years & 1829 & 2005169 & 13570 & 1631 \\ 
+Texas & 25-34 years & 4405 & 4085728 & 27650 & 3923 \\ 
+Texas & 35-44 years & 6292 & 3726287 & 25217 & 5587 \\ 
+Texas & 45-54 years & 13636 & 3519013 & 23815 & 12117 \\ 
+Texas & 55-64 years & 28663 & 3116019 & 21087 & 25088 \\ 
+Texas & 65-74 years & 37506 & 2008449 & 13592 & 32837 \\ 
+Texas & 75-84 years & 44144 & 957001 & 6476 & 39652 \\ 
+Texas & 85+ years & 51173 & 387790 & 2624 & 48732 \\ 
+\bottomrule
+\end{longtable}
+
+In this table, you can see the age-specific expected counts of deaths are much more in line with the age-specific mortality rate, and the numbers of expected deaths are much more similar to the observed pattern of deaths, when compared to the expected counts derived from the crude death rate.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{glmp\_E }\OtherTok{\textless{}{-}} \FunctionTok{glm}\NormalTok{(Deaths }\SpecialCharTok{\textasciitilde{}} \FunctionTok{offset}\NormalTok{(}\FunctionTok{log}\NormalTok{(E)) }\SpecialCharTok{+} \FunctionTok{factor}\NormalTok{(Age\_Group)}\SpecialCharTok{+}\NormalTok{State,}
+              \AttributeTok{data=}\NormalTok{txca2,}
+              \AttributeTok{family=}\NormalTok{poisson)}
+
+\NormalTok{glmp\_Eage }\OtherTok{\textless{}{-}} \FunctionTok{glm}\NormalTok{(Deaths }\SpecialCharTok{\textasciitilde{}} \FunctionTok{offset}\NormalTok{(}\FunctionTok{log}\NormalTok{(E\_age)) }\SpecialCharTok{+} \FunctionTok{factor}\NormalTok{(Age\_Group)}\SpecialCharTok{+}\NormalTok{State,}
+              \AttributeTok{data=}\NormalTok{txca2,}
+              \AttributeTok{family=}\NormalTok{poisson)}
+
+\NormalTok{m1 }\OtherTok{\textless{}{-}}\NormalTok{ glmp\_E}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{tbl\_regression}\NormalTok{(}\AttributeTok{exp =}\NormalTok{ T)}
+\NormalTok{m2 }\OtherTok{\textless{}{-}}\NormalTok{ glmp\_Eage}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{tbl\_regression}\NormalTok{(}\AttributeTok{exp =}\NormalTok{ T)}
+
+\NormalTok{m\_all }\OtherTok{\textless{}{-}} \FunctionTok{tbl\_merge}\NormalTok{(}\FunctionTok{list}\NormalTok{(m1, m2))}
+
+\NormalTok{m\_all}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Table printed with `knitr::kable()`, not {gt}. Learn why at
+## https://www.danieldsjoberg.com/gtsummary/articles/rmarkdown.html
+## To suppress this message, include `message = FALSE` in code chunk header.
+\end{verbatim}
+
+\begin{tabular}{l|c|c|c|c|c|c}
+\hline
+**Characteristic** & **IRR** & **95\% CI** & **p-value** & **IRR** & **95\% CI** & **p-value**\\
+\hline
+factor(Age\_Group) &  &  &  &  &  & \\
+\hline
+< 1 year &  &  &  &  &  & \\
+\hline
+1-4 years & 0.05 & 0.04, 0.05 & <0.001 & 1.00 & 0.93, 1.08 & >0.9\\
+\hline
+5-9 years & 0.02 & 0.02, 0.03 & <0.001 & 1.00 & 0.91, 1.09 & >0.9\\
+\hline
+10-14 years & 0.03 & 0.03, 0.03 & <0.001 & 1.00 & 0.92, 1.09 & >0.9\\
+\hline
+15-19 years & 0.10 & 0.09, 0.10 & <0.001 & 1.00 & 0.95, 1.06 & >0.9\\
+\hline
+20-24 years & 0.17 & 0.16, 0.18 & <0.001 & 1.01 & 0.96, 1.05 & 0.8\\
+\hline
+25-34 years & 0.20 & 0.19, 0.21 & <0.001 & 1.01 & 0.97, 1.04 & 0.7\\
+\hline
+35-44 years & 0.31 & 0.30, 0.32 & <0.001 & 1.01 & 0.97, 1.04 & 0.8\\
+\hline
+45-54 years & 0.72 & 0.70, 0.75 & <0.001 & 1.01 & 0.98, 1.04 & 0.6\\
+\hline
+55-64 years & 1.69 & 1.64, 1.74 & <0.001 & 1.01 & 0.98, 1.04 & 0.6\\
+\hline
+65-74 years & 3.44 & 3.33, 3.54 & <0.001 & 1.01 & 0.98, 1.04 & 0.5\\
+\hline
+75-84 years & 8.73 & 8.47, 9.00 & <0.001 & 1.01 & 0.98, 1.04 & 0.5\\
+\hline
+85+ years & 26.6 & 25.8, 27.4 & <0.001 & 1.02 & 0.99, 1.05 & 0.3\\
+\hline
+State &  &  &  &  &  & \\
+\hline
+California &  &  &  &  &  & \\
+\hline
+Texas & 1.19 & 1.18, 1.19 & <0.001 & 1.19 & 1.18, 1.19 & <0.001\\
+\hline
+\end{tabular}
+
+This result is identical in terms of the difference between states, as the rate model above, and the results are invariant to the choice of the standard used, although when the age-specific expected count is used, the overall mortality pattern becomes insignificant in the model. This is an example of, despite different denominator/offset terms, we can achieve the same comparison from either the rate model or the model for relative risks.
+
+\hypertarget{overdispersion}{%
+\subsection{Overdispersion}\label{overdispersion}}
+
+When using the Poisson GLM, you often run into \emph{overdispersion}. What's overdispersion you might ask? For the Poisson distribution, the mean and the variance are functions of one another (variance = mean for Poisson). So when you have more variability than you expect in your data, you have overdispersion. This basically says that your data do not fit your model, and is a problem because overdispersion leads to standard errors for our model parameters that are too small typically. But, we can fit other models that do not make such assumptions, or allow there to be more variability.
+
+\hypertarget{checking-for-overdispersion}{%
+\paragraph{Checking for overdispersion}\label{checking-for-overdispersion}}
+
+An easy check on this is to compare the residual deviance to the residual degrees of freedom. They ratio should be 1 if the model fits the data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{scale}\OtherTok{\textless{}{-}}\FunctionTok{sqrt}\NormalTok{(glmp\_E}\SpecialCharTok{$}\NormalTok{deviance}\SpecialCharTok{/}\NormalTok{glmp\_E}\SpecialCharTok{$}\NormalTok{df.residual)}
 \NormalTok{scale}
 \end{Highlighting}
 \end{Shaded}
 
-The deviance can also be a test of model fit, using a chi square distribution, with degrees of freedom equal to the residual d.f. (n-p):
+Here, we see for the Poisson model, the scale factor is over 6, which shows evidence of overdispersion in the data. The residual deviance can also be used as a goodness of fit test for the model, because the deviance has been shown to be distributed as a \(\chi^2\) distribution, with degrees of freedom equal to the residual d.f. (n-p):
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DecValTok{1}\SpecialCharTok{{-}}\FunctionTok{pchisq}\NormalTok{(fit2}\SpecialCharTok{$}\NormalTok{deviance, }\AttributeTok{df =}\NormalTok{ fit2}\SpecialCharTok{$}\NormalTok{df.residual)}
+\DecValTok{1}\SpecialCharTok{{-}}\FunctionTok{pchisq}\NormalTok{(glmp\_E}\SpecialCharTok{$}\NormalTok{deviance,}
+         \AttributeTok{df =}\NormalTok{ glmp\_E}\SpecialCharTok{$}\NormalTok{df.residual)}
 \end{Highlighting}
 \end{Shaded}
 
-So, this p value is 0, which means the model does not fit the data.
+So, this p value is 0, which means the model does not fit the data. If the goodness of fit test had a p-value over 5 percent, we could conclude that the model in fact did fit the data.
 
 \hypertarget{modeling-overdispersion-via-a-quasi-distribution}{%
 \subsection{Modeling Overdispersion via a Quasi distribution}\label{modeling-overdispersion-via-a-quasi-distribution}}
 
-For the Poisson , we can fit a ``quasi'' distribution that adds an extra parameter to allow the mean-variance relationship to not be constant. For Poisson we get:
+For the Poisson and the Binomial, we can fit a ``quasi'' distribution that adds an extra parameter to allow the mean-variance relationship to not be constant. For Poisson we get:
 
-\[var(Y) = \lambda * \phi\] , instead of
+\(Var(Y) = \lambda * \phi\), instead of \(Var(Y) = \lambda\)
 
-\[var(Y) = \lambda \]
-
-This allows us to include a rough proxy for a dispersion parameter for the distribution. Naturally this is fixed at 1 for basic models, and estimated in the quasi models, we can look to see if is much bigger than 1. If overdispersion is present and not accounted for you could identify a relationship as being significant when it is not!
+This accessory parameter \(\phi\) allows us to include a rough proxy for a dispersion parameter for the distribution. Naturally this is fixed at 1 for the normal Poisson model, and estimated in the quasi models, we can look to see if is much bigger than 1. If overdispersion is present and not accounted for you could identify a relationship as being significant when it is not!
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{fit3}\OtherTok{\textless{}{-}}\FunctionTok{glm}\NormalTok{(healthdays}\SpecialCharTok{\textasciitilde{}}\FunctionTok{factor}\NormalTok{(race\_eth)}\SpecialCharTok{+}\FunctionTok{factor}\NormalTok{(educ)}\SpecialCharTok{+}\FunctionTok{factor}\NormalTok{(agec), }\AttributeTok{data=}\NormalTok{brfss\_17, }\AttributeTok{family=}\NormalTok{quasipoisson)}
-\FunctionTok{summary}\NormalTok{(fit3)}
+\NormalTok{glmqp }\OtherTok{\textless{}{-}} \FunctionTok{glm}\NormalTok{(Deaths }\SpecialCharTok{\textasciitilde{}} \FunctionTok{offset}\NormalTok{(}\FunctionTok{log}\NormalTok{(E)) }\SpecialCharTok{+} \FunctionTok{factor}\NormalTok{(Age\_Group)}\SpecialCharTok{+}\NormalTok{State,}
+              \AttributeTok{data=}\NormalTok{txca,}
+              \AttributeTok{family=}\NormalTok{quasipoisson)}
+
+\NormalTok{glmqp}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{tbl\_regression}\NormalTok{(}\AttributeTok{exp =} \ConstantTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{other-count-models---negative-binomial}{%
-\subsection{Other count models - Negative binomial}\label{other-count-models---negative-binomial}}
+\begin{verbatim}
+## Table printed with `knitr::kable()`, not {gt}. Learn why at
+## https://www.danieldsjoberg.com/gtsummary/articles/rmarkdown.html
+## To suppress this message, include `message = FALSE` in code chunk header.
+\end{verbatim}
 
-\begin{itemize}
-\item
-  Of course, we could just fit other distributional models to our data, popular choices are:
-\item
-  Negative binomial
-\item
-  Effectively adds a shape parameter to Poisson
-\end{itemize}
+\begin{tabular}{l|c|c|c}
+\hline
+**Characteristic** & **IRR** & **95\% CI** & **p-value**\\
+\hline
+factor(Age\_Group) &  &  & \\
+\hline
+< 1 year &  &  & \\
+\hline
+1-4 years & 0.05 & 0.03, 0.07 & <0.001\\
+\hline
+5-9 years & 0.02 & 0.01, 0.04 & <0.001\\
+\hline
+10-14 years & 0.03 & 0.02, 0.05 & <0.001\\
+\hline
+15-19 years & 0.10 & 0.07, 0.13 & <0.001\\
+\hline
+20-24 years & 0.17 & 0.13, 0.22 & <0.001\\
+\hline
+25-34 years & 0.20 & 0.16, 0.25 & <0.001\\
+\hline
+35-44 years & 0.31 & 0.25, 0.39 & <0.001\\
+\hline
+45-54 years & 0.72 & 0.59, 0.89 & 0.008\\
+\hline
+55-64 years & 1.69 & 1.40, 2.06 & <0.001\\
+\hline
+65-74 years & 3.44 & 2.85, 4.19 & <0.001\\
+\hline
+75-84 years & 8.73 & 7.25, 10.6 & <0.001\\
+\hline
+85+ years & 26.6 & 22.1, 32.4 & <0.001\\
+\hline
+State &  &  & \\
+\hline
+California &  &  & \\
+\hline
+Texas & 1.19 & 1.14, 1.23 & <0.001\\
+\hline
+\end{tabular}
 
-\[Y \sim NB (\lambda, \lambda+\lambda^2/\theta),\] \[\text{   } E(Y) = \lambda,\] \[\text{   } var(Y) = \lambda+\lambda^2/\theta\] \[\lambda = log(\eta)\] \[\eta = \beta_0 + \beta_1 x_1+ log(n)\]
+While the overall pattern and substantive interpretation of the regular Poisson and the quasiPoisson models are identical, the standard errors of the parameters are not. We can see this by forming their ratios. The standard errors of the model parameters can be extracted from the \texttt{summary()\$coefficients} of a model, specifically the second column of this table.
 
-Now, R will not fit negative binomial models using survey design, so, we will fit them using sample weights only, then calculate the robust standard errors. We standardize the weights to equal the sample size, as opposed to the population size by dividing each person's weight by the mean weight.
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sum1}\OtherTok{\textless{}{-}} \FunctionTok{summary}\NormalTok{(glmp\_E)}\SpecialCharTok{$}\NormalTok{coef[, }\DecValTok{2}\NormalTok{]}
+\NormalTok{sum2}\OtherTok{\textless{}{-}} \FunctionTok{summary}\NormalTok{(glmqp)}\SpecialCharTok{$}\NormalTok{coef[, }\DecValTok{2}\NormalTok{]}
 
-\hypertarget{side-by-side-comparison-of-different-specificaitons}{%
-\subsection{side by side comparison of different specificaitons}\label{side-by-side-comparison-of-different-specificaitons}}
+\FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Poisson =}\NormalTok{ sum1,}
+           \AttributeTok{QPoisson=}\NormalTok{ sum2,}
+           \AttributeTok{coef =} \FunctionTok{names}\NormalTok{(}\FunctionTok{coef}\NormalTok{(glmp\_E)))}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ QPoisson}\SpecialCharTok{/}\NormalTok{Poisson, }\AttributeTok{x=}\NormalTok{ coef))}\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{ylab}\NormalTok{(}\StringTok{"Ratio of Standard Errors"}\NormalTok{ )}\SpecialCharTok{+}
+  \FunctionTok{xlab}\NormalTok{ (}\StringTok{"Parameter"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"Ratio of Standard Errors in Poisson and QuasiPoisson Models"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
 
-\hypertarget{have-brief-discussion-of-spatial-models}{%
-\subsection{have brief discussion of spatial models}\label{have-brief-discussion-of-spatial-models}}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-178-1.pdf}
 
-\hypertarget{extensions-of-the-glm-framework-when-working-with-places}{%
-\subsection{Extensions of the GLM framework when working with places}\label{extensions-of-the-glm-framework-when-working-with-places}}
+This \textbf{highly meaningful} plot shows the ratio of all the standard errors is the same and is equal to the square root of the quasiPoisson dispersion parameter \(\phi\), which can be seen in \texttt{summary(glmqp)\$dispersion}, in this case it is 6.308, which is extremely close to the \texttt{scale} we calculated earlier. The quasiPoisson model has a disadvantage however, in that, per the \texttt{?glm} documentation, is fit via quasi-likelihood methods and as such cannot be compared using AIC to other models.
 
-\hypertarget{construction-of-indices-for-places}{%
-\subsection{Construction of indices for places}\label{construction-of-indices-for-places}}
+\hypertarget{modeling-dispersion-properly}{%
+\subsubsection{Modeling dispersion properly}\label{modeling-dispersion-properly}}
+
+The \texttt{dispmod} package implements the method of Breslow \citeyearpar{breslow_extra-poisson_1984} which adds an extra parameter to account for the overdispersion in the Poisson, and is fit via regular maximum likelihood, so it is comparable to other models. Effectively, this takes either a model fit via \texttt{glm()} with either a Binomial or Poisson family, and performs a re-weighted estimate of the model parameters.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(dispmod)}
+
+\NormalTok{glmp\_d }\OtherTok{\textless{}{-}} \FunctionTok{glm.poisson.disp}\NormalTok{(glmp\_E,}
+                           \AttributeTok{verbose =}\NormalTok{ F)}
+
+\NormalTok{glmp\_d}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{tbl\_regression}\NormalTok{(}\AttributeTok{exp =}\NormalTok{ T)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Table printed with `knitr::kable()`, not {gt}. Learn why at
+## https://www.danieldsjoberg.com/gtsummary/articles/rmarkdown.html
+## To suppress this message, include `message = FALSE` in code chunk header.
+\end{verbatim}
+
+\begin{tabular}{l|c|c|c}
+\hline
+**Characteristic** & **IRR** & **95\% CI** & **p-value**\\
+\hline
+factor(Age\_Group) &  &  & \\
+\hline
+< 1 year &  &  & \\
+\hline
+1-4 years & 0.05 & 0.04, 0.05 & <0.001\\
+\hline
+5-9 years & 0.02 & 0.02, 0.03 & <0.001\\
+\hline
+10-14 years & 0.03 & 0.02, 0.03 & <0.001\\
+\hline
+15-19 years & 0.10 & 0.09, 0.10 & <0.001\\
+\hline
+20-24 years & 0.17 & 0.16, 0.19 & <0.001\\
+\hline
+25-34 years & 0.20 & 0.18, 0.22 & <0.001\\
+\hline
+35-44 years & 0.31 & 0.29, 0.34 & <0.001\\
+\hline
+45-54 years & 0.72 & 0.66, 0.79 & <0.001\\
+\hline
+55-64 years & 1.70 & 1.56, 1.85 & <0.001\\
+\hline
+65-74 years & 3.45 & 3.16, 3.76 & <0.001\\
+\hline
+75-84 years & 8.73 & 8.01, 9.52 & <0.001\\
+\hline
+85+ years & 26.4 & 24.2, 28.8 & <0.001\\
+\hline
+State &  &  & \\
+\hline
+California &  &  & \\
+\hline
+Texas & 1.24 & 1.20, 1.29 & <0.001\\
+\hline
+\end{tabular}
+
+In this example the difference between California and Texas is now larger at a 24\% higher mortality rate in Texas. How does this model compare to the regular Poisson model?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{AIC}\NormalTok{(glmp\_E, glmp\_d)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        df   AIC
+## glmp_E 14 773.8
+## glmp_d 14  90.3
+\end{verbatim}
+
+The dispersed model shows a much lower AIC suggesting that the dispersion accounted for in the the Breslow model is likely important. We can see how the dispersed Poisson model's standard errors compare to those of the regular Poisson using the same plot we saw earlier:
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-181-1.pdf}
+
+In this case, the standard errors are not just a monotone transformation of the Poisson model errors, they each have their own scaling, which shows the dispersed Poisson model is doing something different compared to the quasiPoisson model by not using a single scaling factor for all the standard errors.
+
+\hypertarget{other-count-models}{%
+\subsection{Other count models}\label{other-count-models}}
+
+The Poisson and Binomial models are probably the most commonly used models for rates and proportions, but other models exist that offer more flexibility. Specifically the Beta distribution and the Negative Binomial distribution.
+
+\hypertarget{beta-distribution-model}{%
+\subsubsection{Beta distribution model}\label{beta-distribution-model}}
+
+The Beta distribution is a commonly used model for the prior distribution for the mean of the Binomial, as it has values between 0 and 1, but it is not used as often as an outcome distribution. It is indeed quite flexible as an outcome distribution for proportions because of its range of support, but also because it has an additional dispersion parameter, unlike the Binomial, so the pitfalls of overdispersion often present in the Binomial can be avoided. The \texttt{betareg} package \citep{betareg} implements the Beta regression model. The distribution has density:
+
+\[
+f(y:p,q) = \frac{\Gamma(p +
+q)}{\Gamma(p)\Gamma(q)}x^{p - 1}(1 - x)^{q - 1}
+\]
+Where \(\Gamma\) is the Gamma function. The distribution, as parameterized in \texttt{betareg} has mean and variance:
+
+\[
+\mu = p/(p+q) \\
+Var = \mu (1-\mu)/ (1+\phi)
+\]
+
+Where \(phi\) is a precision parameter. The model is linked to the linear predictor using one of the same link functions as the Binomial model: Logit, Probit or Complementary Log-Log.
+
+\[g(\mu_i) = X'\beta = \eta_i\]
+The Logit link is parameterized as:
+
+\[logit(g(\mu)) = log(\mu / (1-\mu))\]
+As described in their article on the \texttt{betareg} package \citep{cribari-neto_beta_2010}, the model can also include a separate model for dispersion, so you can model the variance in the data as well as the mean.
+
+The \texttt{betareg::betareg()} function implements model, and here is an application of the model to the low birth weight data used earlier:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(betareg)}
+\NormalTok{glm\_beta}\OtherTok{\textless{}{-}}\FunctionTok{betareg}\NormalTok{(}\FunctionTok{I}\NormalTok{(lbrate1618}\SpecialCharTok{/}\DecValTok{1000}\NormalTok{) }\SpecialCharTok{\textasciitilde{}}\NormalTok{  fampov14 }\SpecialCharTok{+}\NormalTok{ rucc }\SpecialCharTok{+}\NormalTok{ hpsa16, }
+                  \AttributeTok{data=}\NormalTok{ahrf\_m)}
+
+\FunctionTok{summary}\NormalTok{(glm\_beta)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## betareg(formula = I(lbrate1618/1000) ~ fampov14 + rucc + hpsa16, data = ahrf_m)
+## 
+## Standardized weighted residuals 2:
+##    Min     1Q Median     3Q    Max 
+## -7.039 -0.623 -0.011  0.634  3.750 
+## 
+## Coefficients (mean model with logit link):
+##                                Estimate Std. Error z value Pr(>|z|)    
+## (Intercept)                   -2.638787   0.015061 -175.20  < 2e-16 ***
+## fampov14                       0.025287   0.000794   31.86  < 2e-16 ***
+## rucc02                        -0.018814   0.015072   -1.25  0.21192    
+## rucc03                        -0.040004   0.015758   -2.54  0.01113 *  
+## rucc04                        -0.079860   0.017786   -4.49  7.1e-06 ***
+## rucc05                        -0.073411   0.024275   -3.02  0.00249 ** 
+## rucc06                        -0.049409   0.014282   -3.46  0.00054 ***
+## rucc07                        -0.049818   0.015975   -3.12  0.00182 ** 
+## rucc08                         0.003858   0.025249    0.15  0.87854    
+## rucc09                        -0.063679   0.027447   -2.32  0.02033 *  
+## hpsa16partial county shortage -0.001980   0.012814   -0.15  0.87720    
+## hpsa16whole county shortage    0.027836   0.015618    1.78  0.07471 .  
+## 
+## Phi coefficients (precision model with identity link):
+##       Estimate Std. Error z value Pr(>|z|)    
+## (phi)   304.73       8.95    34.1   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
+## 
+## Type of estimator: ML (maximum likelihood)
+## Log-likelihood: 6.35e+03 on 13 Df
+## Pseudo R-squared: 0.355
+## Number of iterations: 23 (BFGS) + 2 (Fisher scoring)
+\end{verbatim}
+
+And the model with a separate model for the dispersion can be estimated by including a second formula separated by a \texttt{\textbar{}} as:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(betareg)}
+\NormalTok{glm\_beta\_o}\OtherTok{\textless{}{-}}\FunctionTok{betareg}\NormalTok{(}\FunctionTok{I}\NormalTok{(lbrate1618}\SpecialCharTok{/}\DecValTok{1000}\NormalTok{) }\SpecialCharTok{\textasciitilde{}}\NormalTok{  fampov14 }\SpecialCharTok{+}\NormalTok{ rucc }\SpecialCharTok{+}\NormalTok{ hpsa16 }\SpecialCharTok{|} \FunctionTok{scale}\NormalTok{(popn), }
+                  \AttributeTok{data=}\NormalTok{ahrf\_m)}
+
+\FunctionTok{summary}\NormalTok{(glm\_beta\_o)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## betareg(formula = I(lbrate1618/1000) ~ fampov14 + rucc + hpsa16 | scale(popn), 
+##     data = ahrf_m)
+## 
+## Standardized weighted residuals 2:
+##    Min     1Q Median     3Q    Max 
+## -6.925 -0.617 -0.002  0.650  3.711 
+## 
+## Coefficients (mean model with logit link):
+##                                Estimate Std. Error z value Pr(>|z|)    
+## (Intercept)                   -2.642161   0.014920 -177.09  < 2e-16 ***
+## fampov14                       0.025114   0.000794   31.64  < 2e-16 ***
+## rucc02                        -0.012491   0.014638   -0.85   0.3935    
+## rucc03                        -0.032752   0.015424   -2.12   0.0337 *  
+## rucc04                        -0.072141   0.017519   -4.12 0.000038 ***
+## rucc05                        -0.065526   0.024147   -2.71   0.0067 ** 
+## rucc06                        -0.041570   0.013954   -2.98   0.0029 ** 
+## rucc07                        -0.041744   0.015694   -2.66   0.0078 ** 
+## rucc08                         0.011858   0.025232    0.47   0.6384    
+## rucc09                        -0.055053   0.027452   -2.01   0.0449 *  
+## hpsa16partial county shortage -0.004801   0.012786   -0.38   0.7073    
+## hpsa16whole county shortage    0.027095   0.015684    1.73   0.0841 .  
+## 
+## Phi coefficients (precision model with log link):
+##             Estimate Std. Error z value Pr(>|z|)    
+## (Intercept)   5.7271     0.0294  195.06   <2e-16 ***
+## scale(popn)   0.0842     0.0293    2.87    0.004 ** 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
+## 
+## Type of estimator: ML (maximum likelihood)
+## Log-likelihood: 6.36e+03 on 14 Df
+## Pseudo R-squared: 0.355
+## Number of iterations: 21 (BFGS) + 1 (Fisher scoring)
+\end{verbatim}
+
+The AIC can be used to determine if the dispersion model is preferred to the regular beta regression.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{AIC}\NormalTok{(glm\_beta, glm\_beta\_o)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            df    AIC
+## glm_beta   13 -12668
+## glm_beta_o 14 -12682
+\end{verbatim}
+
+In this case, the dispersion model is preferred since the AIC is 13.78 points lower for the dispersion model.
+
+\hypertarget{negative-binomial-model}{%
+\subsubsection{Negative binomial model}\label{negative-binomial-model}}
+
+When overdispersion is present, many researchers will automatically turn to the Negative Binomial as an alternative. The Negative Binomial sounds like it is some alternative to the Binomial distribution, but it is more like the Poisson. It effectively adds a second parameter to a model for integer counts. The model has been parameterized in several ways. The most common are the NB1 and NB2 models. The difference is how the model allows the variance to increase with the mean. The NB1 model allows for variance to increase linearly with the mean:
+
+\[
+Y \sim NB (\lambda, \lambda+ \theta \lambda) \\
+E(Y) = \lambda \\
+\text{   } var(Y) = \lambda+\theta\lambda \\
+\lambda = log(\eta) \\ 
+\eta = \beta_0 + \beta_1 x_1+ log(n)
+\]
+The NB2 model, which is the most commonly implemented in software, allows the variance to increase as a square with the mean.
+
+\[
+Y \sim NB (\lambda, \lambda+ \theta \lambda^2) \\
+E(Y) = \lambda \\
+\text{   } var(Y) = \lambda+ \theta \lambda^2 \\
+\lambda = log(\eta) \\ 
+\eta = \beta_0 + \beta_1 x_1+ log(n)
+\]
+
+The base R \texttt{glm()} does not offer the NB1 model by default, but the standard \texttt{MASS} package \citep{venables_ripley} has the \texttt{glm.nb()} function. An alternative is the highly flexible \texttt{gamlss} package\citep{gamlss}, which includes the NB2 model, as well as a host of other distributions, plus the ability to model mean and variance, similar to how \texttt{betareg()} was achieving for the Beta distribution.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(MASS)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'MASS'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:patchwork':
+## 
+##     area
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:gtsummary':
+## 
+##     select
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:srvyr':
+## 
+##     select
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:dplyr':
+## 
+##     select
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{glmnb}\OtherTok{\textless{}{-}} \FunctionTok{glm.nb}\NormalTok{(lowbw1618 }\SpecialCharTok{\textasciitilde{}} \FunctionTok{offset}\NormalTok{(}\FunctionTok{log}\NormalTok{(births1618)) }\SpecialCharTok{+}\NormalTok{ fampov14 }\SpecialCharTok{+}\NormalTok{ rucc }\SpecialCharTok{+}\NormalTok{ hpsa16 ,}
+               \AttributeTok{data=}\NormalTok{ahrf\_m)}
+
+
+\NormalTok{glmnb}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{tbl\_regression}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Table printed with `knitr::kable()`, not {gt}. Learn why at
+## https://www.danieldsjoberg.com/gtsummary/articles/rmarkdown.html
+## To suppress this message, include `message = FALSE` in code chunk header.
+\end{verbatim}
+
+\begin{tabular}{l|c|c|c}
+\hline
+**Characteristic** & **log(IRR)** & **95\% CI** & **p-value**\\
+\hline
+\% Families Below Poverty Level 2014-18 & 0.03 & 0.02, 0.03 & <0.001\\
+\hline
+rucc &  &  & \\
+\hline
+01 &  &  & \\
+\hline
+02 & -0.02 & -0.04, 0.01 & 0.2\\
+\hline
+03 & -0.04 & -0.07, -0.02 & <0.001\\
+\hline
+04 & -0.08 & -0.11, -0.05 & <0.001\\
+\hline
+05 & -0.07 & -0.12, -0.03 & <0.001\\
+\hline
+06 & -0.06 & -0.08, -0.03 & <0.001\\
+\hline
+07 & -0.07 & -0.10, -0.04 & <0.001\\
+\hline
+08 & -0.01 & -0.07, 0.06 & 0.9\\
+\hline
+09 & -0.09 & -0.16, -0.01 & 0.021\\
+\hline
+hpsa16 &  &  & \\
+\hline
+no shortage &  &  & \\
+\hline
+partial county shortage & -0.01 & -0.03, 0.01 & 0.4\\
+\hline
+whole county shortage & 0.00 & -0.03, 0.03 & >0.9\\
+\hline
+\end{tabular}
+
+The NB2 version of the model can be estimated using \texttt{gamlss()} with \texttt{family=NBII}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(gamlss)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: gamlss.data
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'gamlss.data'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:datasets':
+## 
+##     sleep
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: gamlss.dist
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: parallel
+\end{verbatim}
+
+\begin{verbatim}
+## Registered S3 method overwritten by 'gamlss':
+##   method   from
+##   print.ri bit
+\end{verbatim}
+
+\begin{verbatim}
+##  **********   GAMLSS Version 5.4-1  **********
+\end{verbatim}
+
+\begin{verbatim}
+## For more on GAMLSS look at https://www.gamlss.com/
+\end{verbatim}
+
+\begin{verbatim}
+## Type gamlssNews() to see new features/changes/bug fixes.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{glmnb2}\OtherTok{\textless{}{-}}\FunctionTok{gamlss}\NormalTok{(lowbw1618 }\SpecialCharTok{\textasciitilde{}} \FunctionTok{offset}\NormalTok{(}\FunctionTok{log}\NormalTok{(births1618)) }\SpecialCharTok{+}\NormalTok{ fampov14 }\SpecialCharTok{+}\NormalTok{ rucc }\SpecialCharTok{+}\NormalTok{ hpsa16,}
+               \AttributeTok{family =}\NormalTok{ NBII,}
+               \AttributeTok{data=}\NormalTok{ahrf\_m)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## GAMLSS-RS iteration 1: Global Deviance = 27779 
+## GAMLSS-RS iteration 2: Global Deviance = 26731 
+## GAMLSS-RS iteration 3: Global Deviance = 25317 
+## GAMLSS-RS iteration 4: Global Deviance = 23327 
+## GAMLSS-RS iteration 5: Global Deviance = 20581 
+## GAMLSS-RS iteration 6: Global Deviance = 18480 
+## GAMLSS-RS iteration 7: Global Deviance = 18278 
+## GAMLSS-RS iteration 8: Global Deviance = 18277 
+## GAMLSS-RS iteration 9: Global Deviance = 18277 
+## GAMLSS-RS iteration 10: Global Deviance = 18277
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(glmnb2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## ******************************************************************
+## Family:  c("NBII", "Negative Binomial type II") 
+## 
+## Call:  gamlss(formula = lowbw1618 ~ offset(log(births1618)) +  
+##     fampov14 + rucc + hpsa16, family = NBII, data = ahrf_m) 
+## 
+## Fitting method: RS() 
+## 
+## ------------------------------------------------------------------
+## Mu link function:  log
+## Mu Coefficients:
+##                               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)                   -2.67626    0.01225 -218.41   <2e-16 ***
+## fampov14                       0.01900    0.00069   27.53   <2e-16 ***
+## rucc02                        -0.01242    0.00805   -1.54    0.123    
+## rucc03                        -0.01665    0.01139   -1.46    0.144    
+## rucc04                        -0.04012    0.01636   -2.45    0.014 *  
+## rucc05                        -0.02914    0.02541   -1.15    0.252    
+## rucc06                         0.00588    0.01612    0.36    0.715    
+## rucc07                         0.00680    0.02111    0.32    0.747    
+## rucc08                         0.09419    0.04935    1.91    0.056 .  
+## rucc09                         0.02087    0.05461    0.38    0.702    
+## hpsa16partial county shortage -0.02035    0.01176   -1.73    0.084 .  
+## hpsa16whole county shortage    0.00829    0.01953    0.42    0.671    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## ------------------------------------------------------------------
+## Sigma link function:  log
+## Sigma Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)   0.7289     0.0435    16.7   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## ------------------------------------------------------------------
+## No. of observations in the fit:  2324 
+## Degrees of Freedom for the fit:  13
+##       Residual Deg. of Freedom:  2311 
+##                       at cycle:  10 
+##  
+## Global Deviance:     18277 
+##             AIC:     18303 
+##             SBC:     18378 
+## ******************************************************************
+\end{verbatim}
+
+Again, between these two different specifications, we see very similar results. We can compare each of the models, starting with the Gaussian model and proceeding through the NB2 model above (although the Beta regression appears to be on a different scale since the outcome is specified as probability, versus a count, so it is not comparable to the rest) using the \texttt{AIC()} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{AIC}\NormalTok{(glm1, glmb, glmp\_b, glmnb, glmnb2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        df   AIC
+## glm1   13 19599
+## glmb   12 20980
+## glmp_b 12 20518
+## glmnb  13 16866
+## glmnb2 13 18303
+\end{verbatim}
+
+We see that among these five model specifications, the Binomial fits the worst and the NB1 model, estimated by \texttt{glm.nb()} fits the best, with the lowest AIC among these five models.
 
 \newpage
 
@@ -5519,7 +7457,7 @@ These times are subject to random variations, and are considered to be random \e
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-146-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-193-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5527,7 +7465,7 @@ These times are subject to random variations, and are considered to be random \e
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-146-2.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-193-2.pdf}
 
 \begin{itemize}
 \tightlist
@@ -5594,7 +7532,7 @@ Empirically, \emph{S(t)} takes the form of a step function:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-147-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-194-1.pdf}
 
 \hypertarget{the-hazard-function}{%
 \subsubsection{The hazard function}\label{the-hazard-function}}
@@ -5644,6 +7582,10 @@ We can extend this framework to include effects of \emph{individual characterist
 We can re-express the hazard rate with both these conditions as:
 
 \[h(t|x) = \lim_{\Delta t \rightarrow 0} \frac{Pr(t \leqslant T \leqslant t + \Delta t | T \geqslant t, x)}{\Delta t}\]
+\#\# Logistic regression
+When a variable is coded as binary, meaning either 1 or 0, the Bernoulli distribution is used, as in the logistic regression model. When coded like this, the model tries to use the other measured information to predict the 1 value versus the 0 value. So in the basic sense, we want to construct a model like:
+
+\[Pr(y=1) =\pi =  \text{some function of predictors}\]
 
   \bibliography{book.bib}
 

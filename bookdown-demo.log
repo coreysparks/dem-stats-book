@@ -1,11 +1,11 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021/W32TeX) (preloaded format=xelatex 2022.2.4)  4 FEB 2022 10:41
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021/W32TeX) (preloaded format=xelatex 2022.3.1)  1 MAR 2022 09:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **bookdown-demo.tex
 (./bookdown-demo.tex
 LaTeX2e <2021-11-15> patch level 1
-L3 programming layer <2022-01-21> (c:/Users/ozd504/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/article.cls
+L3 programming layer <2022-02-24> (c:/Users/ozd504/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2021/10/04 v1.4n Standard LaTeX document class
 (c:/Users/ozd504/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/size10.clo
 File: size10.clo 2021/10/04 v1.4n Standard LaTeX file (size option)
@@ -118,11 +118,11 @@ LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 (Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 38.
 ) (c:/Users/ozd504/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty
-Package: iftex 2020/03/06 v1.0d TeX engine tests
+Package: iftex 2022/02/03 v1.0f TeX engine tests
 ) (c:/Users/ozd504/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/unicode-math/unicode-math.sty (c:/Users/ozd504/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3kernel/expl3.sty
-Package: expl3 2022-01-21 L3 programming layer (loader) 
+Package: expl3 2022-02-24 L3 programming layer (loader) 
 (c:/Users/ozd504/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-xetex.def
-File: l3backend-xetex.def 2022-01-12 L3 backend support: XeTeX
+File: l3backend-xetex.def 2022-02-07 L3 backend support: XeTeX
 (|extractbb --version)
 \c__kernel_sys_dvipdfmx_version_int=\count267
 \l__color_backend_stack_int=\count268
@@ -206,7 +206,7 @@ Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1373.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1374.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1375.
 ) (c:/Users/ozd504/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty
-Package: hyperref 2021-06-07 v7.00m Hypertext links for LaTeX
+Package: hyperref 2022-02-21 v7.00n Hypertext links for LaTeX
 (c:/Users/ozd504/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
 Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO)
 (c:/Users/ozd504/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/infwarerr/infwarerr.sty
@@ -230,9 +230,7 @@ Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
 \Hy@linkcounter=\count289
 \Hy@pagecounter=\count290
 (c:/Users/ozd504/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def
-File: pd1enc.def 2021-06-07 v7.00m Hyperref: PDFDocEncoding definition (HO)
-) (c:/Users/ozd504/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref-langpatches.def
-File: hyperref-langpatches.def 2021-06-07 v7.00m Hyperref: patches for babel languages
+File: pd1enc.def 2022-02-21 v7.00n Hyperref: PDFDocEncoding definition (HO)
 ) (c:/Users/ozd504/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 ) (c:/Users/ozd504/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/etexcmds/etexcmds.sty
@@ -240,22 +238,22 @@ Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
 )
 \Hy@SavedSpaceFactor=\count291
 (c:/Users/ozd504/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def
-File: puenc.def 2021-06-07 v7.00m Hyperref: PDF Unicode definition (HO)
+File: puenc.def 2022-02-21 v7.00n Hyperref: PDF Unicode definition (HO)
 )
-Package hyperref Info: Option `unicode' set `true' on input line 4073.
-Package hyperref Info: Hyper figures OFF on input line 4192.
-Package hyperref Info: Link nesting OFF on input line 4197.
-Package hyperref Info: Hyper index ON on input line 4200.
-Package hyperref Info: Plain pages OFF on input line 4207.
-Package hyperref Info: Backreferencing OFF on input line 4212.
+Package hyperref Info: Option `unicode' set `true' on input line 4018.
+Package hyperref Info: Hyper figures OFF on input line 4137.
+Package hyperref Info: Link nesting OFF on input line 4142.
+Package hyperref Info: Hyper index ON on input line 4145.
+Package hyperref Info: Plain pages OFF on input line 4152.
+Package hyperref Info: Backreferencing OFF on input line 4157.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
-Package hyperref Info: Bookmarks ON on input line 4445.
+Package hyperref Info: Bookmarks ON on input line 4390.
 \c@Hy@tempcnt=\count292
 (c:/Users/ozd504/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip18
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
-LaTeX Info: Redefining \url on input line 4804.
+LaTeX Info: Redefining \url on input line 4749.
 \XeTeXLinkMargin=\dimen152
 (c:/Users/ozd504/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/bitset/bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
@@ -265,15 +263,15 @@ Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
 \Fld@menulength=\count293
 \Field@Width=\dimen153
 \Fld@charsize=\dimen154
-Package hyperref Info: Hyper figures OFF on input line 6076.
-Package hyperref Info: Link nesting OFF on input line 6081.
-Package hyperref Info: Hyper index ON on input line 6084.
-Package hyperref Info: backreferencing OFF on input line 6091.
-Package hyperref Info: Link coloring OFF on input line 6096.
-Package hyperref Info: Link coloring with OCG OFF on input line 6101.
-Package hyperref Info: PDF/A mode OFF on input line 6106.
-LaTeX Info: Redefining \ref on input line 6146.
-LaTeX Info: Redefining \pageref on input line 6150.
+Package hyperref Info: Hyper figures OFF on input line 6027.
+Package hyperref Info: Link nesting OFF on input line 6032.
+Package hyperref Info: Hyper index ON on input line 6035.
+Package hyperref Info: backreferencing OFF on input line 6042.
+Package hyperref Info: Link coloring OFF on input line 6047.
+Package hyperref Info: Link coloring with OCG OFF on input line 6052.
+Package hyperref Info: PDF/A mode OFF on input line 6057.
+LaTeX Info: Redefining \ref on input line 6097.
+LaTeX Info: Redefining \pageref on input line 6101.
 (c:/Users/ozd504/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/atbegshi-ltx.sty
 Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
 package with kernel methods
@@ -284,7 +282,7 @@ package with kernel methods
 )
 Package hyperref Info: Driver (autodetected): hxetex.
 (c:/Users/ozd504/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hxetex.def
-File: hxetex.def 2021-06-07 v7.00m Hyperref driver for XeTeX
+File: hxetex.def 2022-02-21 v7.00n Hyperref driver for XeTeX
 (c:/Users/ozd504/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/stringenc/stringenc.sty
 Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO)
 )
@@ -423,16 +421,17 @@ Package: amsthm 2020/05/29 v2.20.6
 \thm@headsep=\skip65
 \dth@everypar=\toks30
 ) (c:/Users/ozd504/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/caption/caption.sty
-Package: caption 2020/10/26 v3.5g Customizing captions (AR)
+Package: caption 2022/02/20 v3.6 Customizing captions (AR)
 (c:/Users/ozd504/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/caption/caption3.sty
-Package: caption3 2020/10/21 v2.2e caption3 kernel (AR)
-\captionmargin=\dimen188
-\captionmargin@=\dimen189
-\captionwidth=\dimen190
-\caption@tempdima=\dimen191
-\caption@indent=\dimen192
-\caption@parindent=\dimen193
-\caption@hangindent=\dimen194
+Package: caption3 2022/01/07 v2.3 caption3 kernel (AR)
+\caption@tempdima=\dimen188
+\captionmargin=\dimen189
+\caption@leftmargin=\dimen190
+\caption@rightmargin=\dimen191
+\caption@width=\dimen192
+\caption@indent=\dimen193
+\caption@parindent=\dimen194
+\caption@hangindent=\dimen195
 Package caption Info: Standard document class detected.
 )
 \c@caption@flags=\count319
@@ -440,10 +439,10 @@ Package caption Info: Standard document class detected.
 Package caption Info: hyperref package is loaded.
 Package caption Info: longtable package is loaded.
 (c:/Users/ozd504/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/caption/ltcaption.sty
-Package: ltcaption 2020/05/30 v1.4b longtable captions (AR)
+Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
 )) (c:/Users/ozd504/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/siunitx/siunitx.sty
-Package: siunitx 2022-02-02 v3.0.46 A comprehensive (SI) units package
-\l__siunitx_angle_tmp_dim=\dimen195
+Package: siunitx 2022-02-15 v3.0.49 A comprehensive (SI) units package
+\l__siunitx_angle_tmp_dim=\dimen196
 \l__siunitx_angle_marker_box=\box63
 \l__siunitx_angle_unit_box=\box64
 \l__siunitx_compound_count_int=\count321
@@ -453,14 +452,14 @@ Package: siunitx 2022-02-02 v3.0.46 A comprehensive (SI) units package
 \l__siunitx_number_round_precision_int=\count325
 \l__siunitx_number_group_minimum_int=\count326
 \l__siunitx_table_tmp_box=\box65
-\l__siunitx_table_tmp_dim=\dimen196
-\l__siunitx_table_column_width_dim=\dimen197
+\l__siunitx_table_tmp_dim=\dimen197
+\l__siunitx_table_column_width_dim=\dimen198
 \l__siunitx_table_integer_box=\box66
 \l__siunitx_table_decimal_box=\box67
 \l__siunitx_table_before_box=\box68
 \l__siunitx_table_after_box=\box69
-\l__siunitx_table_before_dim=\dimen198
-\l__siunitx_table_carry_dim=\dimen199
+\l__siunitx_table_before_dim=\dimen199
+\l__siunitx_table_carry_dim=\dimen256
 \l__siunitx_unit_tmp_int=\count327
 \l__siunitx_unit_position_int=\count328
 \l__siunitx_unit_total_int=\count329
@@ -469,12 +468,12 @@ Package: siunitx 2022-02-02 v3.0.46 A comprehensive (SI) units package
 \UL@hyphenbox=\box71
 \UL@skip=\skip66
 \UL@hook=\toks31
-\UL@height=\dimen256
+\UL@height=\dimen257
 \UL@pe=\count330
-\UL@pixel=\dimen257
+\UL@pixel=\dimen258
 \ULC@box=\box72
 Package: ulem 2019/11/18
-\ULdepth=\dimen258
+\ULdepth=\dimen259
 ) (c:/Users/ozd504/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/colortbl/colortbl.sty
 Package: colortbl 2020/01/04 v1.0e Color table columns (DPC)
 \everycr=\toks32
@@ -484,24 +483,24 @@ Package: multirow 2021/03/15 v2.8 Span multiple rows of a table
 \multirow@colwidth=\skip68
 \multirow@cntb=\count331
 \multirow@dima=\skip69
-\bigstrutjot=\dimen259
+\bigstrutjot=\dimen260
 ) (c:/Users/ozd504/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/hhline.sty
 Package: hhline 2020/01/04 v2.04 Table rule package (DPC)
 ) (c:/Users/ozd504/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/tabularx.sty
 Package: tabularx 2020/01/15 v2.11c `tabularx' package (DPC)
-\TX@col@width=\dimen260
-\TX@old@table=\dimen261
-\TX@old@col=\dimen262
-\TX@target=\dimen263
-\TX@delta=\dimen264
+\TX@col@width=\dimen261
+\TX@old@table=\dimen262
+\TX@old@col=\dimen263
+\TX@target=\dimen264
+\TX@delta=\dimen265
 \TX@cols=\count332
 \TX@ftn=\toks33
 ) (c:/Users/ozd504/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/threeparttable/threeparttable.sty
 Package: threeparttable 2003/06/13  v 3.0
 \@tempboxb=\box73
 ) (c:/Users/ozd504/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/wrapfig/wrapfig.sty
-\wrapoverhang=\dimen265
-\WF@size=\dimen266
+\wrapoverhang=\dimen266
+\WF@size=\dimen267
 \c@WF@wrappedlines=\count333
 \WF@box=\box74
 \WF@everypar=\toks34
@@ -524,28 +523,28 @@ Package: trimclip 2020/08/19 v1.2 Trim and clip general TeX material
 Package: collectbox 2012/05/17 v0.4b Collect macro arguments as boxes
 \collectedbox=\box75
 )
-\tc@llx=\dimen267
-\tc@lly=\dimen268
-\tc@urx=\dimen269
-\tc@ury=\dimen270
+\tc@llx=\dimen268
+\tc@lly=\dimen269
+\tc@urx=\dimen270
+\tc@ury=\dimen271
 Package trimclip Info: Using driver 'tc-xetex.def'.
 (c:/Users/ozd504/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/adjustbox/tc-xetex.def
 File: tc-xetex.def 2019/01/04 v2.2 Clipping driver for xetex
 ))
-\adjbox@Width=\dimen271
-\adjbox@Height=\dimen272
-\adjbox@Depth=\dimen273
-\adjbox@Totalheight=\dimen274
-\adjbox@pwidth=\dimen275
-\adjbox@pheight=\dimen276
-\adjbox@pdepth=\dimen277
-\adjbox@ptotalheight=\dimen278
+\adjbox@Width=\dimen272
+\adjbox@Height=\dimen273
+\adjbox@Depth=\dimen274
+\adjbox@Totalheight=\dimen275
+\adjbox@pwidth=\dimen276
+\adjbox@pheight=\dimen277
+\adjbox@pdepth=\dimen278
+\adjbox@ptotalheight=\dimen279
 (c:/Users/ozd504/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/varwidth/varwidth.sty
 Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
 \@vwid@box=\box76
 \sift@deathcycles=\count335
-\@vwid@loff=\dimen279
-\@vwid@roff=\dimen280
+\@vwid@loff=\dimen280
+\@vwid@roff=\dimen281
 )) (c:/Users/ozd504/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count336
@@ -567,15 +566,15 @@ Package: tabu 2019/01/11 v2.9 - flexible LaTeX tabulars (FC+tabu-fixed)
 \tabu@Xcol=\count340
 \tabu@alloc=\count341
 \tabu@nested=\count342
-\tabu@target=\dimen281
-\tabu@spreadtarget=\dimen282
-\tabu@naturalX=\dimen283
-\tabucolX=\dimen284
-\tabu@Xsum=\dimen285
-\extrarowdepth=\dimen286
-\abovetabulinesep=\dimen287
-\belowtabulinesep=\dimen288
-\tabustrutrule=\dimen289
+\tabu@target=\dimen282
+\tabu@spreadtarget=\dimen283
+\tabu@naturalX=\dimen284
+\tabucolX=\dimen285
+\tabu@Xsum=\dimen286
+\extrarowdepth=\dimen287
+\abovetabulinesep=\dimen288
+\belowtabulinesep=\dimen289
+\tabustrutrule=\dimen290
 \tabu@thebody=\toks39
 \tabu@footnotes=\toks40
 \tabu@box=\box79
@@ -593,7 +592,7 @@ Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 \TPTL@width=\skip71
 ) (c:/Users/ozd504/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/makecell/makecell.sty
 Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
-\rotheadsize=\dimen290
+\rotheadsize=\dimen291
 \c@nlinenum=\count343
 \TeXr@lab=\toks41
 ) (c:/Users/ozd504/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/natbib/natbib.sty
@@ -978,21 +977,371 @@ LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 (Font)              scaled to size 4.99947pt on input line 412.
 [5] [6] [7]
+File: images/dplyrconflict.png Graphic file (type bmp)
+<images/dplyrconflict.png>
+[8]
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 784.
 
-LaTeX Warning: File `C:/Users/ozd504/Documents/Github/dem-stats-book/images/dplyrconflict.png' not found on input line 723.
+Overfull \vbox (0.34563pt too high) detected at line 795
+ []
 
-! Unable to load picture or PDF file 'C:/Users/ozd504/Documents/Github/dem-stats-book/images/dplyrconflict.png'.
-<to be read again> 
-                   }
-l.723 .../dem-stats-book/images/dplyrconflict.png}
-                                                   
+[9]
+File: images/meandoc.png Graphic file (type bmp)
+<images/meandoc.png>
+[10] [11]
+
+Package natbib Warning: Citation `Wickham' on page 12 undefined on input line 1025.
+
+[12] [13] [14]
+Underfull \hbox (badness 1210) in paragraph at lines 1302--1316
+[]\TU/lmr/m/n/10 Character and factor variables often store the same kind of information, and R (until recently)
+ []
+
+[15] [16] [17]
+
+Package natbib Warning: Citation `GT' on page 18 undefined on input line 1694.
+
+[18]
+
+Package natbib Warning: Citation `haven' on page 19 undefined on input line 1791.
+
+[19] [20]
+Overfull \hbox (18.49498pt too wide) in paragraph at lines 1960--1960
+[]\TU/lmtt/m/n/10 ## highest: ASIA             EUROPE           NORTHERN AMERICA OCEANIA          SOUTH AMERICA[] 
+ []
+
+
+Overfull \hbox (2.74498pt too wide) in paragraph at lines 1960--1960
+[]\TU/lmtt/m/n/10 ## lowest : CARIBBEAN       CENTRAL AMERICA CENTRAL ASIA    EAST ASIA       EASTERN AFRICA[] 
+ []
+
+
+Overfull \hbox (2.74498pt too wide) in paragraph at lines 1960--1960
+[]\TU/lmtt/m/n/10 ## highest: SOUTHERN AFRICA SOUTHERN EUROPE WESTERN AFRICA  WESTERN ASIA    WESTERN EUROPE[] 
+ []
+
+
+Overfull \hbox (7.99498pt too wide) in paragraph at lines 1960--1960
+[]\TU/lmtt/m/n/10 ## lowest :    0.0    0.1    0.2    0.3    0.4, highest:  209.4  265.2  328.0 1371.3 1393.8[] 
+ []
+
+[21] [22] [23]
+
+Package natbib Warning: Citation `tidyverse' on page 24 undefined on input line 2238.
+
+
+Package natbib Warning: Citation `dplyr' on page 24 undefined on input line 2249.
+
+
+Package natbib Warning: Citation `ggplot2' on page 24 undefined on input line 2250.
+
+
+Package natbib Warning: Citation `Wickham2017R' on page 24 undefined on input line 2251.
+
+
+Package natbib Warning: Citation `ggplot2' on page 24 undefined on input line 2253.
+
+[24]
+Overfull \vbox (0.97496pt too high) detected at line 2339
+ []
+
+[25]
+Underfull \hbox (badness 10000) in paragraph at lines 2349--2356
+[]\TU/lmr/m/n/10 The line \TU/lmtt/m/n/10 summarise(n=n() , across(.cols = c(e0male, e0female, gnigdp, imr), .fns = mean,
+ []
+
+[26]
+File: bookdown-demo_files/figure-latex/prbhist-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/prbhist-1.pdf>
+File: bookdown-demo_files/figure-latex/unnamed-chunk-69-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-69-1.pdf>
+[27]
+File: bookdown-demo_files/figure-latex/unnamed-chunk-70-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-70-1.pdf>
+[28]
+File: bookdown-demo_files/figure-latex/unnamed-chunk-71-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-71-1.pdf>
+[29]
+File: bookdown-demo_files/figure-latex/unnamed-chunk-72-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-72-1.pdf>
+[30]
+File: bookdown-demo_files/figure-latex/unnamed-chunk-73-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-73-1.pdf>
+[31]
+File: bookdown-demo_files/figure-latex/unnamed-chunk-74-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-74-1.pdf>
+[32]
+File: bookdown-demo_files/figure-latex/unnamed-chunk-75-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-75-1.pdf>
+[33]
+File: bookdown-demo_files/figure-latex/unnamed-chunk-76-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-76-1.pdf>
+[34]
+File: bookdown-demo_files/figure-latex/unnamed-chunk-77-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-77-1.pdf>
+[35]
+File: bookdown-demo_files/figure-latex/unnamed-chunk-78-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-78-1.pdf>
+[36]
+File: bookdown-demo_files/figure-latex/unnamed-chunk-79-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-79-1.pdf>
+[37] [38]
+
+Package natbib Warning: Citation `Lohr2019' on page 39 undefined on input line 2749.
+
+
+Package natbib Warning: Citation `lumley2010' on page 39 undefined on input line 2749.
+
+[39]
+File: images/MLdata.png Graphic file (type bmp)
+<images/MLdata.png>
+[40]
+
+Package natbib Warning: Citation `international_demographic_2012' on page 41 undefined on input line 2772.
+
+
+Package natbib Warning: Citation `cdc2020' on page 41 undefined on input line 2778.
+
+
+Package natbib Warning: Citation `cdc2020' on page 41 undefined on input line 2778.
+
+[41]
+
+Package natbib Warning: Citation `walker21' on page 42 undefined on input line 2790.
+
+
+Package natbib Warning: Citation `Ruggles2021' on page 42 undefined on input line 2821.
+
+File: images/impum1.png Graphic file (type bmp)
+<images/impum1.png>
+[42]
+File: images/ipums_files.png Graphic file (type bmp)
+<images/ipums_files.png>
+
+Package natbib Warning: Citation `uscensusbureau2014' on page 43 undefined on input line 2849.
+
+[43]
+File: bookdown-demo_files/figure-latex/unnamed-chunk-87-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-87-1.pdf>
+[44] [45] [46]
+Overfull \hbox (275.74498pt too wide) in paragraph at lines 3045--3045
+[]\TU/lmtt/m/n/10 ## Error in svydesign.default(ids, probs, strata, variables, fpc, .data, : Clusters not nested in strata at top level; you may want nest=TRUE.[] 
+ []
+
+
+Package natbib Warning: Citation `Ruggles2021' on page 47 undefined on input line 3077.
+
+[47]
+
+Package natbib Warning: Citation `Lohr2019' on page 48 undefined on input line 3150.
+
+[48] [49] [50]
+File: bookdown-demo_files/figure-latex/unnamed-chunk-102-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-102-1.pdf>
+
+Underfull \hbox (badness 10000) in paragraph at lines 3288--3290
+[][]
+ []
+
+[51]
+Overfull \vbox (2.01418pt too high) detected at line 3319
+ []
+
+[52]
+File: bookdown-demo_files/figure-latex/unnamed-chunk-103-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-103-1.pdf>
+
+Underfull \hbox (badness 10000) in paragraph at lines 3321--3323
+[][]
+ []
+
+[53]
+
+Package natbib Warning: Citation `Iannone2021' on page 54 undefined on input line 3374.
+
+[54]
+
+Package natbib Warning: Citation `Lohr2019' on page 55 undefined on input line 3519.
+
+[55] [56]
+File: bookdown-demo_files/figure-latex/unnamed-chunk-109-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-109-1.pdf>
+
+Underfull \hbox (badness 10000) in paragraph at lines 3605--3607
+[][]
+ []
+
+[57]
+Overfull \hbox (5.72697pt too wide) in paragraph at lines 3611--3612
+\TU/lmr/m/n/10 To perform basic bivariate statistical tests for frequency tables, the \TU/lmtt/m/n/10 srvyr::svychisq \TU/lmr/m/n/10 and \TU/lmtt/m/n/10 survey::svy_chisq
+ []
+
+[58]
+
+Package natbib Warning: Citation `rao_chi-squared_1984' on page 59 undefined on input line 3640.
+
+[59] [60]
+File: bookdown-demo_files/figure-latex/unnamed-chunk-113-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-113-1.pdf>
+[61]
+
+Package natbib Warning: Citation `stargazer' on page 62 undefined on input line 3830.
+
+
+Package natbib Warning: Citation `cameron_practitioners_2015' on page 62 undefined on input line 3870.
+
+
+Package natbib Warning: Citation `ibragimov_inference_2016' on page 62 undefined on input line 3870.
+
+[62]
+Underfull \hbox (badness 2460) in paragraph at lines 3872--3875
+[]\TU/lmr/m/n/10 [^surveydata-3] []$[][][][][] [] [] [] [][][][][][][][][][] [] [][][] [] [][][][] [] [][][][][] [][] [][][][][][][][] [] [][][]$[] [^surveydata-4] []$[][][][][] [] [] [] [][][][][][] [] [][][] []
+ []
+
+[63]
+
+Package natbib Warning: Citation `keyfitz_introduction_1968' on page 64 undefined on input line 3889.
+
+
+Package natbib Warning: Citation `united_nations_population_division_manual_1983' on page 64 undefined on input line 3889.
+
+
+Package natbib Warning: Citation `voss_demography_2007' on page 64 undefined on input line 3891.
+
+File: images/macro2.png Graphic file (type bmp)
+<images/macro2.png>
+[64]
+File: images/macro2.png Graphic file (type bmp)
+<images/macro2.png>
+[65]
+
+Package natbib Warning: Citation `soni2017a' on page 66 undefined on input line 3931.
+
+
+Package natbib Warning: Citation `courtemanche2019' on page 66 undefined on input line 3931.
+
+
+Package natbib Warning: Citation `tigris' on page 66 undefined on input line 3936.
+
+[66]
+File: bookdown-demo_files/figure-latex/unnamed-chunk-121-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-121-1.pdf>
+[67]
+
+Package natbib Warning: Citation `walker21' on page 68 undefined on input line 3967.
+
+[68]
+Overfull \hbox (291.49498pt too wide) in paragraph at lines 4016--4016
+[]\TU/lmtt/m/n/10 ## Downloading feature geometry from the Census website.  To cache shapefiles for use in future sessions, set []options(tigris_use_cache = TRUE)[].[] 
+ []
+
+[69]
+File: bookdown-demo_files/figure-latex/unnamed-chunk-126-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-126-1.pdf>
+[70]
+
+Package natbib Warning: Citation `us_census_bureau_worked_nodate' on page 71 undefined on input line 4120.
+
+File: bookdown-demo_files/figure-latex/unnamed-chunk-127-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-127-1.pdf>
+[71]
+
+Package natbib Warning: Citation `nhgis' on page 72 undefined on input line 4143.
+
+[72]
+File: bookdown-demo_files/figure-latex/unnamed-chunk-128-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-128-1.pdf>
+
+Package natbib Warning: Citation `rdhs' on page 73 undefined on input line 4187.
+
+[73]
+Overfull \vbox (0.72925pt too high) detected at line 4247
+ []
+
+[74]
+File: bookdown-demo_files/figure-latex/unnamed-chunk-132-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-132-1.pdf>
+
+Underfull \hbox (badness 10000) in paragraph at lines 4296--4298
+[][]
+ []
+
+[75]
+File: bookdown-demo_files/figure-latex/unnamed-chunk-133-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-133-1.pdf>
+[76]
+
+Package natbib Warning: Citation `fox_applied_2016' on page 77 undefined on input line 4329.
+
+[77] [78]
+
+Package natbib Warning: Citation `gtsummary' on page 79 undefined on input line 4422.
+
+[79]
+File: bookdown-demo_files/figure-latex/unnamed-chunk-137-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-137-1.pdf>
+[80]
+File: bookdown-demo_files/figure-latex/unnamed-chunk-137-2.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-137-2.pdf>
+[81]
+File: bookdown-demo_files/figure-latex/unnamed-chunk-137-3.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-137-3.pdf>
+
+Underfull \hbox (badness 10000) in paragraph at lines 4522--4524
+[][]
+ []
+
+[82]
+Missing character: There is no 𝜎 (U+1D70E) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 𝜖 (U+1D716) in font [lmroman10-regular]:mapping=tex-text;!
+File: bookdown-demo_files/figure-latex/unnamed-chunk-138-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-138-1.pdf>
+File: bookdown-demo_files/figure-latex/unnamed-chunk-138-2.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/unnamed-chunk-138-2.pdf>
+
+Underfull \hbox (badness 10000) in paragraph at lines 4535--4537
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4535--4537
+[]
+ []
+
+[83] [84] [85]
+
+Package natbib Warning: Citation `white_1980' on page 86 undefined on input line 4593.
+
+
+Package natbib Warning: Citation `mackinnon_white_1985' on page 86 undefined on input line 4593.
+
+
+Package natbib Warning: Citation `long_using_2000' on page 86 undefined on input line 4593.
+
+
+Package natbib Warning: Citation `long_using_2000' on page 86 undefined on input line 4595.
+
+[86] [87]
+
+Package natbib Warning: Citation `mclaughlin_differential_2007' on page 88 undefined on input line 4717.
+
+
+Package natbib Warning: Citation `sparks_application_2010' on page 88 undefined on input line 4717.
+
+[88]
+! Missing $ inserted.
+<inserted text> 
+                $
+l.4808 \begin{Bmatrix}
+                       
 Here is how much of TeX's memory you used:
- 24263 strings out of 478190
- 478271 string characters out of 5853074
- 908813 words of memory out of 5000000
- 44508 multiletter control sequences out of 15000+600000
- 475784 words of font info for 78 fonts, out of 8000000 for 9000
+ 24549 strings out of 478179
+ 490139 string characters out of 5852814
+ 917484 words of memory out of 5000000
+ 44779 multiletter control sequences out of 15000+600000
+ 475848 words of font info for 86 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 86i,8n,121p,921b,893s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 86i,13n,121p,3812b,896s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on bookdown-demo.pdf (7 pages).
+Output written on bookdown-demo.pdf (88 pages).

@@ -1,8 +1,10 @@
 ---
-output: html_document
+output:
+  word_document: default
+  html_document: default
 bibliography: book.bib
-editor_options: 
-  markdown: 
+editor_options:
+  markdown:
     wrap: 72
 ---
 # Introduction to R
@@ -349,8 +351,7 @@ to access that function specifically. How do you know when this happens?
 When you load a library, you will often see messages from R that
 functions have conflicts. For example, if I load `dplyr`, I see:
 
-![Conflict
-messages](C:/Users/ozd504/Documents/Github/dem-stats-book/images/dplyrconflict.png)
+![Conflict messages](images/dplyrconflict.png)
 
 As you use R more, you will learn which packages have conflicts, and
 often the developers of the packages will do this and rename the
@@ -398,8 +399,7 @@ have default values. As mentioned earlier, to see all the information
 for a function's arguments, use the help operator, `?`. For example
 `?mean` will show you the help documents for the `mean()` function
 
-![Mean Function
-Help](C:/Users/ozd504/Documents/Github/dem-stats-book/images/meandoc.png)
+![Mean Function Help](images/meandoc.png)
 
 When using a new function, it's always advised to check out the help
 file to see all the arguments the function can take, because this is

@@ -27,7 +27,7 @@ Prior to the advent in the 1960's of large scale social surveys like the General
 
 Paul Voss [-@voss_demography_2007] describes most demography (and certainly most demographic studies prior to the 1970's and 1980's) as **Macro** demography. Voss also mentions that prior to the availability of individual level microdata, all demography was macro-demography, and most demographic studies were spatial in nature, because demographic data were only available in spatial units corresponding to administrative areas. Typical types of geographic areas would be counties, census tracts, ZIP codes, state or nations.
 
-\<\<\<\<\<\<\< Updated upstream In the macro-demographic perspective on demography, observations are typically places, areas, or some other aggregate level of individuals. We do not observe the individual people themselves often times. An example of this is if you were to have access to an aggregate count of deaths in a region, even if the deaths were classified by age and sex, you still would be dealing with data that ignores, or has no index to the more nuanced characteristics of the individual decedents themselves. That being said, data such as these are invaluable, and most demographic summaries of individual-level data would aggregate based on the characteristics of the individuals any way. The macro scale principal is illustrated below, where all of the variables we observe are a scale above the individual person.
+In the macro-demographic perspective on demography, observations are typically places, areas, or some other aggregate level of individuals. We do not observe the individual people themselves often times. An example of this is if you were to have access to an aggregate count of deaths in a region, even if the deaths were classified by age and sex, you still would be dealing with data that ignores, or has no index to the more nuanced characteristics of the individual decedents themselves. That being said, data such as these are invaluable, and most demographic summaries of individual-level data would aggregate based on the characteristics of the individuals any way. The macro scale principal is illustrated below, where all of the variables we observe are a scale above the individual person.
 
 ![Macro Level Proposition](images/macro2.png)
 
@@ -96,7 +96,7 @@ census_api_key(key = "yourkeyhere", install = TRUE)
 
 which only needs to be done once.
 
-A basic use of the `tidycensus` package is to get data and produce maps of the indicators. This is done easily because `tidycensus` fits directly into general `dplyr` and `ggplot2` workflows. Below is an example of accessing 2019 ACS data on poverty rate estimates for New York census tracts from New York county, New York. The sytax takes several arguments indicating what level of census geography you want, the year of the estimates, the details of states and counties you may want, and which ACS tables you want. Here I use the Data Profile table for the percentage estimate of families with incomes below the poverty line. The `output = "wide"` option is useful if you get multiple estimates, as it arrages them into columns, one for each estimate. 
+A basic use of the `tidycensus` package is to get data and produce maps of the indicators. This is done easily because `tidycensus` fits directly into general `dplyr` and `ggplot2` workflows. Below is an example of accessing 2019 ACS data on poverty rate estimates for New York census tracts from New York county, New York. The syntax takes several arguments indicating what level of census geography you want, the year of the estimates, the details of states and counties you may want, and which ACS tables you want. Here I use the Data Profile table for the percentage estimate of families with incomes below the poverty line. The `output = "wide"` option is useful if you get multiple estimates, as it arranges them into columns, one for each estimate. 
 
 
 
@@ -551,15 +551,17 @@ If the data clearly do not display a linear trend, I personally automatically lo
 
 Mathematically, knots can be written as:
 
-$$Y(x) = \begin{Bmatrix}
+$$
+Y(x) = \begin{Bmatrix}
 F_1(x) \text {  for  } x\in [x_1, x_2]\\ 
 F_2(x) \text {  for  } x\in [x_2, x_3]\\ 
 \cdots \\ 
 F_{k}(x) \text {  for  } x\in [x_{k-1}, x_k]\\
 
-\end{Bmatrix}$$
+\end{Bmatrix}
+$$
 
-Where each of the $F_k (x)$ functions imply a different form in the interval between $x\in [x_{k-1}, x_k]$, where the $k$ breaks are at a given knot in the data. Most splines are nonlinear functions, usustally cubic polynomials, and the spline model combines a series of these polynomials to model nonlinearities in the relationship between predictors and outcomes. A relatively recent invention, *Genearlized Additive Models* or *GAMs* are a way to model an outcome with both linear and non-linear terms together. The GAM model forms the linear predctor of a model can be constructed as:
+Where each of the $F_k (x)$ functions imply a different form in the interval between $x\in [x_{k-1}, x_k]$, where the $k$ breaks are at a given knot in the data. Most splines are nonlinear functions, usually cubic polynomials, and the spline model combines a series of these polynomials to model nonlinearities in the relationship between predictors and outcomes. A relatively recent invention, *Generalized Additive Models* or *GAMs* are a way to model an outcome with both linear and non-linear terms together. The GAM model forms the linear predictor of a model can be constructed as:
 
 $$E(y)= \beta_0 + f(x_1) + \beta_1 x_2$$
 where the $f(x_1)$ term is a regression spline of one of the variables. The models can be a mixture of linear and smooth terms. Here is an example of using a B-spline within the `lm()` model to fit a smooth regression function to the messy nonlinear model above. 
@@ -584,7 +586,7 @@ lines(t, predict( lm (y2 ~ bs(t, df = 5)),
 
 ```
 
-I really think splines, and GAMs are an excellent addition to the modeling world and have started teaching them in my own methods courses. In the world of demography, especially, with age affecting everything, there is no need to constantly assume relationships are purely linear, and splines offer an excelent method to explore such relationships.
+I really think splines, and GAMs are an excellent addition to the modeling world and have started teaching them in my own methods courses. In the world of demography, especially, with age affecting everything, there is no need to constantly assume relationships are purely linear, and splines offer an excellent method to explore such relationships.
 
 </div>
 
@@ -600,28 +602,28 @@ Once our data start to violate the assumptions of the linear model, the model be
 
 Generalized Least Squares adds a lot more flexibility to modeling normally distributed outcomes, basically by allowing us to modify the fundamental equations above to accommodate unequal variances, or the use of covariates or stratification variables on variances. Another way to write the OLS model above would be:
 
-$$\epsilon_i \sim Normal(X'\beta, I\sigma_\epsilon)$$ Where $I$ is the **identity matrix**, which implies that for each observation, the variances in the residuals are all the same:
+$\epsilon_i \sim Normal(X'\beta, I\sigma_\epsilon)$ Where $I$ is the **identity matrix**, which implies that for each observation, the variances in the residuals are all the same:
 
 $$
-\sigma_{\epsilon}  = I * \sigma_{\epsilon} = \begin{bmatrix}
+\sigma_{\epsilon}  = I * \sigma_{\epsilon} = \begin{Bmatrix}
 1& 0& 0 \\
 0& 1& 0 \\
 0& 0& 1\\
-\end{bmatrix} *\sigma_{\epsilon} = \begin{bmatrix}
+\end{Bmatrix} *\sigma_{\epsilon} = \begin{Bmatrix}
 \sigma_{\epsilon}& 0& 0 \\
 0& \sigma_{\epsilon}& 0 \\
 0& 0 & \sigma_{\epsilon} \\
-\end{bmatrix}
+\end{Bmatrix}
 $$
 
 
 Which shows the common variance for the three residuals. GLS allows us to relax this constant variance assumption, by at the minimum allowing the variances to be a function of a weighting variable (which produces **Weighted Least Squares**), or some covariate. In the most basic presentation of this principle, this makes the residuals have some other, non-constant form of:
 
-$$\sigma_{\epsilon}  = \Omega$$ which in turn modifies the estimation equation for the $\beta$'s to:
+$\sigma_{\epsilon}  = \Omega$ which in turn modifies the estimation equation for the $\beta$'s to:
 
-$$\beta_{k_{GLS}} = (X' \Omega^{-1} X)^{-1} X' \Omega^{-1} Y$$ Applications of such models are more commonly seen in time series modeling and longitudinal analysis, where the residuals of the model often have an autoregressive form to allow individuals to be correlated with themselves over time, but when talking about place-based demography, more modifications of the model have been derived that allow for addressing another key assumption of independence among observations and nonconstant variances. This in fact is the realm of an entire field of econometrics, often called **spatial econometrics** [@anselin_spatial_1988; @chi_spatial_2020; @elhorst_spatial_2014; @lesage_introduction_2009].
+$\beta_{k_{GLS}} = (X' \Omega^{-1} X)^{-1} X' \Omega^{-1} Y$ Applications of such models are more commonly seen in time series modeling and longitudinal analysis, where the residuals of the model often have an autoregressive form to allow individuals to be correlated with themselves over time, but when talking about place-based demography, more modifications of the model have been derived that allow for addressing another key assumption of independence among observations and nonconstant variances. This in fact is the realm of an entire field of econometrics, often called **spatial econometrics** [@anselin_spatial_1988; @chi_spatial_2020; @elhorst_spatial_2014; @lesage_introduction_2009].
 
-The `gls()` function in the `nlme` library is very flexible at modeling heteroskedasticity using several types of variance functions. The general principle of the gls model in terms of modeling heteroskedasticity is that the OLS model residual variance $\sigma_{\epsilon}$ is now not a constant, but a function of covariates or different variances based on a stratifiation variable. This generates a model for the residual variances of the form: 
+The `gls()` function in the `nlme` library is very flexible at modeling heteroskedasticity using several types of variance functions. The general principle of the gls model in terms of modeling heteroskedasticity is that the OLS model residual variance $\sigma_{\epsilon}$ is now not a constant, but a function of covariates or different variances based on a stratification variable. This generates a model for the residual variances of the form: 
 
 $$Var(\epsilon_i |\beta) = \sigma^2 g$$
 
@@ -827,10 +829,10 @@ The OLS model and its extensions are a very useful staring place when analyzing 
 
 \newpage
 
-## Basics of Genearlized Linear Models
+## Basics of Generalized Linear Models
 
 Up until now, we have been relying on linear statistical models which assumed the Normal distribution for our outcomes. A broader class of regression models, are ***Generalized Linear Models*** [@nelder_generalized_1972; @mccullagh_generalized_1998], or **GLM**s, which allow for the estimation of a linear regression specification for outcomes that are not assumed to come from a Normal distribution. GLMs are a class of statistical models with three underlying components: A probability density appropriate to the outcome, a link function and a linear predictor. The ***link function*** is some mathematical function that links the mean of the specified probability distribution to the linear predictor of regression parameters and covariates. For example, the Normal distribution used by the OLS model has the mean, $\mu$, which is typically estimated using the ***linear mean function*** :
-$$\mu = \beta_0 + \beta_1 x_1$$ 
+$\mu = \beta_0 + \beta_1 x_1$ 
 Which describes the line that estimates the mean of the outcome variable as a linear function of $\beta$ parameters and the predictor variable $x_1$. The OLS, or *Gaussian* GLM model uses an ***identity link*** meaning there is no transformation of the linear mean function as it is connected to the mean of the outcome. This can be written as:
 
 $$g(u) = g(E(Y)) = \beta_0 + \beta_1 x_1$$
@@ -1067,7 +1069,7 @@ Which shows that Texas has a standardized mortality rate `r (round(exp(coef(glmb
 
 ## Poisson distribution 
 
-Another distribution commonly used in the analysis of place-based data is the Poisson distribution. The Poisson is applicable to outcomes that are positive integers, and is commonly used in epdiemiology as a model of relative risk of a disease or mortality. The Poisson has a single parameter, the mean, $\lambda$, and it is really the average count for the outcome ($y$). We have several ways of modeling a count outcome with the Poisson
+Another distribution commonly used in the analysis of place-based data is the Poisson distribution. The Poisson is applicable to outcomes that are positive integers, and is commonly used in epidemiology as a model of relative risk of a disease or mortality. The Poisson has a single parameter, the mean, $\lambda$, and it is really the average count for the outcome ($y$). We have several ways of modeling a count outcome with the Poisson
 
 -   *Pure count model* If each area or place has the same total area, risk set, or population size, then we can model the mean as-is. This would lead to a model that looks like:
 
@@ -1129,7 +1131,7 @@ txca$E<- txca$Population*(sum(txca$Deaths/sum(txca$Population)))
 
 In this calculation, the `Population` variable is multiplied by $r$, which is the sum of all deaths, divided by all populations. 
 
-The age-specific expected count is a little more involved. We first have to sum all deaths and populations by age, then calculate the age specific rate, then join this back to the original data based on the `Age_Group` variable. Is this the only way to do this, no, but it works in this example. Alternatively, we could get another age schedule of mortality rates and merge it to these data and standardize our data to that mortality shedule.
+The age-specific expected count is a little more involved. We first have to sum all deaths and populations by age, then calculate the age specific rate, then join this back to the original data based on the `Age_Group` variable. Is this the only way to do this, no, but it works in this example. Alternatively, we could get another age schedule of mortality rates and merge it to these data and standardize our data to that mortality schedule.
 
 ```{r}
 
@@ -1147,7 +1149,7 @@ txca2%>%
   select(State, Age_Group, Deaths, Population, E, E_age)%>%
   gt()
 ```
-In this table, you can see the age-specifc expected counts of deaths are much more in line with the age-specific mortality rate, and the numbers of expected deaths are much more similar to the observed pattern of deaths, when compared to the expected counts derived from the crude death rate. 
+In this table, you can see the age-specific expected counts of deaths are much more in line with the age-specific mortality rate, and the numbers of expected deaths are much more similar to the observed pattern of deaths, when compared to the expected counts derived from the crude death rate. 
 
 ```{r}
 glmp_E <- glm(Deaths ~ offset(log(E)) + factor(Age_Group)+State,
@@ -1202,7 +1204,7 @@ $Var(Y) = \lambda * \phi$, instead of $Var(Y) = \lambda$
 
 This accessory parameter $\phi$ allows us to include a rough proxy for a dispersion parameter for the distribution. Naturally this is fixed at 1 for the normal Poisson model, and estimated in the quasi models, we can look to see if is much bigger than 1. If overdispersion is present and not accounted for you could identify a relationship as being significant when it is not!
 
-```{r, eval=FALSE}
+```{r}
 glmqp <- glm(Deaths ~ offset(log(E)) + factor(Age_Group)+State,
               data=txca,
               family=quasipoisson)
@@ -1355,38 +1357,40 @@ $$
 
 The base R `glm()` does not offer the NB1 model by default, but the standard `MASS` package [@venables_ripley] has the `glm.nb()` function. An alternative is the highly flexible `gamlss` package[@gamlss], which includes the NB2 model, as well as a host of other distributions, plus the ability to model mean and variance, similar to how `betareg()` was achieving for the Beta distribution.  
 
+```{r, echo=FALSE, include=FALSE}
+glmp_b<- glm(lowbw1618 ~ offset(log(births1618)) + fampov14 + rucc + hpsa16 ,
+             family= poisson,
+               data=ahrf_m)
+
+```
+
 ```{r}
 library(MASS)
-glmnb<- glm.nb(Deaths ~ offset(log(Population)) + factor(Age_Group) +  State,
-               data=txca)
+glmnb<- glm.nb(lowbw1618 ~ offset(log(births1618)) + fampov14 + rucc + hpsa16 ,
+               data=ahrf_m)
 
-library(gamlss)
-
-glmnb2<-gamlss(Deaths ~ offset(log(Population)) + factor(Age_Group) +  State,
-               family = NBII,
-               data=txca)
 
 glmnb%>%
   tbl_regression()
-
-glmnb2%>%
-  tbl_regression()
-
-AIC(glmb_s, glmp_s, glmnb)
-
-glmn<- glm(Deaths/Population ~ factor(Age_Group)+State,
-           family=gaussian,
-               data=txca)
-summary(fitted(glmn)<0)
 ```
 
+The NB2 version of the model can be estimated using `gamlss()` with `family=NBII`:
 
-## side by side comparison of different specificaitons
+```{r}
+library(gamlss)
 
+glmnb2<-gamlss(lowbw1618 ~ offset(log(births1618)) + fampov14 + rucc + hpsa16,
+               family = NBII,
+               data=ahrf_m)
 
+summary(glmnb2)
+```
 
-## have brief discussion of spatial models
+Again, between these two different specifications, we see very similar results. We can compare each of the models, starting with the Gaussian model and proceeding through the NB2 model above (although the Beta regression appears to be on a different scale since the outcome is specified as probability, versus a count, so it is not comparable to the rest) using the `AIC()` function:
 
-## Extensions of the GLM framework when working with places
+```{r}
+AIC(glm1, glmb, glmp_b, glmnb, glmnb2)
+```
 
-## Construction of indices for places
+We see that among these five model specifications, the Binomial fits the worst and the NB1 model, estimated by `glm.nb()` fits the best, with the lowest AIC among these five models. 
+
