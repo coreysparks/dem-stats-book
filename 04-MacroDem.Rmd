@@ -843,18 +843,24 @@ Where $g()$ is the link function, linking the mean of the Normal distribution to
 glm1<- glm(lbrate1618 ~  fampov14 + rucc + hpsa16,
           data = ahrf_m, 
           family =gaussian)
+library(texreg)
+
+texreg(list(glm1, lm1), file = "4_1.tex")
 
 lm1_t<-lm1%>%
   tbl_regression()
 
 
+
 glm1_t<-glm1%>%
   tbl_regression()
+ 
 
 t_m <- tbl_merge(
     tbls = list(lm1_t, glm1_t),
     tab_spanner = c("**OLS**", "**GLM**")
-  )
+  ) 
+
 t_m
 
 ```

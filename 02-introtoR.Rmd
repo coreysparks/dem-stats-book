@@ -1498,18 +1498,7 @@ ggplot(data = prb,mapping = aes(x = tfr, y = pctlt15_2018))+
 
 ## Chapter summary
 
-In this chapter, I have introduced R and Rstudio and some basic uses of
-the software for accessing data and estimating some summary statistics.
-The R ecosystem is large and complex, and the goal of this book is to
-show you, the user, how to use R for analyzing data from demographic
-data sources. In the chapters that follow, I will show how to use R
-within two large universes of data, the macro and the micro. The *macro*
-level sections will focus on using R on data that come primarily from
-places - nations, regions, administrative areas. The *micro* level
-sections will focus on analyzing complex survey data on individual
-responses to demographic surveys. The final section will discuss
-approaches that merge these two levels into a multi-level framework and
-describe how such models are estimated and applied.
+In this chapter, I have introduced R and Rstudio and some basic uses of the software for accessing data and estimating some summary statistics. The R ecosystem is large and complex, and the goal of this book is to show you, the user, how to use R for analyzing data from demographic data sources. In the chapters that follow, I will show how to use R within two large universes of data, the macro and the micro. The *macro* level sections will focus on using R on data that come primarily from places - nations, regions, administrative areas. The *micro* level sections will focus on analyzing complex survey data on individual responses to demographic surveys. The final section will discuss approaches that merge these two levels into a multi-level framework and describe how such models are estimated and applied.
 
 ## References
 

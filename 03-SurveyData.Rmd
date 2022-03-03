@@ -15,11 +15,8 @@ theme_set(theme_classic())
 
 # Survey Data
 
-## elaborate on SRS
-## more info on how sampling is
 ## Long vs wide
 ## larger data - 
-## goal - I want you to be able to do this
 
 ## Demographic Survey data
 
@@ -27,7 +24,9 @@ The majority of demographic research relies on two or three main sources of info
 
 It's not uncommon for us to go and collect our own survey data specific to a research project we have, typically on a specialized population that we are interested in learning about, but surveys can also be quite general in their scope and collect information on a wide variety of subjects. Owing to the mix of small and large-scale survey data collection efforts, survey data are often available on many different topics, locales and time periods. Of course we as demographers are typically interested in population-level analysis or generalization from our work, so the survey data we try to use are collected in rigorous manners, with much attention and forethought paid to ensure the data we collect can actually be representative of the *target population* we are trying to describe.
 
-In this chapter, I will introduce the nature of survey sampling as is often used in demographic data sources, and describe what to look for when first using a survey data source for you research. These topics are geared towards researchers and students who have not worked with survey data much in the past and will go over some very pragmatic things to keep in mind. Following this discussion, I will use a specific example from the US Census Bureau's American Community Survey and illustrate how to apply these principals to this specific source. The final goal of this chapter is to show how to use R to analyze survey data and produce useful summaries from our surveys, both tabular and graphically.
+In this chapter, I will introduce the nature of survey sampling as is often used in demographic data sources, and describe what to look for when first using a survey data source for you research. These topics are geared towards researchers and students who have not worked with survey data much in the past and will go over some very pragmatic things to keep in mind. Following this discussion, I will use a specific example from the US Census Bureau's American Community Survey and illustrate how to apply these principals to this specific source. The final goal of this chapter is to show how to use R to analyze survey data and produce useful summaries from our surveys, both tabular and graphically. 
+
+My goal in this chapter is to introduce you to common statistical sampling terms and principles, and show how to analyze complex survey design data using R. I hope that the general workflow I use in this chapter allows you to identify the key elements of your survey data source, use R to begin analyzing your data. 
 
 ## Basics of survey sampling
 
@@ -35,7 +34,7 @@ To begin this section, I want to go over some of the simple terms from sampling 
 
 The **target population** is the population that our survey has been designed to measure. For large national surveys, these are typically the population of the country of interest. For example, the Demographic and Health Survey (DHS) has it's primary target population as women of childbearing ages in women of reproductive age and their young children living in households. Our **observational units** are the level at which we are collecting data, for surveys this is typically a person or a household, and our survey documentation will tell us what its unit of observation is. **Sampling Units** refer to the units that can serve for us to collect data from, for example we may not have a list of every school age child, but we may have a list of schools, so we may use schools as our sampling units and sample children within them. The **sampling frame** is the set of sampling units containing distinct sets of population members, this is usually the most recent population census, ideally the entire population, or following our school example from above, the entire listing of schools.
 
-These terms are ubiquitous in sampling, but other terminology also exists in many surveys and these terms relate to the nature of how the survey was actually carried out. Many times the surveys we end up using are not themselves **simple random samples**, but are instead some blend of stratified or cluster sample. For example, the DHS uses a stratified, cluster sample to collect its information. **Strata** refer to relatively homogeneous areas within the place we are trying to collect data. In the DHS, these are typically rural or urban areas of a country, as identified by the census. Within each strata, the DHS will choose **clusters** from which to sample from, this is a **two-stage sampling method**, where first the sampling frame is stratified, then clusters are selected. Clusters in the DHS are usually neighborhoods in urban areas and smaller towns or villages in rural areas.
+These terms are ubiquitous in sampling, but other terminology also exists in many surveys and these terms relate to the nature of how the survey was actually carried out. Many times the surveys we end up using are not themselves **simple random samples**, but are instead some blend of stratified or cluster sample. Simple random samples are the basis for much of statistical insight, and most methods in statistics assume your data are drawn from a population at random. Certainly, methods for collecting random samples exist, such as random digit dialing for phone samples, but often times these samples themselves are not truly random, they are stratified by a geographic area or by type of phone (mobile vs land line). For example, the DHS uses a stratified, cluster sample to collect its information. **Strata** refer to relatively homogeneous areas within the place we are trying to collect data. In the DHS, these are typically rural or urban areas of a country, as identified by the census. Within each strata, the DHS will choose **clusters** from which to sample from, this is a **two-stage sampling method**, where first the sampling frame is stratified, then clusters are selected. Clusters in the DHS are usually neighborhoods in urban areas and smaller towns or villages in rural areas.
 
 Figure 1 shows a cartoon of how this process works, with multiple potential cluster that can be sampled (boxes), and within the cluster are our observational units, some of which are sampled, and some of which are unsampled.
 
@@ -383,6 +382,15 @@ ipums %>%
 
 ```
 
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
+
+**A note about pivoting data**
+
+</div>
+
 Of course, if we want rates, this would imply us having to divide these columns to calculate the rate, but we can also get R to do this for us using `survey_mean()`. Since the `employed` variable is dichotomous, if we take the mean of its various levels, we get a proportion, in this case the employment and unemployment rates, respectively. 
 
 
@@ -729,22 +737,27 @@ dhs_model_hh_sub <- dhs_model_hh%>%
          wt = hv005/1000000,
          psu = hv021,
          strata = hv022)
+```
 
 
+
+```{r}
 dhs_model_des<- dhs_model_hh_sub%>%
   as_survey_design(cluster = psu,
                    strata = strata,
                    weights = wt,
                    nest = TRUE)
+
 summary(dhs_model_des)
 ```
+
 Just for completeness, I create a bar chart showing the percent stunted by the two main variables, gender and rural residence. 
 
 ```{r}
 dhs_model_des%>%
   group_by(gender, rural)%>%
   summarise(stunting = survey_mean( stunting,design =.,
-                              na.rm=T))%>%
+                              na.rm=T) )%>%
   ggplot()+
   geom_bar(aes(x = gender, y  = stunting, fill = rural),
            stat="identity",
@@ -763,7 +776,7 @@ Now I estimate two logistic regression models for the stunting outcome. The firs
 options(scipen = 1, digits = 3)
 ```
 
-For the unweighted regular logistic regression, we use the `glm()` function with `family = binomial (link = "logit")`. 
+For the unweighted regular logistic regression, we use the `glm()` function with `family = binomial (link = "logit")`. The`glm()` function will be used extensivley in the chapters that follow.
 
 ```{r}
 library(broom)
