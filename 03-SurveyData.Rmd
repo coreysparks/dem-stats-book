@@ -362,7 +362,7 @@ ipums %>%
 This is OK, but if we want the totals in columns versus rows, we need to reshape the data. To go from the current "long" form of the variables to a wide form, we can use `pivot_wider` in `dplyr`. 
 
 ```{r}
-ipums %>%
+wide<-ipums %>%
   filter(EMPSTAT %in% 1:2,
          AGE >= 16 & AGE <= 65, 
          MET2013 != 0) %>%
@@ -379,7 +379,7 @@ ipums %>%
               values_from = c(emp_rate, emp_rate_se) ) %>%
   head()
   
-
+wide
 ```
 
 <style>
@@ -388,8 +388,22 @@ div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
 <div class = "blue">
 
 **A note about pivoting data**
+The previous example used the `pivot_wider()` function to take observations that were in rows and pivot them into columns. This process, along with the `pivot_longer()` function are fundamental to working with many types of demographic data where we either need to format the data so observations are distributed over columns (as in the above example), or where we have multiple columns and we need to put those into multiple rows. The `pivot_wider()` function has lots of arguments that can be used, but the key ones are `id_cols` which identifies the unique identifier for each observation, here being the city or `met_name`. After that is identified, the `names_from` option tells R what the labels are in the current rows that will become separate column names. Here these are `Employed` and `Unemployed`. From these new columns, we can have multiple values provided to `values_from`, provided as a vector of current column names. Here these are `emp_rate` and the standard error `emp_rate_se`.  
+
+To return the data to their original form, with repeated observations in the rows, we can use the `pivot_longer()` function. In this case I will just provide the columns in the wide data that I want to be in rows in the long data:
+
+```{r, warning=FALSE}
+wide%>%
+  pivot_longer(cols = starts_with("emp_rate_"), 
+               names_to = c(".value", "rate"),
+               names_sep = "\\._")%>%
+  select(-rate)
+```
+
+Which gets me back to a very similar data frame that I started with above. We will also see in the chapter on micro demography examples of using these functions when assemlbing longitudinal data sets. 
 
 </div>
+
 
 Of course, if we want rates, this would imply us having to divide these columns to calculate the rate, but we can also get R to do this for us using `survey_mean()`. Since the `employed` variable is dichotomous, if we take the mean of its various levels, we get a proportion, in this case the employment and unemployment rates, respectively. 
 
