@@ -17,33 +17,46 @@ theme_set(theme_classic())
 
 Demographic studies began to focus on individual level outcomes once the availability of individual level census and social/health survey data became more prevalent in the 1960's and 1970's. Corresponding with this availability of individual level data, demography began to be influenced by sociological thought, which brought a proper theoretical perspective to demographic studies, which, before this period were dominated by methodological issues and descriptions of macro scale demographic processes we saw in the previous chapter. 
 
-This chapter focuses on how we model individual level observational data, with a focus on data from demographic surveys. In doing this, I focus on two primary goals, first to illustrate how to conduct regression analysis of common demographic outcomes as measured in surveys, drawing heavily on data from the ******. Secondly, I describe the event-history framework that is used in much of social science when we analyze changes in outcomes between time points, or in describing the time to some demographic event, such as having a child or dying.
+This chapter focuses on how we model individual level observational data, with a focus on data from demographic surveys. In doing this, I focus on two primary goals, first to illustrate how to conduct commonly used regression analysis of demographic outcomes as measured in surveys, drawing heavily on data from the ******. Secondly, I describe the event-history framework that is used in much of social science when we analyze changes in outcomes between time points, or in describing the time to some demographic event, such as having a child or dying.
 
 ### Individual-level focus
 
-In contrast to the macro-demographic perspective described previously, the micro-demographic perspective is focused on the **individual** rather than the aggregate. Barbara Entwisle [-@Entwisle2007a] explains, micro-demography focuses on how individuals are modeled within demographic studies, which focus on individual level behaviors and outcomes as a prime importance. Most of the time in an individual, or micro-demographic focus, our hypotheses are related to how the individual outcome or behavior is influenced by characteristics of the individual, usually without concern or interest in the physical or social context in which the individual lives their life. 
-
-For instance, in a micro-demographic study of mortality, the researcher may make ask:
+In contrast to the macro-demographic perspective described in the previous chapter, the micro-demographic perspective is focused on the **individual** rather than the aggregate. Barbara Entwisle [-@entwisle_2007] explains, micro-demography focuses on how individuals are modeled within demographic studies, which focus on individual level behaviors and outcomes as a prime importance. Most of the time in an individual, or micro-demographic focus, our hypotheses are related to how the individual outcome or behavior is influenced by characteristics of the individual, usually without concern or interest in the physical or social context in which the individual lives their life. For instance, in a micro-demographic study of mortality, the researcher may make ask:
 *Do individuals with a low level of education face higher risk of death, compared to people with a college education*
-
 This in and of itself says nothing about the spatial context in which the person lives, it is only concerned with characteristics of the person. 
 
 ### Individual level propositions
-
-If we are concerned with how individual-level factors affect each person's outcome, then we are stating an individual level, or micro, proposition. In this type of analysis, we have *Y* and *X*, both measured on our individual level units. We may also have a variable *Z* measured on a second-level unit, but we'll wait and discuss these in the next chapter.
-
-An example of this micro-level, or individual level, proposition would be that we think a persons health is affected by their level of education. 
+If we are concerned with how individual-level factors affect each person's outcome, then we are stating an individual level, or micro, proposition. In this type of analysis, we have *y* and *x*, both measured on our individual level units. We may also have a variable *Z* measured on a second-level unit, but we'll wait and discuss these in the next chapter. An example of this micro-level, or individual level, proposition would be that we think a persons health is affected by their level of education. 
 
 ![Micro-level proposition](./images/indi.png)
+## Types of individual level outcomes
+In the analysis of micro-demographic outcomes, we encounter a wide variety of outcomes. Some are relatively simple recoding of existing survey data, other times the outcomes depend on repeated measures of some behavior in a longitudinal framework. At the heart of different outcomes are different assumed statistical distributions used to model them, and the choices that we face related to which outcome best suits a particular outcome. Based on the Generalized Linear Model framework introduced in the previous chapter, in this chapter my goal is to illustrate how to use this framework for analyzing a variety of different types of outcomes. Also, I show how to use appropriate corrections for using complex survey data in the context of the various outcome types, relying heavily on the `survey` and `svyVGAM` packages [@lumley2004; @lumleysvyvgam]. 
+
+### Continuous outcomes
+The workhorse for continuous outcomes in statistics is the Gaussian, or Normal distribution linear model, which was reviewed in the previous chapter. The Normal distribution is incredibly flexible in its form, and once certain restrictions are removed via techniques such as generalized least squares, the model becomes even more flexible. I do not intend to go over the details of the model estimation in this chapter, as this was covered previously. Instead, I will use a common demographic survey data source, the Demographic and Health Survey model data to illustrate how to include survey design information and estimate the models. In addition to the Normal distribution, other continuous distributions including the Student-t and Gamma distributions are also relevant for modeling heteroskedastic and skewed continuous outcomes, as described in the previous chapters. 
+
+#### Data for examples 
+
+#### Discrete
+
+#### Binary Logistic regression model
 
 
-## Modeling individual level outcomes
+#### Marginal effects
+
+#### Ordinal logistic regression model
+
+#### Multinomial logistic regression model
+
+#### Changes in an outcome over time
+
+#### Creating an event history dataset
+
+### Creating a longitudinal dataset
 
 
 
 ## Event history framework
-
-## Rational for Event history analysis
 
 ### When to conduct an event history analysis?
 * When you questions include
@@ -72,7 +85,8 @@ An example of this micro-level, or individual level, proposition would be that w
 * **Durations** – length of an episode
 * **Time axis** – Metric for measuring durations (days, months, years)
 
-![State Space Illustration](C:/Users/ozd504/Documents/GitHub/DEM7223/images/state_concepts.png)
+![State Space Illustration](C:/Users/ozd504/GitHub/DEM7223/images/state_concepts.png)
+
 
 ### Issues in event history data
 #### Censoring

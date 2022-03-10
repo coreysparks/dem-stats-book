@@ -1400,3 +1400,5 @@ AIC(glm1, glmb, glmp_b, glmnb, glmnb2)
 
 We see that among these five model specifications, the Binomial fits the worst and the NB1 model, estimated by `glm.nb()` fits the best, with the lowest AIC among these five models. 
 
+
+## Chapter summary
