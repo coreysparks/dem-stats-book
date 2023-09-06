@@ -670,29 +670,31 @@ F-statistic: 123.3 on 11 and 2312 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>It is important to remember, when describing results for place-based data, to avoid using language centered on individuals. For instance, with reference to the <code>fampov14</code> variable, we cannot say that families living in poverty are more likely to have a low birth weight birth, instead, we must focus on discussion on <em>places</em> with higher rates of poverty having a higher rate of low birth weight births. Ascribing individual risk from an ecological analysis is an example of the <em>ecological fallacy</em> often seen when doing place-based analysis, and we must be aware of it when framing our questions and describing our results.</p>
 <p>The <code>gtsummary</code> package <span class="citation" data-cites="gtsummary">(<a href="#ref-gtsummary" role="doc-biblioref">Sjoberg et al. 2021</a>)</span> provides a very nice interface to produce much better looking summaries of models.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtsummary)</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>lm1<span class="sc">%&gt;%</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_regression</span>(<span class="at">add_estimate_to_reference_rows =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtsummary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>#BlackLivesMatter</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>lm1<span class="sc">%&gt;%</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_regression</span>(<span class="at">add_estimate_to_reference_rows =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="pmyzpszcpi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#pmyzpszcpi table {
+<div id="kbvuwjdtex" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#kbvuwjdtex table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#pmyzpszcpi thead, #pmyzpszcpi tbody, #pmyzpszcpi tfoot, #pmyzpszcpi tr, #pmyzpszcpi td, #pmyzpszcpi th {
+#kbvuwjdtex thead, #kbvuwjdtex tbody, #kbvuwjdtex tfoot, #kbvuwjdtex tr, #kbvuwjdtex td, #kbvuwjdtex th {
   border-style: none;
 }
 
-#pmyzpszcpi p {
+#kbvuwjdtex p {
   margin: 0;
   padding: 0;
 }
 
-#pmyzpszcpi .gt_table {
+#kbvuwjdtex .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -718,12 +720,12 @@ F-statistic: 123.3 on 11 and 2312 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#pmyzpszcpi .gt_caption {
+#kbvuwjdtex .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#pmyzpszcpi .gt_title {
+#kbvuwjdtex .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -735,7 +737,7 @@ F-statistic: 123.3 on 11 and 2312 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-width: 0;
 }
 
-#pmyzpszcpi .gt_subtitle {
+#kbvuwjdtex .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -747,7 +749,7 @@ F-statistic: 123.3 on 11 and 2312 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-top-width: 0;
 }
 
-#pmyzpszcpi .gt_heading {
+#kbvuwjdtex .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -759,13 +761,13 @@ F-statistic: 123.3 on 11 and 2312 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#pmyzpszcpi .gt_bottom_border {
+#kbvuwjdtex .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#pmyzpszcpi .gt_col_headings {
+#kbvuwjdtex .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -780,7 +782,7 @@ F-statistic: 123.3 on 11 and 2312 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#pmyzpszcpi .gt_col_heading {
+#kbvuwjdtex .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -800,7 +802,7 @@ F-statistic: 123.3 on 11 and 2312 DF,  p-value: &lt; 2.2e-16</code></pre>
   overflow-x: hidden;
 }
 
-#pmyzpszcpi .gt_column_spanner_outer {
+#kbvuwjdtex .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -812,15 +814,15 @@ F-statistic: 123.3 on 11 and 2312 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 4px;
 }
 
-#pmyzpszcpi .gt_column_spanner_outer:first-child {
+#kbvuwjdtex .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#pmyzpszcpi .gt_column_spanner_outer:last-child {
+#kbvuwjdtex .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#pmyzpszcpi .gt_column_spanner {
+#kbvuwjdtex .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -832,11 +834,11 @@ F-statistic: 123.3 on 11 and 2312 DF,  p-value: &lt; 2.2e-16</code></pre>
   width: 100%;
 }
 
-#pmyzpszcpi .gt_spanner_row {
+#kbvuwjdtex .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#pmyzpszcpi .gt_group_heading {
+#kbvuwjdtex .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -862,7 +864,7 @@ F-statistic: 123.3 on 11 and 2312 DF,  p-value: &lt; 2.2e-16</code></pre>
   text-align: left;
 }
 
-#pmyzpszcpi .gt_empty_group_heading {
+#kbvuwjdtex .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -877,15 +879,15 @@ F-statistic: 123.3 on 11 and 2312 DF,  p-value: &lt; 2.2e-16</code></pre>
   vertical-align: middle;
 }
 
-#pmyzpszcpi .gt_from_md > :first-child {
+#kbvuwjdtex .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#pmyzpszcpi .gt_from_md > :last-child {
+#kbvuwjdtex .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#pmyzpszcpi .gt_row {
+#kbvuwjdtex .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -904,7 +906,7 @@ F-statistic: 123.3 on 11 and 2312 DF,  p-value: &lt; 2.2e-16</code></pre>
   overflow-x: hidden;
 }
 
-#pmyzpszcpi .gt_stub {
+#kbvuwjdtex .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -917,7 +919,7 @@ F-statistic: 123.3 on 11 and 2312 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#pmyzpszcpi .gt_stub_row_group {
+#kbvuwjdtex .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -931,15 +933,15 @@ F-statistic: 123.3 on 11 and 2312 DF,  p-value: &lt; 2.2e-16</code></pre>
   vertical-align: top;
 }
 
-#pmyzpszcpi .gt_row_group_first td {
+#kbvuwjdtex .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#pmyzpszcpi .gt_row_group_first th {
+#kbvuwjdtex .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#pmyzpszcpi .gt_summary_row {
+#kbvuwjdtex .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -949,16 +951,16 @@ F-statistic: 123.3 on 11 and 2312 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#pmyzpszcpi .gt_first_summary_row {
+#kbvuwjdtex .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#pmyzpszcpi .gt_first_summary_row.thick {
+#kbvuwjdtex .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#pmyzpszcpi .gt_last_summary_row {
+#kbvuwjdtex .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -968,7 +970,7 @@ F-statistic: 123.3 on 11 and 2312 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#pmyzpszcpi .gt_grand_summary_row {
+#kbvuwjdtex .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -978,7 +980,7 @@ F-statistic: 123.3 on 11 and 2312 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#pmyzpszcpi .gt_first_grand_summary_row {
+#kbvuwjdtex .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -988,7 +990,7 @@ F-statistic: 123.3 on 11 and 2312 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#pmyzpszcpi .gt_last_grand_summary_row_top {
+#kbvuwjdtex .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -998,11 +1000,11 @@ F-statistic: 123.3 on 11 and 2312 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#pmyzpszcpi .gt_striped {
+#kbvuwjdtex .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#pmyzpszcpi .gt_table_body {
+#kbvuwjdtex .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1011,7 +1013,7 @@ F-statistic: 123.3 on 11 and 2312 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#pmyzpszcpi .gt_footnotes {
+#kbvuwjdtex .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1025,7 +1027,7 @@ F-statistic: 123.3 on 11 and 2312 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#pmyzpszcpi .gt_footnote {
+#kbvuwjdtex .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1034,7 +1036,7 @@ F-statistic: 123.3 on 11 and 2312 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#pmyzpszcpi .gt_sourcenotes {
+#kbvuwjdtex .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1048,7 +1050,7 @@ F-statistic: 123.3 on 11 and 2312 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#pmyzpszcpi .gt_sourcenote {
+#kbvuwjdtex .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1056,63 +1058,63 @@ F-statistic: 123.3 on 11 and 2312 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#pmyzpszcpi .gt_left {
+#kbvuwjdtex .gt_left {
   text-align: left;
 }
 
-#pmyzpszcpi .gt_center {
+#kbvuwjdtex .gt_center {
   text-align: center;
 }
 
-#pmyzpszcpi .gt_right {
+#kbvuwjdtex .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#pmyzpszcpi .gt_font_normal {
+#kbvuwjdtex .gt_font_normal {
   font-weight: normal;
 }
 
-#pmyzpszcpi .gt_font_bold {
+#kbvuwjdtex .gt_font_bold {
   font-weight: bold;
 }
 
-#pmyzpszcpi .gt_font_italic {
+#kbvuwjdtex .gt_font_italic {
   font-style: italic;
 }
 
-#pmyzpszcpi .gt_super {
+#kbvuwjdtex .gt_super {
   font-size: 65%;
 }
 
-#pmyzpszcpi .gt_footnote_marks {
+#kbvuwjdtex .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#pmyzpszcpi .gt_asterisk {
+#kbvuwjdtex .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#pmyzpszcpi .gt_indent_1 {
+#kbvuwjdtex .gt_indent_1 {
   text-indent: 5px;
 }
 
-#pmyzpszcpi .gt_indent_2 {
+#kbvuwjdtex .gt_indent_2 {
   text-indent: 10px;
 }
 
-#pmyzpszcpi .gt_indent_3 {
+#kbvuwjdtex .gt_indent_3 {
   text-indent: 15px;
 }
 
-#pmyzpszcpi .gt_indent_4 {
+#kbvuwjdtex .gt_indent_4 {
   text-indent: 20px;
 }
 
-#pmyzpszcpi .gt_indent_5 {
+#kbvuwjdtex .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1212,18 +1214,18 @@ F-statistic: 123.3 on 11 and 2312 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>The normality assumption is linked to distributional assumption underlying the linear regression model. This states that the model residuals, calculated as <span class="math inline">\(e_i = (\beta_0 +\sum_k \beta_k x_{ki}) - y_i\)</span>, or more compactly as <span class="math inline">\(e_i =\hat{y_i} - y_i\)</span> follow a normal distribution. If the errors around the mean function are not normally distributed, this can be an indicator that the linear model is not appropriate for the outcome under consideration. A commonly used graphical check of this is the <em>quantile-quantile</em> or Q-Q plot, which plots the residuals from a model against the hypothetical quantiles from a normal distribution.</p>
 <p>We can check these for our model above easily:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">residuals</span>(lm1))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">residuals</span>(lm1))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="macro_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">density</span>(<span class="fu">resid</span>(lm1)),</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Density plot of the residuals"</span>)</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dnorm</span>(x,<span class="dv">0</span>,<span class="fu">sd</span>(<span class="fu">resid</span>(lm1))),</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">lwd =</span><span class="dv">2</span>, <span class="at">add=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">density</span>(<span class="fu">resid</span>(lm1)),</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Density plot of the residuals"</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dnorm</span>(x,<span class="dv">0</span>,<span class="fu">sd</span>(<span class="fu">resid</span>(lm1))),</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">lwd =</span><span class="dv">2</span>, <span class="at">add=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="macro_files/figure-html/unnamed-chunk-19-2.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lm1, <span class="at">which =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lm1, <span class="at">which =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="macro_files/figure-html/unnamed-chunk-19-3.png" class="img-fluid" width="672"></p>
 </div>
@@ -1232,7 +1234,7 @@ F-statistic: 123.3 on 11 and 2312 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>The <em>homoskedasticity</em> assumption is also tied to the normal distributional assumption of the model, as see above, if we write the model in its distributional form, <span class="math inline">\(y_i \sim Normal(X' \beta, \sigma_\epsilon)\)</span>, the term $ _$ is a single parameter, meaning that we only have one of these in a linear regression model. This parameter determines the spread of the variation around the mean function. Larger values equal more spread around the mean, and smaller values equal less spread. A commonly used graphical procedure to detect lack of homoskedasticity, or <em>heteroskedasticity</em>, is an envelope plot, or a plot of the residuals against the fitted values from the model. Formal tests also exist including the <em>Breusch-Pagan test</em> and the modified version of this test developed by Cook and Weisberg [cite]</p>
 <p>A graphical check of this assumption is easily done from the model fit:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lm1, <span class="at">which =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lm1, <span class="at">which =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="macro_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -1242,7 +1244,7 @@ F-statistic: 123.3 on 11 and 2312 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <p>These plots show some evidence that the error variances are non-constant. The first plot has the very characteristic “fish” or “cone” shape, where the error variances increase as the fitted values increase. We can also do a formal test using functions from the <code>car</code> package:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Loading required package: carData</code></pre>
 </div>
@@ -1260,7 +1262,7 @@ Attaching package: 'car'</code></pre>
 
     some</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ncvTest</span>(lm1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ncvTest</span>(lm1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Non-constant Variance Score Test 
 Variance formula: ~ fitted.values 
@@ -1278,8 +1280,8 @@ Chisquare = 469.4844, Df = 1, p = &lt; 2.22e-16</code></pre>
 <p>if the term <span class="math inline">\(\sigma_{\epsilon}\)</span> is not constant then the standard error of each parameter in the model is incorrect. Corrections for heteroskedasticity are commonplace in the social sciences, and are usually attributed to White <span class="citation" data-cites="white_1980">(<a href="#ref-white_1980" role="doc-biblioref">1980</a>)</span> and MacKinnon and White <span class="citation" data-cites="mackinnon_white_1985">(<a href="#ref-mackinnon_white_1985" role="doc-biblioref">1985</a>)</span> with many additions since the original publication, notably Long and Ervin <span class="citation" data-cites="long_using_2000">(<a href="#ref-long_using_2000" role="doc-biblioref">2000</a>)</span>. These corrections use the empirically observed error terms and avoid the assumption of common variance in all residuals.</p>
 <p>The <code>coeftest()</code> function in the <code>lmtest</code> package is one option to correct for heteroskedasticity in regression models. It allows for various correction types, with the “HC3” type <span class="citation" data-cites="long_using_2000">(<a href="#ref-long_using_2000" role="doc-biblioref">Long and Ervin 2000</a>)</span> being the default for linear models. Below, I show the default tests assuming constant variance and the corrected tests.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sandwich)</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmtest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sandwich)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmtest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Loading required package: zoo</code></pre>
 </div>
@@ -1292,7 +1294,7 @@ Attaching package: 'zoo'</code></pre>
 
     as.Date, as.Date.numeric</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coeftest</span>(lm1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coeftest</span>(lm1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 t test of coefficients:
@@ -1313,7 +1315,7 @@ hpsa16whole county shortage    2.362138   1.253348  1.8847 0.0596007 .
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coeftest</span>(lm1, <span class="at">vcov  =</span> <span class="fu">vcovHC</span>(lm1, <span class="at">type =</span> <span class="st">"HC3"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coeftest</span>(lm1, <span class="at">vcov  =</span> <span class="fu">vcovHC</span>(lm1, <span class="at">type =</span> <span class="st">"HC3"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 t test of coefficients:
@@ -1341,8 +1343,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <h4 data-number="5.7.0.2" class="anchored" data-anchor-id="clustered-standard-errors"><span class="header-section-number">5.7.0.2</span> Clustered standard errors</h4>
 <p>Another commonly used correction in regression modeling is the <em>clustered standard error</em>. These are commonplace and almost the default in the Stata programming environment, and are widely used in the field of economics. Clustering of standard errors attempts to correct for clustering in the residuals from the regression model. Clustering can happen for a wide variety of reasons, and as we saw in the previous chapter on survey data analysis, is often an artifact of how the data are collected. With place-based data, we may have clustering because the places are close to each other, or because the share some other characteristic that we have not measured in our regression model. In the case of our regression model, and in our descriptive analysis of our outcome, the map shown prior may indicate some form of <em>spatial correlation</em> in the outcome. While there are models to deal with such non-independence in place-based data, they are not a subject I will touch on here. Instead, we may use the state which each county is in as a proxy for the spatial clustering in the outcome, as one example of potential of a clustering term.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coeftest</span>(lm1,</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">vcov  =</span> <span class="fu">vcovCL</span>(lm1, <span class="at">cluster =</span> ahrf_m<span class="sc">$</span>state))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coeftest</span>(lm1,</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">vcov  =</span> <span class="fu">vcovCL</span>(lm1, <span class="at">cluster =</span> ahrf_m<span class="sc">$</span>state))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 t test of coefficients:
@@ -1372,10 +1374,10 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p><span class="math display">\[y \sim Normal(\beta_0 +\sum_k \beta_k x_{ki}, \sigma_{\epsilon_i} )\]</span></p>
 <p>Where the term <span class="math inline">\(\sigma_{\epsilon_i}\)</span> represents the different variances for each observation. The weights in the model are often variables that represent an underlying factor that affects the variance in the estimates. In demography this is often the population size of a place, as places with smaller population sizes often have more volatility to their rate estimates. This approach has been used in the spatial demographic modeling of county mortality rates in the United States by several authors <span class="citation" data-cites="mclaughlin_differential_2007 sparks_application_2010">(<a href="#ref-mclaughlin_differential_2007" role="doc-biblioref">McLaughlin et al. 2007</a>; <a href="#ref-sparks_application_2010" role="doc-biblioref">Sparks and Sparks 2010</a>)</span>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>lm2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(lbrate1618 <span class="sc">~</span>  fampov14 <span class="sc">+</span> rucc <span class="sc">+</span> hpsa16,</span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> ahrf_m,</span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">weights =</span> popn)</span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>lm2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(lbrate1618 <span class="sc">~</span>  fampov14 <span class="sc">+</span> rucc <span class="sc">+</span> hpsa16,</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> ahrf_m,</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">weights =</span> popn)</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1410,7 +1412,7 @@ F-statistic: 83.05 on 11 and 2312 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <p>We see that by including the population size weights in the model, most of the parameters are no longer significant in the analysis, but the weights have not dealt with the non-constant variance issue totally:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ncvTest</span>(lm2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ncvTest</span>(lm2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Non-constant Variance Score Test 
 Variance formula: ~ fitted.values 
@@ -1449,21 +1451,21 @@ F_{k}(x) \text {  for  } x\in [x_{k-1}, x_k]\\
 <p>Where each of the <span class="math inline">\(F_k (x)\)</span> functions imply a different form in the interval between <span class="math inline">\(x\in [x_{k-1}, x_k]\)</span>, where the <span class="math inline">\(k\)</span> breaks are at a given knot in the data. Most splines are nonlinear functions, usually cubic polynomials, and the spline model combines a series of these polynomials to model nonlinearities in the relationship between predictors and outcomes. A relatively recent invention, <em>Generalized Additive Models</em> or <em>GAMs</em> are a way to model an outcome with both linear and non-linear terms together. The GAM model forms the linear predictor of a model can be constructed as:</p>
 <p><span class="math display">\[E(y)= \beta_0 + f(x_1) + \beta_1 x_2\]</span> where the <span class="math inline">\(f(x_1)\)</span> term is a regression spline of one of the variables. The models can be a mixture of linear and smooth terms. Here is an example of using a B-spline within the <code>lm()</code> model to fit a smooth regression function to the messy nonlinear model above.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(splines)</span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>sm<span class="ot">&lt;-</span> <span class="fu">lm</span>(y2<span class="sc">~</span><span class="fu">bs</span>(t, <span class="at">df =</span> <span class="dv">5</span>))</span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(t, y2, <span class="at">t=</span><span class="st">"p"</span>,</span>
-<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim=</span><span class="fu">range</span>(y2) <span class="sc">*</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">1.2</span>),</span>
-<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">"Nice Spline Model,</span><span class="sc">\n</span><span class="st">Fit to Nonlinear Outcome"</span>,</span>
-<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span><span class="st">"y"</span>,</span>
-<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span> <span class="st">"x"</span>)</span>
-<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a>t<span class="ot">&lt;-</span><span class="fu">seq</span>(<span class="at">from =</span> <span class="fu">min</span>(t),<span class="at">to =</span> <span class="fu">max</span>(t), <span class="at">length.out =</span> <span class="fu">length</span>(y2))</span>
-<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-13"><a href="#cb48-13" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(t, <span class="fu">predict</span>( <span class="fu">lm</span> (y2 <span class="sc">~</span> <span class="fu">bs</span>(t, <span class="at">df =</span> <span class="dv">5</span>)),</span>
-<span id="cb48-14"><a href="#cb48-14" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">data.frame</span>(<span class="at">t =</span> t), <span class="at">lwd =</span> <span class="fl">1.5</span>),</span>
-<span id="cb48-15"><a href="#cb48-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">col=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(splines)</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>sm<span class="ot">&lt;-</span> <span class="fu">lm</span>(y2<span class="sc">~</span><span class="fu">bs</span>(t, <span class="at">df =</span> <span class="dv">5</span>))</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(t, y2, <span class="at">t=</span><span class="st">"p"</span>,</span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim=</span><span class="fu">range</span>(y2) <span class="sc">*</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">1.2</span>),</span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">"Nice Spline Model,</span><span class="sc">\n</span><span class="st">Fit to Nonlinear Outcome"</span>,</span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span><span class="st">"y"</span>,</span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span> <span class="st">"x"</span>)</span>
+<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a>t<span class="ot">&lt;-</span><span class="fu">seq</span>(<span class="at">from =</span> <span class="fu">min</span>(t),<span class="at">to =</span> <span class="fu">max</span>(t), <span class="at">length.out =</span> <span class="fu">length</span>(y2))</span>
+<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-13"><a href="#cb50-13" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(t, <span class="fu">predict</span>( <span class="fu">lm</span> (y2 <span class="sc">~</span> <span class="fu">bs</span>(t, <span class="at">df =</span> <span class="dv">5</span>)),</span>
+<span id="cb50-14"><a href="#cb50-14" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">data.frame</span>(<span class="at">t =</span> t), <span class="at">lwd =</span> <span class="fl">1.5</span>),</span>
+<span id="cb50-15"><a href="#cb50-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">col=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="macro_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -1497,7 +1499,7 @@ F_{k}(x) \text {  for  } x\in [x_{k-1}, x_k]\\
 <p><span class="math display">\[Var(\epsilon_i |\beta) = \sigma^2 g\]</span></p>
 <p>Where the <span class="math inline">\(g\)</span> function can be the effect of a covariate, which would allow the variance to increase or decrease as function of that variable, or a set of strata, where the variance can be different in two or more groups. Below, I first show the model above fit using <code>gls()</code> instead of <code>lm()</code>, then extend the model to include heteroskedasticity based on the population size of the county, and state-specific variance terms <span class="citation" data-cites="pinheiro_mixed-effects_2000">(<a href="#ref-pinheiro_mixed-effects_2000" role="doc-biblioref">Pinheiro and Bates 2000</a>)</span>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nlme)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nlme)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
 Attaching package: 'nlme'</code></pre>
@@ -1507,10 +1509,10 @@ Attaching package: 'nlme'</code></pre>
 
     collapse</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>lm1g<span class="ot">&lt;-</span> <span class="fu">gls</span>(lbrate1618 <span class="sc">~</span>  fampov14 <span class="sc">+</span> rucc <span class="sc">+</span> hpsa16,</span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> ahrf_m)</span>
-<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm1g)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>lm1g<span class="ot">&lt;-</span> <span class="fu">gls</span>(lbrate1618 <span class="sc">~</span>  fampov14 <span class="sc">+</span> rucc <span class="sc">+</span> hpsa16,</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> ahrf_m)</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm1g)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Generalized least squares fit by REML
   Model: lbrate1618 ~ fampov14 + rucc + hpsa16 
@@ -1569,10 +1571,10 @@ Degrees of freedom: 2324 total; 2312 residual</code></pre>
 </div>
 <p>These are the same results, in terms of the regression coefficients as returned by <code>lm()</code>. If we include a <code>varFixed()</code> term, we can regress the residual variance term on a covariate, in this case I select the population size.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>lm2g<span class="ot">&lt;-</span> <span class="fu">gls</span>(lbrate1618 <span class="sc">~</span>  fampov14 <span class="sc">+</span> rucc <span class="sc">+</span> hpsa16,</span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> ahrf_m, </span>
-<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">weights =</span> <span class="fu">varFixed</span>(<span class="sc">~</span>popn) )</span>
-<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm2g)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>lm2g<span class="ot">&lt;-</span> <span class="fu">gls</span>(lbrate1618 <span class="sc">~</span>  fampov14 <span class="sc">+</span> rucc <span class="sc">+</span> hpsa16,</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> ahrf_m, </span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">weights =</span> <span class="fu">varFixed</span>(<span class="sc">~</span>popn) )</span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm2g)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Generalized least squares fit by REML
   Model: lbrate1618 ~ fampov14 + rucc + hpsa16 
@@ -1636,10 +1638,10 @@ Degrees of freedom: 2324 total; 2312 residual</code></pre>
 <p>This model shows some very different effects after controlling for non-constant variance. For instance, the <code>whole county shortage</code> effect is now much more significant in the model, compared to the <code>lm1</code> model.</p>
 <p>The final model includes a separate variance for each state using the <code>varIdent()</code> term.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>lm3<span class="ot">&lt;-</span> <span class="fu">gls</span>(lbrate1618 <span class="sc">~</span>  fampov14 <span class="sc">+</span> rucc <span class="sc">+</span> hpsa16,</span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> ahrf_m, </span>
-<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">weights =</span> <span class="fu">varIdent</span>(<span class="at">form =</span> <span class="sc">~</span><span class="dv">1</span><span class="sc">|</span><span class="fu">factor</span>(state) ) )</span>
-<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>lm3<span class="ot">&lt;-</span> <span class="fu">gls</span>(lbrate1618 <span class="sc">~</span>  fampov14 <span class="sc">+</span> rucc <span class="sc">+</span> hpsa16,</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> ahrf_m, </span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">weights =</span> <span class="fu">varIdent</span>(<span class="at">form =</span> <span class="sc">~</span><span class="dv">1</span><span class="sc">|</span><span class="fu">factor</span>(state) ) )</span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Generalized least squares fit by REML
   Model: lbrate1618 ~ fampov14 + rucc + hpsa16 
@@ -1721,10 +1723,10 @@ AIC = -2LL(\theta) + 2k
 \]</span> Where the term <span class="math inline">\(-2LL(\theta)\)</span> is the model -2 Log likelihood, or <em>deviance</em>, and <span class="math inline">\(2k\)</span> is a penalty term with <span class="math inline">\(k\)</span> being the number of parameters.</p>
 <p>Since the three models <code>lm1g</code>, <code>lm2</code> and <code>lm3</code> are all fit by <code>gls()</code>, and fit to the same dataset, we can compare them. We can even add another model with a smooth spline effect of poverty:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>lm3s<span class="ot">&lt;-</span> <span class="fu">gls</span>(lbrate1618 <span class="sc">~</span>  <span class="fu">bs</span>(fampov14, <span class="at">df=</span><span class="dv">4</span>) <span class="sc">+</span> rucc <span class="sc">+</span> hpsa16,</span>
-<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> ahrf_m, </span>
-<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">weights =</span> <span class="fu">varIdent</span>(<span class="at">form =</span> <span class="sc">~</span><span class="dv">1</span><span class="sc">|</span><span class="fu">factor</span>(state) ) )</span>
-<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm3s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>lm3s<span class="ot">&lt;-</span> <span class="fu">gls</span>(lbrate1618 <span class="sc">~</span>  <span class="fu">bs</span>(fampov14, <span class="at">df=</span><span class="dv">4</span>) <span class="sc">+</span> rucc <span class="sc">+</span> hpsa16,</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> ahrf_m, </span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">weights =</span> <span class="fu">varIdent</span>(<span class="at">form =</span> <span class="sc">~</span><span class="dv">1</span><span class="sc">|</span><span class="fu">factor</span>(state) ) )</span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm3s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Generalized least squares fit by REML
   Model: lbrate1618 ~ bs(fampov14, df = 4) + rucc + hpsa16 
@@ -1825,7 +1827,7 @@ Degrees of freedom: 2324 total; 2309 residual</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>( lm1g,  lm2g, lm3, lm3s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>( lm1g,  lm2g, lm3, lm3s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in AIC.default(lm1g, lm2g, lm3, lm3s): models are not all fitted to the
 same number of observations</code></pre>
@@ -1843,7 +1845,7 @@ lm3s 64 19166.97</code></pre>
 <h4 data-number="5.7.2.1" class="anchored" data-anchor-id="further-model-comparisons"><span class="header-section-number">5.7.2.1</span> Further model comparisons</h4>
 <p>R has a general method of comparing models using <span class="math inline">\(F\)</span> tests or Likelihood Ratio Tests. These are often used when comparing nested models, where one model is a simplified version of another. We have such models above in our <code>gls()</code> models. The <code>lm1g</code> model is a simplified version of the <code>lm3</code> model because it doesn’t contain the extra parameters modeling the unequal variances. The <code>anova()</code> method can compare the models to see if the extra parameters are explaining the model deviance (or variation) better.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm1g, lm3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lm1g, lm3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     Model df      AIC      BIC    logLik   Test  L.Ratio p-value
 lm1g     1 13 19580.52 19655.22 -9777.261                        
@@ -1862,17 +1864,17 @@ lm3      2 61 19232.57 19583.07 -9555.287 1 vs 2 443.9476  &lt;.0001</code></pre
 <p>or the linear combination of the estimated model parameters and the <span class="math inline">\(k\)</span> observed predictors, <span class="math inline">\(x_{ki}\)</span>. Most models in R have a <code>fitted()</code> method to extract the fitted values of the outcome variable for each observation.</p>
 <p>For example, here are the first six fitted values from the original <code>lm1</code> OLS model, the <code>gls()</code> heteroskedastic model <code>lm3</code> model, and the first six values of the outcome:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
-<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>fits<span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="fu">head</span>( ahrf_m<span class="sc">$</span>NAME ),</span>
-<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">lm1 =</span> <span class="fu">head</span>( <span class="fu">fitted</span> ( lm1 )),</span>
-<span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">lm3 =</span> <span class="fu">head</span>( <span class="fu">fitted</span>( lm3 )), </span>
-<span id="cb65-7"><a href="#cb65-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">observed =</span> <span class="fu">head</span>( ahrf_m<span class="sc">$</span>lbrate1618 )</span>
-<span id="cb65-8"><a href="#cb65-8" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb65-9"><a href="#cb65-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-10"><a href="#cb65-10" aria-hidden="true" tabindex="-1"></a>fits<span class="sc">%&gt;%</span></span>
-<span id="cb65-11"><a href="#cb65-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>fits<span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="fu">head</span>( ahrf_m<span class="sc">$</span>NAME ),</span>
+<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">lm1 =</span> <span class="fu">head</span>( <span class="fu">fitted</span> ( lm1 )),</span>
+<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">lm3 =</span> <span class="fu">head</span>( <span class="fu">fitted</span>( lm3 )), </span>
+<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">observed =</span> <span class="fu">head</span>( ahrf_m<span class="sc">$</span>lbrate1618 )</span>
+<span id="cb67-8"><a href="#cb67-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb67-9"><a href="#cb67-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-10"><a href="#cb67-10" aria-hidden="true" tabindex="-1"></a>fits<span class="sc">%&gt;%</span></span>
+<span id="cb67-11"><a href="#cb67-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
 <div id="ydgabwknrs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -2359,43 +2361,43 @@ lm3      2 61 19232.57 19583.07 -9555.287 1 vs 2 443.9476  &lt;.0001</code></pre
 </div>
 <p>We can also easily construct the map of the observed, fitted values and residuals from the model using <code>tmap</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>ahrf_m<span class="sc">$</span>fitted_lm3 <span class="ot">&lt;-</span> <span class="fu">predict</span>(lm3)</span>
-<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>ahrf_m<span class="sc">$</span>resid <span class="ot">&lt;-</span> <span class="fu">resid</span>(lm3)</span>
-<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>actual <span class="ot">&lt;-</span><span class="fu">tm_shape</span>(ahrf_m)<span class="sc">+</span></span>
-<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="st">"lbrate1618"</span>,</span>
-<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">palette =</span> <span class="st">"Blues"</span>,</span>
-<span id="cb66-8"><a href="#cb66-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">n=</span><span class="dv">6</span>,</span>
-<span id="cb66-9"><a href="#cb66-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">style=</span><span class="st">"fisher"</span>,</span>
-<span id="cb66-10"><a href="#cb66-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">border.col =</span> <span class="cn">NULL</span>,</span>
-<span id="cb66-11"><a href="#cb66-11" aria-hidden="true" tabindex="-1"></a>              <span class="at">colorNA =</span> <span class="st">"grey50"</span>)<span class="sc">+</span></span>
-<span id="cb66-12"><a href="#cb66-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(sts)<span class="sc">+</span></span>
-<span id="cb66-13"><a href="#cb66-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_lines</span>( <span class="at">col =</span> <span class="st">"black"</span>)</span>
-<span id="cb66-14"><a href="#cb66-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb66-15"><a href="#cb66-15" aria-hidden="true" tabindex="-1"></a>fit<span class="ot">&lt;-</span><span class="fu">tm_shape</span>(ahrf_m)<span class="sc">+</span></span>
-<span id="cb66-16"><a href="#cb66-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="st">"fitted_lm3"</span>,</span>
-<span id="cb66-17"><a href="#cb66-17" aria-hidden="true" tabindex="-1"></a>              <span class="at">palette =</span> <span class="st">"Blues"</span>,</span>
-<span id="cb66-18"><a href="#cb66-18" aria-hidden="true" tabindex="-1"></a>              <span class="at">n=</span><span class="dv">6</span>,</span>
-<span id="cb66-19"><a href="#cb66-19" aria-hidden="true" tabindex="-1"></a>              <span class="at">style=</span><span class="st">"fisher"</span>, </span>
-<span id="cb66-20"><a href="#cb66-20" aria-hidden="true" tabindex="-1"></a>              <span class="at">border.col =</span> <span class="cn">NULL</span>,</span>
-<span id="cb66-21"><a href="#cb66-21" aria-hidden="true" tabindex="-1"></a>              <span class="at">colorNA =</span> <span class="st">"grey50"</span>)<span class="sc">+</span></span>
-<span id="cb66-22"><a href="#cb66-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(sts)<span class="sc">+</span></span>
-<span id="cb66-23"><a href="#cb66-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_lines</span>( <span class="at">col =</span> <span class="st">"black"</span>)</span>
-<span id="cb66-24"><a href="#cb66-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb66-25"><a href="#cb66-25" aria-hidden="true" tabindex="-1"></a>resids<span class="ot">&lt;-</span><span class="fu">tm_shape</span>(ahrf_m)<span class="sc">+</span></span>
-<span id="cb66-26"><a href="#cb66-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="st">"resid"</span>,</span>
-<span id="cb66-27"><a href="#cb66-27" aria-hidden="true" tabindex="-1"></a>              <span class="at">palette =</span> <span class="st">"RdBu"</span>,</span>
-<span id="cb66-28"><a href="#cb66-28" aria-hidden="true" tabindex="-1"></a>              <span class="at">n=</span><span class="dv">6</span>,</span>
-<span id="cb66-29"><a href="#cb66-29" aria-hidden="true" tabindex="-1"></a>              <span class="at">style=</span><span class="st">"fisher"</span>,</span>
-<span id="cb66-30"><a href="#cb66-30" aria-hidden="true" tabindex="-1"></a>              <span class="at">midpoint =</span> <span class="cn">NA</span>,</span>
-<span id="cb66-31"><a href="#cb66-31" aria-hidden="true" tabindex="-1"></a>              <span class="at">border.col =</span> <span class="cn">NULL</span>,</span>
-<span id="cb66-32"><a href="#cb66-32" aria-hidden="true" tabindex="-1"></a>              <span class="at">colorNA =</span> <span class="st">"grey50"</span>)<span class="sc">+</span></span>
-<span id="cb66-33"><a href="#cb66-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(sts)<span class="sc">+</span></span>
-<span id="cb66-34"><a href="#cb66-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_lines</span>( <span class="at">col =</span> <span class="st">"black"</span>)</span>
-<span id="cb66-35"><a href="#cb66-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb66-36"><a href="#cb66-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb66-37"><a href="#cb66-37" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_arrange</span>(actual, fit, resids, <span class="at">nrow=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>ahrf_m<span class="sc">$</span>fitted_lm3 <span class="ot">&lt;-</span> <span class="fu">predict</span>(lm3)</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>ahrf_m<span class="sc">$</span>resid <span class="ot">&lt;-</span> <span class="fu">resid</span>(lm3)</span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a>actual <span class="ot">&lt;-</span><span class="fu">tm_shape</span>(ahrf_m)<span class="sc">+</span></span>
+<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="st">"lbrate1618"</span>,</span>
+<span id="cb68-7"><a href="#cb68-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">palette =</span> <span class="st">"Blues"</span>,</span>
+<span id="cb68-8"><a href="#cb68-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">n=</span><span class="dv">6</span>,</span>
+<span id="cb68-9"><a href="#cb68-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">style=</span><span class="st">"fisher"</span>,</span>
+<span id="cb68-10"><a href="#cb68-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">border.col =</span> <span class="cn">NULL</span>,</span>
+<span id="cb68-11"><a href="#cb68-11" aria-hidden="true" tabindex="-1"></a>              <span class="at">colorNA =</span> <span class="st">"grey50"</span>)<span class="sc">+</span></span>
+<span id="cb68-12"><a href="#cb68-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(sts)<span class="sc">+</span></span>
+<span id="cb68-13"><a href="#cb68-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_lines</span>( <span class="at">col =</span> <span class="st">"black"</span>)</span>
+<span id="cb68-14"><a href="#cb68-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-15"><a href="#cb68-15" aria-hidden="true" tabindex="-1"></a>fit<span class="ot">&lt;-</span><span class="fu">tm_shape</span>(ahrf_m)<span class="sc">+</span></span>
+<span id="cb68-16"><a href="#cb68-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="st">"fitted_lm3"</span>,</span>
+<span id="cb68-17"><a href="#cb68-17" aria-hidden="true" tabindex="-1"></a>              <span class="at">palette =</span> <span class="st">"Blues"</span>,</span>
+<span id="cb68-18"><a href="#cb68-18" aria-hidden="true" tabindex="-1"></a>              <span class="at">n=</span><span class="dv">6</span>,</span>
+<span id="cb68-19"><a href="#cb68-19" aria-hidden="true" tabindex="-1"></a>              <span class="at">style=</span><span class="st">"fisher"</span>, </span>
+<span id="cb68-20"><a href="#cb68-20" aria-hidden="true" tabindex="-1"></a>              <span class="at">border.col =</span> <span class="cn">NULL</span>,</span>
+<span id="cb68-21"><a href="#cb68-21" aria-hidden="true" tabindex="-1"></a>              <span class="at">colorNA =</span> <span class="st">"grey50"</span>)<span class="sc">+</span></span>
+<span id="cb68-22"><a href="#cb68-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(sts)<span class="sc">+</span></span>
+<span id="cb68-23"><a href="#cb68-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_lines</span>( <span class="at">col =</span> <span class="st">"black"</span>)</span>
+<span id="cb68-24"><a href="#cb68-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-25"><a href="#cb68-25" aria-hidden="true" tabindex="-1"></a>resids<span class="ot">&lt;-</span><span class="fu">tm_shape</span>(ahrf_m)<span class="sc">+</span></span>
+<span id="cb68-26"><a href="#cb68-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="st">"resid"</span>,</span>
+<span id="cb68-27"><a href="#cb68-27" aria-hidden="true" tabindex="-1"></a>              <span class="at">palette =</span> <span class="st">"RdBu"</span>,</span>
+<span id="cb68-28"><a href="#cb68-28" aria-hidden="true" tabindex="-1"></a>              <span class="at">n=</span><span class="dv">6</span>,</span>
+<span id="cb68-29"><a href="#cb68-29" aria-hidden="true" tabindex="-1"></a>              <span class="at">style=</span><span class="st">"fisher"</span>,</span>
+<span id="cb68-30"><a href="#cb68-30" aria-hidden="true" tabindex="-1"></a>              <span class="at">midpoint =</span> <span class="cn">NA</span>,</span>
+<span id="cb68-31"><a href="#cb68-31" aria-hidden="true" tabindex="-1"></a>              <span class="at">border.col =</span> <span class="cn">NULL</span>,</span>
+<span id="cb68-32"><a href="#cb68-32" aria-hidden="true" tabindex="-1"></a>              <span class="at">colorNA =</span> <span class="st">"grey50"</span>)<span class="sc">+</span></span>
+<span id="cb68-33"><a href="#cb68-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(sts)<span class="sc">+</span></span>
+<span id="cb68-34"><a href="#cb68-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_lines</span>( <span class="at">col =</span> <span class="st">"black"</span>)</span>
+<span id="cb68-35"><a href="#cb68-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-36"><a href="#cb68-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-37"><a href="#cb68-37" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_arrange</span>(actual, fit, resids, <span class="at">nrow=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="macro_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid" width="960"></p>
 </div>
@@ -2405,13 +2407,13 @@ lm3      2 61 19232.57 19583.07 -9555.287 1 vs 2 443.9476  &lt;.0001</code></pre
 <h4 data-number="5.7.3.1" class="anchored" data-anchor-id="more-on-predicted-values"><span class="header-section-number">5.7.3.1</span> More on predicted values</h4>
 <p>There are more systematic methods for generating predictions from a model that allow us to marginalize the estimates across other variables and to generate counter factual or hypothetical rates using combinations of <span class="math inline">\(x\)</span> values that may not be observed in the data. The <code>emmeans</code> package is very good at this and also accommodates many types of models. For instance if we would like the marginal means for counties by their healthcare shortage area type, after controlling for the other variables in our model, we can request that.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
-<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>rg<span class="ot">&lt;-</span> <span class="fu">ref_grid</span>(lm3s)</span>
-<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>mu1 <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(rg, <span class="at">specs =</span><span class="st">"hpsa16"</span> )</span>
-<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a>mu1<span class="sc">%&gt;%</span></span>
-<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()<span class="sc">%&gt;%</span></span>
-<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>rg<span class="ot">&lt;-</span> <span class="fu">ref_grid</span>(lm3s)</span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>mu1 <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(rg, <span class="at">specs =</span><span class="st">"hpsa16"</span> )</span>
+<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a>mu1<span class="sc">%&gt;%</span></span>
+<span id="cb69-6"><a href="#cb69-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()<span class="sc">%&gt;%</span></span>
+<span id="cb69-7"><a href="#cb69-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
 <div id="auujvnjgio" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -2894,29 +2896,8 @@ lm3      2 61 19232.57 19583.07 -9555.287 1 vs 2 443.9476  &lt;.0001</code></pre
 </div>
 <p>Which unsurprisingly does not tell us much, because the health care shortage area variable in <code>lm3</code> was not a significant predictor of the low birth weight rate. We can include more than one margin in the function, and include specific values we wish to highlight. For instance, let’s compare three hypothetical counties with three different poverty rates, we can use the <code>summary(ahrf_m$fampov14)</code> to see the first and third quartiles of the distribution and the mean, we will use these as our theoretical values.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>rg<span class="ot">&lt;-</span><span class="fu">ref_grid</span>(lm3,</span>
-<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">at=</span><span class="fu">list</span>( <span class="at">fampov14 =</span> <span class="fu">c</span>(<span class="fl">1.8</span>,<span class="fl">7.8</span>, <span class="fl">11.6</span>, <span class="fl">14.3</span>, <span class="fl">52.1</span>) ) )</span>
-<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(rg, <span class="at">specs =</span> <span class="fu">c</span>(<span class="st">"fampov14"</span>, <span class="st">"rucc"</span>))</span>
-<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a>means<span class="sc">%&gt;%</span></span>
-<span id="cb68-7"><a href="#cb68-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()<span class="sc">%&gt;%</span></span>
-<span id="cb68-8"><a href="#cb68-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>rucc, <span class="at">y=</span>emmean))<span class="sc">+</span></span>
-<span id="cb68-9"><a href="#cb68-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group=</span><span class="fu">factor</span>(fampov14), <span class="at">color=</span><span class="fu">factor</span>(fampov14)))<span class="sc">+</span></span>
-<span id="cb68-10"><a href="#cb68-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="macro_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>Which illustrates the differences in the poverty rates on the low birth weight rate across the rural-urban continuum. The use of these marginal means is very useful when illustrating the effects of covariates in regression models, and to effectively illustrate interactions in such models. For instance, if we estimate the model below, which interacts the poverty rate with the rural-urban continuum code:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>lm3i<span class="ot">&lt;-</span> <span class="fu">gls</span>(lbrate1618 <span class="sc">~</span>  fampov14 <span class="sc">*</span> rucc <span class="sc">+</span> hpsa16,</span>
-<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> ahrf_m, </span>
-<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">weights =</span> <span class="fu">varIdent</span>(<span class="at">form =</span> <span class="sc">~</span><span class="dv">1</span><span class="sc">|</span><span class="fu">factor</span>(state) ) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>rg<span class="ot">&lt;-</span><span class="fu">ref_grid</span>(lm3i,</span>
-<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">at=</span><span class="fu">list</span>( <span class="at">fampov14 =</span> <span class="fu">c</span>(<span class="fl">7.8</span>, <span class="fl">11.6</span>, <span class="fl">14.3</span>) ) )</span>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>rg<span class="ot">&lt;-</span><span class="fu">ref_grid</span>(lm3,</span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">at=</span><span class="fu">list</span>( <span class="at">fampov14 =</span> <span class="fu">c</span>(<span class="fl">1.8</span>,<span class="fl">7.8</span>, <span class="fl">11.6</span>, <span class="fl">14.3</span>, <span class="fl">52.1</span>) ) )</span>
 <span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(rg, <span class="at">specs =</span> <span class="fu">c</span>(<span class="st">"fampov14"</span>, <span class="st">"rucc"</span>))</span>
 <span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a></span>
@@ -2925,6 +2906,27 @@ lm3      2 61 19232.57 19583.07 -9555.287 1 vs 2 443.9476  &lt;.0001</code></pre
 <span id="cb70-8"><a href="#cb70-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>rucc, <span class="at">y=</span>emmean))<span class="sc">+</span></span>
 <span id="cb70-9"><a href="#cb70-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group=</span><span class="fu">factor</span>(fampov14), <span class="at">color=</span><span class="fu">factor</span>(fampov14)))<span class="sc">+</span></span>
 <span id="cb70-10"><a href="#cb70-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="macro_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Which illustrates the differences in the poverty rates on the low birth weight rate across the rural-urban continuum. The use of these marginal means is very useful when illustrating the effects of covariates in regression models, and to effectively illustrate interactions in such models. For instance, if we estimate the model below, which interacts the poverty rate with the rural-urban continuum code:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>lm3i<span class="ot">&lt;-</span> <span class="fu">gls</span>(lbrate1618 <span class="sc">~</span>  fampov14 <span class="sc">*</span> rucc <span class="sc">+</span> hpsa16,</span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> ahrf_m, </span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">weights =</span> <span class="fu">varIdent</span>(<span class="at">form =</span> <span class="sc">~</span><span class="dv">1</span><span class="sc">|</span><span class="fu">factor</span>(state) ) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>rg<span class="ot">&lt;-</span><span class="fu">ref_grid</span>(lm3i,</span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">at=</span><span class="fu">list</span>( <span class="at">fampov14 =</span> <span class="fu">c</span>(<span class="fl">7.8</span>, <span class="fl">11.6</span>, <span class="fl">14.3</span>) ) )</span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(rg, <span class="at">specs =</span> <span class="fu">c</span>(<span class="st">"fampov14"</span>, <span class="st">"rucc"</span>))</span>
+<span id="cb72-5"><a href="#cb72-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-6"><a href="#cb72-6" aria-hidden="true" tabindex="-1"></a>means<span class="sc">%&gt;%</span></span>
+<span id="cb72-7"><a href="#cb72-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()<span class="sc">%&gt;%</span></span>
+<span id="cb72-8"><a href="#cb72-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>rucc, <span class="at">y=</span>emmean))<span class="sc">+</span></span>
+<span id="cb72-9"><a href="#cb72-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group=</span><span class="fu">factor</span>(fampov14), <span class="at">color=</span><span class="fu">factor</span>(fampov14)))<span class="sc">+</span></span>
+<span id="cb72-10"><a href="#cb72-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="macro_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -2944,10 +2946,10 @@ lm3      2 61 19232.57 19583.07 -9555.287 1 vs 2 443.9476  &lt;.0001</code></pre
 <p><span class="math display">\[g(u) = g(E(Y)) = \beta_0 + \beta_1 x_1\]</span></p>
 <p>Where <span class="math inline">\(g()\)</span> is the link function, linking the mean of the Normal distribution to the linear mean function of the model. The equivalent GLM model to the <code>lm1</code> model from the previous section is:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>glm1<span class="ot">&lt;-</span> <span class="fu">glm</span>(lbrate1618 <span class="sc">~</span>  fampov14 <span class="sc">+</span> rucc <span class="sc">+</span> hpsa16,</span>
-<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> ahrf_m, </span>
-<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">family =</span>gaussian)</span>
-<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(texreg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>glm1<span class="ot">&lt;-</span> <span class="fu">glm</span>(lbrate1618 <span class="sc">~</span>  fampov14 <span class="sc">+</span> rucc <span class="sc">+</span> hpsa16,</span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> ahrf_m, </span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">family =</span>gaussian)</span>
+<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(texreg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Version:  1.38.6
 Date:     2022-04-06
@@ -2965,25 +2967,25 @@ Attaching package: 'texreg'</code></pre>
 
     extract</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">texreg</span>(<span class="fu">list</span>(glm1, lm1), <span class="at">file =</span> <span class="st">"4_1.tex"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">texreg</span>(<span class="fu">list</span>(glm1, lm1), <span class="at">file =</span> <span class="st">"4_1.tex"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>The table was written to the file '4_1.tex'.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>lm1_t<span class="ot">&lt;-</span>lm1<span class="sc">%&gt;%</span></span>
-<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_regression</span>()</span>
-<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-5"><a href="#cb77-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-6"><a href="#cb77-6" aria-hidden="true" tabindex="-1"></a>glm1_t<span class="ot">&lt;-</span>glm1<span class="sc">%&gt;%</span></span>
-<span id="cb77-7"><a href="#cb77-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_regression</span>()</span>
-<span id="cb77-8"><a href="#cb77-8" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb77-9"><a href="#cb77-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-10"><a href="#cb77-10" aria-hidden="true" tabindex="-1"></a>t_m <span class="ot">&lt;-</span> <span class="fu">tbl_merge</span>(</span>
-<span id="cb77-11"><a href="#cb77-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">tbls =</span> <span class="fu">list</span>(lm1_t, glm1_t),</span>
-<span id="cb77-12"><a href="#cb77-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">tab_spanner =</span> <span class="fu">c</span>(<span class="st">"**OLS**"</span>, <span class="st">"**GLM**"</span>)</span>
-<span id="cb77-13"><a href="#cb77-13" aria-hidden="true" tabindex="-1"></a>  ) </span>
-<span id="cb77-14"><a href="#cb77-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-15"><a href="#cb77-15" aria-hidden="true" tabindex="-1"></a>t_m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>lm1_t<span class="ot">&lt;-</span>lm1<span class="sc">%&gt;%</span></span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_regression</span>()</span>
+<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-4"><a href="#cb79-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-5"><a href="#cb79-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-6"><a href="#cb79-6" aria-hidden="true" tabindex="-1"></a>glm1_t<span class="ot">&lt;-</span>glm1<span class="sc">%&gt;%</span></span>
+<span id="cb79-7"><a href="#cb79-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_regression</span>()</span>
+<span id="cb79-8"><a href="#cb79-8" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb79-9"><a href="#cb79-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-10"><a href="#cb79-10" aria-hidden="true" tabindex="-1"></a>t_m <span class="ot">&lt;-</span> <span class="fu">tbl_merge</span>(</span>
+<span id="cb79-11"><a href="#cb79-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">tbls =</span> <span class="fu">list</span>(lm1_t, glm1_t),</span>
+<span id="cb79-12"><a href="#cb79-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">tab_spanner =</span> <span class="fu">c</span>(<span class="st">"**OLS**"</span>, <span class="st">"**GLM**"</span>)</span>
+<span id="cb79-13"><a href="#cb79-13" aria-hidden="true" tabindex="-1"></a>  ) </span>
+<span id="cb79-14"><a href="#cb79-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-15"><a href="#cb79-15" aria-hidden="true" tabindex="-1"></a>t_m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
 <div id="ueiyneebjy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -3566,7 +3568,7 @@ Attaching package: 'texreg'</code></pre>
 </div>
 <p>Which shows the exact same output for both models, as it should be. The output shown by <code>summary(lm1)</code> and <code>summary(glm1)</code> is different though, but the same results can be recovered.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glm1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glm1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -3601,22 +3603,22 @@ Number of Fisher Scoring iterations: 2</code></pre>
 </div>
 <p>This output shows the same coefficients, and hypothesis test results compared to <code>summary(lm1)</code>, but the residual variances are reported differently. The GLM summary reports the Null and Residual deviance instead of the Residual standard errors reported by <code>summary(lm1)</code>. If we take the residual deviance and divide it by the residual degrees of freedom, and take the square root, we get the residual standard error reported by <code>summary(lm1)</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(glm1<span class="sc">$</span>deviance<span class="sc">/</span>glm1<span class="sc">$</span>df.residual)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(glm1<span class="sc">$</span>deviance<span class="sc">/</span>glm1<span class="sc">$</span>df.residual)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 16.35905</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm1)<span class="sc">$</span>sigma</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm1)<span class="sc">$</span>sigma</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 16.35905</code></pre>
 </div>
 </div>
 <p>The deviance in the GLM model is calculated in the same way as the residual sums of squares:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((<span class="fu">fitted</span>(lm1)<span class="sc">-</span>ahrf_m<span class="sc">$</span>lbrate1618 )<span class="sc">^</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((<span class="fu">fitted</span>(lm1)<span class="sc">-</span>ahrf_m<span class="sc">$</span>lbrate1618 )<span class="sc">^</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 618733.7</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>glm1<span class="sc">$</span>deviance</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>glm1<span class="sc">$</span>deviance</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 618733.7</code></pre>
 </div>
@@ -3628,10 +3630,10 @@ Y = exp(\beta_0 + \beta_1 x_1) \\
 Y = exp(\beta_0) * exp(\beta_1 x_1)
 \]</span> Which changes the model to no longer be additive in terms of the parameters for the logarithmic link function.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>glm2<span class="ot">&lt;-</span> <span class="fu">glm</span>(lbrate1618 <span class="sc">~</span>  fampov14 <span class="sc">+</span> rucc <span class="sc">+</span> hpsa16,</span>
-<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> ahrf_m, </span>
-<span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">family =</span><span class="fu">gaussian</span>(<span class="at">link =</span> <span class="st">"log"</span>))</span>
-<span id="cb88-4"><a href="#cb88-4" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(glm1, glm2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>glm2<span class="ot">&lt;-</span> <span class="fu">glm</span>(lbrate1618 <span class="sc">~</span>  fampov14 <span class="sc">+</span> rucc <span class="sc">+</span> hpsa16,</span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> ahrf_m, </span>
+<span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">family =</span><span class="fu">gaussian</span>(<span class="at">link =</span> <span class="st">"log"</span>))</span>
+<span id="cb90-4"><a href="#cb90-4" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(glm1, glm2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     df      AIC
 glm1 13 19599.34
@@ -3725,12 +3727,12 @@ glm2 13 19687.44</code></pre>
 <h4 data-number="5.8.1.1" class="anchored" data-anchor-id="binomial-regression"><span class="header-section-number">5.8.1.1</span> Binomial regression</h4>
 <p>The <code>glm()</code> function can estimate the count binomial model using the syntax <code>cbind( y, n-y)</code> in the outcome portion of the model formula.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>glmb<span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="fu">cbind</span>(lowbw1618, births1618<span class="sc">-</span>lowbw1618) <span class="sc">~</span>  fampov14 <span class="sc">+</span> rucc <span class="sc">+</span> hpsa16,</span>
-<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> ahrf_m, </span>
-<span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">family =</span> binomial)</span>
-<span id="cb90-4"><a href="#cb90-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb90-5"><a href="#cb90-5" aria-hidden="true" tabindex="-1"></a>glmb<span class="sc">%&gt;%</span></span>
-<span id="cb90-6"><a href="#cb90-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_regression</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>glmb<span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="fu">cbind</span>(lowbw1618, births1618<span class="sc">-</span>lowbw1618) <span class="sc">~</span>  fampov14 <span class="sc">+</span> rucc <span class="sc">+</span> hpsa16,</span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> ahrf_m, </span>
+<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">family =</span> binomial)</span>
+<span id="cb92-4"><a href="#cb92-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-5"><a href="#cb92-5" aria-hidden="true" tabindex="-1"></a>glmb<span class="sc">%&gt;%</span></span>
+<span id="cb92-6"><a href="#cb92-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_regression</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
 <div id="loatcfjjfo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -4257,8 +4259,8 @@ glm2 13 19687.44</code></pre>
 </div>
 <p>The output above shows the results of the model. The coefficients are on the log-odds scale, and typically would be converted to an odds-ratio by exponentiating them.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>glmb<span class="sc">%&gt;%</span></span>
-<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_regression</span>(<span class="at">exponentiate=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>glmb<span class="sc">%&gt;%</span></span>
+<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_regression</span>(<span class="at">exponentiate=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
 <div id="ttzlywfyhl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -4785,11 +4787,11 @@ glm2 13 19687.44</code></pre>
 </div>
 <p>In this case, the odds ratio interpretation is not as clear as in the case of the Bernoulli case, in the context of individuals. When I interpret the coefficients for the count binomial, I describe them as <em>percent changes in the mean</em>. For example, the <code>fampov14</code> odds ratio is 1.02, I describe this result as: The low birth weight rate increases by 2 percent for every 1 percentage point increase in the poverty rate. We can see this by using the fitted values from <code>emmeans</code>, here I generate two cases where <code>fampov14</code> is exactly 1 percentage point different, and you can see the difference in the estimated rates.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>rg <span class="ot">&lt;-</span> <span class="fu">ref_grid</span>(glmb,</span>
-<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">at=</span><span class="fu">list</span>( <span class="at">fampov14 =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">6</span>) ) ) </span>
-<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(rg,</span>
-<span id="cb92-4"><a href="#cb92-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">specs =</span> <span class="st">"fampov14"</span>,</span>
-<span id="cb92-5"><a href="#cb92-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">type =</span> <span class="st">"response"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a>rg <span class="ot">&lt;-</span> <span class="fu">ref_grid</span>(glmb,</span>
+<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">at=</span><span class="fu">list</span>( <span class="at">fampov14 =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">6</span>) ) ) </span>
+<span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(rg,</span>
+<span id="cb94-4"><a href="#cb94-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">specs =</span> <span class="st">"fampov14"</span>,</span>
+<span id="cb94-5"><a href="#cb94-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">type =</span> <span class="st">"response"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> fampov14   prob       SE  df asymp.LCL asymp.UCL
         5 0.0735 0.000474 Inf    0.0726    0.0745
@@ -4802,7 +4804,7 @@ Intervals are back-transformed from the logit scale </code></pre>
 </div>
 <p>We can calculate the percentage change in these two estimates:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a>(.<span class="dv">0750</span> <span class="sc">-</span> .<span class="dv">0735</span>)<span class="sc">/</span>.<span class="dv">0750</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>(.<span class="dv">0750</span> <span class="sc">-</span> .<span class="dv">0735</span>)<span class="sc">/</span>.<span class="dv">0750</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.02</code></pre>
 </div>
@@ -4813,20 +4815,20 @@ Intervals are back-transformed from the logit scale </code></pre>
 <h4 data-number="5.8.1.2" class="anchored" data-anchor-id="application-of-the-binomial-to-age-standardization"><span class="header-section-number">5.8.1.2</span> Application of the binomial to age standardization</h4>
 <p>The Binomial is very useful for conducting standardization of rates between groups to measure the differences. To show an example of how to do age standardization, I use data from the <a href="https://wonder.cdc.gov/mortSQL.html">CDC Wonder Compressed Mortality file</a>. The data are for the states of Texas and California for the year 2016, and are the numbers of deaths and population at risk in 13 age groups.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>txca <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_delim</span>(<span class="st">"data/CMF_TX_CA_age.txt"</span>,</span>
-<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">delim =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>,</span>
-<span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">quote =</span> <span class="st">"</span><span class="sc">\"</span><span class="st">"</span>,</span>
-<span id="cb96-4"><a href="#cb96-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">skip=</span><span class="dv">1</span>,</span>
-<span id="cb96-5"><a href="#cb96-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">col_names =</span> <span class="fu">c</span>(<span class="st">"State"</span>,</span>
-<span id="cb96-6"><a href="#cb96-6" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"State_Code"</span>,</span>
-<span id="cb96-7"><a href="#cb96-7" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"Age_Group"</span>,</span>
-<span id="cb96-8"><a href="#cb96-8" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"Age_Group_Code"</span>,</span>
-<span id="cb96-9"><a href="#cb96-9" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"Deaths"</span>,</span>
-<span id="cb96-10"><a href="#cb96-10" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"Population"</span>,</span>
-<span id="cb96-11"><a href="#cb96-11" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"Crude.Rate"</span>)</span>
-<span id="cb96-12"><a href="#cb96-12" aria-hidden="true" tabindex="-1"></a>                          )<span class="sc">%&gt;%</span></span>
-<span id="cb96-13"><a href="#cb96-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Age_Group <span class="sc">!=</span> <span class="st">"Not Stated"</span>)<span class="sc">%&gt;%</span></span>
-<span id="cb96-14"><a href="#cb96-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Population =</span> <span class="fu">as.numeric</span>(Population), <span class="at">Deaths =</span> <span class="fu">as.numeric</span>(Deaths))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a>txca <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_delim</span>(<span class="st">"data/CMF_TX_CA_age.txt"</span>,</span>
+<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">delim =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>,</span>
+<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">quote =</span> <span class="st">"</span><span class="sc">\"</span><span class="st">"</span>,</span>
+<span id="cb98-4"><a href="#cb98-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">skip=</span><span class="dv">1</span>,</span>
+<span id="cb98-5"><a href="#cb98-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">col_names =</span> <span class="fu">c</span>(<span class="st">"State"</span>,</span>
+<span id="cb98-6"><a href="#cb98-6" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"State_Code"</span>,</span>
+<span id="cb98-7"><a href="#cb98-7" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"Age_Group"</span>,</span>
+<span id="cb98-8"><a href="#cb98-8" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"Age_Group_Code"</span>,</span>
+<span id="cb98-9"><a href="#cb98-9" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"Deaths"</span>,</span>
+<span id="cb98-10"><a href="#cb98-10" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"Population"</span>,</span>
+<span id="cb98-11"><a href="#cb98-11" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"Crude.Rate"</span>)</span>
+<span id="cb98-12"><a href="#cb98-12" aria-hidden="true" tabindex="-1"></a>                          )<span class="sc">%&gt;%</span></span>
+<span id="cb98-13"><a href="#cb98-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Age_Group <span class="sc">!=</span> <span class="st">"Not Stated"</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb98-14"><a href="#cb98-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Population =</span> <span class="fu">as.numeric</span>(Population), <span class="at">Deaths =</span> <span class="fu">as.numeric</span>(Deaths))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 28 Columns: 7
 ── Column specification ────────────────────────────────────────────────────────
@@ -4836,8 +4838,8 @@ chr (7): State, State_Code, Age_Group, Age_Group_Code, Deaths, Population, C...
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a>txca<span class="sc">%&gt;%</span></span>
-<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a>txca<span class="sc">%&gt;%</span></span>
+<span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
 <div id="ywxfzgsjfx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -5484,29 +5486,29 @@ chr (7): State, State_Code, Age_Group, Age_Group_Code, Deaths, Population, C...
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a>txca<span class="sc">%&gt;%</span></span>
-<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(State)<span class="sc">%&gt;%</span></span>
-<span id="cb99-3"><a href="#cb99-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">p_pop =</span> Population<span class="sc">/</span><span class="fu">sum</span>(Population ))<span class="sc">%&gt;%</span></span>
-<span id="cb99-4"><a href="#cb99-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()<span class="sc">%&gt;%</span></span>
-<span id="cb99-5"><a href="#cb99-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">age =</span> forcats<span class="sc">::</span><span class="fu">fct_relevel</span>(txca<span class="sc">$</span>Age_Group,<span class="st">"&lt; 1 year"</span>,</span>
-<span id="cb99-6"><a href="#cb99-6" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"1-4 years"</span>,</span>
-<span id="cb99-7"><a href="#cb99-7" aria-hidden="true" tabindex="-1"></a>                                     <span class="st">"5-9 years"</span>,</span>
-<span id="cb99-8"><a href="#cb99-8" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"10-14 years"</span>,</span>
-<span id="cb99-9"><a href="#cb99-9" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"15-19 years"</span>,</span>
-<span id="cb99-10"><a href="#cb99-10" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"20-24 years"</span>,</span>
-<span id="cb99-11"><a href="#cb99-11" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"25-34 years"</span>,</span>
-<span id="cb99-12"><a href="#cb99-12" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"35-44 years"</span>,</span>
-<span id="cb99-13"><a href="#cb99-13" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"45-54 years"</span>,</span>
-<span id="cb99-14"><a href="#cb99-14" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"55-64 years"</span>,</span>
-<span id="cb99-15"><a href="#cb99-15" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"65-74 years"</span>,</span>
-<span id="cb99-16"><a href="#cb99-16" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"75-84 years"</span>, <span class="st">"85+ years"</span></span>
-<span id="cb99-17"><a href="#cb99-17" aria-hidden="true" tabindex="-1"></a>                                    ))<span class="sc">%&gt;%</span></span>
-<span id="cb99-18"><a href="#cb99-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> p_pop,<span class="at">group=</span>State, <span class="at">color=</span> State))<span class="sc">+</span></span>
-<span id="cb99-19"><a href="#cb99-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">lwd=</span><span class="dv">2</span>)<span class="sc">+</span></span>
-<span id="cb99-20"><a href="#cb99-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"% in Age"</span> )<span class="sc">+</span></span>
-<span id="cb99-21"><a href="#cb99-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span> (<span class="st">"Age group"</span>)<span class="sc">+</span></span>
-<span id="cb99-22"><a href="#cb99-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Age distribution in Texas and California"</span>)<span class="sc">+</span></span>
-<span id="cb99-23"><a href="#cb99-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a>txca<span class="sc">%&gt;%</span></span>
+<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(State)<span class="sc">%&gt;%</span></span>
+<span id="cb101-3"><a href="#cb101-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">p_pop =</span> Population<span class="sc">/</span><span class="fu">sum</span>(Population ))<span class="sc">%&gt;%</span></span>
+<span id="cb101-4"><a href="#cb101-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()<span class="sc">%&gt;%</span></span>
+<span id="cb101-5"><a href="#cb101-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">age =</span> forcats<span class="sc">::</span><span class="fu">fct_relevel</span>(txca<span class="sc">$</span>Age_Group,<span class="st">"&lt; 1 year"</span>,</span>
+<span id="cb101-6"><a href="#cb101-6" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"1-4 years"</span>,</span>
+<span id="cb101-7"><a href="#cb101-7" aria-hidden="true" tabindex="-1"></a>                                     <span class="st">"5-9 years"</span>,</span>
+<span id="cb101-8"><a href="#cb101-8" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"10-14 years"</span>,</span>
+<span id="cb101-9"><a href="#cb101-9" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"15-19 years"</span>,</span>
+<span id="cb101-10"><a href="#cb101-10" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"20-24 years"</span>,</span>
+<span id="cb101-11"><a href="#cb101-11" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"25-34 years"</span>,</span>
+<span id="cb101-12"><a href="#cb101-12" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"35-44 years"</span>,</span>
+<span id="cb101-13"><a href="#cb101-13" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"45-54 years"</span>,</span>
+<span id="cb101-14"><a href="#cb101-14" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"55-64 years"</span>,</span>
+<span id="cb101-15"><a href="#cb101-15" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"65-74 years"</span>,</span>
+<span id="cb101-16"><a href="#cb101-16" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"75-84 years"</span>, <span class="st">"85+ years"</span></span>
+<span id="cb101-17"><a href="#cb101-17" aria-hidden="true" tabindex="-1"></a>                                    ))<span class="sc">%&gt;%</span></span>
+<span id="cb101-18"><a href="#cb101-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> p_pop,<span class="at">group=</span>State, <span class="at">color=</span> State))<span class="sc">+</span></span>
+<span id="cb101-19"><a href="#cb101-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">lwd=</span><span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb101-20"><a href="#cb101-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"% in Age"</span> )<span class="sc">+</span></span>
+<span id="cb101-21"><a href="#cb101-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span> (<span class="st">"Age group"</span>)<span class="sc">+</span></span>
+<span id="cb101-22"><a href="#cb101-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Age distribution in Texas and California"</span>)<span class="sc">+</span></span>
+<span id="cb101-23"><a href="#cb101-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Returning more (or less) than 1 row per `summarise()` group was deprecated in
 dplyr 1.1.0.
@@ -5525,27 +5527,27 @@ dplyr 1.1.0.
 <p>We see that the age distribution of Texas is slightly younger than California, also the large peak at 25-34 year age group is because the data adopt a 10 year age interval after age 25.</p>
 <p>To do age standardization using the regression framework, we have to control for the differences in the age structure of the two populations (Texas and California) by regressing the mortality rate on the Age structure, the difference between the states after doing this is the difference in the age-standardized rate.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a>txca<span class="ot">&lt;-</span> txca<span class="sc">%&gt;%</span></span>
-<span id="cb102-2"><a href="#cb102-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Age_Group =</span> forcats<span class="sc">::</span><span class="fu">fct_relevel</span>(txca<span class="sc">$</span>Age_Group,<span class="st">"&lt; 1 year"</span>,</span>
-<span id="cb102-3"><a href="#cb102-3" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"1-4 years"</span>,</span>
-<span id="cb102-4"><a href="#cb102-4" aria-hidden="true" tabindex="-1"></a>                                     <span class="st">"5-9 years"</span>,</span>
-<span id="cb102-5"><a href="#cb102-5" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"10-14 years"</span>,</span>
-<span id="cb102-6"><a href="#cb102-6" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"15-19 years"</span>,</span>
-<span id="cb102-7"><a href="#cb102-7" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"20-24 years"</span>,</span>
-<span id="cb102-8"><a href="#cb102-8" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"25-34 years"</span>,</span>
-<span id="cb102-9"><a href="#cb102-9" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"35-44 years"</span>,</span>
-<span id="cb102-10"><a href="#cb102-10" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"45-54 years"</span>,</span>
-<span id="cb102-11"><a href="#cb102-11" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"55-64 years"</span>,</span>
-<span id="cb102-12"><a href="#cb102-12" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"65-74 years"</span>,</span>
-<span id="cb102-13"><a href="#cb102-13" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"75-84 years"</span>, <span class="st">"85+ years"</span></span>
-<span id="cb102-14"><a href="#cb102-14" aria-hidden="true" tabindex="-1"></a>                                    ))</span>
-<span id="cb102-15"><a href="#cb102-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb102-16"><a href="#cb102-16" aria-hidden="true" tabindex="-1"></a>glmb_s <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="fu">cbind</span>(Deaths, Population<span class="sc">-</span>Deaths) <span class="sc">~</span> <span class="fu">factor</span>(Age_Group)<span class="sc">+</span>State,</span>
-<span id="cb102-17"><a href="#cb102-17" aria-hidden="true" tabindex="-1"></a>              <span class="at">data=</span>txca,</span>
-<span id="cb102-18"><a href="#cb102-18" aria-hidden="true" tabindex="-1"></a>              <span class="at">family=</span>binomial)</span>
-<span id="cb102-19"><a href="#cb102-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb102-20"><a href="#cb102-20" aria-hidden="true" tabindex="-1"></a>glmb_s<span class="sc">%&gt;%</span></span>
-<span id="cb102-21"><a href="#cb102-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_regression</span>(<span class="at">exp =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a>txca<span class="ot">&lt;-</span> txca<span class="sc">%&gt;%</span></span>
+<span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Age_Group =</span> forcats<span class="sc">::</span><span class="fu">fct_relevel</span>(txca<span class="sc">$</span>Age_Group,<span class="st">"&lt; 1 year"</span>,</span>
+<span id="cb104-3"><a href="#cb104-3" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"1-4 years"</span>,</span>
+<span id="cb104-4"><a href="#cb104-4" aria-hidden="true" tabindex="-1"></a>                                     <span class="st">"5-9 years"</span>,</span>
+<span id="cb104-5"><a href="#cb104-5" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"10-14 years"</span>,</span>
+<span id="cb104-6"><a href="#cb104-6" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"15-19 years"</span>,</span>
+<span id="cb104-7"><a href="#cb104-7" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"20-24 years"</span>,</span>
+<span id="cb104-8"><a href="#cb104-8" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"25-34 years"</span>,</span>
+<span id="cb104-9"><a href="#cb104-9" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"35-44 years"</span>,</span>
+<span id="cb104-10"><a href="#cb104-10" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"45-54 years"</span>,</span>
+<span id="cb104-11"><a href="#cb104-11" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"55-64 years"</span>,</span>
+<span id="cb104-12"><a href="#cb104-12" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"65-74 years"</span>,</span>
+<span id="cb104-13"><a href="#cb104-13" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"75-84 years"</span>, <span class="st">"85+ years"</span></span>
+<span id="cb104-14"><a href="#cb104-14" aria-hidden="true" tabindex="-1"></a>                                    ))</span>
+<span id="cb104-15"><a href="#cb104-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb104-16"><a href="#cb104-16" aria-hidden="true" tabindex="-1"></a>glmb_s <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="fu">cbind</span>(Deaths, Population<span class="sc">-</span>Deaths) <span class="sc">~</span> <span class="fu">factor</span>(Age_Group)<span class="sc">+</span>State,</span>
+<span id="cb104-17"><a href="#cb104-17" aria-hidden="true" tabindex="-1"></a>              <span class="at">data=</span>txca,</span>
+<span id="cb104-18"><a href="#cb104-18" aria-hidden="true" tabindex="-1"></a>              <span class="at">family=</span>binomial)</span>
+<span id="cb104-19"><a href="#cb104-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb104-20"><a href="#cb104-20" aria-hidden="true" tabindex="-1"></a>glmb_s<span class="sc">%&gt;%</span></span>
+<span id="cb104-21"><a href="#cb104-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_regression</span>(<span class="at">exp =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
 <div id="nbmrvnfass" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -6103,19 +6105,19 @@ log(y)= \beta_0 + \beta_1 x_1 + log(n)
 <p>This model includes the natural log of the population size in the <code>offset()</code> function on the right side of the model formula. R will not estimate a regression coefficient for this term, and as in the equation above, the term just represents a scale factor for the outcome.</p>
 <p><strong>Note on offsets</strong> It is important to ensure that all of the populations in a particular analysis have non-zero counts, because if the model sees <span class="math inline">\(log(0)\)</span> in data, it will generate an error, because this is not a number.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -Inf</code></pre>
 </div>
 </div>
 <p>The Poisson model with a population offset is specified as:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a>glmp_s <span class="ot">&lt;-</span> <span class="fu">glm</span>(Deaths <span class="sc">~</span> <span class="fu">offset</span>(<span class="fu">log</span>(Population)) <span class="sc">+</span> <span class="fu">factor</span>(Age_Group) <span class="sc">+</span> State,</span>
-<span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">data=</span>txca,</span>
-<span id="cb105-3"><a href="#cb105-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">family=</span>poisson)</span>
-<span id="cb105-4"><a href="#cb105-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb105-5"><a href="#cb105-5" aria-hidden="true" tabindex="-1"></a>glmp_s<span class="sc">%&gt;%</span></span>
-<span id="cb105-6"><a href="#cb105-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_regression</span>(<span class="at">exp =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a>glmp_s <span class="ot">&lt;-</span> <span class="fu">glm</span>(Deaths <span class="sc">~</span> <span class="fu">offset</span>(<span class="fu">log</span>(Population)) <span class="sc">+</span> <span class="fu">factor</span>(Age_Group) <span class="sc">+</span> State,</span>
+<span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">data=</span>txca,</span>
+<span id="cb107-3"><a href="#cb107-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">family=</span>poisson)</span>
+<span id="cb107-4"><a href="#cb107-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb107-5"><a href="#cb107-5" aria-hidden="true" tabindex="-1"></a>glmp_s<span class="sc">%&gt;%</span></span>
+<span id="cb107-6"><a href="#cb107-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_regression</span>(<span class="at">exp =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
 <div id="hfwlfhgkqd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -6660,25 +6662,25 @@ log(y)= \beta_0 + \beta_1 x_1 + log(n)
 <p><span class="math display">\[log(y)= \beta_0 + \beta_1 x_1  + log(E)\]</span>.</p>
 <p>And is specified very similarly to the rate model above. First, I show how to calculate the expected number of deaths in the data. A naive method of calculating the expected counts is to use the crude death rate as <span class="math inline">\(r\)</span>, or we can use an age-specific death rate.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="co">#crude death rate</span></span>
-<span id="cb106-2"><a href="#cb106-2" aria-hidden="true" tabindex="-1"></a>txca<span class="sc">$</span>E<span class="ot">&lt;-</span> txca<span class="sc">$</span>Population<span class="sc">*</span>(<span class="fu">sum</span>(txca<span class="sc">$</span>Deaths<span class="sc">/</span><span class="fu">sum</span>(txca<span class="sc">$</span>Population)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="co">#crude death rate</span></span>
+<span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a>txca<span class="sc">$</span>E<span class="ot">&lt;-</span> txca<span class="sc">$</span>Population<span class="sc">*</span>(<span class="fu">sum</span>(txca<span class="sc">$</span>Deaths<span class="sc">/</span><span class="fu">sum</span>(txca<span class="sc">$</span>Population)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>In this calculation, the <code>Population</code> variable is multiplied by <span class="math inline">\(r\)</span>, which is the sum of all deaths, divided by all populations.</p>
 <p>The age-specific expected count is a little more involved. We first have to sum all deaths and populations by age, then calculate the age specific rate, then join this back to the original data based on the <code>Age_Group</code> variable. Is this the only way to do this, no, but it works in this example. Alternatively, we could get another age schedule of mortality rates and merge it to these data and standardize our data to that mortality schedule.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Age specific death rate</span></span>
-<span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a>txca2<span class="ot">&lt;-</span> txca<span class="sc">%&gt;%</span></span>
-<span id="cb107-3"><a href="#cb107-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Age_Group)<span class="sc">%&gt;%</span></span>
-<span id="cb107-4"><a href="#cb107-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">ndeaths =</span> <span class="fu">sum</span>(Deaths), <span class="at">npop=</span><span class="fu">sum</span>(Population))<span class="sc">%&gt;%</span></span>
-<span id="cb107-5"><a href="#cb107-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">r_age =</span> ndeaths<span class="sc">/</span>npop)<span class="sc">%&gt;%</span></span>
-<span id="cb107-6"><a href="#cb107-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()<span class="sc">%&gt;%</span></span>
-<span id="cb107-7"><a href="#cb107-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(., txca, <span class="at">by =</span> <span class="st">"Age_Group"</span>)<span class="sc">%&gt;%</span></span>
-<span id="cb107-8"><a href="#cb107-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(State, Age_Group)<span class="sc">%&gt;%</span></span>
-<span id="cb107-9"><a href="#cb107-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">E_age =</span> Population <span class="sc">*</span> r_age)</span>
-<span id="cb107-10"><a href="#cb107-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb107-11"><a href="#cb107-11" aria-hidden="true" tabindex="-1"></a>txca2<span class="sc">%&gt;%</span></span>
-<span id="cb107-12"><a href="#cb107-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(State, Age_Group, Deaths, Population, E, E_age)<span class="sc">%&gt;%</span></span>
-<span id="cb107-13"><a href="#cb107-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Age specific death rate</span></span>
+<span id="cb109-2"><a href="#cb109-2" aria-hidden="true" tabindex="-1"></a>txca2<span class="ot">&lt;-</span> txca<span class="sc">%&gt;%</span></span>
+<span id="cb109-3"><a href="#cb109-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Age_Group)<span class="sc">%&gt;%</span></span>
+<span id="cb109-4"><a href="#cb109-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">ndeaths =</span> <span class="fu">sum</span>(Deaths), <span class="at">npop=</span><span class="fu">sum</span>(Population))<span class="sc">%&gt;%</span></span>
+<span id="cb109-5"><a href="#cb109-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">r_age =</span> ndeaths<span class="sc">/</span>npop)<span class="sc">%&gt;%</span></span>
+<span id="cb109-6"><a href="#cb109-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()<span class="sc">%&gt;%</span></span>
+<span id="cb109-7"><a href="#cb109-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(., txca, <span class="at">by =</span> <span class="st">"Age_Group"</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb109-8"><a href="#cb109-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(State, Age_Group)<span class="sc">%&gt;%</span></span>
+<span id="cb109-9"><a href="#cb109-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">E_age =</span> Population <span class="sc">*</span> r_age)</span>
+<span id="cb109-10"><a href="#cb109-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb109-11"><a href="#cb109-11" aria-hidden="true" tabindex="-1"></a>txca2<span class="sc">%&gt;%</span></span>
+<span id="cb109-12"><a href="#cb109-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(State, Age_Group, Deaths, Population, E, E_age)<span class="sc">%&gt;%</span></span>
+<span id="cb109-13"><a href="#cb109-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
 <div id="mhypywntgm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -7299,22 +7301,22 @@ log(y)= \beta_0 + \beta_1 x_1 + log(n)
 </div>
 <p>In this table, you can see the age-specific expected counts of deaths are much more in line with the age-specific mortality rate, and the numbers of expected deaths are much more similar to the observed pattern of deaths, when compared to the expected counts derived from the crude death rate.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a>glmp_E <span class="ot">&lt;-</span> <span class="fu">glm</span>(Deaths <span class="sc">~</span> <span class="fu">offset</span>(<span class="fu">log</span>(E)) <span class="sc">+</span> <span class="fu">factor</span>(Age_Group)<span class="sc">+</span>State,</span>
-<span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">data=</span>txca2,</span>
-<span id="cb108-3"><a href="#cb108-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">family=</span>poisson)</span>
-<span id="cb108-4"><a href="#cb108-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb108-5"><a href="#cb108-5" aria-hidden="true" tabindex="-1"></a>glmp_Eage <span class="ot">&lt;-</span> <span class="fu">glm</span>(Deaths <span class="sc">~</span> <span class="fu">offset</span>(<span class="fu">log</span>(E_age)) <span class="sc">+</span> <span class="fu">factor</span>(Age_Group)<span class="sc">+</span>State,</span>
-<span id="cb108-6"><a href="#cb108-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">data=</span>txca2,</span>
-<span id="cb108-7"><a href="#cb108-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">family=</span>poisson)</span>
-<span id="cb108-8"><a href="#cb108-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb108-9"><a href="#cb108-9" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> glmp_E<span class="sc">%&gt;%</span></span>
-<span id="cb108-10"><a href="#cb108-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_regression</span>(<span class="at">exp =</span> T)</span>
-<span id="cb108-11"><a href="#cb108-11" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> glmp_Eage<span class="sc">%&gt;%</span></span>
-<span id="cb108-12"><a href="#cb108-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_regression</span>(<span class="at">exp =</span> T)</span>
-<span id="cb108-13"><a href="#cb108-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb108-14"><a href="#cb108-14" aria-hidden="true" tabindex="-1"></a>m_all <span class="ot">&lt;-</span> <span class="fu">tbl_merge</span>(<span class="fu">list</span>(m1, m2))</span>
-<span id="cb108-15"><a href="#cb108-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb108-16"><a href="#cb108-16" aria-hidden="true" tabindex="-1"></a>m_all</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb110"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a>glmp_E <span class="ot">&lt;-</span> <span class="fu">glm</span>(Deaths <span class="sc">~</span> <span class="fu">offset</span>(<span class="fu">log</span>(E)) <span class="sc">+</span> <span class="fu">factor</span>(Age_Group)<span class="sc">+</span>State,</span>
+<span id="cb110-2"><a href="#cb110-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">data=</span>txca2,</span>
+<span id="cb110-3"><a href="#cb110-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">family=</span>poisson)</span>
+<span id="cb110-4"><a href="#cb110-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-5"><a href="#cb110-5" aria-hidden="true" tabindex="-1"></a>glmp_Eage <span class="ot">&lt;-</span> <span class="fu">glm</span>(Deaths <span class="sc">~</span> <span class="fu">offset</span>(<span class="fu">log</span>(E_age)) <span class="sc">+</span> <span class="fu">factor</span>(Age_Group)<span class="sc">+</span>State,</span>
+<span id="cb110-6"><a href="#cb110-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">data=</span>txca2,</span>
+<span id="cb110-7"><a href="#cb110-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">family=</span>poisson)</span>
+<span id="cb110-8"><a href="#cb110-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-9"><a href="#cb110-9" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> glmp_E<span class="sc">%&gt;%</span></span>
+<span id="cb110-10"><a href="#cb110-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_regression</span>(<span class="at">exp =</span> T)</span>
+<span id="cb110-11"><a href="#cb110-11" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> glmp_Eage<span class="sc">%&gt;%</span></span>
+<span id="cb110-12"><a href="#cb110-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_regression</span>(<span class="at">exp =</span> T)</span>
+<span id="cb110-13"><a href="#cb110-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-14"><a href="#cb110-14" aria-hidden="true" tabindex="-1"></a>m_all <span class="ot">&lt;-</span> <span class="fu">tbl_merge</span>(<span class="fu">list</span>(m1, m2))</span>
+<span id="cb110-15"><a href="#cb110-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-16"><a href="#cb110-16" aria-hidden="true" tabindex="-1"></a>m_all</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
 <div id="vlpamufqig" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -7918,13 +7920,13 @@ log(y)= \beta_0 + \beta_1 x_1 + log(n)
 <h4 data-number="5.11.0.1" class="anchored" data-anchor-id="checking-for-overdispersion"><span class="header-section-number">5.11.0.1</span> Checking for overdispersion</h4>
 <p>An easy check on this is to compare the residual deviance to the residual degrees of freedom. They ratio should be 1 if the model fits the data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a>scale<span class="ot">&lt;-</span><span class="fu">sqrt</span>(glmp_E<span class="sc">$</span>deviance<span class="sc">/</span>glmp_E<span class="sc">$</span>df.residual)</span>
-<span id="cb109-2"><a href="#cb109-2" aria-hidden="true" tabindex="-1"></a>scale</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a>scale<span class="ot">&lt;-</span><span class="fu">sqrt</span>(glmp_E<span class="sc">$</span>deviance<span class="sc">/</span>glmp_E<span class="sc">$</span>df.residual)</span>
+<span id="cb111-2"><a href="#cb111-2" aria-hidden="true" tabindex="-1"></a>scale</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Here, we see for the Poisson model, the scale factor is over 6, which shows evidence of overdispersion in the data. The residual deviance can also be used as a goodness of fit test for the model, because the deviance has been shown to be distributed as a <span class="math inline">\(\chi^2\)</span> distribution, with degrees of freedom equal to the residual d.f. (n-p):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb110"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pchisq</span>(glmp_E<span class="sc">$</span>deviance,</span>
-<span id="cb110-2"><a href="#cb110-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">df =</span> glmp_E<span class="sc">$</span>df.residual)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pchisq</span>(glmp_E<span class="sc">$</span>deviance,</span>
+<span id="cb112-2"><a href="#cb112-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">df =</span> glmp_E<span class="sc">$</span>df.residual)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>So, this p value is 0, which means the model does not fit the data. If the goodness of fit test had a p-value over 5 percent, we could conclude that the model in fact did fit the data.</p>
 </section>
@@ -7935,12 +7937,12 @@ log(y)= \beta_0 + \beta_1 x_1 + log(n)
 <p><span class="math inline">\(Var(Y) = \lambda * \phi\)</span>, instead of <span class="math inline">\(Var(Y) = \lambda\)</span></p>
 <p>This accessory parameter <span class="math inline">\(\phi\)</span> allows us to include a rough proxy for a dispersion parameter for the distribution. Naturally this is fixed at 1 for the normal Poisson model, and estimated in the quasi models, we can look to see if is much bigger than 1. If overdispersion is present and not accounted for you could identify a relationship as being significant when it is not!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a>glmqp <span class="ot">&lt;-</span> <span class="fu">glm</span>(Deaths <span class="sc">~</span> <span class="fu">offset</span>(<span class="fu">log</span>(E)) <span class="sc">+</span> <span class="fu">factor</span>(Age_Group)<span class="sc">+</span>State,</span>
-<span id="cb111-2"><a href="#cb111-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">data=</span>txca,</span>
-<span id="cb111-3"><a href="#cb111-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">family=</span>quasipoisson)</span>
-<span id="cb111-4"><a href="#cb111-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb111-5"><a href="#cb111-5" aria-hidden="true" tabindex="-1"></a>glmqp<span class="sc">%&gt;%</span></span>
-<span id="cb111-6"><a href="#cb111-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_regression</span>(<span class="at">exp =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a>glmqp <span class="ot">&lt;-</span> <span class="fu">glm</span>(Deaths <span class="sc">~</span> <span class="fu">offset</span>(<span class="fu">log</span>(E)) <span class="sc">+</span> <span class="fu">factor</span>(Age_Group)<span class="sc">+</span>State,</span>
+<span id="cb113-2"><a href="#cb113-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">data=</span>txca,</span>
+<span id="cb113-3"><a href="#cb113-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">family=</span>quasipoisson)</span>
+<span id="cb113-4"><a href="#cb113-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-5"><a href="#cb113-5" aria-hidden="true" tabindex="-1"></a>glmqp<span class="sc">%&gt;%</span></span>
+<span id="cb113-6"><a href="#cb113-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_regression</span>(<span class="at">exp =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
 <div id="wsvrzpkjgs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -8475,18 +8477,18 @@ log(y)= \beta_0 + \beta_1 x_1 + log(n)
 </div>
 <p>While the overall pattern and substantive interpretation of the regular Poisson and the quasiPoisson models are identical, the standard errors of the parameters are not. We can see this by forming their ratios. The standard errors of the model parameters can be extracted from the <code>summary()$coefficients</code> of a model, specifically the second column of this table.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a>sum1<span class="ot">&lt;-</span> <span class="fu">summary</span>(glmp_E)<span class="sc">$</span>coef[, <span class="dv">2</span>]</span>
-<span id="cb112-2"><a href="#cb112-2" aria-hidden="true" tabindex="-1"></a>sum2<span class="ot">&lt;-</span> <span class="fu">summary</span>(glmqp)<span class="sc">$</span>coef[, <span class="dv">2</span>]</span>
-<span id="cb112-3"><a href="#cb112-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb112-4"><a href="#cb112-4" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">Poisson =</span> sum1,</span>
-<span id="cb112-5"><a href="#cb112-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">QPoisson=</span> sum2,</span>
-<span id="cb112-6"><a href="#cb112-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">coef =</span> <span class="fu">names</span>(<span class="fu">coef</span>(glmp_E)))<span class="sc">%&gt;%</span></span>
-<span id="cb112-7"><a href="#cb112-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> QPoisson<span class="sc">/</span>Poisson, <span class="at">x=</span> coef))<span class="sc">+</span></span>
-<span id="cb112-8"><a href="#cb112-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
-<span id="cb112-9"><a href="#cb112-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Ratio of Standard Errors"</span> )<span class="sc">+</span></span>
-<span id="cb112-10"><a href="#cb112-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span> (<span class="st">"Parameter"</span>)<span class="sc">+</span></span>
-<span id="cb112-11"><a href="#cb112-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Ratio of Standard Errors in Poisson and QuasiPoisson Models"</span>)<span class="sc">+</span></span>
-<span id="cb112-12"><a href="#cb112-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a>sum1<span class="ot">&lt;-</span> <span class="fu">summary</span>(glmp_E)<span class="sc">$</span>coef[, <span class="dv">2</span>]</span>
+<span id="cb114-2"><a href="#cb114-2" aria-hidden="true" tabindex="-1"></a>sum2<span class="ot">&lt;-</span> <span class="fu">summary</span>(glmqp)<span class="sc">$</span>coef[, <span class="dv">2</span>]</span>
+<span id="cb114-3"><a href="#cb114-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb114-4"><a href="#cb114-4" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">Poisson =</span> sum1,</span>
+<span id="cb114-5"><a href="#cb114-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">QPoisson=</span> sum2,</span>
+<span id="cb114-6"><a href="#cb114-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">coef =</span> <span class="fu">names</span>(<span class="fu">coef</span>(glmp_E)))<span class="sc">%&gt;%</span></span>
+<span id="cb114-7"><a href="#cb114-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> QPoisson<span class="sc">/</span>Poisson, <span class="at">x=</span> coef))<span class="sc">+</span></span>
+<span id="cb114-8"><a href="#cb114-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb114-9"><a href="#cb114-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Ratio of Standard Errors"</span> )<span class="sc">+</span></span>
+<span id="cb114-10"><a href="#cb114-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span> (<span class="st">"Parameter"</span>)<span class="sc">+</span></span>
+<span id="cb114-11"><a href="#cb114-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Ratio of Standard Errors in Poisson and QuasiPoisson Models"</span>)<span class="sc">+</span></span>
+<span id="cb114-12"><a href="#cb114-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="macro_files/figure-html/unnamed-chunk-60-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -8496,13 +8498,13 @@ log(y)= \beta_0 + \beta_1 x_1 + log(n)
 <h3 data-number="5.12.1" class="anchored" data-anchor-id="modeling-dispersion-properly"><span class="header-section-number">5.12.1</span> Modeling dispersion properly</h3>
 <p>The <code>dispmod</code> package implements the method of Breslow <span class="citation" data-cites="breslow_extra-poisson_1984">(<a href="#ref-breslow_extra-poisson_1984" role="doc-biblioref">1984</a>)</span> which adds an extra parameter to account for the overdispersion in the Poisson, and is fit via regular maximum likelihood, so it is comparable to other models. Effectively, this takes either a model fit via <code>glm()</code> with either a Binomial or Poisson family, and performs a re-weighted estimate of the model parameters.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dispmod)</span>
-<span id="cb113-2"><a href="#cb113-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb113-3"><a href="#cb113-3" aria-hidden="true" tabindex="-1"></a>glmp_d <span class="ot">&lt;-</span> <span class="fu">glm.poisson.disp</span>(glmp_E,</span>
-<span id="cb113-4"><a href="#cb113-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">verbose =</span> F)</span>
-<span id="cb113-5"><a href="#cb113-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb113-6"><a href="#cb113-6" aria-hidden="true" tabindex="-1"></a>glmp_d<span class="sc">%&gt;%</span></span>
-<span id="cb113-7"><a href="#cb113-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_regression</span>(<span class="at">exp =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb115"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dispmod)</span>
+<span id="cb115-2"><a href="#cb115-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb115-3"><a href="#cb115-3" aria-hidden="true" tabindex="-1"></a>glmp_d <span class="ot">&lt;-</span> <span class="fu">glm.poisson.disp</span>(glmp_E,</span>
+<span id="cb115-4"><a href="#cb115-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">verbose =</span> F)</span>
+<span id="cb115-5"><a href="#cb115-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb115-6"><a href="#cb115-6" aria-hidden="true" tabindex="-1"></a>glmp_d<span class="sc">%&gt;%</span></span>
+<span id="cb115-7"><a href="#cb115-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_regression</span>(<span class="at">exp =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
 <div id="bjakzozxjp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -9037,7 +9039,7 @@ log(y)= \beta_0 + \beta_1 x_1 + log(n)
 </div>
 <p>In this example the difference between California and Texas is now larger at a 24% higher mortality rate in Texas. How does this model compare to the regular Poisson model?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(glmp_E, glmp_d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(glmp_E, glmp_d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       df      AIC
 glmp_E 14 773.7668
@@ -9072,11 +9074,11 @@ Var = \mu (1-\mu)/ (1+\phi)
 <p><span class="math display">\[logit(g(\mu)) = log(\mu / (1-\mu))\]</span> As described in their article on the <code>betareg</code> package <span class="citation" data-cites="cribari-neto_beta_2010">(<a href="#ref-cribari-neto_beta_2010" role="doc-biblioref">Cribari-Neto and Zeileis 2010</a>)</span>, the model can also include a separate model for dispersion, so you can model the variance in the data as well as the mean.</p>
 <p>The <code>betareg::betareg()</code> function implements model, and here is an application of the model to the low birth weight data used earlier:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(betareg)</span>
-<span id="cb116-2"><a href="#cb116-2" aria-hidden="true" tabindex="-1"></a>glm_beta<span class="ot">&lt;-</span><span class="fu">betareg</span>(<span class="fu">I</span>(lbrate1618<span class="sc">/</span><span class="dv">1000</span>) <span class="sc">~</span>  fampov14 <span class="sc">+</span> rucc <span class="sc">+</span> hpsa16, </span>
-<span id="cb116-3"><a href="#cb116-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data=</span>ahrf_m)</span>
-<span id="cb116-4"><a href="#cb116-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb116-5"><a href="#cb116-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glm_beta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(betareg)</span>
+<span id="cb118-2"><a href="#cb118-2" aria-hidden="true" tabindex="-1"></a>glm_beta<span class="ot">&lt;-</span><span class="fu">betareg</span>(<span class="fu">I</span>(lbrate1618<span class="sc">/</span><span class="dv">1000</span>) <span class="sc">~</span>  fampov14 <span class="sc">+</span> rucc <span class="sc">+</span> hpsa16, </span>
+<span id="cb118-3"><a href="#cb118-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data=</span>ahrf_m)</span>
+<span id="cb118-4"><a href="#cb118-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-5"><a href="#cb118-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glm_beta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -9115,11 +9117,11 @@ Number of iterations: 23 (BFGS) + 3 (Fisher scoring) </code></pre>
 </div>
 <p>And the model with a separate model for the dispersion can be estimated by including a second formula separated by a <code>|</code> as:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(betareg)</span>
-<span id="cb118-2"><a href="#cb118-2" aria-hidden="true" tabindex="-1"></a>glm_beta_o<span class="ot">&lt;-</span><span class="fu">betareg</span>(<span class="fu">I</span>(lbrate1618<span class="sc">/</span><span class="dv">1000</span>) <span class="sc">~</span>  fampov14 <span class="sc">+</span> rucc <span class="sc">+</span> hpsa16 <span class="sc">|</span> <span class="fu">scale</span>(popn), </span>
-<span id="cb118-3"><a href="#cb118-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data=</span>ahrf_m)</span>
-<span id="cb118-4"><a href="#cb118-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb118-5"><a href="#cb118-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glm_beta_o)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(betareg)</span>
+<span id="cb120-2"><a href="#cb120-2" aria-hidden="true" tabindex="-1"></a>glm_beta_o<span class="ot">&lt;-</span><span class="fu">betareg</span>(<span class="fu">I</span>(lbrate1618<span class="sc">/</span><span class="dv">1000</span>) <span class="sc">~</span>  fampov14 <span class="sc">+</span> rucc <span class="sc">+</span> hpsa16 <span class="sc">|</span> <span class="fu">scale</span>(popn), </span>
+<span id="cb120-3"><a href="#cb120-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data=</span>ahrf_m)</span>
+<span id="cb120-4"><a href="#cb120-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-5"><a href="#cb120-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glm_beta_o)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -9160,7 +9162,7 @@ Number of iterations: 21 (BFGS) + 5 (Fisher scoring) </code></pre>
 </div>
 <p>The AIC can be used to determine if the dispersion model is preferred to the regular beta regression.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(glm_beta, glm_beta_o)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb122"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(glm_beta, glm_beta_o)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           df       AIC
 glm_beta   13 -12668.24
@@ -9188,7 +9190,7 @@ E(Y) = \lambda \\
 \]</span></p>
 <p>The base R <code>glm()</code> does not offer the NB1 model by default, but the standard <code>MASS</code> package <span class="citation" data-cites="venables_ripley">(<a href="#ref-venables_ripley" role="doc-biblioref">Venables and Ripley 2002</a>)</span> has the <code>glm.nb()</code> function. An alternative is the highly flexible <code>gamlss</code> package<span class="citation" data-cites="gamlss">(<a href="#ref-gamlss" role="doc-biblioref">Rigby and Stasinopoulos 2005</a>)</span>, which includes the NB2 model, as well as a host of other distributions, plus the ability to model mean and variance, similar to how <code>betareg()</code> was achieving for the Beta distribution.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb122"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb124"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
 Attaching package: 'MASS'</code></pre>
@@ -9203,12 +9205,12 @@ Attaching package: 'MASS'</code></pre>
 
     select</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb126"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a>glmnb<span class="ot">&lt;-</span> <span class="fu">glm.nb</span>(lowbw1618 <span class="sc">~</span> <span class="fu">offset</span>(<span class="fu">log</span>(births1618)) <span class="sc">+</span> fampov14 <span class="sc">+</span> rucc <span class="sc">+</span> hpsa16 ,</span>
-<span id="cb126-2"><a href="#cb126-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">data=</span>ahrf_m)</span>
-<span id="cb126-3"><a href="#cb126-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb126-4"><a href="#cb126-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb126-5"><a href="#cb126-5" aria-hidden="true" tabindex="-1"></a>glmnb<span class="sc">%&gt;%</span></span>
-<span id="cb126-6"><a href="#cb126-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_regression</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb128"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a>glmnb<span class="ot">&lt;-</span> <span class="fu">glm.nb</span>(lowbw1618 <span class="sc">~</span> <span class="fu">offset</span>(<span class="fu">log</span>(births1618)) <span class="sc">+</span> fampov14 <span class="sc">+</span> rucc <span class="sc">+</span> hpsa16 ,</span>
+<span id="cb128-2"><a href="#cb128-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">data=</span>ahrf_m)</span>
+<span id="cb128-3"><a href="#cb128-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-4"><a href="#cb128-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-5"><a href="#cb128-5" aria-hidden="true" tabindex="-1"></a>glmnb<span class="sc">%&gt;%</span></span>
+<span id="cb128-6"><a href="#cb128-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_regression</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
 <div id="ulgxuvhasz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -9735,7 +9737,7 @@ Attaching package: 'MASS'</code></pre>
 </div>
 <p>The NB2 version of the model can be estimated using <code>gamlss()</code> with <code>family=NBII</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb127"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb127-1"><a href="#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gamlss)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb129"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb129-1"><a href="#cb129-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gamlss)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Loading required package: gamlss.data</code></pre>
 </div>
@@ -9768,9 +9770,9 @@ Attaching package: 'gamlss.data'</code></pre>
 <div class="cell-output cell-output-stderr">
 <pre><code>Type gamlssNews() to see new features/changes/bug fixes.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb137"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb137-1"><a href="#cb137-1" aria-hidden="true" tabindex="-1"></a>glmnb2<span class="ot">&lt;-</span><span class="fu">gamlss</span>(lowbw1618 <span class="sc">~</span> <span class="fu">offset</span>(<span class="fu">log</span>(births1618)) <span class="sc">+</span> fampov14 <span class="sc">+</span> rucc <span class="sc">+</span> hpsa16,</span>
-<span id="cb137-2"><a href="#cb137-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">family =</span> NBII,</span>
-<span id="cb137-3"><a href="#cb137-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">data=</span>ahrf_m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb139"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb139-1"><a href="#cb139-1" aria-hidden="true" tabindex="-1"></a>glmnb2<span class="ot">&lt;-</span><span class="fu">gamlss</span>(lowbw1618 <span class="sc">~</span> <span class="fu">offset</span>(<span class="fu">log</span>(births1618)) <span class="sc">+</span> fampov14 <span class="sc">+</span> rucc <span class="sc">+</span> hpsa16,</span>
+<span id="cb139-2"><a href="#cb139-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">family =</span> NBII,</span>
+<span id="cb139-3"><a href="#cb139-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">data=</span>ahrf_m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>GAMLSS-RS iteration 1: Global Deviance = 27778.63 
 GAMLSS-RS iteration 2: Global Deviance = 26730.85 
@@ -9783,7 +9785,7 @@ GAMLSS-RS iteration 8: Global Deviance = 18277.03
 GAMLSS-RS iteration 9: Global Deviance = 18277.03 
 GAMLSS-RS iteration 10: Global Deviance = 18277.03 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb139"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb139-1"><a href="#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glmnb2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb141"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb141-1"><a href="#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glmnb2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>******************************************************************
 Family:  c("NBII", "Negative Binomial type II") 
@@ -9834,7 +9836,7 @@ Global Deviance:     18277.03
 </div>
 <p>Again, between these two different specifications, we see very similar results. We can compare each of the models, starting with the Gaussian model and proceeding through the NB2 model above (although the Beta regression appears to be on a different scale since the outcome is specified as probability, versus a count, so it is not comparable to the rest) using the <code>AIC()</code> function:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb141"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb141-1"><a href="#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(glm1, glmb, glmp_b, glmnb, glmnb2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb143"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb143-1"><a href="#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(glm1, glmb, glmp_b, glmnb, glmnb2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       df      AIC
 glm1   13 19599.34

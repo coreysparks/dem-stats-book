@@ -104,8 +104,15 @@ You will also need to download the data file, by right clicking the **Download.D
 The fundamentals of using `ipumsr` is to specify the name of your `.xml` file from your extract, and as long as your `.tar.gz` file from your extract is in the same location, R will read the data. The files on my computer:
 
 ![](images/ipums_files.png)
+```{r ch21xa, results='hide', message=FALSE, warning=FALSE, include=FALSE}
+library(ipumsr)
 
-```{r ch2_2x,eval=TRUE,results='hide', message=FALSE, warning=FALSE, include=TRUE}
+ddi <- read_ipums_ddi(ddi_file = "/Users/coreysparks/Documents/GitHub//usa_00097.xml")
+ipums <- read_ipums_micro(ddi = ddi)
+
+```
+
+```{r ch2_2x,eval=FALSE,results='hide', message=FALSE, warning=FALSE, include=TRUE}
 
 library(ipumsr)
 
