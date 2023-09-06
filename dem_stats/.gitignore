@@ -1,0 +1,5 @@
+/.quarto/
+*.rds
+*.dat
+*.DTA
+US_county_*
